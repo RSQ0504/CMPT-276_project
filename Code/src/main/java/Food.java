@@ -1,6 +1,3 @@
-package com.game;
-
-import com.game.Reward;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -9,13 +6,10 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class Vaccine extends Reward {
+public class Food extends Reward {
+  private int HP_increase;
 
-  public void increaseVaccine(MainCharacter m){
-    m.setVaccines(m.getVaccines()+1);
-  }
-
-  public Vaccine(int x,int y,String path) throws IOException {
+  public Food(int x,int y,String path) throws IOException {
     this.x = x;
     this.y = y;
     image = ImageIO.read(new File(path));
@@ -24,4 +18,8 @@ public class Vaccine extends Reward {
     draw.repaint();
   }
 
+
+  public void increaseHP(Maincharacter m){
+    m.setHP(m.getHP()+1);
+  }
 }

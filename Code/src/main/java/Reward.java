@@ -1,10 +1,9 @@
-package com.game;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public abstract class Reward {
+abstract class Reward extends GameObject{
   public boolean appearStatus;
 
   public int x,y;
