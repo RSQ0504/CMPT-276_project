@@ -1,0 +1,25 @@
+import javax.swing.JFrame;
+public class Main {
+    public static void main(String[] args) {
+        int colm = 16;
+        int rows = 12;
+        int pacSize = 48; //industry standard 48x48
+
+        JFrame frame = new JFrame("Walking till the end");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setResizable(false);
+
+        GameMap gameMap = new GameMap(colm, rows, pacSize);
+        frame.add(gameMap);
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+        gameMap.beginThread();
+
+
+        //GameMap maze = new GameMap(sizeY, sizeX, pacSize);
+        //maze.drawFrame();
+    }
+
+
+}
