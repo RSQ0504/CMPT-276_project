@@ -1,16 +1,15 @@
-public class Wall {
+public class Wall extends GameObject{
     //attributes of Wall
     private boolean DoorStatus;
 
     /**
      * Get function to return private Wall attributes
-     * @return
+     * @return DoorStatus
      */
     public boolean getDoorStatus() {return DoorStatus;}
 
     /**
      * Set function to set private Wall attributes
-     * @return
      */
     public void setDoorStatus(boolean DoorStatus) { this.DoorStatus = DoorStatus; }
 }
