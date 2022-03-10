@@ -1,8 +1,32 @@
+import java.awt.*;
+import java.awt.image.BufferedImage;
+
 abstract class GameObject {
-    private boolean collision;
+  public int x,y;
+  public int width;
+  int height;
 
-    public boolean getCollision(){return collision; }
+  private boolean collision;
 
-    public void setCollision(boolean collision){ this.collision = collision; }
+  BufferedImage image;
 
+  public boolean getCollision(){return collision; }
+
+  public void setCollision(boolean collision){ this.collision = collision; }
+
+  public BufferedImage getImage(){
+    return image;
+  }
+  public int getX(){
+    return x;
+  }
+  public int getY(){
+    return y;
+  }
+  public int getWidth(){
+    return width;
+  }
+  public int getHeight(){
+    return height;
+  }
 }
