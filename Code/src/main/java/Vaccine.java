@@ -11,13 +11,13 @@ public class Vaccine extends Reward {
     m.setVaccines(m.getVaccines()+1);
   }
 
-  public Vaccine(int x,int y,String path) throws IOException {
+
+  public Vaccine(int x,int y) throws IOException {
     this.x = x;
     this.y = y;
-    image = ImageIO.read(new File(path));
+    image = ImageIO.read(new File("#picture/Food.png"));
     this.width =10;
     this.height = 10;
-    draw.repaint();
   }
 
 }
