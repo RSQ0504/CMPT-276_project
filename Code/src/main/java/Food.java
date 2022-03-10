@@ -19,7 +19,7 @@ public class Food extends Reward {
   }
 
 
-  public void increaseHP(Maincharacter m){
+  public void increaseHP(MainCharacter m){
     m.setHP(m.getHP()+1);
   }
 }

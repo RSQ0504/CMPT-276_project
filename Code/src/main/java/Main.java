@@ -16,9 +16,8 @@ public class Main {
         frame.setVisible(true);
         gameMap.beginThread();
 
-
-        //GameMap maze = new GameMap(sizeY, sizeX, pacSize);
-        //maze.drawFrame();
+        // GameMap maze = new GameMap(sizeY, sizeX, pacSize);
+        // maze.drawFrame();
     }
 
 
