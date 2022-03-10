@@ -9,12 +9,12 @@ public class Main {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
 
-        GameMap gameMap = new GameMap(colm, rows, pacSize);
-        frame.add(gameMap);
+        GameFrame gameFrame = new GameMap(colm, rows, pacSize);
+        frame.add(gameFrame);
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-        gameMap.beginThread();
+        gameFrame.beginThread();
 
 
         //GameMap maze = new GameMap(sizeY, sizeX, pacSize);
