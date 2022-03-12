@@ -31,9 +31,9 @@ abstract class GameObject {
   public int getHeight(){
     return height;
   }
-    public void setFrame(GameFrame frame){this.frame = frame;}
+  public void setFrame(GameFrame frame){this.frame = frame;}
 
-    public void isWall(){
+  public void isWall(){
 
     }
 }
