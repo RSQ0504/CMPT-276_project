@@ -1,8 +1,6 @@
 
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.*;
-import java.util.ArrayList;
 
 public class GameFrame extends JPanel implements Runnable{
     //attributes of GameMap
@@ -21,6 +19,12 @@ public class GameFrame extends JPanel implements Runnable{
     private int speed = 4;
     private int frame_speed = 60;
     GameMap tile = new GameMap(this);
+
+    // The characters
+    private MainCharacter mc = new MainCharacter(this,key);
+    private Zombie zombie1 = new Zombie(this,15,200,mc);
+    private Zombie zombie2 = new Zombie(this,300,30,mc);
+    private Zombie zombie3 = new Zombie(this,550,220,mc);
 
     GameFrame(int colm, int rows, int cellSize){
         this.colm =colm;
@@ -74,36 +78,26 @@ public class GameFrame extends JPanel implements Runnable{
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
-
         }
     }
 
     private void updatePos(){
-        if(key.pressedUp == true){
-            startPointY -= speed;
-        }
-        else if(key.pressedDown == true){
-            startPointY += speed;
-        }
-        else if(key.pressedLeft == true){
-            startPointX -= speed;
-        }
-        else if(key.pressedRight == true){
-            startPointX += speed;
-        }
-
+        mc.updateMC();
+        zombie1.updateZombie();
+        zombie2.updateZombie();
+        zombie3.updateZombie();
     }
 
     protected void paintComponent(Graphics g){
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
-        g2.setColor(Color.white);
         tile.draw(g2);
-        g2.fillRect(startPointX, startPointY, cellSize/3, cellSize/3);
+
+        mc.drawMC(g2);
+        zombie1.drawZombie(g2);
+        zombie2.drawZombie(g2);
+        zombie3.drawZombie(g2);
+
         g2.dispose();
     }
-
-
-
 }
