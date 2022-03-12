@@ -1,6 +1,8 @@
 import javax.swing.JFrame;
+import java.io.IOException;
+
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         int colm = 16;
         int rows = 12;
         int pacSize = 48; //industry standard 48x48

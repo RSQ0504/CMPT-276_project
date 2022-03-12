@@ -7,17 +7,19 @@ import java.io.IOException;
 
 public class Vaccine extends Reward {
 
-  public void increaseVaccine(MainCharacter m){
-    m.setVaccines(m.getVaccines()+1);
+  public void increaseVaccine(MainCharacter m) {
+    m.setVaccines(m.getVaccines() + 1);
   }
 
 
-  public Vaccine(int x,int y) throws IOException {
+  public Vaccine(GameFrame frame, int x, int y) throws IOException {
+    setFrame(frame);
     this.x = x;
     this.y = y;
-    image = ImageIO.read(new File("#picture/Food.png"));
-    this.width =10;
-    this.height = 10;
+    image = ImageIO.read(new File("src/main/java/picture/Rewards/Vaccine.png"));
+    this.width = 30;
+    this.height = 30;
+    hitArea = new Rectangle(this.x,this.y,this.width,this.height);
   }
 
 }

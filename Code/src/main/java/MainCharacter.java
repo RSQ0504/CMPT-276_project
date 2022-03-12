@@ -17,6 +17,8 @@ public class MainCharacter extends DynamicCharacter{
     public MainCharacter(GameFrame gameFrame, inputKey key){
         this.gf = gameFrame;
         this.key = key;
+        this.width = 30;
+        this.height = 30;
 
         setDefaultValue();
         getMCImages();
