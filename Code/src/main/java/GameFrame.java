@@ -7,10 +7,6 @@ import java.util.LinkedList;
 public class GameFrame extends JPanel implements Runnable{
     //attributes of GameMap
     public GameObject[][] Map;
-    private int startPointX;
-    private int startPointY;
-    private int endPointX;
-    private int endPointY;
     private int cellSize;
     private int width;
     private int height;
@@ -19,8 +15,11 @@ public class GameFrame extends JPanel implements Runnable{
     private Thread gameThread;
     private inputKey key = new inputKey();
     private int speed = 4;
-    private int frame_speed = 60;
-    GameMap tile = new GameMap(this);
+    private int frame_speed = 80;
+    private int lvl;
+    GameMap tileFrame = new GameMap(this, lvl);
+
+    public checkCollision check_collision = new checkCollision(this);
 
     // The characters
     private MainCharacter mc = new MainCharacter(this,key);
@@ -29,6 +28,7 @@ public class GameFrame extends JPanel implements Runnable{
     private Zombie zombie3 = new Zombie(this,550,220,mc);
     //Reward
   LinkedList<Vaccine> v = new LinkedList<>();
+  //TO-DO: change it to put it in maze map
   LinkedList <Food> f = new LinkedList<>();
   {
     try {
@@ -58,22 +58,22 @@ public class GameFrame extends JPanel implements Runnable{
     }
   }
 
-  GameFrame(int colm, int rows, int cellSize){
+  GameFrame(int colm, int rows, int cellSize, int lvl){
         this.colm =colm;
         this.rows = rows;
         this.cellSize = cellSize;
+        this.lvl = lvl;
+
+
+       // mc.setLvl(lvl, tileFrame);
 
         setUpScreen();
-        setStartPoint(100,100);
     }
 
     public int getCellSize(){return cellSize;}
 
+
     public void placeWall(Wall wall){}
-    private void setStartPoint(int startPointX, int startPointY){
-        this.startPointX = startPointX;
-        this.startPointY = startPointY;
-    }
    // private void setEndPoint(int endPointX, int endPointY){}
     private void setUpScreen(){
         width = cellSize*colm;
@@ -123,7 +123,9 @@ public class GameFrame extends JPanel implements Runnable{
     protected void paintComponent(Graphics g){
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
-        tile.draw(g2);
+        tileFrame.draw(g2, tileFrame.getBoard(lvl));
+        g2.setColor(Color.white);
+
 
         mc.drawMC(g2);
         zombie1.drawZombie(g2);
@@ -155,4 +157,12 @@ public class GameFrame extends JPanel implements Runnable{
 
         g2.dispose();
     }
+
+    public int getLvl(){
+      return lvl;
+    }
+
+
 }
+
+

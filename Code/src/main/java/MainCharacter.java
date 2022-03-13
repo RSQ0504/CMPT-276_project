@@ -13,22 +13,26 @@ public class MainCharacter extends DynamicCharacter{
 
     private GameFrame gf;
     private inputKey key;
+    public BufferedImage MC_image;
 
     public MainCharacter(GameFrame gameFrame, inputKey key){
         this.gf = gameFrame;
         this.key = key;
         this.width = 30;
         this.height = 30;
+        System.out.println("Heyyyyy " + gf.getLvl());
 
-        setDefaultValue();
+        setDefaultValue(gf.tileFrame.getStartPoints());
         getMCImages();
+        hitArea = new Rectangle((int) 1,45,gf.getCellSize()/2, (int) (gf.getCellSize()));
     }
 
     // Set Start point
-    private void setDefaultValue(){
-        x = 100;
-        y = 100;
-        speed = 4;
+    private void setDefaultValue(int[] startPoints){
+        x = 365;
+        y = startPoints[1];
+        System.out.print(x);
+        speed = 1 ;
     }
 
     /**
@@ -87,31 +91,49 @@ public class MainCharacter extends DynamicCharacter{
     }
 
     void updateMC(){
-        if(key.pressedUp == true){
-            direction = "up";
-            y -= speed;
-        }
-        else if(key.pressedDown == true){
-            direction = "down";
-            y += speed;
-        }
-        else if(key.pressedLeft == true){
-            direction = "left";
-            x -= speed;
-        }
-        else if(key.pressedRight == true){
-            direction = "right";
-            x += speed;
-        }
-        spriteCounter++;
-        if(spriteCounter > 10){
-            spriteNum = (spriteNum + 1) % 4 + 1;
-            spriteCounter = 0;
+        if(key.pressedUp == true || key.pressedDown == true || key.pressedLeft == true || key.pressedRight == true) {
+            if (key.pressedUp == true) {
+                direction = "up";
+            } else if (key.pressedDown == true) {
+                direction = "down";
+            } else if (key.pressedLeft == true) {
+                direction = "left";
+            } else if (key.pressedRight == true) {
+                direction = "right";
+            }
+
+            collisionArea = false;
+            gf.check_collision.checkTile(this);
+
+            if (collisionArea == false) {
+                switch (direction) {
+                    case "up":
+                        y -= speed;
+                        break;
+                    case "down":
+                        y += speed;
+                        break;
+                    case "right":
+                        x += speed;
+                        break;
+                    case "left":
+                        x -= speed;
+                        break;
+
+                }
+            }
+
+
+            spriteCounter++;
+            if (spriteCounter > 10) {
+                spriteNum = (spriteNum + 1) % 4 + 1;
+                spriteCounter = 0;
+            }
         }
     }
 
     void drawMC(Graphics2D g2){
-        BufferedImage MC_image = null;
+        MC_image = null;
         switch (direction){
             case "up":
                 if(spriteNum == 1)
@@ -154,6 +176,6 @@ public class MainCharacter extends DynamicCharacter{
                     MC_image = right4;
                 break;
         }
-        g2.drawImage(MC_image,x,y,MC_image.getWidth(),MC_image.getHeight(),null);
+        g2.drawImage(MC_image,x,y, (gf.getCellSize()/3), gf.getCellSize(), null);
     }
 }
