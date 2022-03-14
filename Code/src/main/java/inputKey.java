@@ -2,7 +2,13 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class inputKey implements KeyListener {
+    GameFrame gf;
     public boolean pressedUp, pressedDown,pressedLeft,pressedRight;
+
+    public inputKey(GameFrame gf) {
+        this.gf = gf;
+    }
+
     @Override
     public void keyTyped(KeyEvent e) {
         //Dont use this
@@ -11,18 +17,50 @@ public class inputKey implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();
-        if(key == KeyEvent.VK_UP){
-            pressedUp = true;
+
+        // key input in title screen to move cursor
+        if(gf.gameState == gf.titleState) {
+            if(key == KeyEvent.VK_UP) {
+                gf.commandNum--;
+                if(gf.commandNum == -1) {
+                    gf.commandNum = 2;
+                }
+            }
+            if(key == KeyEvent.VK_DOWN) {
+                gf.commandNum++;
+                if(gf.commandNum == 3) {
+                    gf.commandNum = (gf.commandNum % 3);
+                }
+            }
+            if(key == KeyEvent.VK_ENTER) {
+                if(gf.commandNum == 0) {
+                    gf.gameState = gf.playState;
+                }
+                if(gf.commandNum == 1) {
+                    // change level
+                }
+                if(gf.commandNum == 2) {
+                    System.exit(0);
+                }
+            }
         }
-        else if(key == KeyEvent.VK_DOWN){
-            pressedDown = true;
+
+        // key input during play state
+        if(gf.gameState == gf.playState) {
+            if(key == KeyEvent.VK_UP){
+                pressedUp = true;
+            }
+            else if(key == KeyEvent.VK_DOWN){
+                pressedDown = true;
+            }
+            else if(key == KeyEvent.VK_LEFT){
+                pressedLeft = true;
+            }
+            else if(key == KeyEvent.VK_RIGHT){
+                pressedRight = true;
+            }
         }
-        else if(key == KeyEvent.VK_LEFT){
-            pressedLeft = true;
-        }
-        else if(key == KeyEvent.VK_RIGHT){
-            pressedRight = true;
-        }
+
     }
 
     @Override

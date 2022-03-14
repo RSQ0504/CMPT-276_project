@@ -1,10 +1,20 @@
 
-import javax.swing.JPanel;
+import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 import java.util.LinkedList;
 
+
 public class GameFrame extends JPanel implements Runnable{
+    // GAME STATE
+    public int gameState;
+    public final int titleState = 0;
+    public final int playState = 1;
+    public final int pauseState = 2;
+
+    // menu
+    public int commandNum = 0; // start: 0, play: 1, exit: 2
+
     //attributes of GameMap
     public GameObject[][] Map;
     private int startPointX;
@@ -17,7 +27,7 @@ public class GameFrame extends JPanel implements Runnable{
     private int colm;
     private int rows;
     private Thread gameThread;
-    private inputKey key = new inputKey();
+    private inputKey key = new inputKey(this);
     private int speed = 4;
     private int frame_speed = 60;
     GameMap tile = new GameMap(this);
@@ -62,7 +72,8 @@ public class GameFrame extends JPanel implements Runnable{
         this.colm =colm;
         this.rows = rows;
         this.cellSize = cellSize;
-
+        this.gameState = titleState;
+//        this.gameState = playState;
         setUpScreen();
         setStartPoint(100,100);
     }
@@ -79,7 +90,8 @@ public class GameFrame extends JPanel implements Runnable{
         width = cellSize*colm;
         height = cellSize*rows;
         this.setPreferredSize(new Dimension(width, height));
-        this.setBackground(Color.CYAN);
+//        this.setBackground(Color.CYAN);
+        this.setBackground(new Color(0x123456));
         this.addKeyListener(key);
         this.setFocusable(true);
     }
@@ -123,36 +135,95 @@ public class GameFrame extends JPanel implements Runnable{
     protected void paintComponent(Graphics g){
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
-        tile.draw(g2);
 
-        mc.drawMC(g2);
-        zombie1.drawZombie(g2);
-        zombie2.drawZombie(g2);
-        zombie3.drawZombie(g2);
+        // control display depending on game state
+        if(gameState == titleState) {
+            // show title
+            g2.setFont(g2.getFont().deriveFont(Font.BOLD, 64));
+            String title = "Survive in the end";
+            int x;
+            int y;
+            int titleLength = (int)g2.getFontMetrics().getStringBounds(title, g2).getWidth();
+            x = this.width/2 - titleLength/2;
+            y = 172;
+            g2.setColor(Color.white);
+            g2.drawString(title, x, y);
 
-        //reward
-        for(int i=0;i<v.size();i++)
-          v.get(i).draw(g2);
-        for(int i=0;i<f.size();i++)
-          f.get(i).draw(g2);
-        Rectangle MC = new Rectangle(mc.x, mc.y,mc.width,mc.height);
-        for(int i=0;i<f.size();i++){
-          if(f.get(i).check(MC)){
-          f.get(i).setAppear(false);
-          f.get(i).increaseHP(mc);
-          f.remove(i);
-          break;
-          }
+            // show image
+//            g2.drawImage();
+
+
+            // show menu button
+            int numBtn = 3; // number of buttons in menu
+            String[] buttons = {"START GAME", "CHANGE LEVEL", "EXIT"};
+            String startBtn = "START GAME";
+            String optionBtn = "CHANGE LEVEL";
+            String exitBtn = "EXIT";
+            int btnLength = 0;
+            for(int i = 0; i < numBtn; i++) {
+                int tempLen = (int)g2.getFontMetrics().getStringBounds(buttons[i], g2).getWidth();
+                if(tempLen > btnLength) {
+                    btnLength = tempLen;
+                }
+            }
+            g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 32));
+            x = this.width/2 - titleLength/2;
+            int margin = 20;
+            for(int i = 0; i < numBtn; i++) {
+                y = 360 + (32 + margin)*i;
+                g2.drawString(buttons[i], x, y);
+                if(commandNum == i) {
+                    g2.drawString(">", x-24, y);
+                }
+            }
+
+
+
+//            JButton btn1 = new JButton("START GAME");
+//            JButton btn2 = new JButton("CHANGE LEVEL");
+//            JButton btn3 = new JButton("EXIT");
+//            this.setLayout(null);
+//            this.add(btn1);
+//            btn1.setLocation(x, y);
+
+
+
+
+
+        }else if(gameState == playState) {
+            tile.draw(g2);
+
+            mc.drawMC(g2);
+            zombie1.drawZombie(g2);
+            zombie2.drawZombie(g2);
+            zombie3.drawZombie(g2);
+
+            //reward
+            for(int i=0;i<v.size();i++)
+                v.get(i).draw(g2);
+            for(int i=0;i<f.size();i++)
+                f.get(i).draw(g2);
+            Rectangle MC = new Rectangle(mc.x, mc.y,mc.width,mc.height);
+            for(int i=0;i<f.size();i++){
+                if(f.get(i).check(MC)){
+                    f.get(i).setAppear(false);
+                    f.get(i).increaseHP(mc);
+                    f.remove(i);
+                    break;
+                }
+            }
+            for (int i=0;i<v.size();i++){
+                if(v.get(i).check(MC)){
+                    v.get(i).setAppear(false);
+                    v.get(i).increaseVaccine(mc);
+                    v.remove(i);
+                    break;
+                }
+            }
+
+            g2.dispose();
         }
-        for (int i=0;i<v.size();i++){
-          if(v.get(i).check(MC)){
-          v.get(i).setAppear(false);
-          v.get(i).increaseVaccine(mc);
-          v.remove(i);
-          break;
-          }
-        }
 
-        g2.dispose();
     }
+
 }
