@@ -5,8 +5,10 @@ abstract class GameObject {
   public int x,y;
   public int width;
   int height;
-
-  private boolean collision;
+    private boolean collision;
+    public Rectangle hitArea;
+    public boolean collisionArea;
+    private GameFrame frame;
 
   BufferedImage image;
 
@@ -29,4 +31,9 @@ abstract class GameObject {
   public int getHeight(){
     return height;
   }
+  public void setFrame(GameFrame frame){this.frame = frame;}
+
+  public void isWall(){
+
+    }
 }
