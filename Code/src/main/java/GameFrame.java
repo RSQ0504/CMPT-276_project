@@ -9,8 +9,12 @@ public class GameFrame extends JPanel implements Runnable{
     // GAME STATE
     public int gameState;
     public final int titleState = 0;
-    public final int playState = 1;
-    public final int pauseState = 2;
+    public final int playState = 1; // game play screen
+    public final int pauseState = 2; // game pause screen
+    public final int endState = 3; // game end screen
+    public final int changeLevelState = 4; // change game level screen
+
+
 
     // menu
     public int commandNum = 0; // start: 0, play: 1, exit: 2
@@ -150,43 +154,36 @@ public class GameFrame extends JPanel implements Runnable{
             g2.drawString(title, x, y);
 
             // show image
-//            g2.drawImage();
+//            g2.drawImage();// titleScreenBg.jpg
 
 
             // show menu button
             int numBtn = 3; // number of buttons in menu
-            String[] buttons = {"START GAME", "CHANGE LEVEL", "EXIT"};
-            String startBtn = "START GAME";
-            String optionBtn = "CHANGE LEVEL";
-            String exitBtn = "EXIT";
             int btnLength = 0;
+            int fontSize = 28;
+            int margin = 20;
+            String[] buttons = {"START GAME", "CHANGE LEVEL", "EXIT"};
+//            String startBtn = "START GAME";
+//            String optionBtn = "CHANGE LEVEL";
+//            String exitBtn = "EXIT";
+
             for(int i = 0; i < numBtn; i++) {
                 int tempLen = (int)g2.getFontMetrics().getStringBounds(buttons[i], g2).getWidth();
                 if(tempLen > btnLength) {
                     btnLength = tempLen;
                 }
             }
-            g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 32));
+
+            g2.setFont(g2.getFont().deriveFont(Font.PLAIN, fontSize));
             x = this.width/2 - titleLength/2;
-            int margin = 20;
+
             for(int i = 0; i < numBtn; i++) {
-                y = 360 + (32 + margin)*i;
+                y = 360 + (fontSize + margin)*i;
                 g2.drawString(buttons[i], x, y);
                 if(commandNum == i) {
                     g2.drawString(">", x-24, y);
                 }
             }
-
-
-
-//            JButton btn1 = new JButton("START GAME");
-//            JButton btn2 = new JButton("CHANGE LEVEL");
-//            JButton btn3 = new JButton("EXIT");
-//            this.setLayout(null);
-//            this.add(btn1);
-//            btn1.setLocation(x, y);
-
-
 
 
 

@@ -21,23 +21,6 @@ public class Main {
 
 
 
-
-
-        // display game screen when user clicks 'START'
-//        click.addActionListener(this);
-//        if(false) {
-//            GameFrame gameFrame = new GameFrame(colm, rows, pacSize);
-//            frame.add(gameFrame);
-//            frame.pack();
-//            frame.setLocationRelativeTo(null);
-//            frame.setVisible(true);
-//            gameFrame.beginThread();
-//        }
-//        frame.pack();
-//        frame.setLocationRelativeTo(null);
-//        frame.setVisible(true);
-
-
         // GameMap maze = new GameMap(sizeY, sizeX, pacSize);
         // maze.drawFrame();
     }
