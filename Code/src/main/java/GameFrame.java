@@ -1,6 +1,9 @@
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
 
@@ -15,9 +18,12 @@ public class GameFrame extends JPanel implements Runnable{
     public final int changeLevelState = 4; // change game level screen
 
 
-
     // menu
-    public int commandNum = 0; // start: 0, play: 1, exit: 2
+    public int commandNum = 0; // start: 0, change level: 1, exit: 2
+    public final int optionStart = 0;
+    public final int optionChangeLevel = 1;
+    public final int optionExit = 2;
+    private BufferedImage bgImage;
 
     //attributes of GameMap
     public GameObject[][] Map;
@@ -85,6 +91,12 @@ public class GameFrame extends JPanel implements Runnable{
 //        this.gameState = playState;
         setUpScreen();
         setStartPoint(100,100);
+
+        try {
+            bgImage = ImageIO.read(new File("src/main/java/picture/GUI_image/titleScreenBg.jpg"));
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public int getCellSize(){return cellSize;}
@@ -159,7 +171,8 @@ public class GameFrame extends JPanel implements Runnable{
             g2.drawString(title, x, y);
 
             // show image
-//            g2.drawImage();// titleScreenBg.jpg
+            drawBackgroundImage(g2);// not working
+
 
 
             // show menu button
@@ -228,6 +241,11 @@ public class GameFrame extends JPanel implements Runnable{
             g2.dispose();
         }
 
+    }
+
+    public void drawBackgroundImage(Graphics2D g2) {
+        g2.drawImage(this.bgImage, 0,0,getWidth(),getHeight(),null);
+        // g2.drawImage(); // titleScreenBg.jpg stored in bgImage by GameFrame constructor
     }
 
 }

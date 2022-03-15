@@ -34,13 +34,13 @@ public class inputKey implements KeyListener {
                 }
             }
             if(key == KeyEvent.VK_ENTER) {
-                if(gf.commandNum == 0) {
+                if(gf.commandNum == gf.optionStart) {
                     gf.gameState = gf.playState;
                 }
-                if(gf.commandNum == 1) {
-                    // change level
+                if(gf.commandNum == gf.optionChangeLevel) {
+                    gf.gameState = gf.changeLevelState;
                 }
-                if(gf.commandNum == 2) {
+                if(gf.commandNum == gf.optionExit) {
                     System.exit(0);
                 }
             }
