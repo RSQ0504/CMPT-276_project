@@ -16,10 +16,7 @@ public class BackgroundImagePanel extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-//        Graphics2D g2 = (Graphics2D)g;
-//        g2.drawImage(bgImage, 0, 0, getWidth(), getHeight(), this);
-        System.out.println("[1] Attempting to draw background image.");
-        g.drawImage(bgImage, 0, 0, null);
-        System.out.println("[2] Attempting to draw background image.");
+        Graphics2D g2 = (Graphics2D)g;
+        g2.drawImage(bgImage, 0, 0, getWidth(), getHeight(), null);
     }
 }
