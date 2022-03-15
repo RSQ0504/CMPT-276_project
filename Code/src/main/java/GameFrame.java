@@ -181,9 +181,7 @@ public class GameFrame extends JPanel implements Runnable{
             int fontSize = 28;
             int margin = 20;
             String[] buttons = {"START GAME", "CHANGE LEVEL", "EXIT"};
-//            String startBtn = "START GAME";
-//            String optionBtn = "CHANGE LEVEL";
-//            String exitBtn = "EXIT";
+
 
             for(int i = 0; i < numBtn; i++) {
                 int tempLen = (int)g2.getFontMetrics().getStringBounds(buttons[i], g2).getWidth();
@@ -238,9 +236,10 @@ public class GameFrame extends JPanel implements Runnable{
                 }
             }
 
-            g2.dispose();
+
         }
 
+        g2.dispose();
     }
 
     public void drawBackgroundImage(Graphics2D g2) {
