@@ -23,7 +23,8 @@ public class GameFrame extends JPanel implements Runnable{
     public final int optionStart = 0;
     public final int optionChangeLevel = 1;
     public final int optionExit = 2;
-    private BufferedImage bgImage;
+//    private BufferedImage bgImage;
+    private Image bgImage;
 
     //attributes of GameMap
     public GameObject[][] Map;
@@ -92,11 +93,13 @@ public class GameFrame extends JPanel implements Runnable{
         setUpScreen();
         setStartPoint(100,100);
 
-        try {
-            bgImage = ImageIO.read(new File("src/main/java/picture/GUI_image/titleScreenBg.jpg"));
-        }catch (IOException e) {
-            e.printStackTrace();
-        }
+        bgImage = new ImageIcon("src/main/java/picture/GUI_image/titleScreenBg.jpg").getImage();
+
+//        try {
+//            bgImage = ImageIO.read(new File("src/main/java/picture/GUI_image/titleScreenBg.jpg"));
+//        }catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 
     public int getCellSize(){return cellSize;}
@@ -121,6 +124,12 @@ public class GameFrame extends JPanel implements Runnable{
         gameThread = new Thread(this);
         gameThread.start();
     }
+
+//    public void paint(Graphics g) {
+//        super.paint(g);
+//        Graphics2D g2 = (Graphics2D) g;
+//        g2.drawImage(bgImage, 0, 0, null);
+//    }
 
 
     @Override
@@ -171,7 +180,8 @@ public class GameFrame extends JPanel implements Runnable{
             g2.drawString(title, x, y);
 
             // show image
-            drawBackgroundImage(g2);// not working
+            g2.drawImage(bgImage, 0, 0, null);
+//            drawBackgroundImage(g2);// not working
 
 
 
