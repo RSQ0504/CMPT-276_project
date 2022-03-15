@@ -41,6 +41,11 @@ public class GameFrame extends JPanel implements Runnable{
     private Zombie zombie1 = new Zombie(this,15,200,mc);
     private Zombie zombie2 = new Zombie(this,300,30,mc);
     private Zombie zombie3 = new Zombie(this,550,220,mc);
+
+    // The static characters
+    private KindSurvivor goodPerson1 = new KindSurvivor(this,key,mc,120,255);
+    private BadSurvivor badPerson1 = new BadSurvivor(this,key,mc,262,115);
+
     //Reward
   LinkedList<Vaccine> v = new LinkedList<>();
   LinkedList <Food> f = new LinkedList<>();
@@ -194,6 +199,8 @@ public class GameFrame extends JPanel implements Runnable{
             zombie1.drawZombie(g2);
             zombie2.drawZombie(g2);
             zombie3.drawZombie(g2);
+            goodPerson1.drawKindCharacter(g2);
+            badPerson1.drawBadCharacter(g2);
 
             //reward
             for(int i=0;i<v.size();i++)

@@ -4,6 +4,7 @@ import java.awt.event.KeyListener;
 public class inputKey implements KeyListener {
     GameFrame gf;
     public boolean pressedUp, pressedDown,pressedLeft,pressedRight;
+    public boolean pressF;
 
     public inputKey(GameFrame gf) {
         this.gf = gf;
@@ -47,6 +48,9 @@ public class inputKey implements KeyListener {
 
         // key input during play state
         if(gf.gameState == gf.playState) {
+            if(key== KeyEvent.VK_F){
+                pressF = true;
+            }
             if(key == KeyEvent.VK_UP){
                 pressedUp = true;
             }
@@ -66,6 +70,9 @@ public class inputKey implements KeyListener {
     @Override
     public void keyReleased(KeyEvent e) {
         int key = e.getKeyCode();
+        if(key== KeyEvent.VK_F){
+            pressF = true;
+        }
         if(key == KeyEvent.VK_UP){
             pressedUp = false;
         }

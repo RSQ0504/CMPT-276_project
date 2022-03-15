@@ -55,21 +55,21 @@ public class Zombie extends DynamicCharacter{
     }
     
     void updateZombie(){
+        switch (direction){
+            case "up":
+                y -= speed;
+                break;
+            case "down":
+                y += speed;
+                break;
+            case "left":
+                x -= speed;
+                break;
+            case "right":
+                x += speed;
+                break;
+        }
         if(!closedToAim()){
-            switch (direction){
-                case "up":
-                    y -= speed;
-                    break;
-                case "down":
-                    y += speed;
-                    break;
-                case "left":
-                    x -= speed;
-                    break;
-                case "right":
-                    x += speed;
-                    break;
-            }
             spriteCounter++;
             if(spriteCounter > 120){
                 Random random = new Random();
@@ -90,7 +90,32 @@ public class Zombie extends DynamicCharacter{
             }
         }
         else{
-            // Did not complete yet, it will go to find the aim when it closed to
+            int x_distance = this.x - aim.x;
+            int y_distance = this.y - aim.y;
+            if(x_distance>0){
+                // left
+                direction = "left";
+                if(x_distance<y_distance){
+                    // up
+                    direction = "up";
+                }
+                else if(x_distance < -y_distance){
+                    // down
+                    direction = "down";
+                }
+            }
+            else{
+                // right
+                direction = "right";
+                if(-x_distance < y_distance){
+                    // up
+                    direction = "up";
+                }
+                else if(-x_distance < -y_distance){
+                    // down
+                    direction = "down";
+                }
+            }
         }
     }
 
