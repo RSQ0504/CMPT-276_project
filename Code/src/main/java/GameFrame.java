@@ -16,6 +16,7 @@ public class GameFrame extends JPanel implements Runnable{
     private int speed = 4;
     private int frame_speed = 80;
     private int lvl = 2;
+    private Timer clock = new Timer();
     GameFrame(int colm, int rows, int cellSize){
         this.colm =colm;
         this.rows = rows;
@@ -131,6 +132,7 @@ public class GameFrame extends JPanel implements Runnable{
         zombie1.drawZombie(g2);
         zombie2.drawZombie(g2);
         zombie3.drawZombie(g2);
+        clock.draw(g2);
 
         //reward
         for(int i=0;i<v.size();i++)
