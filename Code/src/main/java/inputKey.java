@@ -46,6 +46,37 @@ public class inputKey implements KeyListener {
             }
         }
 
+
+        // key input in change level screen to move cursor
+        if(gf.gameState == gf.changeLevelState) {
+            if(key == KeyEvent.VK_UP) {
+                gf.commandNum--;
+                if(gf.commandNum == -1) {
+                    gf.commandNum = 2;
+                }
+            }
+            if(key == KeyEvent.VK_DOWN) {
+                gf.commandNum++;
+                if(gf.commandNum == 3) {
+                    gf.commandNum = (gf.commandNum % 3);
+                }
+            }
+            if(key == KeyEvent.VK_ENTER) {
+                if(gf.commandNum == gf.levelEasy) {
+                    gf.gameLevel = gf.levelEasy;
+                }
+                if(gf.commandNum == gf.levelIntermediate) {
+                    gf.gameLevel = gf.levelIntermediate;
+                }
+                if(gf.commandNum == gf.levelChallenge) {
+                    gf.gameLevel = gf.levelChallenge;
+                }
+                gf.commandNum = 0;
+//                gf.gameState = gf.titleState;
+            }
+        }
+
+
         // key input during play state
         if(gf.gameState == gf.playState) {
             if(key== KeyEvent.VK_F){

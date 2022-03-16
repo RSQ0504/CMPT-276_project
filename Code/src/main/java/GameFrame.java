@@ -23,7 +23,6 @@ public class GameFrame extends JPanel implements Runnable{
     public final int optionStart = 0;
     public final int optionChangeLevel = 1;
     public final int optionExit = 2;
-//    private BufferedImage bgImage;
     private Image bgImage;
 
     //attributes of GameMap
@@ -42,6 +41,10 @@ public class GameFrame extends JPanel implements Runnable{
     private int speed = 4;
     private int frame_speed = 60;
     GameMap tile = new GameMap(this);
+    public int gameLevel = 0;
+    public final int levelEasy = 0;
+    public final int levelIntermediate = 1;
+    public final int levelChallenge = 2;
 
     // The characters
     private MainCharacter mc = new MainCharacter(this,key);
@@ -93,13 +96,6 @@ public class GameFrame extends JPanel implements Runnable{
         setStartPoint(100,100);
 
         bgImage = new ImageIcon("src/main/java/picture/GUI_image/titleScreenBg.jpg").getImage();
-
-
-//        try {
-//            bgImage = ImageIO.read(new File("src/main/java/picture/GUI_image/titleScreenBg.jpg"));
-//        }catch (IOException e) {
-//            e.printStackTrace();
-//        }
     }
 
     public int getCellSize(){return cellSize;}
@@ -114,7 +110,6 @@ public class GameFrame extends JPanel implements Runnable{
         width = cellSize*colm;
         height = cellSize*rows;
         this.setPreferredSize(new Dimension(width, height));
-//        this.setBackground(Color.CYAN);
         this.setBackground(new Color(0x123456));
         this.addKeyListener(key);
         this.setFocusable(true);
@@ -160,19 +155,20 @@ public class GameFrame extends JPanel implements Runnable{
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
 
-        // show image
-        g2.drawImage(bgImage, 0, 0, getWidth(), getHeight(), null);
 
         // control display depending on game state
         if(gameState == titleState) {
+            // display background image
+            g2.drawImage(bgImage, 0, 0, getWidth(), getHeight(), null);
+
             // show title
             g2.setFont(g2.getFont().deriveFont(Font.BOLD, 64));
             String title = "Survive in the end";
-            int x;
-            int y;
+            int x = 0;
+            int y = 0;
             int titleLength = (int)g2.getFontMetrics().getStringBounds(title, g2).getWidth();
             x = this.width/2 - titleLength/2;
-            y = 280;
+            y = 250;
             g2.setColor(Color.white);
             g2.drawString(title, x, y);
 
@@ -180,24 +176,26 @@ public class GameFrame extends JPanel implements Runnable{
             // show menu button
             int numBtn = 3; // number of buttons in menu
             int btnLength = 0;
-            int fontSize = 24;
-            int margin = 16;
+            int fontSize = 20;
+            int margin = 12;
             String[] buttons = {"START GAME", "CHANGE LEVEL", "EXIT"};
 
 
-            for(int i = 0; i < numBtn; i++) {
-                int tempLen = (int)g2.getFontMetrics().getStringBounds(buttons[i], g2).getWidth();
-                if(tempLen > btnLength) {
-                    btnLength = tempLen;
-                }
-            }
-
+            // set font for buttons
             g2.setFont(g2.getFont().deriveFont(Font.PLAIN, fontSize));
-            x = this.width/2 - titleLength/2;
 
+            // display buttons
             for(int i = 0; i < numBtn; i++) {
-                y = 360 + (fontSize + margin)*i;
+                btnLength = (int)g2.getFontMetrics().getStringBounds(buttons[i], g2).getWidth();
+
+                // set position of button
+                x = this.width/2 - btnLength/2;
+                y = 320 + (fontSize + margin)*i;
+
+                // draw button
                 g2.drawString(buttons[i], x, y);
+
+                // display '>' before selected option in menu
                 if(commandNum == i) {
                     g2.drawString(">", x-24, y);
                 }
@@ -207,7 +205,6 @@ public class GameFrame extends JPanel implements Runnable{
 
         }else if(gameState == playState) {
             tile.draw(g2);
-
             mc.drawMC(g2);
             zombie1.drawZombie(g2);
             zombie2.drawZombie(g2);
@@ -239,6 +236,57 @@ public class GameFrame extends JPanel implements Runnable{
             }
 
 
+        }else if(gameState == changeLevelState) { // screen display for change-level-screen
+            // display background image
+            g2.drawImage(bgImage, 0, 0, getWidth(), getHeight(), null);
+
+            // show title
+            int x = 0;
+            int y = 0;
+            int numBtn = 3; // number of options
+            int btnLength = 0;
+            int fontSize = 32;
+            int margin = 12;
+            g2.setFont(g2.getFont().deriveFont(Font.BOLD, fontSize));
+            String title = "Select the level of game you would like to play.";
+
+            int titleLength = (int)g2.getFontMetrics().getStringBounds(title, g2).getWidth();
+            x = this.width/2 - titleLength/2;
+            y = 240;
+            g2.setColor(Color.white);
+            g2.drawString(title, x, y);
+
+
+            // show menu button
+            fontSize = 20;
+            String[] levels = {"EASY", "INTERMEDIATE", "CHALLENGE"};
+
+            // set font for buttons
+            g2.setFont(g2.getFont().deriveFont(Font.PLAIN, fontSize));
+
+            // display buttons
+            for(int i = 0; i < numBtn; i++) {
+                btnLength = (int)g2.getFontMetrics().getStringBounds(levels[i], g2).getWidth();
+
+                // set position of button
+                x = this.width/2 - btnLength/2;
+                y = 320 + (fontSize + margin)*i;
+
+                // draw button
+                g2.drawString(levels[i], x, y);
+
+                // display '>' before selected option in menu
+                if(commandNum == i) {
+                    g2.drawString(">", x-24, y);
+                }
+            }
+        }else if(gameState == pauseState) {
+            // screen display when game is paused
+        }else if(gameState == endState) {
+            // screen display when game ends
+        }else {
+            // exception -> go back to title screen
+            gameState = titleState;
         }
 
         g2.dispose();
