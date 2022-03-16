@@ -23,14 +23,14 @@ public class MainCharacter extends DynamicCharacter{
         this.lvl = 2;
         System.out.println("Heyyyyy " + gf.getLvl());
 
-        setDefaultValue(gf.tileFrame.getStartPoints());
+        setDefaultValue(gf.tileFrame.getStartPoints(gf.getLvl()));
         getMCImages();
         hitArea = new Rectangle((int) 1,45,gf.getCellSize()/2, (int) (gf.getCellSize()));
     }
 
     // Set Start point
     private void setDefaultValue(int[] startPoints){
-        x = 365;
+        x = startPoints[0];
         y = startPoints[1];
        // System.out.print(x);
         speed = 1 ;

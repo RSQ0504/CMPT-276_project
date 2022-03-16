@@ -104,18 +104,12 @@ public class GameMap {
         switch(lvl){
             case 1:
                 board = maplvl1;
-                startPointX = 365;
-                startPointY = 0;
                 break;
             case 2:
                 board =  maplvl2;
-                startPointX = 700;
-                startPointY = 0;
                 break;
             case 3:
                 board =  maplvl3;
-                startPointX = 300;
-                startPointY = 0;
                 break;
             default:
                 board = null;
@@ -124,8 +118,24 @@ public class GameMap {
         return board;
     }
 
-    public int[] getStartPoints(){
+    public int[] getStartPoints(int lvl){
         int[] startPoints = new int[2];
+        switch(lvl){
+            case 1:
+                startPointX = 365;
+                startPointY = 0;
+                break;
+            case 2:
+                startPointX = 730;
+                startPointY = 0;
+                break;
+            case 3:
+                startPointX = 265;
+                startPointY = 0;
+                break;
+            default:
+                System.out.println("map level does not exist.");
+        }
 
         startPoints[0] = startPointX;
         startPoints[1] = startPointY;

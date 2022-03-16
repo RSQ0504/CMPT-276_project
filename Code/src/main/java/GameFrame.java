@@ -15,12 +15,11 @@ public class GameFrame extends JPanel implements Runnable{
     private inputKey key = new inputKey();
     private int speed = 4;
     private int frame_speed = 80;
-    private int lvl;
-    GameFrame(int colm, int rows, int cellSize, int lvl){
+    private int lvl = 2;
+    GameFrame(int colm, int rows, int cellSize){
         this.colm =colm;
         this.rows = rows;
         this.cellSize = cellSize;
-        this.lvl = lvl;
 
         System.out.println(this.lvl);
         // mc.setLvl(lvl, tileFrame);
@@ -158,9 +157,11 @@ public class GameFrame extends JPanel implements Runnable{
 
         g2.dispose();
     }
+    public void setLvl(int lvl){
+      this.lvl = lvl;
+    }
 
     public int getLvl(){
-      System.out.println(this.lvl);
       return this.lvl;
     }
 

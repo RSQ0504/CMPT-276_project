@@ -12,7 +12,7 @@ public class Main {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
 
-        GameFrame gameFrame = new GameFrame(colm, rows, pacSize, lvl);
+        GameFrame gameFrame = new GameFrame(colm, rows, pacSize);
         frame.add(gameFrame);
         frame.pack();
         frame.setLocationRelativeTo(null);
