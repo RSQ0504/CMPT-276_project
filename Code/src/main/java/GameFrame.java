@@ -89,11 +89,11 @@ public class GameFrame extends JPanel implements Runnable{
         this.rows = rows;
         this.cellSize = cellSize;
         this.gameState = titleState;
-//        this.gameState = playState;
         setUpScreen();
         setStartPoint(100,100);
 
         bgImage = new ImageIcon("src/main/java/picture/GUI_image/titleScreenBg.jpg").getImage();
+
 
 //        try {
 //            bgImage = ImageIO.read(new File("src/main/java/picture/GUI_image/titleScreenBg.jpg"));
@@ -124,12 +124,6 @@ public class GameFrame extends JPanel implements Runnable{
         gameThread = new Thread(this);
         gameThread.start();
     }
-
-//    public void paint(Graphics g) {
-//        super.paint(g);
-//        Graphics2D g2 = (Graphics2D) g;
-//        g2.drawImage(bgImage, 0, 0, null);
-//    }
 
 
     @Override
@@ -166,6 +160,9 @@ public class GameFrame extends JPanel implements Runnable{
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
 
+        // show image
+        g2.drawImage(bgImage, 0, 0, getWidth(), getHeight(), null);
+
         // control display depending on game state
         if(gameState == titleState) {
             // show title
@@ -175,21 +172,16 @@ public class GameFrame extends JPanel implements Runnable{
             int y;
             int titleLength = (int)g2.getFontMetrics().getStringBounds(title, g2).getWidth();
             x = this.width/2 - titleLength/2;
-            y = 172;
+            y = 280;
             g2.setColor(Color.white);
             g2.drawString(title, x, y);
-
-            // show image
-            g2.drawImage(bgImage, 0, 0, null);
-//            drawBackgroundImage(g2);// not working
-
 
 
             // show menu button
             int numBtn = 3; // number of buttons in menu
             int btnLength = 0;
-            int fontSize = 28;
-            int margin = 20;
+            int fontSize = 24;
+            int margin = 16;
             String[] buttons = {"START GAME", "CHANGE LEVEL", "EXIT"};
 
 
@@ -250,11 +242,6 @@ public class GameFrame extends JPanel implements Runnable{
         }
 
         g2.dispose();
-    }
-
-    public void drawBackgroundImage(Graphics2D g2) {
-        g2.drawImage(this.bgImage, 0,0,getWidth(),getHeight(),null);
-        // g2.drawImage(); // titleScreenBg.jpg stored in bgImage by GameFrame constructor
     }
 
 }
