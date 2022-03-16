@@ -19,6 +19,7 @@ public class GameFrame extends JPanel implements Runnable{
 
 
     // menu
+    public int numOfCommands = 3; // number of commands
     public int commandNum = 0; // start: 0, change level: 1, exit: 2
     public final int optionStart = 0;
     public final int optionChangeLevel = 1;
