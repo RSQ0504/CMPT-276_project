@@ -28,25 +28,22 @@ public class inputKey implements KeyListener {
                     gf.commandNum = gf.numOfCommands - 1;
                     System.out.println("[change] commandNum = " + gf.commandNum);
                 }
-            }
-            if(key == KeyEvent.VK_DOWN) {
+            }else if(key == KeyEvent.VK_DOWN) {
                 gf.commandNum++;
                 if(gf.commandNum == 3) {
                     gf.commandNum = 0;
                 }
-            }
-            if(key == KeyEvent.VK_ENTER) {
+            }else if(key == KeyEvent.VK_ENTER) {
                 System.out.println("enter pressed in title screen");
                 if(gf.commandNum == gf.optionStart) {
                     gf.gameState = gf.playState;
-                }
-                if(gf.commandNum == gf.optionChangeLevel) {
+                    gf.commandNum = 0;
+                }else if(gf.commandNum == gf.optionChangeLevel) {
                     gf.gameState = gf.changeLevelState;
-                }
-                if(gf.commandNum == gf.optionExit) {
+                    gf.commandNum = gf.gameLevel;
+                }else if(gf.commandNum == gf.optionExit) {
                     System.exit(0);
                 }
-                gf.commandNum = 0;
             }
         }else if(gf.gameState == gf.changeLevelState) { // key input in change level screen to move cursor
             System.out.println("key pressed in change level screen");
@@ -55,24 +52,20 @@ public class inputKey implements KeyListener {
                 if(gf.commandNum < 0) {
                     gf.commandNum = gf.numOfCommands - 1;
                 }
-            }
-            if(key == KeyEvent.VK_DOWN) {
+            }else if(key == KeyEvent.VK_DOWN) {
                 gf.commandNum++;
                 if(gf.commandNum == 3) {
                     gf.commandNum = 0;
                 }
-            }
-            if(key == KeyEvent.VK_ENTER) {
+            }else if(key == KeyEvent.VK_ENTER) {
                 System.out.println("enter pressed in change level screen");
                 if(gf.commandNum == gf.levelEasy) {
                     System.out.println("change to easy");
                     gf.gameLevel = gf.levelEasy;
-                }
-                if(gf.commandNum == gf.levelIntermediate) {
+                }else if(gf.commandNum == gf.levelIntermediate) {
                     System.out.println("change to intermediate");
                     gf.gameLevel = gf.levelIntermediate;
-                }
-                if(gf.commandNum == gf.levelChallenge) {
+                }else if(gf.commandNum == gf.levelChallenge) {
                     System.out.println("change to challenge");
                     gf.gameLevel = gf.levelChallenge;
                 }
