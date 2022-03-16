@@ -6,7 +6,7 @@ public class Main {
         int colm = 16;
         int rows = 12;
         int pacSize = 48; //industry standard 48x48
-        int lvl = 2;
+        int lvl = 1;
 
         JFrame frame = new JFrame("Walking till the end");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

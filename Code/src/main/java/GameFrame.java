@@ -6,7 +6,6 @@ import java.util.LinkedList;
 
 public class GameFrame extends JPanel implements Runnable{
     //attributes of GameMap
-    public GameObject[][] Map;
     private int cellSize;
     private int width;
     private int height;
@@ -17,6 +16,18 @@ public class GameFrame extends JPanel implements Runnable{
     private int speed = 4;
     private int frame_speed = 80;
     private int lvl;
+    GameFrame(int colm, int rows, int cellSize, int lvl){
+        this.colm =colm;
+        this.rows = rows;
+        this.cellSize = cellSize;
+        this.lvl = lvl;
+
+        System.out.println(this.lvl);
+        // mc.setLvl(lvl, tileFrame);
+
+        setUpScreen();
+    }
+    public GameObject[][] Map;
     GameMap tileFrame = new GameMap(this, lvl);
 
     public checkCollision check_collision = new checkCollision(this);
@@ -58,17 +69,7 @@ public class GameFrame extends JPanel implements Runnable{
     }
   }
 
-  GameFrame(int colm, int rows, int cellSize, int lvl){
-        this.colm =colm;
-        this.rows = rows;
-        this.cellSize = cellSize;
-        this.lvl = lvl;
 
-
-       // mc.setLvl(lvl, tileFrame);
-
-        setUpScreen();
-    }
 
     public int getCellSize(){return cellSize;}
 
@@ -159,7 +160,8 @@ public class GameFrame extends JPanel implements Runnable{
     }
 
     public int getLvl(){
-      return lvl;
+      System.out.println(this.lvl);
+      return this.lvl;
     }
 
 

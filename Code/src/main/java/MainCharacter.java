@@ -20,6 +20,7 @@ public class MainCharacter extends DynamicCharacter{
         this.key = key;
         this.width = 30;
         this.height = 30;
+        this.lvl = 2;
         System.out.println("Heyyyyy " + gf.getLvl());
 
         setDefaultValue(gf.tileFrame.getStartPoints());
@@ -31,7 +32,7 @@ public class MainCharacter extends DynamicCharacter{
     private void setDefaultValue(int[] startPoints){
         x = 365;
         y = startPoints[1];
-        System.out.print(x);
+       // System.out.print(x);
         speed = 1 ;
     }
 
@@ -179,3 +180,4 @@ public class MainCharacter extends DynamicCharacter{
         g2.drawImage(MC_image,x,y, (gf.getCellSize()/3), gf.getCellSize(), null);
     }
 }
+

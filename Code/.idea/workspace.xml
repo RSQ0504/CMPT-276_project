@@ -5,28 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="32081732-d965-4b70-80a4-f01299ea5265" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/checkCollision.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DynamicCharacter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DynamicCharacter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Food.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Food.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/GameFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GameFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/GameMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GameMap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/GameObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GameObject.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MainCharacter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MainCharacter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Reward.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Reward.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Vaccine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Vaccine.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/DynamicCharacter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DynamicCharacter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Food.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Food.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/GameFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/GameFrame.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/GameMap.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/GameMap.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/GameObject.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/GameObject.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/MainCharacter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/MainCharacter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Reward.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Reward.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Tile.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Tile.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Vaccine.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Vaccine.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Wall.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Wall.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

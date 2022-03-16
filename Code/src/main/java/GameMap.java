@@ -96,6 +96,7 @@ public class GameMap {
         this.lvl = lvl;
         getTileImg();
 
+        //System.out.print(frame);
     }
 
     public int[][] getBoard(int lvl){
@@ -125,6 +126,7 @@ public class GameMap {
 
     public int[] getStartPoints(){
         int[] startPoints = new int[2];
+
         startPoints[0] = startPointX;
         startPoints[1] = startPointY;
 
