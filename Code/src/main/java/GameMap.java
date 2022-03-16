@@ -108,12 +108,34 @@ public class GameMap {
 
 
 
-    public void draw(Graphics2D g2){
-        for(int i = 0; i < 24; i++){
-            for (int j = 0; j < 32; j++){
-                g2.drawImage(tile[maplvl2[i][j]].tileImg, j* frame.getCellSize()/2, i* frame.getCellSize()/2, 24, 24, null);
+    public void draw(Graphics2D g2, int gameLevel){
+        if(gameLevel == 1) {
+            // intermediate
+            for(int i = 0; i < 24; i++){
+                for (int j = 0; j < 32; j++){
+                    g2.drawImage(tile[maplvl2[i][j]].tileImg, j* frame.getCellSize()/2, i* frame.getCellSize()/2, 24, 24, null);
+                }
+            }
+        }else if(gameLevel == 2) {
+            // challenge
+            for(int i = 0; i < 24; i++){
+                for (int j = 0; j < 32; j++){
+                    g2.drawImage(tile[maplvl3[i][j]].tileImg, j* frame.getCellSize()/2, i* frame.getCellSize()/2, 24, 24, null);
+                }
+            }
+        }else {
+            // easy (default)
+            for(int i = 0; i < 24; i++){
+                for (int j = 0; j < 32; j++){
+                    g2.drawImage(tile[maplvl1[i][j]].tileImg, j* frame.getCellSize()/2, i* frame.getCellSize()/2, 24, 24, null);
+                }
             }
         }
+//        for(int i = 0; i < 24; i++){
+//            for (int j = 0; j < 32; j++){
+//                g2.drawImage(tile[maplvl2[i][j]].tileImg, j* frame.getCellSize()/2, i* frame.getCellSize()/2, 24, 24, null);
+//            }
+//        }
     }
 
 }

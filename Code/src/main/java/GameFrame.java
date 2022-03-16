@@ -205,7 +205,7 @@ public class GameFrame extends JPanel implements Runnable{
 
 
         }else if(gameState == playState) {
-            tile.draw(g2);
+            tile.draw(g2, gameLevel);
             mc.drawMC(g2);
             zombie1.drawZombie(g2);
             zombie2.drawZombie(g2);
