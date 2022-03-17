@@ -58,12 +58,13 @@ public class GameFrame extends JPanel implements Runnable{
     public final int levelChallenge = 2;
     GameMap tileFrame = new GameMap(this);
     public checkCollision check_collision = new checkCollision(this);
+    public int[] startPoints = new int[2];
 
     //Timer
     private TimerClock clock = new TimerClock();
 
     // The characters
-    private MainCharacter mc = new MainCharacter(this,key);
+    public MainCharacter mc = new MainCharacter(this,key);
     private Zombie zombie1 = new Zombie(this,15,200,mc);
     private Zombie zombie2 = new Zombie(this,300,30,mc);
     private Zombie zombie3 = new Zombie(this,550,220,mc);
@@ -362,6 +363,12 @@ public class GameFrame extends JPanel implements Runnable{
             bgm.setFile(i);
             bgm.play();
         }
+    }
+
+    public int[] getStartPoints(){
+      System.out.println(gameLevel);
+      startPoints = tileFrame.getStartPoints(gameLevel);
+      return startPoints;
     }
 
 }

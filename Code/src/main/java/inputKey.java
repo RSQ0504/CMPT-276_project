@@ -130,12 +130,15 @@ public class inputKey implements KeyListener {
                 if(gf.commandNum == gf.levelEasy) {
                     System.out.println("change to easy");
                     gf.gameLevel = gf.levelEasy;
+                    gf.mc.setDefaultValue(gf.tileFrame.getStartPoints(gf.levelEasy));
                 }else if(gf.commandNum == gf.levelIntermediate) {
                     System.out.println("change to intermediate");
                     gf.gameLevel = gf.levelIntermediate;
+                    gf.mc.setDefaultValue(gf.tileFrame.getStartPoints(gf.levelIntermediate));
                 }else if(gf.commandNum == gf.levelChallenge) {
                     System.out.println("change to challenge");
                     gf.gameLevel = gf.levelChallenge;
+                    gf.mc.setDefaultValue(gf.tileFrame.getStartPoints(gf.levelChallenge));
                 }
                 gf.commandNum = 0;
                 gf.gameState = gf.titleState;

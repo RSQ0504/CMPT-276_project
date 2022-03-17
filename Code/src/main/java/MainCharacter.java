@@ -14,26 +14,27 @@ public class MainCharacter extends DynamicCharacter{
     private GameFrame gf;
     private inputKey key;
     public BufferedImage MC_image;
+    private int lvl = 0;
 
     public MainCharacter(GameFrame gameFrame, inputKey key){
         this.gf = gameFrame;
         this.key = key;
         this.width = 30;
         this.height = 30;
-        this.lvl = 2;
-        System.out.println("Heyyyyy " + gf.gameLevel);
+        System.out.println("Heyyyyy " + gf.tileFrame.getStartPoints(lvl));
 
-        setDefaultValue(gf.tileFrame.getStartPoints(gf.gameLevel));
+        setDefaultValue(gf.tileFrame.getStartPoints(lvl));
         getMCImages();
         hitArea = new Rectangle((int) 1,45,gf.getCellSize()/2, (int) (gf.getCellSize()));
     }
 
     // Set Start point
-    private void setDefaultValue(int[] startPoints){
+    public void setDefaultValue(int[] startPoints){
         x = startPoints[0];
         y = startPoints[1];
         speed = 1 ;
     }
+
 
     /**
      * Return the number of vaccine

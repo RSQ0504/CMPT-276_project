@@ -131,6 +131,7 @@ public class GameMap {
 
         startPoints[0] = startPointX;
         startPoints[1] = startPointY;
+        System.out.println(startPoints);
 
         return startPoints;
     }
