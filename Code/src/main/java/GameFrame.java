@@ -61,7 +61,13 @@ public class GameFrame extends JPanel implements Runnable{
     public int[] startPoints = new int[2];
 
     //Timer
-    private TimerClock clock = new TimerClock();
+//    private TimerClock clock = new TimerClock();
+    private TimerClock clock;
+    private int timerState = 0;
+    private int timerInactive = 0;// 00:00, ready to start counting
+    private int timerInProgress = 1;// counting
+    private int timerPaused = 2;// paused
+    private int timerTerminated = 3;// completed counting, with final count of time
 
     // The characters
     public MainCharacter mc = new MainCharacter(this,key);
@@ -140,6 +146,7 @@ public class GameFrame extends JPanel implements Runnable{
 
     @Override
     public void run() {
+        System.out.println("[run/GameFrame.java] running GameFrame");
         double interval = 1000000000/frame_speed;
         double nextUpdate = System.nanoTime() + interval;
         while(gameThread != null) {
@@ -148,6 +155,24 @@ public class GameFrame extends JPanel implements Runnable{
             // 2.DRAW
             repaint();
 
+            // TIMER
+            if(gameState == playState) {
+//                System.out.println("[run/GameFrame] Game playing");
+
+                if(timerState == timerInactive) {
+                    System.out.println("[run/GameFrame] Start timer");
+                    clock = new TimerClock();
+//                    clock.startTimer();
+                    timerState = timerInProgress;
+                }else if(timerState == pauseState) {
+                    System.out.println("[run/GameFrame] resume timer count");
+                }
+
+            }else if(gameState == pauseState) {
+                System.out.println("[run/GameFrame] Game paused");
+            }else if(gameState == endState) {
+                System.out.println("[run/GameFrame] Game ended");
+            }
             try {
                 double sleepTime = (nextUpdate - System.nanoTime())/1000000;
                 if (sleepTime < 0) {
