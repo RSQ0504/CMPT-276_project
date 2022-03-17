@@ -1,4 +1,3 @@
-
 import javax.imageio.ImageIO;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
@@ -53,11 +52,15 @@ public class GameFrame extends JPanel implements Runnable{
     private inputKey key = new inputKey(this);
     private int speed = 4;
     private int frame_speed = 60;
-    GameMap tile = new GameMap(this);
     public int gameLevel = 0;
     public final int levelEasy = 0;
     public final int levelIntermediate = 1;
     public final int levelChallenge = 2;
+    GameMap tileFrame = new GameMap(this);
+    public checkCollision check_collision = new checkCollision(this);
+
+    //Timer
+    private TimerClock clock = new TimerClock();
 
     // The characters
     private MainCharacter mc = new MainCharacter(this,key);
@@ -240,13 +243,14 @@ public class GameFrame extends JPanel implements Runnable{
             }
 
             // setup game
-            tile.draw(g2, gameLevel);
+            tileFrame.draw(g2, tileFrame.getBoard(gameLevel));
             mc.drawMC(g2);
             zombie1.drawZombie(g2);
             zombie2.drawZombie(g2);
             zombie3.drawZombie(g2);
             goodPerson1.drawKindCharacter(g2);
             badPerson1.drawBadCharacter(g2);
+            clock.draw(g2);
 
             //reward
             for(int i=0;i<v.size();i++)

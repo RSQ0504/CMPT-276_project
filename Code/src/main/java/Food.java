@@ -1,8 +1,5 @@
-
 import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
@@ -16,7 +13,7 @@ public class Food extends Reward {
     image = ImageIO.read(new File("src/main/java/picture/Rewards/Food2_24x24.png"));
     this.width = 30;
     this.height = 30;
-    hitArea = new Rectangle(this.x,this.y,this.width,this.height);
+    hitAreaStatic = new Rectangle(this.x,this.y,this.width,this.height);
   }
 
   public void increaseHP(MainCharacter m){

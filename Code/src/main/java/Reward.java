@@ -1,4 +1,3 @@
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -17,6 +16,6 @@ abstract class Reward extends GameObject{
       g.drawImage(image,x,y,image.getWidth(), image.getHeight(), null);
   }
   public boolean check(Rectangle mc){
-    return hitArea.intersects(mc);
+    return hitAreaStatic.intersects(mc);
   }
 }

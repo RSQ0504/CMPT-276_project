@@ -1,7 +1,8 @@
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.time.LocalDateTime;
 
-public class DynamicCharacter{
+public class DynamicCharacter extends GameObject{
     /**
      * The speed that the character move
      * The x,y means the position of the Dynamic character
@@ -9,6 +10,8 @@ public class DynamicCharacter{
      */
     public int speed;
     public int x,y,width,height;
+    public Rectangle hitArea;
+    public boolean collisionArea = false;
 
     public BufferedImage up1, up2, up3, up4,
                          left1, left2, left3, left4,

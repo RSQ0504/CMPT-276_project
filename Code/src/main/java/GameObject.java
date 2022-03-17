@@ -5,16 +5,23 @@ abstract class GameObject {
   public int x,y;
   public int width;
   int height;
-    private boolean collision;
-    public Rectangle hitArea;
-    public boolean collisionArea;
-    private GameFrame frame;
+  private boolean collision;
+  private GameFrame frame;
+  public Rectangle hitAreaStatic;
+  protected int lvl;
+  protected GameMap gm;
 
   BufferedImage image;
 
   public boolean getCollision(){return collision; }
 
   public void setCollision(boolean collision){ this.collision = collision; }
+
+  public void setLvl(int lvl, GameMap gm){
+    this.lvl = lvl;
+    this.gm = gm;
+  }
+
 
   public BufferedImage getImage(){
     return image;
@@ -32,8 +39,4 @@ abstract class GameObject {
     return height;
   }
   public void setFrame(GameFrame frame){this.frame = frame;}
-
-  public void isWall(){
-
-    }
 }

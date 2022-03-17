@@ -5,8 +5,12 @@ import java.io.IOException;
 
 public class GameMap {
     private GameFrame frame;
-    private Tile[] tile;
-    public int[][] maplvl1 = {{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+    public Tile[] tile;
+    public int startPointX;
+    public int startPointY;
+    private int endPointX;
+    private int endPointY;
+    private int[][] maplvl1 = {{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
             {1,0,0,0,0,0,1,0,0,1,1,0,1,1,0,0,0,0,0,1,1,1,0,0,0,0,1,0,1,0,0,1} ,
             {1,0,1,1,1,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,1,1,0,1,0,1,0,0,1},
             {1,0,0,0,0,1,1,0,0,0,1,0,0,1,1,1,1,1,0,1,1,1,1,1,1,0,1,0,1,0,0,1},
@@ -33,7 +37,7 @@ public class GameMap {
 
     private int[][] maplvl2 = {
             {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0},
-            {1,0,0,0,0,0,1,0,0,1,1,0,1,1,0,0,0,0,0,1,1,1,0,0,0,0,1,0,1,0,0,0} ,
+            {1,0,0,0,0,0,1,0,0,1,1,0,1,1,0,0,0,0,0,1,1,1,0,0,0,0,1,1,1,0,0,0} ,
             {1,0,1,1,1,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,1,1,0,1,0,1,0,0,1},
             {1,0,0,0,0,1,1,0,0,0,1,0,0,1,1,1,1,1,0,1,1,1,1,1,1,0,1,0,1,0,0,1},
             {1,0,1,1,1,0,0,1,0,0,1,0,1,0,0,1,1,1,0,0,0,0,0,0,0,1,1,0,1,1,0,1},
@@ -81,14 +85,54 @@ public class GameMap {
     {1,1,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,1,1,0,1,0,0,0,0,0,1,0,0,0,0,1},
     {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1}};
 
-
-
-
     GameMap(GameFrame frame){
         this.frame = frame;
         tile = new Tile[10];
         getTileImg();
+    }
 
+    public int[][] getBoard(int lvl){
+        int[][] board;
+        switch(lvl){
+            case 0:
+                board = maplvl1;
+                break;
+            case 1:
+                board =  maplvl2;
+                break;
+            case 2:
+                board =  maplvl3;
+                break;
+            default:
+                board = null;
+                System.out.println("map level does not exist.");
+        }
+        return board;
+    }
+
+    public int[] getStartPoints(int lvl){
+        int[] startPoints = new int[2];
+        switch(lvl){
+            case 0:
+                startPointX = 365;
+                startPointY = 0;
+                break;
+            case 1:
+                startPointX = 730;
+                startPointY = 0;
+                break;
+            case 2:
+                startPointX = 265;
+                startPointY = 0;
+                break;
+            default:
+                System.out.println("map level does not exist.");
+        }
+
+        startPoints[0] = startPointX;
+        startPoints[1] = startPointY;
+
+        return startPoints;
     }
 
     public void getTileImg()  {
@@ -108,34 +152,13 @@ public class GameMap {
 
 
 
-    public void draw(Graphics2D g2, int gameLevel){
-        if(gameLevel == 1) {
-            // intermediate
-            for(int i = 0; i < 24; i++){
-                for (int j = 0; j < 32; j++){
-                    g2.drawImage(tile[maplvl2[i][j]].tileImg, j* frame.getCellSize()/2, i* frame.getCellSize()/2, 24, 24, null);
-                }
-            }
-        }else if(gameLevel == 2) {
-            // challenge
-            for(int i = 0; i < 24; i++){
-                for (int j = 0; j < 32; j++){
-                    g2.drawImage(tile[maplvl3[i][j]].tileImg, j* frame.getCellSize()/2, i* frame.getCellSize()/2, 24, 24, null);
-                }
-            }
-        }else {
-            // easy (default)
-            for(int i = 0; i < 24; i++){
-                for (int j = 0; j < 32; j++){
-                    g2.drawImage(tile[maplvl1[i][j]].tileImg, j* frame.getCellSize()/2, i* frame.getCellSize()/2, 24, 24, null);
-                }
+    public void draw(Graphics2D g2, int[][] map){
+        for(int i = 0; i < 24; i++){
+            for (int j = 0; j < 32; j++){
+                g2.drawImage(tile[map[i][j]].tileImg, j* frame.getCellSize()/2, i* frame.getCellSize()/2, 24, 24, null);
             }
         }
-//        for(int i = 0; i < 24; i++){
-//            for (int j = 0; j < 32; j++){
-//                g2.drawImage(tile[maplvl2[i][j]].tileImg, j* frame.getCellSize()/2, i* frame.getCellSize()/2, 24, 24, null);
-//            }
-//        }
     }
+
 
 }
