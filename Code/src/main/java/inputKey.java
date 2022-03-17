@@ -37,6 +37,7 @@ public class inputKey implements KeyListener {
                 System.out.println("enter pressed in title screen");
                 if(gf.commandNum == gf.optionStart) {
                     gf.gameState = gf.playState;
+                    gf.stopBGM();
                     gf.commandNum = 0;
                 }else if(gf.commandNum == gf.optionChangeLevel) {
                     gf.gameState = gf.changeLevelState;

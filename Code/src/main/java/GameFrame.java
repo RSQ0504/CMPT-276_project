@@ -228,6 +228,18 @@ public class GameFrame extends JPanel implements Runnable{
 
 
         }else if(gameState == playState) {
+            // play bgm
+            try {
+                playBGM(3);
+            } catch (UnsupportedAudioFileException e) {
+                e.printStackTrace();
+            } catch (LineUnavailableException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            // setup game
             tile.draw(g2, gameLevel);
             mc.drawMC(g2);
             zombie1.drawZombie(g2);
