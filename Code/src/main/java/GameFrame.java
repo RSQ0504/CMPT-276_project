@@ -1,5 +1,7 @@
 
 import javax.imageio.ImageIO;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -11,7 +13,13 @@ import java.util.LinkedList;
 
 public class GameFrame extends JPanel implements Runnable{
     // BGM
-    Music bgm = new Music();
+    public Music bgm = new Music();
+//    public Music soundEffect = new Music();
+    public int musicState = 0; // 0 or 1
+    public final int musicPaused = 0;
+    public final int musicPlaying = 1;
+
+
 
     // GAME STATE
     public int gameState;
@@ -164,7 +172,15 @@ public class GameFrame extends JPanel implements Runnable{
         // control display depending on game state
         if(gameState == titleState) {
             // play bgm
-            playBGM(4);
+            try {
+                playBGM(4);
+            } catch (UnsupportedAudioFileException e) {
+                e.printStackTrace();
+            } catch (LineUnavailableException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
             // display background image
             g2.drawImage(bgImage, 0, 0, getWidth(), getHeight(), null);
@@ -212,6 +228,18 @@ public class GameFrame extends JPanel implements Runnable{
 
 
         }else if(gameState == playState) {
+            // play bgm
+            try {
+                playBGM(3);
+            } catch (UnsupportedAudioFileException e) {
+                e.printStackTrace();
+            } catch (LineUnavailableException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            // setup game
             tile.draw(g2, gameLevel);
             mc.drawMC(g2);
             zombie1.drawZombie(g2);
@@ -300,20 +328,36 @@ public class GameFrame extends JPanel implements Runnable{
         g2.dispose();
     }
 
-    public void playBGM(int i) {
-        System.out.println("[playBGM] playing bgm.");
-        bgm.setFile(i);
-        bgm.play();
-        bgm.loop();
+    public void playBGM(int i) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+        if(musicState == musicPaused) {
+            System.out.println("[playBGM] playing bgm.");
+            if(bgm.setFile(i)) {
+                bgm.play();
+                bgm.loop();
+                musicState = musicPlaying;
+            }
+        }
     }
 
     public void stopBGM() {
-        bgm.stop();;
+        System.out.println("[stopBGM] stopping bgm.");
+        if(musicState == musicPlaying) {
+            System.out.println("[stopBGM] stop playing bgm.");
+            bgm.stop();
+        }
+        musicState = musicPaused;
     }
 
-    public void playSoundEffect(int i) {
-        bgm.setFile(i);
-        bgm.play();
+    public void playSoundEffect(int i) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+        // sound effect music files are 0, 1, 2
+        // 0: Click_music_1
+        // 1: Click_music_2
+        // 2: Click_music_3
+        if(i >= 0 && i <= 2) {
+            System.out.println("[playBGM] play sound effect.");
+            bgm.setFile(i);
+            bgm.play();
+        }
     }
 
 }

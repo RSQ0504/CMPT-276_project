@@ -1,46 +1,30 @@
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
+import javax.sound.sampled.*;
 import java.io.File;
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.io.IOException;
 
 public class Music {
     Clip clip;
-    URL musicURL[] = new URL[30];
-//    File musicFiles[];
     private String[] musicFilePaths = {
-            "/music/Click_music_1.wav",// 0
-            "/music/Click_music_2.wav",// 1
-            "/music/Click_music_3.wav",// 2
-            "/music/bgm_mysteriousSound.wav",// 3
-            "/music/bgm_darkCaveSound.wav"// 4
+            "src/main/java/music/Click_music_1.wav",// 0
+            "src/main/java/music/Click_music_2.wav",// 1
+            "src/main/java/music/Click_music_3.wav",// 2
+            "src/main/java/music/bgm_mysteriousSound.wav",// 3
+            "src/main/java/music/bgm_darkCaveSound.wav"// 4
     };
 
-    public Music() throws MalformedURLException {
-        for(int i = 0; i < musicFilePaths.length; i++) {
-            musicURL[i] = getClass().getResource(musicFilePaths[i]);
-        }
-    }
 
-    public void setFile(int i) {
+    public boolean setFile(int i) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
         System.out.println("[setFile] setting music file");
-        try {
-            System.out.println("[setFile] entering try statement");
-            AudioInputStream ais = AudioSystem.getAudioInputStream(musicURL[i]);
-            System.out.println("[setFile] AudioInputStream ais = AudioSystem.getAudioInputStream(musicURL[i]);");
+        if(i >= 0 && i < musicFilePaths.length) {
+            File file = new File(musicFilePaths[i]);
+            AudioInputStream bgm = AudioSystem.getAudioInputStream(file);
             clip = AudioSystem.getClip();
-            System.out.println("[setFile] clip = AudioSystem.getClip();");
-            if(clip == null) {
-                System.out.println("[setFile] Clip is null.");
-            }else {
-                System.out.println("[setFile] Clip is NOT null.");
-                clip.open(ais);
-            }
-
-        }catch (Exception e) {
-            System.out.println("[setFile] FAILED");
+            clip.open(bgm);
+        }else {
+            return false;
         }
+
+        return true;
     }
 
     public void play() {
