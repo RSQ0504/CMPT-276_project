@@ -340,17 +340,24 @@ public class GameFrame extends JPanel implements Runnable{
     }
 
     public void stopBGM() {
-        System.out.println("[playBGM] stopping bgm.");
+        System.out.println("[stopBGM] stopping bgm.");
         if(musicState == musicPlaying) {
+            System.out.println("[stopBGM] stop playing bgm.");
             bgm.stop();
         }
         musicState = musicPaused;
     }
 
     public void playSoundEffect(int i) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
-        System.out.println("[playBGM] play sound effect.");
-        bgm.setFile(i);
-        bgm.play();
+        // sound effect music files are 0, 1, 2
+        // 0: Click_music_1
+        // 1: Click_music_2
+        // 2: Click_music_3
+        if(i >= 0 && i <= 2) {
+            System.out.println("[playBGM] play sound effect.");
+            bgm.setFile(i);
+            bgm.play();
+        }
     }
 
 }

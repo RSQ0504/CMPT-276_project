@@ -1,5 +1,8 @@
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.IOException;
 
 public class inputKey implements KeyListener {
     GameFrame gf;
@@ -22,6 +25,15 @@ public class inputKey implements KeyListener {
         if(gf.gameState == gf.titleState) { // key input in title screen to move cursor
             System.out.println("key pressed in title screen");
             if(key == KeyEvent.VK_UP) {
+                try {
+                    gf.playSoundEffect(0);
+                } catch (UnsupportedAudioFileException ex) {
+                    ex.printStackTrace();
+                } catch (LineUnavailableException ex) {
+                    ex.printStackTrace();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
                 gf.commandNum--;
                 System.out.println("commandNum = " + gf.commandNum);
                 if(gf.commandNum < 0) {
@@ -29,6 +41,15 @@ public class inputKey implements KeyListener {
                     System.out.println("[change] commandNum = " + gf.commandNum);
                 }
             }else if(key == KeyEvent.VK_DOWN) {
+                try {
+                    gf.playSoundEffect(0);
+                } catch (UnsupportedAudioFileException ex) {
+                    ex.printStackTrace();
+                } catch (LineUnavailableException ex) {
+                    ex.printStackTrace();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
                 gf.commandNum++;
                 if(gf.commandNum == 3) {
                     gf.commandNum = 0;
@@ -36,29 +57,75 @@ public class inputKey implements KeyListener {
             }else if(key == KeyEvent.VK_ENTER) {
                 System.out.println("enter pressed in title screen");
                 if(gf.commandNum == gf.optionStart) {
+
                     gf.gameState = gf.playState;
-                    gf.stopBGM();
                     gf.commandNum = 0;
+                    gf.stopBGM();
                 }else if(gf.commandNum == gf.optionChangeLevel) {
+                    try {
+                        gf.playSoundEffect(0);
+                    } catch (UnsupportedAudioFileException ex) {
+                        ex.printStackTrace();
+                    } catch (LineUnavailableException ex) {
+                        ex.printStackTrace();
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
                     gf.gameState = gf.changeLevelState;
                     gf.commandNum = gf.gameLevel;
                 }else if(gf.commandNum == gf.optionExit) {
+                    try {
+                        gf.playSoundEffect(2);
+                    } catch (UnsupportedAudioFileException ex) {
+                        ex.printStackTrace();
+                    } catch (LineUnavailableException ex) {
+                        ex.printStackTrace();
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
                     System.exit(0);
                 }
             }
         }else if(gf.gameState == gf.changeLevelState) { // key input in change level screen to move cursor
             System.out.println("key pressed in change level screen");
             if(key == KeyEvent.VK_UP) {
+                try {
+                    gf.playSoundEffect(0);
+                } catch (UnsupportedAudioFileException ex) {
+                    ex.printStackTrace();
+                } catch (LineUnavailableException ex) {
+                    ex.printStackTrace();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
                 gf.commandNum--;
                 if(gf.commandNum < 0) {
                     gf.commandNum = gf.numOfCommands - 1;
                 }
             }else if(key == KeyEvent.VK_DOWN) {
+                try {
+                    gf.playSoundEffect(0);
+                } catch (UnsupportedAudioFileException ex) {
+                    ex.printStackTrace();
+                } catch (LineUnavailableException ex) {
+                    ex.printStackTrace();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
                 gf.commandNum++;
                 if(gf.commandNum == 3) {
                     gf.commandNum = 0;
                 }
             }else if(key == KeyEvent.VK_ENTER) {
+                try {
+                    gf.playSoundEffect(0);
+                } catch (UnsupportedAudioFileException ex) {
+                    ex.printStackTrace();
+                } catch (LineUnavailableException ex) {
+                    ex.printStackTrace();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
                 System.out.println("enter pressed in change level screen");
                 if(gf.commandNum == gf.levelEasy) {
                     System.out.println("change to easy");
