@@ -1,10 +1,8 @@
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import java.io.IOException;
 
 public class Main {
-    public static void main(String[] args) throws IOException, UnsupportedAudioFileException, LineUnavailableException {
+    public static void main(String[] args) throws IOException {
         int colm = 16;
         int rows = 12;
         int pacSize = 48; //industry standard 48x48
@@ -15,7 +13,6 @@ public class Main {
         frame.setResizable(false);
 
         GameFrame gameFrame = new GameFrame(colm, rows, pacSize);
-//        gameFrame.playBGM(4);
         frame.add(gameFrame);
         frame.pack();
         frame.setLocationRelativeTo(null);
