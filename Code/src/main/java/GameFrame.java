@@ -5,10 +5,14 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.LinkedList;
 
 
 public class GameFrame extends JPanel implements Runnable{
+    // BGM
+    Music bgm = new Music();
+
     // GAME STATE
     public int gameState;
     public final int titleState = 0;
@@ -88,7 +92,7 @@ public class GameFrame extends JPanel implements Runnable{
     }
   }
 
-  GameFrame(int colm, int rows, int cellSize){
+  GameFrame(int colm, int rows, int cellSize) throws MalformedURLException {
         this.colm =colm;
         this.rows = rows;
         this.cellSize = cellSize;
@@ -159,6 +163,9 @@ public class GameFrame extends JPanel implements Runnable{
 
         // control display depending on game state
         if(gameState == titleState) {
+            // play bgm
+            playBGM(4);
+
             // display background image
             g2.drawImage(bgImage, 0, 0, getWidth(), getHeight(), null);
 
@@ -291,6 +298,22 @@ public class GameFrame extends JPanel implements Runnable{
         }
 
         g2.dispose();
+    }
+
+    public void playBGM(int i) {
+        System.out.println("[playBGM] playing bgm.");
+        bgm.setFile(i);
+        bgm.play();
+        bgm.loop();
+    }
+
+    public void stopBGM() {
+        bgm.stop();;
+    }
+
+    public void playSoundEffect(int i) {
+        bgm.setFile(i);
+        bgm.play();
     }
 
 }
