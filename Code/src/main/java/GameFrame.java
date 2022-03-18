@@ -351,6 +351,10 @@ public class GameFrame extends JPanel implements Runnable{
             // setup game
             tileFrame.draw(g2, tileFrame.getBoard(gameLevel));
             goodPerson1.resetBoard(tileFrame.getBoard(gameLevel));
+            g2.setColor(Color.black);
+            g2.setFont(new Font("default", Font.BOLD, 18));
+            g2.drawString("Find out endpoint by",25,20);
+            g2.drawString("chatting with ch (press F)",25,35);
             mc.drawMC(g2);
             mc.drawScore(g2,690,0);
             zombie1.drawZombie(g2);
