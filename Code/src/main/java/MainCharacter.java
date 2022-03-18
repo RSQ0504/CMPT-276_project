@@ -122,10 +122,8 @@ public class MainCharacter extends DynamicCharacter{
                     case "left":
                         x -= speed;
                         break;
-
                 }
             }
-
 
             spriteCounter++;
             if (spriteCounter > 10) {

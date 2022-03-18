@@ -7,7 +7,6 @@ public class Main {
         int rows = 12;
         int pacSize = 48; //industry standard 48x48
 
-
         JFrame frame = new JFrame("Survive in the end");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
