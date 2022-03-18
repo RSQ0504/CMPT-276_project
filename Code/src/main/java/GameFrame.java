@@ -268,13 +268,13 @@ public class GameFrame extends JPanel implements Runnable{
 
         //check whether mc is killed by zombies
         Rectangle MC = new Rectangle(mc.x, mc.y,mc.width,mc.height);
-        Rectangle endpoint = new Rectangle(1* getCellSize()/2, 23* getCellSize()/2, 24, 24);
+        Rectangle endpoint = new Rectangle(40, 520, 24, 24);
         if(zombie1.check(MC)||zombie2.check(MC)||zombie3.check(MC)||mc.getHP()<0){
           mc.setHP(0);
           gameResult = fail;
           gameState = endState;
         }
-        if(mc.getVaccines()>=10 /*&& endpoint */){
+        if(mc.getVaccines()>=1 && endpoint.intersects(MC)){
           gameResult = win;
           gameState = endState;
         }
@@ -351,6 +351,7 @@ public class GameFrame extends JPanel implements Runnable{
 
             // setup game
             tileFrame.draw(g2, tileFrame.getBoard(gameLevel));
+            goodPerson1.resetBoard(tileFrame.getBoard(gameLevel));
             mc.drawMC(g2);
             mc.drawScore(g2,690,0);
             zombie1.drawZombie(g2);

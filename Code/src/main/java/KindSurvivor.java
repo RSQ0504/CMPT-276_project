@@ -34,6 +34,10 @@ public class KindSurvivor extends StaticCharacter{
         setDefaultValue(x,y,door_x,door_y);
     }
 
+    public void resetBoard(int[][] Board){
+      this.map = Board;
+    }
+
     private void setDefaultValue(int x, int y,int door_x, int door_y){
         this.direction = "down";
         this.x = x;
