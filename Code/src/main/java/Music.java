@@ -14,7 +14,7 @@ public class Music {
 
 
     public boolean setFile(int i) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-        System.out.println("[setFile] setting music file");
+//        System.out.println("[setFile] setting music file");
         if(i >= 0 && i < musicFilePaths.length) {
             File file = new File(musicFilePaths[i]);
             AudioInputStream bgm = AudioSystem.getAudioInputStream(file);
@@ -29,7 +29,7 @@ public class Music {
 
     public void play() {
         if(clip == null) {
-            System.out.println("[play] Clip is null.");
+//            System.out.println("[play] Clip is null.");
         }else {
             clip.start();
         }

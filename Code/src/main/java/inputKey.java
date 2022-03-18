@@ -23,8 +23,9 @@ public class inputKey implements KeyListener {
         int key = e.getKeyCode();
 
         if(gf.gameState == gf.titleState) { // key input in title screen to move cursor
-            System.out.println("key pressed in title screen");
+
             if(key == KeyEvent.VK_UP) {
+                System.out.println("UP pressed in title screen");
                 try {
                     gf.playSoundEffect(0);
                 } catch (UnsupportedAudioFileException ex) {
@@ -41,6 +42,7 @@ public class inputKey implements KeyListener {
                     System.out.println("[change] commandNum = " + gf.commandNum);
                 }
             }else if(key == KeyEvent.VK_DOWN) {
+                System.out.println("DOWN pressed in title screen");
                 try {
                     gf.playSoundEffect(0);
                 } catch (UnsupportedAudioFileException ex) {
@@ -50,9 +52,11 @@ public class inputKey implements KeyListener {
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
+                System.out.println("commandNum = " + gf.commandNum);
                 gf.commandNum++;
                 if(gf.commandNum == 3) {
                     gf.commandNum = 0;
+                    System.out.println("[change] commandNum = " + gf.commandNum);
                 }
             }else if(key == KeyEvent.VK_ENTER) {
                 System.out.println("enter pressed in title screen");
