@@ -270,7 +270,7 @@ public class GameFrame extends JPanel implements Runnable{
         Rectangle MC = new Rectangle(mc.x, mc.y,mc.width,mc.height);
         Rectangle endpoint = new Rectangle(1* getCellSize()/2, 23* getCellSize()/2, 24, 24);
         if(zombie1.check(MC)||zombie2.check(MC)||zombie3.check(MC)||mc.getHP()<0){
-          mc.setHP(-1);
+          mc.setHP(0);
           gameResult = fail;
           gameState = endState;
         }
