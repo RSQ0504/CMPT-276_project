@@ -54,11 +54,11 @@ public class TimerClock {
             }
         });
     }
-    public void draw(Graphics2D g2) {
-        g2.drawImage(timerImg, 600,0, 90,40,null);
+    public void draw(Graphics2D g2,int x, int y) {
+        g2.drawImage(timerImg, x,y, 90,40,null);
         g2.setColor(Color.black);
         g2.setFont(new Font("default", Font.BOLD, 16));
-        g2.drawString(minuteFormatted + ":" + secondFormatted, 635,25);
+        g2.drawString(minuteFormatted + ":" + secondFormatted, x+35,y+25);
     }
 
 }

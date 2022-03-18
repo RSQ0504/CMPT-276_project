@@ -189,14 +189,14 @@ public class MainCharacter extends DynamicCharacter{
     }
   }
 
-    public void drawScore(Graphics2D g2){
+    public void drawScore(Graphics2D g2,int x,int y){
       getTimerImg();
-      g2.drawImage(VaccineImage, 690,0, 60,40,null);
-      g2.drawImage(HP_image, 690,40, 60,40,null);
+      g2.drawImage(VaccineImage,x,y,60,40,null);
+      g2.drawImage(HP_image,x,y+40, 60,40,null);
       g2.setColor(Color.black);
       g2.setFont(new Font("default", Font.BOLD, 16));
-      g2.drawString(""+getVaccines(), 720,25);
-      g2.drawString(""+getHP(), 720,65);
+      g2.drawString(""+getVaccines(), x+30,y+25);
+      g2.drawString(""+getHP(), x+30,y+65);
     }
 
     public void WinorLose(){

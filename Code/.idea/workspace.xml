@@ -4,19 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d1523491-d180-4c57-990c-1160e4abce8b" name="Changes" comment="staticCharacter fix: speakMessage show time extended.">
+    <list default="true" id="d1523491-d180-4c57-990c-1160e4abce8b" name="Changes" comment="staticCharacter fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/GameFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GameFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MainCharacter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MainCharacter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/picture/GUI_image/GameOver.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/picture/GUI_image/GameOver_interface.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/picture/GUI_image/GameOver_interface.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/picture/GUI_image/GameWin.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/picture/GUI_image/GameWin_interface.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/picture/GUI_image/GameWin_interface.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/picture/GUI_image/HP_icon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/picture/GUI_image/Time_icon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/picture/GUI_image/blood.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TimerClock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TimerClock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/GameFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/GameFrame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/MainCharacter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/MainCharacter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/TimerClock.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/TimerClock.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,6 +45,16 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="localRepository" value="$PROJECT_DIR$/../../../../Code environment/apache-maven-3.8.4/Repository" />
+        <option name="mavenHome" value="$PROJECT_DIR$/../../../../Code environment/apache-maven-3.8.4" />
+        <option name="useMavenConfig" value="true" />
+        <option name="userSettingsFile" value="$PROJECT_DIR$/../../../../Code environment/apache-maven-3.8.4/conf/settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
   <component name="ProjectCodeStyleSettingsMigration">
     <option name="version" value="2" />
   </component>
@@ -78,6 +83,13 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="Code" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="DjangoTestsConfigurationType">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -97,6 +109,17 @@
       <option name="USE_OPTIONS" value="false" />
       <option name="OPTIONS" value="" />
       <method v="2" />
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration default="true" type="PyBehaveRunConfigurationType" factoryName="Behave">
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -199,24 +222,6 @@
       <option name="USE_PATTERN" value="false" />
       <method v="2" />
     </configuration>
-    <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Main" />
-      <module name="Code" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="JetRunConfigurationType">
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <option name="filePath" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -239,9 +244,6 @@
       <workItem from="1647581991220" duration="1160000" />
       <workItem from="1647585194664" duration="37000" />
       <workItem from="1647585260947" duration="427000" />
-      <workItem from="1647589518619" duration="26000" />
-      <workItem from="1647589566137" duration="4285000" />
-      <workItem from="1647594603993" duration="1188000" />
     </task>
     <task id="LOCAL-00001" summary="MC can be killed by zombies">
       <created>1647579667518</created>
@@ -292,14 +294,7 @@
       <option name="project" value="LOCAL" />
       <updated>1647585677948</updated>
     </task>
-    <task id="LOCAL-00008" summary="staticCharacter fix: speakMessage show time extended.">
-      <created>1647591156289</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1647591156289</updated>
-    </task>
-    <option name="localTasksCounter" value="9" />
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -315,13 +310,11 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="MC can be killed by zombies" />
     <MESSAGE value="Score display" />
     <MESSAGE value="staticCharacter fix" />
-    <MESSAGE value="staticCharacter fix: speakMessage show time extended." />
-    <option name="LAST_COMMIT_MESSAGE" value="staticCharacter fix: speakMessage show time extended." />
+    <option name="LAST_COMMIT_MESSAGE" value="staticCharacter fix" />
   </component>
 </project>

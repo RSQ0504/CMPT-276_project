@@ -84,6 +84,8 @@ public class GameFrame extends JPanel implements Runnable{
     private Image narrationPage10;
     private Image narrationPage11;
 
+    private BufferedImage gamewin = ImageIO.read(new File("src/main/java/picture/GUI_image/GameWin_interface.png"));
+    private BufferedImage gamefail = ImageIO.read(new File("src/main/java/picture/GUI_image/GameOver_interface.png"));
 
     //attributes of GameMap
     public GameObject[][] Map;
@@ -158,7 +160,7 @@ public class GameFrame extends JPanel implements Runnable{
     }
   }
 
-  GameFrame(int colm, int rows, int cellSize) throws MalformedURLException {
+  GameFrame(int colm, int rows, int cellSize) throws IOException {
         this.colm =colm;
         this.rows = rows;
         this.cellSize = cellSize;
@@ -266,9 +268,14 @@ public class GameFrame extends JPanel implements Runnable{
 
         //check whether mc is killed by zombies
         Rectangle MC = new Rectangle(mc.x, mc.y,mc.width,mc.height);
-        if(zombie1.check(MC)||zombie2.check(MC)||zombie3.check(MC)){
-          mc.setHP(-99);
+        Rectangle endpoint = new Rectangle(1* getCellSize()/2, 23* getCellSize()/2, 24, 24);
+        if(zombie1.check(MC)||zombie2.check(MC)||zombie3.check(MC)||mc.getHP()<0){
+          mc.setHP(-1);
           gameResult = fail;
+          gameState = endState;
+        }
+        if(mc.getVaccines()>=10 /*&& endpoint */){
+          gameResult = win;
           gameState = endState;
         }
 
@@ -345,7 +352,7 @@ public class GameFrame extends JPanel implements Runnable{
             // setup game
             tileFrame.draw(g2, tileFrame.getBoard(gameLevel));
             mc.drawMC(g2);
-            mc.drawScore(g2);
+            mc.drawScore(g2,690,0);
             zombie1.drawZombie(g2);
             zombie2.drawZombie(g2);
             zombie3.drawZombie(g2);
@@ -353,7 +360,7 @@ public class GameFrame extends JPanel implements Runnable{
               goodPerson1.drawKindCharacter(g2);
             if(badPerson1.status)
               badPerson1.drawBadCharacter(g2);
-            clock.draw(g2);
+            clock.draw(g2,600,0);
 
             //reward
             for(int i=0;i<v.size();i++)
@@ -425,6 +432,18 @@ public class GameFrame extends JPanel implements Runnable{
         }else if(gameState == pauseState) {
             // screen display when game is paused
         }else if(gameState == endState) {
+          if(gameResult == fail) {
+            g2.drawImage(gamefail, 150, 150, null);
+            clock.stopTimer();
+            clock.draw(g2,250,260);
+            mc.drawScore(g2,400,260);
+          }
+          if(gameResult == win) {
+            g2.drawImage(gamewin, 150, 150, null);
+            clock.stopTimer();
+            clock.draw(g2,250,260);
+            mc.drawScore(g2,400,260);
+          }
             // screen display when game ends
         }else if(gameState == tutorialState) {
             // tutorial screen
