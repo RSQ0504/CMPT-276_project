@@ -11,8 +11,8 @@ public class Food extends Reward {
     this.x = x;
     this.y = y;
     image = ImageIO.read(new File("src/main/java/picture/Rewards/Food2_24x24.png"));
-    this.width = 30;
-    this.height = 30;
+    this.width = 25;
+    this.height = 25;
     hitAreaStatic = new Rectangle(this.x,this.y-10,this.width,this.height);
   }
 
