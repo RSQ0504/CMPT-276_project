@@ -283,6 +283,7 @@ public class GameFrame extends JPanel implements Runnable{
             // setup game
             tileFrame.draw(g2, tileFrame.getBoard(gameLevel));
             mc.drawMC(g2);
+            mc.drawScore(g2);
             zombie1.drawZombie(g2);
             zombie2.drawZombie(g2);
             zombie3.drawZombie(g2);

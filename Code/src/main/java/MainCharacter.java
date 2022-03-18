@@ -10,6 +10,8 @@ public class MainCharacter extends DynamicCharacter{
      */
     private int vaccines;
     private int HP;
+    private BufferedImage HP_image;
+    private BufferedImage VaccineImage;
 
     private GameFrame gf;
     private inputKey key;
@@ -178,5 +180,24 @@ public class MainCharacter extends DynamicCharacter{
                 break;
         }
         g2.drawImage(MC_image,x,y, (gf.getCellSize()/2), gf.getCellSize(), null);
+    }
+
+  private void getTimerImg() {
+    try{
+      VaccineImage = ImageIO.read(new File("src/main/java/picture/GUI_image/Vaccine_panel.png"));
+      HP_image = ImageIO.read(new File("src/main/java/picture/GUI_image/HP_panel.png"));
+    }catch(IOException e){
+      e.printStackTrace();
+    }
+  }
+
+    public void drawScore(Graphics2D g2){
+      getTimerImg();
+      g2.drawImage(VaccineImage, 690,0, 60,40,null);
+      g2.drawImage(HP_image, 690,40, 60,40,null);
+      g2.setColor(Color.black);
+      g2.setFont(new Font("default", Font.BOLD, 16));
+      g2.drawString(""+getVaccines(), 720,25);
+      g2.drawString(""+getHP(), 720,65);
     }
 }
