@@ -356,7 +356,7 @@ public class GameFrame extends JPanel implements Runnable{
             g2.drawString("Find out endpoint by",25,20);
             g2.drawString("chatting with ch (press F)",25,35);
             mc.drawMC(g2);
-            mc.drawScore(g2,690,0);
+            mc.drawScore(g2,650,0);
             zombie1.drawZombie(g2);
             zombie2.drawZombie(g2);
             zombie3.drawZombie(g2);
@@ -364,10 +364,12 @@ public class GameFrame extends JPanel implements Runnable{
               goodPerson1.drawKindCharacter(g2);
             if(badPerson1.status) {
               badPerson1.drawBadCharacter(g2);
-              badPerson2.drawBadCharacter(g2);
-              badPerson3.drawBadCharacter(g2);
             }
-            clock.draw(g2,600,0);
+            if(badPerson2.status)
+              badPerson2.drawBadCharacter(g2);
+            if(badPerson3.status)
+              badPerson3.drawBadCharacter(g2);
+            clock.draw(g2,560,0);
 
             //reward
             for(int i=0;i<v.size();i++)
@@ -442,14 +444,14 @@ public class GameFrame extends JPanel implements Runnable{
           if(gameResult == fail) {
             g2.drawImage(gamefail, 150, 150, null);
             clock.stopTimer();
-            clock.draw(g2,250,260);
-            mc.drawScore(g2,400,260);
+            clock.draw(g2,260,280);
+            mc.drawScore(g2,360,280);
           }
           if(gameResult == win) {
             g2.drawImage(gamewin, 150, 150, null);
             clock.stopTimer();
-            clock.draw(g2,250,260);
-            mc.drawScore(g2,400,260);
+            clock.draw(g2,260,280);
+            mc.drawScore(g2,360,280);
           }
             // screen display when game ends
         }else if(gameState == tutorialState) {

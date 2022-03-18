@@ -192,11 +192,11 @@ public class MainCharacter extends DynamicCharacter{
     public void drawScore(Graphics2D g2,int x,int y){
       getTimerImg();
       g2.drawImage(VaccineImage,x,y,60,40,null);
-      g2.drawImage(HP_image,x,y+40, 60,40,null);
+      g2.drawImage(HP_image,x+60,y, 60,40,null);
       g2.setColor(Color.black);
-      g2.setFont(new Font("default", Font.BOLD, 16));
-      g2.drawString(""+getVaccines(), x+30,y+25);
-      g2.drawString(""+getHP(), x+30,y+65);
+      g2.setFont(new Font("default", Font.BOLD, 15));
+      g2.drawString(""+getVaccines()+"/10", x+18,y+25);
+      g2.drawString(""+getHP(), x+90,y+25);
     }
 
     public void WinorLose(){
