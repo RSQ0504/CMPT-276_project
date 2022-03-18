@@ -395,8 +395,8 @@ public class GameFrame extends JPanel implements Runnable{
             }
 
             // draw frame (score, time, overlay)
-            mc.drawScore(g2,650,0);
-            clock.draw(g2,560,0);
+            mc.drawScore(g2,645,4);
+            clock.draw(g2,555,4);
             g2.drawImage(overlayImage, 0, getHeight() - 28, getWidth(), 32, null);
 
 
