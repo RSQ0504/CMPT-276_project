@@ -69,7 +69,7 @@ public class GameFrame extends JPanel implements Runnable{
     private Image bgImage;
     private Image overlayImage;
     private Image gameWinBg;
-    private Image gameLoseBg;
+    private Image gameFailBg;
     private Image tutorialPage;
     private Image tutorialPage1;
     private Image tutorialPage2;
@@ -173,6 +173,7 @@ public class GameFrame extends JPanel implements Runnable{
         bgImage = new ImageIcon("src/main/java/picture/GUI_image/titleScreenBg.jpg").getImage();
         overlayImage = new ImageIcon("src/main/java/picture/GUI_image/overlay_instructions.png").getImage();
         gameWinBg = new ImageIcon("src/main/java/picture/GUI_image/escape_success_bg.jpg").getImage();
+        gameFailBg = new ImageIcon("src/main/java/picture/GUI_image/escape_fail_bg.jpg").getImage();
 
         // get images for tutorial screen
         tutorialPage = new ImageIcon("src/main/java/picture/GUI_image/tutorial/tutorial_sample.png").getImage();
@@ -278,9 +279,13 @@ public class GameFrame extends JPanel implements Runnable{
           gameResult = fail;
           gameState = endState;
         }
-        if(mc.getVaccines()>=10 && endpoint.intersects(MC)){
-          gameResult = win;
-          gameState = endState;
+//        if(mc.getVaccines()>=10 && endpoint.intersects(MC)){
+//          gameResult = win;
+//          gameState = endState;
+//        }
+        if(mc.getVaccines()>=3 && endpoint.intersects(MC)){
+            gameResult = win;
+            gameState = endState;
         }
 
         // control display depending on game state
@@ -453,14 +458,18 @@ public class GameFrame extends JPanel implements Runnable{
         }else if(gameState == endState) {
 
             if(gameResult == fail) {
-                g2.drawImage(bgImage, 0, 0, getWidth(), getHeight(), null);
+                // background image
+                g2.drawImage(gameFailBg, 0, 0, getWidth(), getHeight(), null);
+
                 g2.drawImage(gamefail, 150, 150, null);
                 clock.stopTimer();
                 clock.draw(g2,260,280);
                 mc.drawScore(g2,360,280);
             }
             if(gameResult == win) {
+                // background image
                 g2.drawImage(gameWinBg, 0, 0, getWidth(), getHeight(), null);
+
                 g2.drawImage(bgImage, 0, 0, getWidth(), getHeight(), null);
                 g2.drawImage(gamewin, 150, 150, null);
                 clock.stopTimer();
