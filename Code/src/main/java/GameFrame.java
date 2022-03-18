@@ -68,6 +68,8 @@ public class GameFrame extends JPanel implements Runnable{
     // background images, initialized in GameFrame constructor
     private Image bgImage;
     private Image overlayImage;
+    private Image gameWinBg;
+    private Image gameLoseBg;
     private Image tutorialPage;
     private Image tutorialPage1;
     private Image tutorialPage2;
@@ -170,6 +172,7 @@ public class GameFrame extends JPanel implements Runnable{
 
         bgImage = new ImageIcon("src/main/java/picture/GUI_image/titleScreenBg.jpg").getImage();
         overlayImage = new ImageIcon("src/main/java/picture/GUI_image/overlay_instructions.png").getImage();
+        gameWinBg = new ImageIcon("src/main/java/picture/GUI_image/escape_success_bg.jpg").getImage();
 
         // get images for tutorial screen
         tutorialPage = new ImageIcon("src/main/java/picture/GUI_image/tutorial/tutorial_sample.png").getImage();
@@ -397,7 +400,7 @@ public class GameFrame extends JPanel implements Runnable{
             // draw frame (score, time, overlay)
             mc.drawScore(g2,645,4);
             clock.draw(g2,555,4);
-            g2.drawImage(overlayImage, 0, getHeight() - 28, getWidth(), 32, null);
+            g2.drawImage(overlayImage, 0, 0, 240, 28, null);
 
 
         }else if(gameState == changeLevelState) { // screen display for change-level-screen
@@ -448,19 +451,22 @@ public class GameFrame extends JPanel implements Runnable{
             g2.drawImage(bgImage, 0, 0, getWidth(), getHeight(), null);
             // screen display when game is paused
         }else if(gameState == endState) {
-            g2.drawImage(bgImage, 0, 0, getWidth(), getHeight(), null);
-          if(gameResult == fail) {
-            g2.drawImage(gamefail, 150, 150, null);
-            clock.stopTimer();
-            clock.draw(g2,260,280);
-            mc.drawScore(g2,360,280);
-          }
-          if(gameResult == win) {
-            g2.drawImage(gamewin, 150, 150, null);
-            clock.stopTimer();
-            clock.draw(g2,260,280);
-            mc.drawScore(g2,360,280);
-          }
+
+            if(gameResult == fail) {
+                g2.drawImage(bgImage, 0, 0, getWidth(), getHeight(), null);
+                g2.drawImage(gamefail, 150, 150, null);
+                clock.stopTimer();
+                clock.draw(g2,260,280);
+                mc.drawScore(g2,360,280);
+            }
+            if(gameResult == win) {
+                g2.drawImage(gameWinBg, 0, 0, getWidth(), getHeight(), null);
+                g2.drawImage(bgImage, 0, 0, getWidth(), getHeight(), null);
+                g2.drawImage(gamewin, 150, 150, null);
+                clock.stopTimer();
+                clock.draw(g2,260,280);
+                mc.drawScore(g2,360,280);
+            }
             // screen display when game ends
         }else if(gameState == tutorialState) {
             // tutorial screen
