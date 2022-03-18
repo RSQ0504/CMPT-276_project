@@ -234,25 +234,14 @@ public class GameFrame extends JPanel implements Runnable{
 //                    clock.startTimer();
                     timerState = timerInProgress;
                 }else if(timerState == pauseState) {
-//                    System.out.println("[run/GameFrame] resume timer count");
-//                    clock.startTimer();// restart timer
-//                    timerState = timerInProgress;
+                    System.out.println("[run/GameFrame] resume timer count");
                 }
 
             }else if(gameState == pauseState) {
-//                System.out.println("[run/GameFrame] Game paused");
-//                if(timerState == timerInProgress) {
-//                    clock.stopTimer();
-//                }
-//                timerState = timerPaused;
+                System.out.println("[run/GameFrame] Game paused");
             }else if(gameState == endState) {
-//                System.out.println("[run/GameFrame] Game ended");
-//                if(timerState == timerInProgress) {
-//                    clock.stopTimer();
-//                }
-//                timerState = timerTerminated;
+                System.out.println("[run/GameFrame] Game ended");
             }
-            
             try {
                 double sleepTime = (nextUpdate - System.nanoTime())/1000000;
                 if (sleepTime < 0) {
@@ -281,7 +270,7 @@ public class GameFrame extends JPanel implements Runnable{
         Rectangle MC = new Rectangle(mc.x, mc.y,mc.width,mc.height);
         Rectangle endpoint = new Rectangle(1* getCellSize()/2, 23* getCellSize()/2, 24, 24);
         if(zombie1.check(MC)||zombie2.check(MC)||zombie3.check(MC)||mc.getHP()<0){
-          mc.setHP(-1);
+          mc.setHP(0);
           gameResult = fail;
           gameState = endState;
         }
@@ -292,8 +281,6 @@ public class GameFrame extends JPanel implements Runnable{
 
         // control display depending on game state
         if(gameState == titleState) {
-            // reset necessary variables
-
             // play bgm
             try {
                 playBGM(4);
@@ -445,21 +432,18 @@ public class GameFrame extends JPanel implements Runnable{
         }else if(gameState == pauseState) {
             // screen display when game is paused
         }else if(gameState == endState) {
-            // display background image
-            g2.drawImage(bgImage, 0, 0, getWidth(), getHeight(), null);
-
-            // display the result
-            if(gameResult == fail) {
-                g2.drawImage(gamefail, 150, 150, null);
-                clock.stopTimer();
-                clock.draw(g2,250,260);
-                mc.drawScore(g2,400,260);
-            }else if(gameResult == win) {
-                g2.drawImage(gamewin, 150, 150, null);
-                clock.stopTimer();
-                clock.draw(g2,250,260);
-                mc.drawScore(g2,400,260);
-            }
+          if(gameResult == fail) {
+            g2.drawImage(gamefail, 150, 150, null);
+            clock.stopTimer();
+            clock.draw(g2,250,260);
+            mc.drawScore(g2,400,260);
+          }
+          if(gameResult == win) {
+            g2.drawImage(gamewin, 150, 150, null);
+            clock.stopTimer();
+            clock.draw(g2,250,260);
+            mc.drawScore(g2,400,260);
+          }
             // screen display when game ends
         }else if(gameState == tutorialState) {
             // tutorial screen
@@ -512,7 +496,7 @@ public class GameFrame extends JPanel implements Runnable{
 
     public void playBGM(int i) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         if(musicState == musicPaused) {
-//            System.out.println("[playBGM] playing bgm.");
+            System.out.println("[playBGM] playing bgm.");
             if(bgm.setFile(i)) {
                 bgm.play();
                 bgm.loop();
@@ -522,9 +506,9 @@ public class GameFrame extends JPanel implements Runnable{
     }
 
     public void stopBGM() {
-//        System.out.println("[stopBGM] stopping bgm.");
+        System.out.println("[stopBGM] stopping bgm.");
         if(musicState == musicPlaying) {
-//            System.out.println("[stopBGM] stop playing bgm.");
+            System.out.println("[stopBGM] stop playing bgm.");
             bgm.stop();
         }
         musicState = musicPaused;
@@ -536,7 +520,7 @@ public class GameFrame extends JPanel implements Runnable{
         // 1: Click_music_2
         // 2: Click_music_3
         if(i >= 0 && i <= 2) {
-//            System.out.println("[playBGM] play sound effect.");
+            System.out.println("[playBGM] play sound effect.");
             bgm.setFile(i);
             bgm.play();
         }

@@ -7,11 +7,7 @@
     <list default="true" id="d1523491-d180-4c57-990c-1160e4abce8b" name="Changes" comment="staticCharacter fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/GameFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GameFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MainCharacter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MainCharacter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/TimerClock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TimerClock.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/GameFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/GameFrame.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/MainCharacter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/MainCharacter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/TimerClock.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/TimerClock.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,10 +44,10 @@
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
-        <option name="localRepository" value="$PROJECT_DIR$/../../../../Code environment/apache-maven-3.8.4/Repository" />
-        <option name="mavenHome" value="$PROJECT_DIR$/../../../../Code environment/apache-maven-3.8.4" />
+        <option name="localRepository" value="$PROJECT_DIR$/../../Code environment/apache-maven-3.8.4/Repository" />
+        <option name="mavenHome" value="$PROJECT_DIR$/../../Code environment/apache-maven-3.8.4" />
         <option name="useMavenConfig" value="true" />
-        <option name="userSettingsFile" value="$PROJECT_DIR$/../../../../Code environment/apache-maven-3.8.4/conf/settings.xml" />
+        <option name="userSettingsFile" value="$PROJECT_DIR$/../../Code environment/apache-maven-3.8.4/conf/settings.xml" />
       </MavenGeneralSettings>
     </option>
   </component>
@@ -244,6 +240,9 @@
       <workItem from="1647581991220" duration="1160000" />
       <workItem from="1647585194664" duration="37000" />
       <workItem from="1647585260947" duration="427000" />
+      <workItem from="1647628121157" duration="153000" />
+      <workItem from="1647628454932" duration="10000" />
+      <workItem from="1647628517111" duration="493000" />
     </task>
     <task id="LOCAL-00001" summary="MC can be killed by zombies">
       <created>1647579667518</created>
