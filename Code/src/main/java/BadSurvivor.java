@@ -42,7 +42,7 @@ public class BadSurvivor extends StaticCharacter{
 
     void speak(){
         if(status && (this.x < (mc.x + 40)) && (this.x > (mc.x - 40)) && (this.y < (mc.y + 40)) && (this.y > (mc.y - 40))){
-            if(k.pressF == true){
+            if(k.pressF){
                 int x_distance = this.x - mc.x;
                 int y_distance = this.y - mc.y;
                 if(x_distance>0){
@@ -70,14 +70,14 @@ public class BadSurvivor extends StaticCharacter{
                     }
                 }
                 speakMessageShow = true;
-            }else if(speakMessageShow == true){
-              // damage
-              mc.setHP(mc.getHP()-1);
-              status = false;
+            }else if(speakMessageShow){
+                speakTimeCounter++;
+                if(speakTimeCounter >100){
+                    // damage
+                    mc.setHP(mc.getHP()-1);
+                    status = false;
+                }
             }
-        }
-        else{
-            speakMessageShow = false;
         }
     }
 

@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d1523491-d180-4c57-990c-1160e4abce8b" name="Changes" comment="staticCharacter fix" />
+    <list default="true" id="d1523491-d180-4c57-990c-1160e4abce8b" name="Changes" comment="staticCharacter fix">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/BadSurvivor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BadSurvivor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/KindSurvivor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/KindSurvivor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/StaticCharacter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/StaticCharacter.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -37,16 +42,6 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="MavenImportPreferences">
-    <option name="generalSettings">
-      <MavenGeneralSettings>
-        <option name="localRepository" value="$PROJECT_DIR$/../../../../Code environment/apache-maven-3.8.4/Repository" />
-        <option name="mavenHome" value="$PROJECT_DIR$/../../../../Code environment/apache-maven-3.8.4" />
-        <option name="useMavenConfig" value="true" />
-        <option name="userSettingsFile" value="$PROJECT_DIR$/../../../../Code environment/apache-maven-3.8.4/conf/settings.xml" />
-      </MavenGeneralSettings>
-    </option>
-  </component>
   <component name="ProjectCodeStyleSettingsMigration">
     <option name="version" value="2" />
   </component>
@@ -75,13 +70,6 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager">
-    <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Main" />
-      <module name="Code" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration default="true" type="DjangoTestsConfigurationType">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -101,17 +89,6 @@
       <option name="USE_OPTIONS" value="false" />
       <option name="OPTIONS" value="" />
       <method v="2" />
-    </configuration>
-    <configuration default="true" type="JetRunConfigurationType">
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <option name="filePath" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
     </configuration>
     <configuration default="true" type="PyBehaveRunConfigurationType" factoryName="Behave">
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -214,6 +191,24 @@
       <option name="USE_PATTERN" value="false" />
       <method v="2" />
     </configuration>
+    <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="Code" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -236,6 +231,8 @@
       <workItem from="1647581991220" duration="1160000" />
       <workItem from="1647585194664" duration="37000" />
       <workItem from="1647585260947" duration="427000" />
+      <workItem from="1647589518619" duration="26000" />
+      <workItem from="1647589566137" duration="1484000" />
     </task>
     <task id="LOCAL-00001" summary="MC can be killed by zombies">
       <created>1647579667518</created>
@@ -302,6 +299,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="MC can be killed by zombies" />

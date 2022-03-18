@@ -82,12 +82,12 @@ public class KindSurvivor extends StaticCharacter{
                     }
                 }
                 speakMessageShow = true;
-            }else if (speakMessageShow == true){
-              status = false;
+            }else if(speakMessageShow == true){
+                speakTimeCounter++;
+                if(speakTimeCounter >100){
+                    status = false;
+                }
             }
-        }
-        else{
-            speakMessageShow = false;
         }
     }
 

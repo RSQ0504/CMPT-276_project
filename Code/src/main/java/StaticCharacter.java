@@ -14,6 +14,7 @@ public class StaticCharacter {
     public MainCharacter mc;
     public boolean speakMessageShow;
     public boolean status = true;
+    public int speakTimeCounter;
 
     public BufferedImage up, left, right, down, message_image;
     public String direction;
