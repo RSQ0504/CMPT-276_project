@@ -128,6 +128,8 @@ public class GameFrame extends JPanel implements Runnable{
     // The static characters
     private KindSurvivor goodPerson1 = new KindSurvivor(this,key,mc,120,255,tileFrame.getBoard(gameLevel),23,1);
     private BadSurvivor badPerson1 = new BadSurvivor(this,key,mc,262,115);
+    private BadSurvivor badPerson2 = new BadSurvivor(this,key,mc,300,280);
+    private BadSurvivor badPerson3 = new BadSurvivor(this,key,mc,650,220);
 
     //Reward
   LinkedList<Vaccine> v = new LinkedList<>();
@@ -150,11 +152,8 @@ public class GameFrame extends JPanel implements Runnable{
       f.add(new Food(this,350,20));
       f.add(new Food(this,250,320));
       f.add(new Food(this,120,300));
-      f.add(new Food(this,50,530));
       f.add(new Food(this,320,190));
       f.add(new Food(this,695,220));
-      f.add(new Food(this,387,220));
-      f.add(new Food(this,550,420));
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -274,7 +273,7 @@ public class GameFrame extends JPanel implements Runnable{
           gameResult = fail;
           gameState = endState;
         }
-        if(mc.getVaccines()>=1 && endpoint.intersects(MC)){
+        if(mc.getVaccines()>=10 && endpoint.intersects(MC)){
           gameResult = win;
           gameState = endState;
         }
@@ -359,8 +358,11 @@ public class GameFrame extends JPanel implements Runnable{
             zombie3.drawZombie(g2);
             if(goodPerson1.status)
               goodPerson1.drawKindCharacter(g2);
-            if(badPerson1.status)
+            if(badPerson1.status) {
               badPerson1.drawBadCharacter(g2);
+              badPerson2.drawBadCharacter(g2);
+              badPerson3.drawBadCharacter(g2);
+            }
             clock.draw(g2,600,0);
 
             //reward
