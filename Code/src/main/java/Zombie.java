@@ -19,6 +19,7 @@ public class Zombie extends DynamicCharacter{
 
         setDefaultValue(x,y);
         getZombieImages();
+        hitArea = new Rectangle((int) 1,45,gf.getCellSize()/2, (int) (gf.getCellSize()));
     }
 
     private void getZombieImages() {
@@ -55,19 +56,25 @@ public class Zombie extends DynamicCharacter{
     }
     
     void updateZombie(){
-        switch (direction){
-            case "up":
-                y -= speed;
-                break;
-            case "down":
-                y += speed;
-                break;
-            case "left":
-                x -= speed;
-                break;
-            case "right":
-                x += speed;
-                break;
+
+        collisionArea = false;
+        gf.check_collision.checkTile(this);
+
+        if (collisionArea == false) {
+            switch (direction){
+                case "up":
+                    y -= speed;
+                    break;
+                case "down":
+                    y += speed;
+                    break;
+                case "left":
+                    x -= speed;
+                    break;
+                case "right":
+                    x += speed;
+                    break;
+            }
         }
         if(!closedToAim()){
             spriteCounter++;

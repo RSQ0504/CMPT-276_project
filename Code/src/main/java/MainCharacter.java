@@ -25,14 +25,14 @@ public class MainCharacter extends DynamicCharacter{
 
         setDefaultValue(gf.tileFrame.getStartPoints(lvl));
         getMCImages();
-        hitArea = new Rectangle((int) 1,45,gf.getCellSize()/2, (int) (gf.getCellSize()));
+        hitArea = new Rectangle( 1,45,gf.getCellSize()/2,  gf.getCellSize());
     }
 
     // Set Start point
     public void setDefaultValue(int[] startPoints){
         x = startPoints[0];
         y = startPoints[1];
-        speed = 1 ;
+        speed = 2 ;
     }
 
 
@@ -177,6 +177,6 @@ public class MainCharacter extends DynamicCharacter{
                     MC_image = right4;
                 break;
         }
-        g2.drawImage(MC_image,x,y, (gf.getCellSize()/3), gf.getCellSize(), null);
+        g2.drawImage(MC_image,x,y, (gf.getCellSize()/2), gf.getCellSize(), null);
     }
 }

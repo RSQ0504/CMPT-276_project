@@ -72,8 +72,8 @@ public class GameFrame extends JPanel implements Runnable{
     // The characters
     public MainCharacter mc = new MainCharacter(this,key);
     private Zombie zombie1 = new Zombie(this,15,200,mc);
-    private Zombie zombie2 = new Zombie(this,300,30,mc);
-    private Zombie zombie3 = new Zombie(this,550,220,mc);
+    private Zombie zombie2 = new Zombie(this,300,280,mc);
+    private Zombie zombie3 = new Zombie(this,650,220,mc);
 
     // The static characters
     private KindSurvivor goodPerson1 = new KindSurvivor(this,key,mc,120,255);

@@ -7,11 +7,10 @@
     <list default="true" id="d1523491-d180-4c57-990c-1160e4abce8b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/GameFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GameFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/GameMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GameMap.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MainCharacter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MainCharacter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Zombie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Zombie.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/inputKey.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/inputKey.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/GameFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/GameFrame.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/GameMap.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/GameMap.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/MainCharacter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/MainCharacter.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -59,6 +58,10 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -88,6 +91,7 @@
       <workItem from="1647061332850" duration="14000" />
       <workItem from="1647061408487" duration="300000" />
       <workItem from="1647303412795" duration="591000" />
+      <workItem from="1647564211376" duration="1183000" />
     </task>
     <servers />
   </component>
