@@ -28,6 +28,11 @@ public class GameFrame extends JPanel implements Runnable{
     public final int endState = 3; // game end screen
     public final int changeLevelState = 4; // change game level screen
 
+  //Game Result
+    public int gameResult;
+    public final int fail = 0;
+    public final int win = 1;
+
 
     // menu
     public int numOfCommands = 3; // number of commands
@@ -197,6 +202,13 @@ public class GameFrame extends JPanel implements Runnable{
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
 
+        //check whether mc is killed by zombies
+        Rectangle MC = new Rectangle(mc.x, mc.y,mc.width,mc.height);
+        if(zombie1.check(MC)||zombie2.check(MC)||zombie3.check(MC)){
+          mc.setHP(-99);
+          gameResult = fail;
+          gameState = endState;
+        }
 
         // control display depending on game state
         if(gameState == titleState) {
@@ -283,7 +295,6 @@ public class GameFrame extends JPanel implements Runnable{
                 v.get(i).draw(g2);
             for(int i=0;i<f.size();i++)
                 f.get(i).draw(g2);
-            Rectangle MC = new Rectangle(mc.x, mc.y,mc.width,mc.height);
             for(int i=0;i<f.size();i++){
                 if(f.get(i).check(MC)){
                     f.get(i).setAppear(false);

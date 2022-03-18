@@ -19,8 +19,8 @@ public class MainCharacter extends DynamicCharacter{
     public MainCharacter(GameFrame gameFrame, inputKey key){
         this.gf = gameFrame;
         this.key = key;
-        this.width = 30;
-        this.height = 30;
+        this.width = 20;
+        this.height = 20;
         System.out.println("Heyyyyy " + gf.tileFrame.getStartPoints(lvl));
 
         setDefaultValue(gf.tileFrame.getStartPoints(lvl));
