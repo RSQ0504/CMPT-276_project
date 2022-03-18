@@ -267,7 +267,7 @@ public class GameFrame extends JPanel implements Runnable{
 
         //check whether mc is killed by zombies
         Rectangle MC = new Rectangle(mc.x, mc.y,mc.width,mc.height);
-        Rectangle endpoint = new Rectangle(40, 520, 24, 24);
+        Rectangle endpoint = new Rectangle(tileFrame.getEndPointX(), tileFrame.getEndPointY(), 10, 10);
         if(zombie1.check(MC)||zombie2.check(MC)||zombie3.check(MC)||mc.getHP()<0){
           mc.setHP(0);
           gameResult = fail;

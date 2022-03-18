@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d1523491-d180-4c57-990c-1160e4abce8b" name="Changes" comment="endstate" />
+    <list default="true" id="d1523491-d180-4c57-990c-1160e4abce8b" name="Changes" comment="More badperson &amp; less food">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/GameFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GameFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/GameMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GameMap.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -300,7 +304,14 @@
       <option name="project" value="LOCAL" />
       <updated>1647633731480</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="More badperson &amp; less food">
+      <created>1647634138134</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1647634138134</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -322,6 +333,7 @@
     <MESSAGE value="Score display" />
     <MESSAGE value="staticCharacter fix" />
     <MESSAGE value="endstate" />
-    <option name="LAST_COMMIT_MESSAGE" value="endstate" />
+    <MESSAGE value="More badperson &amp; less food" />
+    <option name="LAST_COMMIT_MESSAGE" value="More badperson &amp; less food" />
   </component>
 </project>

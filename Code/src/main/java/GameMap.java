@@ -8,8 +8,8 @@ public class GameMap {
     public Tile[] tile;
     public int startPointX;
     public int startPointY;
-    private int endPointX;
-    private int endPointY;
+    private int endPointX =30;
+    private int endPointY =510;
     private int[][] maplvl1 = {
             {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
             {1,0,0,0,0,0,1,0,0,1,1,0,1,1,0,0,0,0,0,1,1,1,0,0,0,0,1,0,1,0,0,1} ,
@@ -94,6 +94,12 @@ public class GameMap {
         getTileImg();
     }
 
+    public int getEndPointX(){
+      return endPointX;
+    }
+    public int getEndPointY(){
+      return endPointY;
+    }
     public int[][] getBoard(int lvl){
         int[][] board;
         switch(lvl){
