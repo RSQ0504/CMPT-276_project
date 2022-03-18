@@ -70,9 +70,10 @@ public class BadSurvivor extends StaticCharacter{
                     }
                 }
                 speakMessageShow = true;
-                // damage
-                mc.setHP(mc.getHP()-1);
-                status = false;
+            }else if(speakMessageShow == true){
+              // damage
+              mc.setHP(mc.getHP()-1);
+              status = false;
             }
         }
         else{

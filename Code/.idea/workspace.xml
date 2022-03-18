@@ -6,6 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="d1523491-d180-4c57-990c-1160e4abce8b" name="Changes" comment="Score display">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/BadSurvivor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BadSurvivor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/KindSurvivor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/KindSurvivor.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -236,6 +238,8 @@
       <workItem from="1647580020505" duration="61000" />
       <workItem from="1647580088330" duration="1597000" />
       <workItem from="1647581991220" duration="1160000" />
+      <workItem from="1647585194664" duration="37000" />
+      <workItem from="1647585260947" duration="325000" />
     </task>
     <task id="LOCAL-00001" summary="MC can be killed by zombies">
       <created>1647579667518</created>
