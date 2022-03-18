@@ -7,24 +7,39 @@ public class KindSurvivor extends StaticCharacter{
     /**
      * The attributes of kind survivor: the door he can open
      */
-    private Wall doorOpen;
+    private int[][] map;
+    private int door_x, door_y;
 
-    public KindSurvivor(GameFrame gameFrame, inputKey key, MainCharacter mc, int x, int y){
+    /**
+     * The constructor for KindSurvivor
+     * The parameters are:
+     *      gameFrame--The frame that show the game
+     *      key -- The key input
+     *      mc -- the main character
+     *      x -- the x position of the kind survivor
+     *      y -- the y position of the kind survivor
+     *      Board -- the GameMap
+     *      door_x -- the x position of the door that kind survivor can open
+     *      door_y -- the y position of the door that kind survivor can open
+     */
+    public KindSurvivor(GameFrame gameFrame, inputKey key, MainCharacter mc, int x, int y, int[][] Board,int door_x, int door_y){
         this.gf = gameFrame;
         this.k = key;
         this.mc = mc;
+        this.map = Board;
         this.width = 30;
         this.height = 30;
 
         getSurvivorImages();
-        setDefaultValue(x,y);
-
+        setDefaultValue(x,y,door_x,door_y);
     }
 
-    private void setDefaultValue(int x, int y){
+    private void setDefaultValue(int x, int y,int door_x, int door_y){
         this.direction = "down";
         this.x = x;
         this.y = y;
+        this.door_x = door_x;
+        this.door_y = door_y;
         this.speakMessageShow = false;
         this.message_x = x;
         this.message_y = y - message_image.getHeight();
@@ -33,10 +48,10 @@ public class KindSurvivor extends StaticCharacter{
     }
 
     /**
-     * Set the door it can open
+     * Open the door
      */
-    public void setDoorOpen(Wall doorOpen) {
-        this.doorOpen = doorOpen;
+    public void openDoor() {
+        this.map[door_x][door_y] = 0;
     }
 
     public void getSurvivorImages(){
@@ -86,6 +101,7 @@ public class KindSurvivor extends StaticCharacter{
                 speakTimeCounter++;
                 if(speakTimeCounter >100){
                     status = false;
+                    openDoor();
                 }
             }
         }

@@ -124,7 +124,7 @@ public class GameFrame extends JPanel implements Runnable{
     private Zombie zombie3 = new Zombie(this,650,220,mc);
 
     // The static characters
-    private KindSurvivor goodPerson1 = new KindSurvivor(this,key,mc,120,255);
+    private KindSurvivor goodPerson1 = new KindSurvivor(this,key,mc,120,255,tileFrame.getBoard(gameLevel),23,1);
     private BadSurvivor badPerson1 = new BadSurvivor(this,key,mc,262,115);
 
     //Reward
