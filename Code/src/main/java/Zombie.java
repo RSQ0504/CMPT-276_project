@@ -54,7 +54,7 @@ public class Zombie extends DynamicCharacter{
         this.y = y;
         speed = 1;
     }
-    
+
     void updateZombie(){
 
         collisionArea = false;
@@ -198,4 +198,9 @@ public class Zombie extends DynamicCharacter{
     public void Damage(MainCharacter zombie){
         zombie.setHP(zombie.getHP()-damage);
     }
+
+    public boolean check(Rectangle mc){
+      hitAreaStatic = new Rectangle(this.x,this.y,5,5);
+      return hitAreaStatic.intersects(mc);
+  }
 }

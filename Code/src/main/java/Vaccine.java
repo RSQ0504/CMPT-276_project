@@ -17,9 +17,9 @@ public class Vaccine extends Reward {
     this.x = x;
     this.y = y;
     image = ImageIO.read(new File("src/main/java/picture/Rewards/Vaccine.png"));
-    this.width = 30;
-    this.height = 30;
-    hitAreaStatic = new Rectangle(this.x,this.y,this.width,this.height);
+    this.width = 25;
+    this.height = 25;
+    hitAreaStatic = new Rectangle(this.x,this.y-10,this.width,this.height);
   }
 
 }
