@@ -53,7 +53,7 @@ public class KindSurvivor extends StaticCharacter{
     }
 
     void speak(){
-        if((this.x < (mc.x + 40)) && (this.x > (mc.x - 40)) && (this.y < (mc.y + 40)) && (this.y > (mc.y - 40))){
+        if(status && (this.x < (mc.x + 40)) && (this.x > (mc.x - 40)) && (this.y < (mc.y + 40)) && (this.y > (mc.y - 40))){
             if(k.pressF == true){
                 int x_distance = this.x - mc.x;
                 int y_distance = this.y - mc.y;
@@ -82,6 +82,7 @@ public class KindSurvivor extends StaticCharacter{
                     }
                 }
                 speakMessageShow = true;
+                status = false;
             }
         }
         else{

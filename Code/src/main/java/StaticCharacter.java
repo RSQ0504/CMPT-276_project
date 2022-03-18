@@ -13,6 +13,7 @@ public class StaticCharacter {
     public inputKey k;
     public MainCharacter mc;
     public boolean speakMessageShow;
+    public boolean status = true;
 
     public BufferedImage up, left, right, down, message_image;
     public String direction;

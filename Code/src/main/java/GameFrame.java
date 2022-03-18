@@ -287,8 +287,10 @@ public class GameFrame extends JPanel implements Runnable{
             zombie1.drawZombie(g2);
             zombie2.drawZombie(g2);
             zombie3.drawZombie(g2);
-            goodPerson1.drawKindCharacter(g2);
-            badPerson1.drawBadCharacter(g2);
+            if(goodPerson1.status)
+              goodPerson1.drawKindCharacter(g2);
+            if(badPerson1.status)
+              badPerson1.drawBadCharacter(g2);
             clock.draw(g2);
 
             //reward

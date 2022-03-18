@@ -200,4 +200,8 @@ public class MainCharacter extends DynamicCharacter{
       g2.drawString(""+getVaccines(), 720,25);
       g2.drawString(""+getHP(), 720,65);
     }
+
+    public void WinorLose(){
+
+    }
 }
