@@ -57,10 +57,10 @@ public class inputKey implements KeyListener {
             }else if(key == KeyEvent.VK_ENTER) {
                 System.out.println("enter pressed in title screen");
                 if(gf.commandNum == gf.optionStart) {
-
-                    gf.gameState = gf.playState;
+//                    gf.gameState = gf.playState;
+                    gf.gameState = gf.tutorialState;
                     gf.commandNum = 0;
-                    gf.stopBGM();
+//                    gf.stopBGM();
                 }else if(gf.commandNum == gf.optionChangeLevel) {
                     try {
                         gf.playSoundEffect(0);
@@ -170,6 +170,40 @@ public class inputKey implements KeyListener {
                     ex.printStackTrace();
                 }
                 // pause game
+            }
+        }else if(gf.gameState == gf.tutorialState) {
+            if(key== KeyEvent.VK_LEFT){
+                if(gf.tutorialState > gf.tutorialIntro) {
+                    gf.tutorialState--;
+                }
+                gf.gameState = gf.tutorialState;
+            }else if(key == KeyEvent.VK_RIGHT){
+                gf.tutorialState++;
+                if(gf.tutorialState == gf.narrationState) {
+                    gf.tutorialState = gf.tutorialIntro;
+                    gf.gameState = gf.narrationState;
+                }else {
+                    gf.gameState = gf.tutorialState;
+                }
+            }else if(key == KeyEvent.VK_ENTER){
+                gf.tutorialState = gf.tutorialIntro;
+                gf.gameState = gf.narrationState;
+            }
+        }else if(gf.gameState == gf.narrationState) {
+            if(key== KeyEvent.VK_LEFT){
+                if(gf.narrationState > 9) {
+                    gf.narrationState--;
+                }
+                gf.gameState = gf.narrationState;
+            }else if(key == KeyEvent.VK_RIGHT){
+                if(gf.narrationState < 19) {
+                    gf.narrationState++;
+                }
+                gf.gameState = gf.narrationState;
+            }else if(key == KeyEvent.VK_ENTER){
+                gf.narrationState = gf.narration1;
+                gf.gameState = gf.playState;
+                gf.stopBGM();
             }
         }
 

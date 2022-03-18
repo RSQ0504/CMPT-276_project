@@ -27,15 +27,30 @@ public class GameFrame extends JPanel implements Runnable{
     public final int pauseState = 2; // game pause screen
     public final int endState = 3; // game end screen
     public final int changeLevelState = 4; // change game level screen
-    public final int narrationState = 5; // background story
-
 
     // TUTORIAL STATE
-    public int tutorialState = 6;
-    public final int tutorialIntro = 6; // navigation guide for tutorial and background-story screen
-    public final int tutorial1 = 7;
-    public final int tutorial2 = 8;
-    public final int tutorial3 = 9;
+    public int tutorialState = 5;
+    public final int tutorialIntro = 5; // navigation guide for tutorial and background-story screen
+    public final int tutorial1 = 6;
+    public final int tutorial2 = 7;
+    public final int tutorial3 = 8;
+
+
+    // NARRATION STATE
+    public int narrationState = 9; // background story
+    public final int narration1 = 9;
+    public final int narration2 = 10;
+    public final int narration3 = 11;
+    public final int narration4 = 12;
+    public final int narration5 = 13;
+    public final int narration6 = 14;
+    public final int narration7 = 15;
+    public final int narration8 = 16;
+    public final int narration9 = 17;
+    public final int narration10 = 18;
+    public final int narration11 = 19;
+
+
 
   //Game Result
     public int gameResult;
@@ -49,9 +64,26 @@ public class GameFrame extends JPanel implements Runnable{
     public final int optionStart = 0;
     public final int optionChangeLevel = 1;
     public final int optionExit = 2;
+
+    // background images, initialized in GameFrame constructor
     private Image bgImage;
-    private Image tutorialImage;
-    private Image narrationImage;
+    private Image tutorialPage;
+    private Image tutorialPage1;
+    private Image tutorialPage2;
+    private Image tutorialPage3;
+
+    private Image narrationPage1;
+    private Image narrationPage2;
+    private Image narrationPage3;
+    private Image narrationPage4;
+    private Image narrationPage5;
+    private Image narrationPage6;
+    private Image narrationPage7;
+    private Image narrationPage8;
+    private Image narrationPage9;
+    private Image narrationPage10;
+    private Image narrationPage11;
+
 
     //attributes of GameMap
     public GameObject[][] Map;
@@ -135,8 +167,26 @@ public class GameFrame extends JPanel implements Runnable{
         setStartPoint(100,100);
 
         bgImage = new ImageIcon("src/main/java/picture/GUI_image/titleScreenBg.jpg").getImage();
-        tutorialImage = new ImageIcon("src/main/java/picture/GUI_image/tuto").getImage();
-    }
+
+        // get images for tutorial screen
+        tutorialPage = new ImageIcon("src/main/java/picture/GUI_image/tutorial/tutorial_sample.png").getImage();
+        tutorialPage1 = new ImageIcon("src/main/java/picture/GUI_image/tutorial/tutorial1_sample.png").getImage();
+        tutorialPage2 = new ImageIcon("src/main/java/picture/GUI_image/tutorial/tutorial2_sample.png").getImage();
+        tutorialPage3 = new ImageIcon("src/main/java/picture/GUI_image/tutorial/tutorial3_sample.png").getImage();
+
+        // get images for narration screen
+        narrationPage1 = new ImageIcon("src/main/java/picture/GUI_image/background_story/background_story1.png").getImage();
+        narrationPage2 = new ImageIcon("src/main/java/picture/GUI_image/background_story/background_story2.png").getImage();
+        narrationPage3 = new ImageIcon("src/main/java/picture/GUI_image/background_story/background_story3.png").getImage();
+        narrationPage4 = new ImageIcon("src/main/java/picture/GUI_image/background_story/background_story4.png").getImage();
+        narrationPage5 = new ImageIcon("src/main/java/picture/GUI_image/background_story/background_story5.png").getImage();
+        narrationPage6 = new ImageIcon("src/main/java/picture/GUI_image/background_story/background_story6.png").getImage();
+        narrationPage7 = new ImageIcon("src/main/java/picture/GUI_image/background_story/background_story7.png").getImage();
+        narrationPage8 = new ImageIcon("src/main/java/picture/GUI_image/background_story/background_story8.png").getImage();
+        narrationPage9 = new ImageIcon("src/main/java/picture/GUI_image/background_story/background_story9.png").getImage();
+        narrationPage10 = new ImageIcon("src/main/java/picture/GUI_image/background_story/background_story10.png").getImage();
+        narrationPage11 = new ImageIcon("src/main/java/picture/GUI_image/background_story/background_story11.png").getImage();
+  }
 
     public int getCellSize(){return cellSize;}
 
@@ -377,9 +427,46 @@ public class GameFrame extends JPanel implements Runnable{
         }else if(gameState == endState) {
             // screen display when game ends
         }else if(gameState == tutorialState) {
-            // display background image
-            g2.drawImage(bgImage, 0, 0, getWidth(), getHeight(), null);
+            // tutorial screen
+            if(tutorialState == tutorialIntro) {
+                g2.drawImage(tutorialPage, 0, 0, getWidth(), getHeight(), null);
+            }else if(tutorialState == tutorial1) {
+                g2.drawImage(tutorialPage1, 0, 0, getWidth(), getHeight(), null);
+            }else if(tutorialState == tutorial2) {
+                g2.drawImage(tutorialPage2, 0, 0, getWidth(), getHeight(), null);
+            }else if(tutorialState == tutorial3) {
+                g2.drawImage(tutorialPage3, 0, 0, getWidth(), getHeight(), null);
+            }else {
+                // exception -> display first page
+                tutorialState = tutorialIntro;
+            }
 
+
+        }else if(gameState == narrationState) {
+            // narration screen
+            if(narrationState == narration1) {
+                g2.drawImage(narrationPage1, 0, 0, getWidth(), getHeight(), null);
+            }else if(narrationState == narration2) {
+                g2.drawImage(narrationPage2, 0, 0, getWidth(), getHeight(), null);
+            }else if(narrationState == narration3) {
+                g2.drawImage(narrationPage3, 0, 0, getWidth(), getHeight(), null);
+            }else if(narrationState == narration4) {
+                g2.drawImage(narrationPage4, 0, 0, getWidth(), getHeight(), null);
+            }else if(narrationState == narration5) {
+                g2.drawImage(narrationPage5, 0, 0, getWidth(), getHeight(), null);
+            }else if(narrationState == narration6) {
+                g2.drawImage(narrationPage6, 0, 0, getWidth(), getHeight(), null);
+            }else if(narrationState == narration7) {
+                g2.drawImage(narrationPage7, 0, 0, getWidth(), getHeight(), null);
+            }else if(narrationState == narration8) {
+                g2.drawImage(narrationPage8, 0, 0, getWidth(), getHeight(), null);
+            }else if(narrationState == narration9) {
+                g2.drawImage(narrationPage9, 0, 0, getWidth(), getHeight(), null);
+            }else if(narrationState == narration10) {
+                g2.drawImage(narrationPage10, 0, 0, getWidth(), getHeight(), null);
+            }else if(narrationState == narration11) {
+                g2.drawImage(narrationPage11, 0, 0, getWidth(), getHeight(), null);
+            }
         }else {
             // exception -> go back to title screen
             gameState = titleState;
