@@ -67,6 +67,7 @@ public class GameFrame extends JPanel implements Runnable{
 
     // background images, initialized in GameFrame constructor
     private Image bgImage;
+    private Image overlayImage;
     private Image tutorialPage;
     private Image tutorialPage1;
     private Image tutorialPage2;
@@ -159,7 +160,7 @@ public class GameFrame extends JPanel implements Runnable{
     }
   }
 
-  GameFrame(int colm, int rows, int cellSize) throws IOException {
+    GameFrame(int colm, int rows, int cellSize) throws IOException {
         this.colm =colm;
         this.rows = rows;
         this.cellSize = cellSize;
@@ -168,6 +169,7 @@ public class GameFrame extends JPanel implements Runnable{
         setStartPoint(100,100);
 
         bgImage = new ImageIcon("src/main/java/picture/GUI_image/titleScreenBg.jpg").getImage();
+        overlayImage = new ImageIcon("src/main/java/picture/GUI_image/overlay_instructions.png").getImage();
 
         // get images for tutorial screen
         tutorialPage = new ImageIcon("src/main/java/picture/GUI_image/tutorial/tutorial_sample.png").getImage();
@@ -187,7 +189,7 @@ public class GameFrame extends JPanel implements Runnable{
         narrationPage9 = new ImageIcon("src/main/java/picture/GUI_image/background_story/background_story9.png").getImage();
         narrationPage10 = new ImageIcon("src/main/java/picture/GUI_image/background_story/background_story10.png").getImage();
         narrationPage11 = new ImageIcon("src/main/java/picture/GUI_image/background_story/background_story11.png").getImage();
-  }
+    }
 
     public int getCellSize(){return cellSize;}
 
@@ -351,25 +353,24 @@ public class GameFrame extends JPanel implements Runnable{
             // setup game
             tileFrame.draw(g2, tileFrame.getBoard(gameLevel));
             goodPerson1.resetBoard(tileFrame.getBoard(gameLevel));
-            g2.setColor(Color.black);
-            g2.setFont(new Font("default", Font.BOLD, 18));
-            g2.drawString("Find out endpoint by",25,20);
-            g2.drawString("chatting with ch (press F)",25,35);
             mc.drawMC(g2);
-            mc.drawScore(g2,650,0);
             zombie1.drawZombie(g2);
             zombie2.drawZombie(g2);
             zombie3.drawZombie(g2);
-            if(goodPerson1.status)
-              goodPerson1.drawKindCharacter(g2);
+            if(goodPerson1.status) {
+                goodPerson1.drawKindCharacter(g2);
+            }
             if(badPerson1.status) {
               badPerson1.drawBadCharacter(g2);
             }
-            if(badPerson2.status)
-              badPerson2.drawBadCharacter(g2);
-            if(badPerson3.status)
-              badPerson3.drawBadCharacter(g2);
-            clock.draw(g2,560,0);
+            if(badPerson2.status) {
+                badPerson2.drawBadCharacter(g2);
+            }
+            if(badPerson3.status) {
+                badPerson3.drawBadCharacter(g2);
+            }
+
+
 
             //reward
             for(int i=0;i<v.size();i++)
@@ -392,6 +393,11 @@ public class GameFrame extends JPanel implements Runnable{
                     break;
                 }
             }
+
+            // draw frame (score, time, overlay)
+            mc.drawScore(g2,650,0);
+            clock.draw(g2,560,0);
+            g2.drawImage(overlayImage, 0, getHeight() - 28, getWidth(), 32, null);
 
 
         }else if(gameState == changeLevelState) { // screen display for change-level-screen
@@ -439,8 +445,10 @@ public class GameFrame extends JPanel implements Runnable{
                 }
             }
         }else if(gameState == pauseState) {
+            g2.drawImage(bgImage, 0, 0, getWidth(), getHeight(), null);
             // screen display when game is paused
         }else if(gameState == endState) {
+            g2.drawImage(bgImage, 0, 0, getWidth(), getHeight(), null);
           if(gameResult == fail) {
             g2.drawImage(gamefail, 150, 150, null);
             clock.stopTimer();
