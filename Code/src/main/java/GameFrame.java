@@ -27,6 +27,15 @@ public class GameFrame extends JPanel implements Runnable{
     public final int pauseState = 2; // game pause screen
     public final int endState = 3; // game end screen
     public final int changeLevelState = 4; // change game level screen
+    public final int narrationState = 5; // background story
+
+
+    // TUTORIAL STATE
+    public int tutorialState = 6;
+    public final int tutorialIntro = 6; // navigation guide for tutorial and background-story screen
+    public final int tutorial1 = 7;
+    public final int tutorial2 = 8;
+    public final int tutorial3 = 9;
 
 
     // menu
@@ -36,6 +45,8 @@ public class GameFrame extends JPanel implements Runnable{
     public final int optionChangeLevel = 1;
     public final int optionExit = 2;
     private Image bgImage;
+    private Image tutorialImage;
+    private Image narrationImage;
 
     //attributes of GameMap
     public GameObject[][] Map;
@@ -119,6 +130,7 @@ public class GameFrame extends JPanel implements Runnable{
         setStartPoint(100,100);
 
         bgImage = new ImageIcon("src/main/java/picture/GUI_image/titleScreenBg.jpg").getImage();
+        tutorialImage = new ImageIcon("src/main/java/picture/GUI_image/tuto").getImage();
     }
 
     public int getCellSize(){return cellSize;}
@@ -350,6 +362,10 @@ public class GameFrame extends JPanel implements Runnable{
             // screen display when game is paused
         }else if(gameState == endState) {
             // screen display when game ends
+        }else if(gameState == tutorialState) {
+            // display background image
+            g2.drawImage(bgImage, 0, 0, getWidth(), getHeight(), null);
+
         }else {
             // exception -> go back to title screen
             gameState = titleState;
