@@ -159,6 +159,18 @@ public class inputKey implements KeyListener {
             else if(key == KeyEvent.VK_RIGHT){
                 pressedRight = true;
             }
+            else if(key == KeyEvent.VK_ESCAPE) {
+                try {
+                    gf.playSoundEffect(2);
+                } catch (UnsupportedAudioFileException ex) {
+                    ex.printStackTrace();
+                } catch (LineUnavailableException ex) {
+                    ex.printStackTrace();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+                // pause game
+            }
         }
 
     }
