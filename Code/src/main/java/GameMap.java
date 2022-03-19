@@ -12,7 +12,7 @@ public class GameMap {
     public int startPointX;
     public int startPointY;
     private int endPointX =30;
-    private int endPointY;
+    private int endPointY = 540;
 
     //Map for each Game levels
     private int[][] maplvl1 = {
