@@ -106,7 +106,7 @@ public class KindSurvivor extends StaticCharacter{
                 if(speakTimeCounter >200){
                     speakMessageShow = false;
                     speakTimeCounter = 0;
-                    if(mc.getVaccines() == gf.numOfVaccines){
+                    if(mc.getVaccines() >= gf.numOfVaccines){
                         openDoor();
                     }
                 }

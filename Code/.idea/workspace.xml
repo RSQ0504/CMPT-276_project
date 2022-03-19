@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d1523491-d180-4c57-990c-1160e4abce8b" name="Changes" comment="optimized a few things" />
+    <list default="true" id="d1523491-d180-4c57-990c-1160e4abce8b" name="Changes" comment="optimized a few things">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/KindSurvivor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/KindSurvivor.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -237,6 +240,8 @@
       <workItem from="1647585260947" duration="427000" />
       <workItem from="1647635253464" duration="1456000" />
       <workItem from="1647636984650" duration="626000" />
+      <workItem from="1647678120071" duration="63000" />
+      <workItem from="1647720054918" duration="339000" />
     </task>
     <task id="LOCAL-00001" summary="MC can be killed by zombies">
       <created>1647579667518</created>
