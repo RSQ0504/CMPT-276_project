@@ -181,6 +181,31 @@ public class GameMap {
     }
 
     /**
+     * Get the origin maze map depending on game level
+     * @param lvl
+     * @return
+     */
+    public int[][] getOriginMap(int lvl){
+        int[][] board;
+        switch(lvl){
+            case 0:
+                board = maplvl1;
+                break;
+            case 1:
+                board =  maplvl2;
+                break;
+            case 2:
+                board =  maplvl3;
+                break;
+            default:
+                board = null;
+                System.out.println("map level does not exist.");
+        }
+        return board;
+    }
+
+
+    /**
      * Get player starting point depending on game level
      * @param lvl
      * @return

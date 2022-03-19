@@ -137,7 +137,7 @@ public class GameFrame extends JPanel implements Runnable{
     private Zombie zombie3 = new Zombie(this,650,220,mc);
 
     // The static characters
-    private KindSurvivor goodPerson1 = new KindSurvivor(this,key,mc,120,255,tileFrame.getBoard(gameLevel),23,1);
+    private KindSurvivor goodPerson1 = new KindSurvivor(this,key,mc,120,255,tileFrame.getOriginMap(gameLevel),23,1);
     private BadSurvivor badPerson1 = new BadSurvivor(this,key,mc,262,115);
     private BadSurvivor badPerson2 = new BadSurvivor(this,key,mc,300,280);
     private BadSurvivor badPerson3 = new BadSurvivor(this,key,mc,650,220);
@@ -405,13 +405,13 @@ public class GameFrame extends JPanel implements Runnable{
                     break;
                 }
             }
-            goodPerson1.resetBoard(tileFrame.getBoard(gameLevel));
+            goodPerson1.resetBoard(tileFrame.getOriginMap(gameLevel));
             mc.drawMC(g2);
             zombie1.drawZombie(g2);
             zombie2.drawZombie(g2);
             zombie3.drawZombie(g2);
-            goodPerson1.drawKindCharacter(g2);
             if(goodPerson1.status) {
+                goodPerson1.drawKindCharacter(g2);
                 goodPerson1.drawKindCharcMsgBox(g2);
             }
             if(badPerson1.status) {
