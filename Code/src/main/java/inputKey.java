@@ -133,14 +133,17 @@ public class inputKey implements KeyListener {
                 System.out.println("enter pressed in change level screen");
                 if(gf.commandNum == gf.levelEasy) {
                     System.out.println("change to easy");
+                    gf.numOfVaccines = 5;
                     gf.gameLevel = gf.levelEasy;
                     gf.mc.setDefaultValue(gf.tileFrame.getStartPoints(gf.levelEasy));
                 }else if(gf.commandNum == gf.levelIntermediate) {
                     System.out.println("change to intermediate");
+                    gf.numOfVaccines = 7;
                     gf.gameLevel = gf.levelIntermediate;
                     gf.mc.setDefaultValue(gf.tileFrame.getStartPoints(gf.levelIntermediate));
                 }else if(gf.commandNum == gf.levelChallenge) {
                     System.out.println("change to challenge");
+                    gf.numOfVaccines = 10;
                     gf.gameLevel = gf.levelChallenge;
                     gf.mc.setDefaultValue(gf.tileFrame.getStartPoints(gf.levelChallenge));
                 }

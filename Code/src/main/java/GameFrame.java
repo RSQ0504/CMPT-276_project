@@ -109,6 +109,7 @@ public class GameFrame extends JPanel implements Runnable{
     public final int levelEasy = 0;
     public final int levelIntermediate = 1;
     public final int levelChallenge = 2;
+    public int numOfVaccines = 5;// easy: 5 intermediate: 7 challenge: 10
     GameMap tileFrame = new GameMap(this);
     public checkCollision check_collision = new checkCollision(this);
     public int[] startPoints = new int[2];
@@ -279,14 +280,11 @@ public class GameFrame extends JPanel implements Runnable{
           gameResult = fail;
           gameState = endState;
         }
-//        if(mc.getVaccines()>=10 && endpoint.intersects(MC)){
-//          gameResult = win;
-//          gameState = endState;
-//        }
-        if(mc.getVaccines()>=3 && endpoint.intersects(MC)){
-            gameResult = win;
-            gameState = endState;
+        if(mc.getVaccines()>=numOfVaccines && endpoint.intersects(MC)){
+          gameResult = win;
+          gameState = endState;
         }
+
 
         // control display depending on game state
         if(gameState == titleState) {
@@ -403,9 +401,9 @@ public class GameFrame extends JPanel implements Runnable{
             }
 
             // draw frame (score, time, overlay)
-            mc.drawScore(g2,645,4);
+            mc.drawScore(g2,645,4, numOfVaccines);
             clock.draw(g2,555,4);
-            g2.drawImage(overlayImage, 0, 0, 240, 28, null);
+            g2.drawImage(overlayImage, 0, 0, 340, 28, null);
 
 
         }else if(gameState == changeLevelState) { // screen display for change-level-screen
@@ -464,7 +462,7 @@ public class GameFrame extends JPanel implements Runnable{
                 g2.drawImage(gamefail, 150, 150, null);
                 clock.stopTimer();
                 clock.draw(g2,260,280);
-                mc.drawScore(g2,360,280);
+                mc.drawScore(g2,360,280, numOfVaccines);
             }
             if(gameResult == win) {
                 // background image
@@ -474,7 +472,7 @@ public class GameFrame extends JPanel implements Runnable{
                 g2.drawImage(gamewin, 150, 150, null);
                 clock.stopTimer();
                 clock.draw(g2,260,280);
-                mc.drawScore(g2,360,280);
+                mc.drawScore(g2,360,280, numOfVaccines);
             }
             // screen display when game ends
         }else if(gameState == tutorialState) {
