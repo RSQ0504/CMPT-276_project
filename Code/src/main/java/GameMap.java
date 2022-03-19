@@ -129,19 +129,55 @@ public class GameMap {
         int[][] board;
         switch(lvl){
             case 0:
-                board = maplvl1;
+                board = setNewBoard(maplvl1);
                 break;
             case 1:
-                board =  maplvl2;
+                board =  setNewBoard(maplvl2);
                 break;
             case 2:
-                board =  maplvl3;
+                board =  setNewBoard(maplvl3);
                 break;
             default:
                 board = null;
                 System.out.println("map level does not exist.");
         }
         return board;
+    }
+
+    private int[][] setNewBoard(int[][] map) {
+        int newMap[][] = new int[24][32];
+        for(int i = 0; i < 24; i++){
+            for (int j = 0; j < 32; j++) {
+                if(map[i][j] == 0){
+                    // It is an earth
+                    newMap[i][j] = 0;
+                    if((i!=0) && (map[i-1][j]==1)){
+                        // There are upside wall
+                        newMap[i][j] = 3;
+                        if((j!=0) && (map[i][j-1]==1)){
+                            // There are upside wall and leftist wall
+                            newMap[i][j] = 5;
+                        }
+                    }
+                    else if((j!=0) && (map[i][j-1]==1)){
+                        // There are leftist wall
+                        newMap[i][j] = 4;
+                    }
+                    else if((i!=0) && (j!=0) && (map[i-1][j-1]==1)){
+                        // There are upLeftSide wall
+                        newMap[i][j] = 6;
+                    }
+                }
+                else {
+                    // It is a wall
+                    newMap[i][j] = 1;
+                    if((i!=23) && (map[i+1][j]==0)){
+                        newMap[i][j] = 2;
+                    }
+                }
+            }
+        }
+        return newMap;
     }
 
     /**
@@ -185,8 +221,28 @@ public class GameMap {
             tile[0].setCollision(false);
 
             tile[1] = new Tile();
-            tile[1].tileImg = ImageIO.read(new File("src/main/java/picture/Tiles/wall.png"));
+            tile[1].tileImg = ImageIO.read(new File("src/main/java/picture/Tiles/wall_dark.png"));
             tile[1].setCollision(true);
+
+            tile[2] = new Tile();
+            tile[2].tileImg = ImageIO.read(new File("src/main/java/picture/Tiles/wall_new.png"));
+            tile[2].setCollision(true);
+
+            tile[3] = new Tile();
+            tile[3].tileImg = ImageIO.read(new File("src/main/java/picture/Tiles/earth_upShadow.png"));
+            tile[3].setCollision(false);
+
+            tile[4] = new Tile();
+            tile[4].tileImg = ImageIO.read(new File("src/main/java/picture/Tiles/earth_leftShadow.png"));
+            tile[4].setCollision(false);
+
+            tile[5] = new Tile();
+            tile[5].tileImg = ImageIO.read(new File("src/main/java/picture/Tiles/earth_upLeftShadow.png"));
+            tile[5].setCollision(false);
+
+            tile[6] = new Tile();
+            tile[6].tileImg = ImageIO.read(new File("src/main/java/picture/Tiles/earth_upLeftShadow2.png"));
+            tile[6].setCollision(false);
         }catch (IOException e){
             e.printStackTrace();
         }
