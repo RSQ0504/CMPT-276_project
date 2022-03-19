@@ -436,7 +436,6 @@ public class GameFrame extends JPanel implements Runnable{
                 // background image
                 g2.drawImage(gameWinBg, 0, 0, getWidth(), getHeight(), null);
 
-                g2.drawImage(bgImage, 0, 0, getWidth(), getHeight(), null);
                 g2.drawImage(gamewin, 150, 150, null);
                 clock.stopTimer();
                 clock.draw(g2,260,280);
