@@ -321,9 +321,9 @@ public class GameFrame extends JPanel implements Runnable{
         Rectangle MC = new Rectangle(mc.x, mc.y,mc.width,mc.height);
         Rectangle endpoint = new Rectangle(tileFrame.getEndPointX(), tileFrame.getEndPointY(), 10, 10);
         if(zombie1.check(MC)||zombie2.check(MC)||zombie3.check(MC)||mc.getHP()<0){
-//          mc.setHP(0);
-//          gameResult = fail;
-//          gameState = endState;
+          mc.setHP(0);
+          gameResult = fail;
+          gameState = endState;
         }
         if(mc.getVaccines()>=numOfVaccines && endpoint.intersects(MC)){
           gameResult = win;
@@ -463,7 +463,7 @@ public class GameFrame extends JPanel implements Runnable{
                 // background image
                 g2.drawImage(gameFailBg, 0, 0, getWidth(), getHeight(), null);
 
-                g2.drawImage(gamefail, 150, 150, null);
+                g2.drawImage(gamefail, 165, 165, null);
                 clock.stopTimer();
                 clock.draw(g2,260,280);
                 mc.drawScore(g2,360,280, numOfVaccines);
@@ -472,7 +472,7 @@ public class GameFrame extends JPanel implements Runnable{
                 // background image
                 g2.drawImage(gameWinBg, 0, 0, getWidth(), getHeight(), null);
 
-                g2.drawImage(gamewin, 150, 150, null);
+                g2.drawImage(gamewin, 165, 165, null);
                 clock.stopTimer();
                 clock.draw(g2,260,280);
                 mc.drawScore(g2,360,280, numOfVaccines);
