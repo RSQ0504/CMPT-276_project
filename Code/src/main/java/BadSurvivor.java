@@ -3,8 +3,19 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
+/**
+ * Class for enemy static character which lowers Main Character's HP when in contact
+ */
 public class BadSurvivor extends StaticCharacter{
 
+    /**
+     * Class Constructor
+     * @param gameFrame
+     * @param key - Keyboard input
+     * @param mc
+     * @param x
+     * @param y
+     */
     public BadSurvivor(GameFrame gameFrame, inputKey key, MainCharacter mc, int x, int y){
         this.gf = gameFrame;
         this.k = key;
@@ -16,6 +27,12 @@ public class BadSurvivor extends StaticCharacter{
         setDefaultValue(x,y);
     }
 
+    /**
+     * set starting point for static enemies
+     * set up starting values for their dialog boxes
+     * @param x
+     * @param y
+     */
     private void setDefaultValue(int x, int y){
         this.direction = "down";
         this.x = x;
@@ -27,6 +44,9 @@ public class BadSurvivor extends StaticCharacter{
         this.message_height = message_image.getHeight();
     }
 
+    /**
+     * Read and import images for static enemies and dialog message boxes
+     */
     public void getSurvivorImages(){
         try{
             message_image= ImageIO.read(new File("src/main/java/picture/Character/Character_goodOrBadPerson/Message_badPerson.png"));
@@ -40,6 +60,10 @@ public class BadSurvivor extends StaticCharacter{
         }
     }
 
+    /**
+     * check if player pressed F while in close proximity with static enemy
+     * if close then display message box and lower player's HP
+     */
     void speak(){
         if(status && (this.x < (mc.x + 40)) && (this.x > (mc.x - 40)) && (this.y < (mc.y + 40)) && (this.y > (mc.y - 40))){
             if(k.pressF){
@@ -81,6 +105,10 @@ public class BadSurvivor extends StaticCharacter{
         }
     }
 
+    /**
+     * draw static enemy character
+     * @param g2
+     */
     void drawBadCharacter(Graphics2D g2){
         BufferedImage character_image = null;
         speak();

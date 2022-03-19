@@ -3,6 +3,9 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
+/**
+ * class to implement character which increases player HP
+ */
 public class KindSurvivor extends StaticCharacter{
     /**
      * The attributes of kind survivor: the door he can open
@@ -34,10 +37,21 @@ public class KindSurvivor extends StaticCharacter{
         setDefaultValue(x,y,door_x,door_y);
     }
 
+    /**
+     * reset maze
+     * @param Board
+     */
     public void resetBoard(int[][] Board){
       this.map = Board;
     }
 
+    /**
+     * set starting point and attributes for good character and their dialog message box
+     * @param x
+     * @param y
+     * @param door_x
+     * @param door_y
+     */
     private void setDefaultValue(int x, int y,int door_x, int door_y){
         this.direction = "down";
         this.x = x;
@@ -52,12 +66,15 @@ public class KindSurvivor extends StaticCharacter{
     }
 
     /**
-     * Open the door
+     * Set exit wall to floor for player to exit
      */
     public void openDoor() {
         this.map[door_x][door_y] = 0;
     }
 
+    /**
+     * read and import character image
+     */
     public void getSurvivorImages(){
         try{
             message_image= ImageIO.read(new File("src/main/java/picture/Character/Character_goodOrBadPerson/Message_goodPerson.png"));
@@ -72,8 +89,11 @@ public class KindSurvivor extends StaticCharacter{
         }
     }
 
+    /**
+     * check if player pressed F while in close proximity with static enemy
+     * if close then display message box and open door if all required vaccines are collected by player
+     */
     void speak(){
-        //status &&
         if(status && (this.x < (mc.x + 40)) && (this.x > (mc.x - 40)) && (this.y < (mc.y + 40)) && (this.y > (mc.y - 40))){
             if(k.pressF == true) {
                 int x_distance = this.x - mc.x;
@@ -117,6 +137,10 @@ public class KindSurvivor extends StaticCharacter{
         }
     }
 
+    /**
+     * draw character dialog box
+     * @param g2
+     */
     void drawKindCharcMsgBox(Graphics2D g2){
         speak();
         if(speakMessageShow){
@@ -128,6 +152,10 @@ public class KindSurvivor extends StaticCharacter{
         }
     }
 
+    /**
+     * draw character
+     * @param g2
+     */
     void drawKindCharacter(Graphics2D g2){
         BufferedImage character_image = null;
         speak();

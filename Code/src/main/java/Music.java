@@ -2,6 +2,9 @@ import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * class to implement and manage Background music and sound effects
+ */
 public class Music {
     Clip clip;
     private String[] musicFilePaths = {
@@ -13,6 +16,14 @@ public class Music {
     };
 
 
+    /**
+     * set file to get music from
+     * @param i
+     * @return
+     * @throws UnsupportedAudioFileException
+     * @throws IOException
+     * @throws LineUnavailableException
+     */
     public boolean setFile(int i) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
 //        System.out.println("[setFile] setting music file");
         if(i >= 0 && i < musicFilePaths.length) {
@@ -27,6 +38,9 @@ public class Music {
         return true;
     }
 
+    /**
+     * play music
+     */
     public void play() {
         if(clip == null) {
 //            System.out.println("[play] Clip is null.");
@@ -35,10 +49,16 @@ public class Music {
         }
     }
 
+    /**
+     * Loop music
+     */
     public void loop() {
         clip.loop(Clip.LOOP_CONTINUOUSLY);
     }
 
+    /**
+     * Stop music
+     */
     public void stop() {
         clip.stop();
     }

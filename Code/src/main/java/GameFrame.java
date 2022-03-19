@@ -6,14 +6,16 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.LinkedList;
 
 
+/**
+ * Class to manage Display Frame when Game is opened
+ */
 public class GameFrame extends JPanel implements Runnable{
     // BGM
     public Music bgm = new Music();
-//    public Music soundEffect = new Music();
+    //public Music soundEffect = new Music();
     public int musicState = 0; // 0 or 1
     public final int musicPaused = 0;
     public final int musicPlaying = 1;
@@ -121,7 +123,6 @@ public class GameFrame extends JPanel implements Runnable{
     public int[] startPoints = new int[2];
 
     //Timer
-//    private TimerClock clock = new TimerClock();
     private TimerClock clock;
     private int timerState = 0;
     private int timerInactive = 0;// 00:00, ready to start counting
@@ -169,6 +170,13 @@ public class GameFrame extends JPanel implements Runnable{
     }
   }
 
+    /**
+     * Class Constructor
+     * @param colm
+     * @param rows
+     * @param cellSize
+     * @throws IOException
+     */
     GameFrame(int colm, int rows, int cellSize) throws IOException {
         this.colm =colm;
         this.rows = rows;
@@ -206,14 +214,28 @@ public class GameFrame extends JPanel implements Runnable{
         narrationPage11 = new ImageIcon("src/main/java/picture/GUI_image/background_story/background_story11.png").getImage();
     }
 
+    /**
+     * get default size for tiles
+     * @return
+     */
     public int getCellSize(){return cellSize;}
 
-    public void placeWall(Wall wall){}
+
+    /**
+     * set start points when game is started
+     * @param startPointX
+     * @param startPointY
+     */
     private void setStartPoint(int startPointX, int startPointY){
         this.startPointX = startPointX;
         this.startPointY = startPointY;
     }
+
    // private void setEndPoint(int endPointX, int endPointY){}
+
+    /**
+     * set up screen attributes when game is started
+     */
     private void setUpScreen(){
         width = cellSize*colm;
         height = cellSize*rows;
@@ -223,12 +245,18 @@ public class GameFrame extends JPanel implements Runnable{
         this.setFocusable(true);
     }
 
+    /**
+     * begin Thread for game updates
+     */
     public void beginThread() {
         gameThread = new Thread(this);
         gameThread.start();
     }
 
 
+    /**
+     * update game frame with character positioning, stat updates, and game state
+     */
     @Override
     public void run() {
         System.out.println("[run/GameFrame.java] running GameFrame");
@@ -271,6 +299,9 @@ public class GameFrame extends JPanel implements Runnable{
         }
     }
 
+    /**
+     * update dynamic character positioning
+     */
     private void updatePos(){
         mc.updateMC();
         zombie1.updateZombie();
@@ -278,6 +309,10 @@ public class GameFrame extends JPanel implements Runnable{
         zombie3.updateZombie();
     }
 
+    /**
+     * draw game frame and objects in each update
+     * @param g
+     */
     protected void paintComponent(Graphics g){
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
@@ -492,6 +527,13 @@ public class GameFrame extends JPanel implements Runnable{
         g2.dispose();
     }
 
+    /**
+     * play background music
+     * @param i
+     * @throws UnsupportedAudioFileException
+     * @throws LineUnavailableException
+     * @throws IOException
+     */
     public void playBGM(int i) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         if(musicState == musicPaused) {
             System.out.println("[playBGM] playing bgm.");
@@ -503,6 +545,9 @@ public class GameFrame extends JPanel implements Runnable{
         }
     }
 
+    /**
+     * stop background music
+     */
     public void stopBGM() {
         System.out.println("[stopBGM] stopping bgm.");
         if(musicState == musicPlaying) {
@@ -512,6 +557,13 @@ public class GameFrame extends JPanel implements Runnable{
         musicState = musicPaused;
     }
 
+    /**
+     * play sound effects
+     * @param i
+     * @throws UnsupportedAudioFileException
+     * @throws LineUnavailableException
+     * @throws IOException
+     */
     public void playSoundEffect(int i) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         // sound effect music files are 0, 1, 2
         // 0: Click_music_1

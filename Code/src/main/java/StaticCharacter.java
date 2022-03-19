@@ -1,5 +1,8 @@
 import java.awt.image.BufferedImage;
 
+/**
+ * class to manage static objects
+ */
 public class StaticCharacter {
     /**
      * The x,y means the position of the static character

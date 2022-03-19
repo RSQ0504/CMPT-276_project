@@ -5,13 +5,27 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * class to implement and manage vaccine rewards
+ */
 public class Vaccine extends Reward {
 
+  /**
+   * increase vaccine count that player has collected
+   * @param m
+   */
   public void increaseVaccine(MainCharacter m) {
     m.setVaccines(m.getVaccines() + 1);
   }
 
 
+  /**
+   * class constructor
+   * @param frame
+   * @param x
+   * @param y
+   * @throws IOException
+   */
   public Vaccine(GameFrame frame, int x, int y) throws IOException {
     setFrame(frame);
     this.x = x;

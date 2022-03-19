@@ -4,7 +4,29 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d1523491-d180-4c57-990c-1160e4abce8b" name="Changes" comment="optimized a few things" />
+    <list default="true" id="d1523491-d180-4c57-990c-1160e4abce8b" name="Changes" comment="optimized a few things">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/BadSurvivor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BadSurvivor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/BlockCell.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DynamicCharacter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DynamicCharacter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Food.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Food.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/GameFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GameFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/GameMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GameMap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/GameObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GameObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/KindSurvivor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/KindSurvivor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MainCharacter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MainCharacter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Music.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Music.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Reward.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Reward.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/StaticCharacter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/StaticCharacter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Tile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TimerClock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TimerClock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Vaccine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Vaccine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Wall.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Zombie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Zombie.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/checkCollision.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/checkCollision.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/inputKey.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/inputKey.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

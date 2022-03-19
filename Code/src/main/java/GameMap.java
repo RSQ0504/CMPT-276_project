@@ -3,13 +3,18 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * class to implement maze map
+ */
 public class GameMap {
     private GameFrame frame;
     public Tile[] tile;
     public int startPointX;
     public int startPointY;
     private int endPointX =30;
-    private int endPointY =510;
+    private int endPointY;
+
+    //Map for each Game levels
     private int[][] maplvl1 = {
             {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
             {1,0,0,0,0,0,1,0,0,1,1,0,1,1,0,0,0,0,0,1,1,1,0,0,0,0,1,0,1,0,0,1} ,
@@ -88,18 +93,38 @@ public class GameMap {
             {1,1,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,1,1,0,1,0,0,0,0,0,1,0,0,0,0,1},
             {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}};
 
+    /**
+     * class constructor
+     * @param frame
+     */
     GameMap(GameFrame frame){
         this.frame = frame;
         tile = new Tile[10];
         getTileImg();
     }
 
+
+    /**
+     * Get end x point for maze
+     * @return
+     */
     public int getEndPointX(){
       return endPointX;
     }
+
+    /**
+     * Get end y point for maze
+     * @return
+     */
     public int getEndPointY(){
       return endPointY;
     }
+
+    /**
+     * Get maze map depending on game level
+     * @param lvl
+     * @return
+     */
     public int[][] getBoard(int lvl){
         int[][] board;
         switch(lvl){
@@ -119,6 +144,11 @@ public class GameMap {
         return board;
     }
 
+    /**
+     * Get player starting point depending on game level
+     * @param lvl
+     * @return
+     */
     public int[] getStartPoints(int lvl){
         int[] startPoints = new int[2];
         switch(lvl){
@@ -145,6 +175,9 @@ public class GameMap {
         return startPoints;
     }
 
+    /**
+     * Read and import images for walls and floor
+     */
     public void getTileImg()  {
         try {
             tile[0] = new Tile();
@@ -160,6 +193,11 @@ public class GameMap {
 
     }
 
+    /**
+     * Draw maze
+     * @param g2
+     * @param map
+     */
     public void draw(Graphics2D g2, int[][] map){
         for(int i = 0; i < 24; i++){
             for (int j = 0; j < 32; j++){

@@ -8,12 +8,19 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 import javax.swing.Timer;
 
+/**
+ * class to implement and manage timer in game
+ */
 public class TimerClock {
     public BufferedImage timerImg;
     private Timer timer;
     private int second, minute;
     private String secondFormatted, minuteFormatted;
     private DecimalFormat timeFormatted = new DecimalFormat("00");
+
+    /**
+     * class constructor
+     */
     TimerClock(){
 
         getTimerImg();
@@ -25,16 +32,29 @@ public class TimerClock {
         timer.start();
     }
 
+    /**
+     * return second
+     * @return
+     */
     public int getSecond(){return this.second;}
 
+    /**
+     * restart Timer
+     */
     public void startTimer(){
         timer.restart();
     }
 
+    /**
+     * Stop timer
+     */
     public void stopTimer(){
         timer.stop();
     }
 
+    /**
+     * read and import images for timer
+     */
     private void getTimerImg() {
         try{
             timerImg = ImageIO.read(new File("src/main/java/picture/GUI_image/Time_panel.png"));
@@ -42,6 +62,10 @@ public class TimerClock {
             e.printStackTrace();
         }
     }
+
+    /**
+     * increase timer as game is running
+     */
     public void clockTimer(){
         timer = new Timer(1000, new ActionListener() {
             @Override
@@ -56,6 +80,13 @@ public class TimerClock {
             }
         });
     }
+
+    /**
+     * draw timer
+     * @param g2
+     * @param x
+     * @param y
+     */
     public void draw(Graphics2D g2,int x, int y) {
         g2.drawImage(timerImg, x,y, 90,40,null);
         g2.setColor(Color.black);

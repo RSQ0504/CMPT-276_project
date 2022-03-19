@@ -1,16 +1,27 @@
+/**
+ * class to check collisions between wall and characters
+ */
 public class checkCollision {
     public GameFrame check_frame; //frame used to check collisions
     public checkCollision(GameFrame check_frame) {
         this.check_frame = check_frame;
     }
 
+    /**
+     * check for intersection between character and wall
+     * set boolean collisionArea accordingly
+     * @param obj
+     */
     public void checkTile(DynamicCharacter obj){
         int scaledCellSize = check_frame.getCellSize()/2;
+
+        //character position variables
         int charcTop = obj.y+obj.hitArea.y;
         int charcBottom = obj.y+obj.hitArea.y + obj.hitArea.height;
         int charcLeft = obj.x+obj.hitArea.x;
         int charcRight = obj.x+obj.hitArea.x + obj.hitArea.width;
 
+        //Wall index variables
         int charcTopRow = charcTop/scaledCellSize;
         int charcBottomRow = charcBottom/scaledCellSize;
         int charcLeftCol = charcLeft/scaledCellSize;
@@ -40,8 +51,8 @@ public class checkCollision {
                 break;
             case "right":
                 charcRightCol = (charcRight - obj.speed)/scaledCellSize;
-                tile1 = board[charcTopRow][charcRightCol+1]; //left corner check
-                tile2 = board[charcBottomRow][charcRightCol+1]; //right corner check
+                tile1 = board[charcTopRow][charcRightCol+1]; //top corner check
+                tile2 = board[charcBottomRow][charcRightCol+1]; //bottom corner check
 
                 if(check_frame.tileFrame.tile[tile1].getCollision() || check_frame.tileFrame.tile[tile2].getCollision()) {
                     obj.collisionArea = true;
@@ -49,8 +60,8 @@ public class checkCollision {
                 break;
             case "left":
                 charcLeftCol = (charcLeft + obj.speed)/scaledCellSize;
-                tile1 = board[charcTopRow][charcLeftCol]; //left corner check
-                tile2 = board[charcBottomRow][charcLeftCol]; //right corner check
+                tile1 = board[charcTopRow][charcLeftCol]; //top corner check
+                tile2 = board[charcBottomRow][charcLeftCol]; //bottom corner check
 
                 if(check_frame.tileFrame.tile[tile1].getCollision() || check_frame.tileFrame.tile[tile2].getCollision()) {
                     obj.collisionArea = true;

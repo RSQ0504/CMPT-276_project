@@ -4,6 +4,9 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.Random;
 
+/**
+ * class to implement and manage dynamic enemy
+ */
 public class Zombie extends DynamicCharacter{
     /**
      * The attributes of zombie: the number of HP decrease from MainCharacter (damage)
@@ -13,6 +16,13 @@ public class Zombie extends DynamicCharacter{
     private GameFrame gf;
     private MainCharacter aim;
 
+    /**
+     * class constructor
+     * @param gameFrame
+     * @param x
+     * @param y
+     * @param mc
+     */
     public Zombie(GameFrame gameFrame, int x, int y, MainCharacter mc){
         this.gf = gameFrame;
         this.aim = mc;
@@ -22,6 +32,9 @@ public class Zombie extends DynamicCharacter{
         hitArea = new Rectangle((int) 1,45,gf.getCellSize()/2, (int) (gf.getCellSize()));
     }
 
+    /**
+     * Read and import images for character
+     */
     private void getZombieImages() {
         try{
             up1 = ImageIO.read(new File("src/main/java/picture/Character/Character_zombie/zombie_walkUp1.png"));
@@ -49,12 +62,20 @@ public class Zombie extends DynamicCharacter{
         }
     }
 
+    /**
+     * set starting points and speed of character
+     * @param x
+     * @param y
+     */
     private void setDefaultValue(int x, int y) {
         this.x = x;
         this.y = y;
         speed = 1;
     }
 
+    /**
+     * update character positioning each update
+     */
     void updateZombie(){
 
         collisionArea = false;
@@ -126,6 +147,10 @@ public class Zombie extends DynamicCharacter{
         }
     }
 
+    /**
+     * check if enemy is close to player
+     * @return
+     */
     public boolean closedToAim() {
         if((this.x < (aim.x + 150)) && (this.x > (aim.x - 150)) && (this.y < (aim.y + 150)) && (this.y > (aim.y - 150))){
             return true;
@@ -134,6 +159,10 @@ public class Zombie extends DynamicCharacter{
             return false;
     }
 
+    /**
+     * draw character
+     * @param g2
+     */
     void drawZombie(Graphics2D g2){
         BufferedImage zombie_image = null;
         switch (direction){
@@ -195,10 +224,19 @@ public class Zombie extends DynamicCharacter{
         this.damage = damage;
     }
 
-    public void Damage(MainCharacter zombie){
-        zombie.setHP(zombie.getHP()-damage);
+    /**
+     * decrease player hp when in contact with enemy
+     * @param mc
+     */
+    public void Damage(MainCharacter mc){
+        mc.setHP(mc.getHP()-damage);
     }
 
+    /**
+     * check for hit intersection
+     * @param mc
+     * @return
+     */
     public boolean check(Rectangle mc){
       hitAreaStatic = new Rectangle(this.x,this.y,5,5);
       return hitAreaStatic.intersects(mc);

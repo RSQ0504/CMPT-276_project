@@ -4,11 +4,18 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
 
+/**
+ * class to handle user keyboard inputs
+ */
 public class inputKey implements KeyListener {
     GameFrame gf;
     public boolean pressedUp, pressedDown,pressedLeft,pressedRight;
     public boolean pressF;
 
+    /**
+     * class constructor
+     * @param gf
+     */
     public inputKey(GameFrame gf) {
         this.gf = gf;
     }
@@ -18,6 +25,10 @@ public class inputKey implements KeyListener {
         //Dont use this
     }
 
+    /**
+     * handle keyboard inputs
+     * @param e
+     */
     @Override
     public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();
@@ -216,6 +227,10 @@ public class inputKey implements KeyListener {
 
     }
 
+    /**
+     * handle when keys are released
+     * @param e
+     */
     @Override
     public void keyReleased(KeyEvent e) {
         int key = e.getKeyCode();

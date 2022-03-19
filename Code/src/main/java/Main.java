@@ -1,6 +1,9 @@
 import javax.swing.*;
 import java.io.IOException;
 
+/**
+ * Main class to start game
+ */
 public class Main {
     public static void main(String[] args) throws IOException {
         int colm = 16;

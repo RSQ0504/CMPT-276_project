@@ -1,7 +1,9 @@
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.time.LocalDateTime;
 
+/**
+ * class to manage dynamic characters: Zombies and MainCharacter
+ */
 public class DynamicCharacter extends GameObject{
     /**
      * The speed that the character move

@@ -4,6 +4,9 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * class to implement and manage player character
+ */
 public class MainCharacter extends DynamicCharacter{
     /**
      * The attributes of main character: the number of vaccines, the HP
@@ -18,6 +21,11 @@ public class MainCharacter extends DynamicCharacter{
     public BufferedImage MC_image;
     private int lvl = 0;
 
+    /**
+     * class constructor
+     * @param gameFrame
+     * @param key
+     */
     public MainCharacter(GameFrame gameFrame, inputKey key){
         this.gf = gameFrame;
         this.key = key;
@@ -29,7 +37,10 @@ public class MainCharacter extends DynamicCharacter{
         hitArea = new Rectangle( 1,45,gf.getCellSize()/2,  gf.getCellSize());
     }
 
-    // Set Start point
+    /**
+     * set starting points and speed for player
+     * @param startPoints
+     */
     public void setDefaultValue(int[] startPoints){
         x = startPoints[0];
         y = startPoints[1];
@@ -65,6 +76,9 @@ public class MainCharacter extends DynamicCharacter{
         this.HP = HP;
     }
 
+    /**
+     * Read and import character images
+     */
     public void getMCImages(){
         try{
             up1 = ImageIO.read(new File("src/main/java/picture/Character/Character_boy/boy_walkUp1.png"));
@@ -92,6 +106,9 @@ public class MainCharacter extends DynamicCharacter{
         }
     }
 
+    /**
+     * Update player position based on user keyboard inputs
+     */
     void updateMC(){
         if(key.pressedUp == true || key.pressedDown == true || key.pressedLeft == true || key.pressedRight == true) {
             if (key.pressedUp == true) {
@@ -132,6 +149,10 @@ public class MainCharacter extends DynamicCharacter{
         }
     }
 
+    /**
+     * Draw player character
+     * @param g2
+     */
     void drawMC(Graphics2D g2){
         MC_image = null;
         switch (direction){
@@ -179,7 +200,10 @@ public class MainCharacter extends DynamicCharacter{
         g2.drawImage(MC_image,x,y, (gf.getCellSize()/2), gf.getCellSize(), null);
     }
 
-  private void getTimerImg() {
+    /**
+     * Read and import score images for player
+     */
+    private void getScoreImg() {
     try{
       VaccineImage = ImageIO.read(new File("src/main/java/picture/GUI_image/Vaccine_panel.png"));
       HP_image = ImageIO.read(new File("src/main/java/picture/GUI_image/HP_panel.png"));
@@ -188,8 +212,15 @@ public class MainCharacter extends DynamicCharacter{
     }
   }
 
+    /**
+     * Draw player score board
+     * @param g2
+     * @param x
+     * @param y
+     * @param maxVaccine
+     */
     public void drawScore(Graphics2D g2,int x,int y, int maxVaccine){
-      getTimerImg();
+      getScoreImg();
       g2.drawImage(VaccineImage,x,y,60,40,null);
       g2.drawImage(HP_image,x+60,y, 60,40,null);
       g2.setColor(Color.black);
