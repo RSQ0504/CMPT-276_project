@@ -70,11 +70,15 @@ public class GameFrame extends JPanel implements Runnable{
     private Image overlayImage;
     private Image gameWinBg;
     private Image gameFailBg;
+    private Image cursor;
+
+    // tutorial images
     private Image tutorialPage;
     private Image tutorialPage1;
     private Image tutorialPage2;
     private Image tutorialPage3;
 
+    // narration images
     private Image narrationPage1;
     private Image narrationPage2;
     private Image narrationPage3;
@@ -175,6 +179,8 @@ public class GameFrame extends JPanel implements Runnable{
         overlayImage = new ImageIcon("src/main/java/picture/GUI_image/overlay_instructions.png").getImage();
         gameWinBg = new ImageIcon("src/main/java/picture/GUI_image/escape_success_bg.jpg").getImage();
         gameFailBg = new ImageIcon("src/main/java/picture/GUI_image/escape_fail_bg.jpg").getImage();
+        cursor = new ImageIcon("src/main/java/picture/GUI_image/redHand_icon.png").getImage();
+
 
         // get images for tutorial screen
         tutorialPage = new ImageIcon("src/main/java/picture/GUI_image/tutorial/tutorial_sample.png").getImage();
@@ -319,6 +325,7 @@ public class GameFrame extends JPanel implements Runnable{
             int btnLength = 0;
             int fontSize = 20;
             int margin = 12;
+            int cursorSize = 64;
             String[] buttons = {"START GAME", "CHANGE LEVEL", "EXIT"};
 
 
@@ -331,14 +338,15 @@ public class GameFrame extends JPanel implements Runnable{
 
                 // set position of button
                 x = this.width/2 - btnLength/2;
-                y = 320 + (fontSize + margin)*i;
+                y = 280 + (cursorSize + margin)*i;
 
                 // draw button
                 g2.drawString(buttons[i], x, y);
 
                 // display '>' before selected option in menu
                 if(commandNum == i) {
-                    g2.drawString(">", x-24, y);
+//                    g2.drawString(">", x-24, y);
+                    g2.drawImage(cursor, x-cursorSize, y, cursorSize, cursorSize, null);
                 }
             }
 
@@ -417,6 +425,7 @@ public class GameFrame extends JPanel implements Runnable{
             int btnLength = 0;
             int fontSize = 32;
             int margin = 12;
+            int cursorSize = 64;
             g2.setFont(g2.getFont().deriveFont(Font.BOLD, fontSize));
             String title = "Select the level of game you would like to play.";
 
@@ -440,14 +449,15 @@ public class GameFrame extends JPanel implements Runnable{
 
                 // set position of button
                 x = this.width/2 - btnLength/2;
-                y = 320 + (fontSize + margin)*i;
+                y = 280 + (cursorSize + margin)*i;
 
                 // draw button
                 g2.drawString(levels[i], x, y);
 
                 // display '>' before selected option in menu
                 if(commandNum == i) {
-                    g2.drawString(">", x-24, y);
+//                    g2.drawString(">", x-24, y);
+                    g2.drawImage(cursor, x-cursorSize, y, cursorSize, cursorSize, null);
                 }
             }
         }else if(gameState == pauseState) {
