@@ -67,6 +67,8 @@ public class GameFrame extends JPanel implements Runnable{
 
     // background images, initialized in GameFrame constructor
     private Image bgImage;
+    private Image bgTitleScreen;
+    private Image bgChangeLevelScreen;
     private Image overlayImage;
     private Image gameWinBg;
     private Image gameFailBg;
@@ -176,6 +178,8 @@ public class GameFrame extends JPanel implements Runnable{
         setStartPoint(100,100);
 
         bgImage = new ImageIcon("src/main/java/picture/GUI_image/titleScreenBg.jpg").getImage();
+        bgTitleScreen = new ImageIcon("src/main/java/picture/GUI_image/title_screen_bg.png").getImage();
+        bgChangeLevelScreen = new ImageIcon("src/main/java/picture/GUI_image/change_level_screen_bg.png").getImage();
         overlayImage = new ImageIcon("src/main/java/picture/GUI_image/overlay_instructions.png").getImage();
         gameWinBg = new ImageIcon("src/main/java/picture/GUI_image/escape_success_bg.jpg").getImage();
         gameFailBg = new ImageIcon("src/main/java/picture/GUI_image/escape_fail_bg.jpg").getImage();
@@ -306,31 +310,14 @@ public class GameFrame extends JPanel implements Runnable{
             }
 
             // display background image
-            g2.drawImage(bgImage, 0, 0, getWidth(), getHeight(), null);
+            g2.drawImage(bgTitleScreen, 0, 0, getWidth(), getHeight(), null);
 
-            // show title
-            g2.setFont(g2.getFont().deriveFont(Font.BOLD, 64));
-            String title = "Survive in the end";
             int x = 0;
             int y = 0;
-            int titleLength = (int)g2.getFontMetrics().getStringBounds(title, g2).getWidth();
-            x = this.width/2 - titleLength/2;
-            y = 250;
-            g2.setColor(Color.white);
-            g2.drawString(title, x, y);
-
-
-            // show menu button
             int numBtn = 3; // number of buttons in menu
             int btnLength = 0;
-            int fontSize = 20;
-            int margin = 12;
             int cursorSize = 64;
             String[] buttons = {"START GAME", "CHANGE LEVEL", "EXIT"};
-
-
-            // set font for buttons
-            g2.setFont(g2.getFont().deriveFont(Font.PLAIN, fontSize));
 
             // display buttons
             for(int i = 0; i < numBtn; i++) {
@@ -338,19 +325,13 @@ public class GameFrame extends JPanel implements Runnable{
 
                 // set position of button
                 x = this.width/2 - btnLength/2;
-                y = 280 + (cursorSize + margin)*i;
+                y = 280 + (cursorSize*i) - 10;
 
-                // draw button
-                g2.drawString(buttons[i], x, y);
-
-                // display '>' before selected option in menu
+                // draw cursor
                 if(commandNum == i) {
-//                    g2.drawString(">", x-24, y);
-                    g2.drawImage(cursor, x-cursorSize, y, cursorSize, cursorSize, null);
+                    g2.drawImage(cursor, x - (2*cursorSize + 25), y, cursorSize, cursorSize, null);
                 }
             }
-
-
 
         }else if(gameState == playState) {
             // play bgm
@@ -416,48 +397,25 @@ public class GameFrame extends JPanel implements Runnable{
 
         }else if(gameState == changeLevelState) { // screen display for change-level-screen
             // display background image
-            g2.drawImage(bgImage, 0, 0, getWidth(), getHeight(), null);
+            g2.drawImage(bgChangeLevelScreen, 0, 0, getWidth(), getHeight(), null);
 
-            // show title
             int x = 0;
             int y = 0;
             int numBtn = 3; // number of options
             int btnLength = 0;
-            int fontSize = 32;
-            int margin = 12;
             int cursorSize = 64;
-            g2.setFont(g2.getFont().deriveFont(Font.BOLD, fontSize));
-            String title = "Select the level of game you would like to play.";
-
-            int titleLength = (int)g2.getFontMetrics().getStringBounds(title, g2).getWidth();
-            x = this.width/2 - titleLength/2;
-            y = 240;
-            g2.setColor(Color.white);
-            g2.drawString(title, x, y);
-
-
-            // show menu button
-            fontSize = 20;
             String[] levels = {"EASY", "INTERMEDIATE", "CHALLENGE"};
 
-            // set font for buttons
-            g2.setFont(g2.getFont().deriveFont(Font.PLAIN, fontSize));
-
-            // display buttons
             for(int i = 0; i < numBtn; i++) {
                 btnLength = (int)g2.getFontMetrics().getStringBounds(levels[i], g2).getWidth();
 
                 // set position of button
                 x = this.width/2 - btnLength/2;
-                y = 280 + (cursorSize + margin)*i;
+                y = 280 + (cursorSize*i) - 10;
 
-                // draw button
-                g2.drawString(levels[i], x, y);
-
-                // display '>' before selected option in menu
+                // draw cursor
                 if(commandNum == i) {
-//                    g2.drawString(">", x-24, y);
-                    g2.drawImage(cursor, x-cursorSize, y, cursorSize, cursorSize, null);
+                    g2.drawImage(cursor, x-(2*cursorSize + 10), y, cursorSize, cursorSize, null);
                 }
             }
         }else if(gameState == pauseState) {
