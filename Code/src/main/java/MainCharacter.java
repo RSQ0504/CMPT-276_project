@@ -23,7 +23,6 @@ public class MainCharacter extends DynamicCharacter{
         this.key = key;
         this.width = 20;
         this.height = 20;
-        System.out.println("Heyyyyy " + gf.tileFrame.getStartPoints(lvl));
 
         setDefaultValue(gf.tileFrame.getStartPoints(lvl));
         getMCImages();

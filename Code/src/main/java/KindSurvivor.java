@@ -61,6 +61,7 @@ public class KindSurvivor extends StaticCharacter{
     public void getSurvivorImages(){
         try{
             message_image= ImageIO.read(new File("src/main/java/picture/Character/Character_goodOrBadPerson/Message_goodPerson.png"));
+            message_image_incomplete= ImageIO.read(new File("src/main/java/picture/Character/Character_goodOrBadPerson/Message_goodPerson2.png"));
             up = ImageIO.read(new File("src/main/java/picture/Character/Character_goodOrBadPerson/staticCharacter_faceToUp.png"));
             down = ImageIO.read(new File("src/main/java/picture/Character/Character_goodOrBadPerson/staticCharacter_faceToDown.png"));
             right = ImageIO.read(new File("src/main/java/picture/Character/Character_goodOrBadPerson/staticCharacter_faceToRight.png"));
@@ -72,41 +73,57 @@ public class KindSurvivor extends StaticCharacter{
     }
 
     void speak(){
+        //status &&
         if(status && (this.x < (mc.x + 40)) && (this.x > (mc.x - 40)) && (this.y < (mc.y + 40)) && (this.y > (mc.y - 40))){
-            if(k.pressF == true){
+            if(k.pressF == true) {
                 int x_distance = this.x - mc.x;
                 int y_distance = this.y - mc.y;
-                if(x_distance>0){
+                if (x_distance > 0) {
                     // left
                     direction = "left";
-                    if(x_distance<y_distance){
+                    if (x_distance < y_distance) {
                         // up
                         direction = "up";
-                    }
-                    else if(x_distance < -y_distance){
+                    } else if (x_distance < -y_distance) {
                         // down
                         direction = "down";
                     }
-                }
-                else{
+                } else {
                     // right
                     direction = "right";
-                    if(-x_distance < y_distance){
+                    if (-x_distance < y_distance) {
                         // up
                         direction = "up";
-                    }
-                    else if(-x_distance < -y_distance){
+                    } else if (-x_distance < -y_distance) {
                         // down
                         direction = "down";
                     }
                 }
+
                 speakMessageShow = true;
-            }else if(speakMessageShow == true){
+            } else if (speakMessageShow == true){
                 speakTimeCounter++;
-                if(speakTimeCounter >100){
-                    status = false;
-                    openDoor();
+                if(speakTimeCounter >200){
+                    speakMessageShow = false;
+                    speakTimeCounter = 0;
+                    if(mc.getVaccines() == gf.numOfVaccines){
+                        openDoor();
+                    }
                 }
+            }
+
+
+
+        }
+    }
+
+    void drawKindCharcMsgBox(Graphics2D g2){
+        speak();
+        if(speakMessageShow){
+            if (mc.getVaccines() == gf.numOfVaccines){
+                g2.drawImage(message_image,message_x,message_y,message_width,message_height,null);
+            } else {
+                g2.drawImage(message_image_incomplete,message_x,message_y,message_width,message_height,null);
             }
         }
     }
@@ -129,8 +146,6 @@ public class KindSurvivor extends StaticCharacter{
                 break;
         }
         g2.drawImage(character_image,x,y,character_image.getWidth(),character_image.getHeight(),null);
-        if(speakMessageShow){
-            g2.drawImage(message_image,message_x,message_y,message_width,message_height,null);
-        }
+
     }
 }

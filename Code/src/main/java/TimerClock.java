@@ -25,6 +25,8 @@ public class TimerClock {
         timer.start();
     }
 
+    public int getSecond(){return this.second;}
+
     public void startTimer(){
         timer.restart();
     }

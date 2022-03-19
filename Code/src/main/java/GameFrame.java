@@ -347,24 +347,6 @@ public class GameFrame extends JPanel implements Runnable{
 
             // setup game
             tileFrame.draw(g2, tileFrame.getBoard(gameLevel));
-            goodPerson1.resetBoard(tileFrame.getBoard(gameLevel));
-            mc.drawMC(g2);
-            zombie1.drawZombie(g2);
-            zombie2.drawZombie(g2);
-            zombie3.drawZombie(g2);
-            if(goodPerson1.status) {
-                goodPerson1.drawKindCharacter(g2);
-            }
-            if(badPerson1.status) {
-              badPerson1.drawBadCharacter(g2);
-            }
-            if(badPerson2.status) {
-                badPerson2.drawBadCharacter(g2);
-            }
-            if(badPerson3.status) {
-                badPerson3.drawBadCharacter(g2);
-            }
-
 
 
             //reward
@@ -388,6 +370,25 @@ public class GameFrame extends JPanel implements Runnable{
                     break;
                 }
             }
+            goodPerson1.resetBoard(tileFrame.getBoard(gameLevel));
+            mc.drawMC(g2);
+            zombie1.drawZombie(g2);
+            zombie2.drawZombie(g2);
+            zombie3.drawZombie(g2);
+            goodPerson1.drawKindCharacter(g2);
+            if(goodPerson1.status) {
+                goodPerson1.drawKindCharcMsgBox(g2);
+            }
+            if(badPerson1.status) {
+                badPerson1.drawBadCharacter(g2);
+            }
+            if(badPerson2.status) {
+                badPerson2.drawBadCharacter(g2);
+            }
+            if(badPerson3.status) {
+                badPerson3.drawBadCharacter(g2);
+            }
+
 
             // draw frame (score, time, overlay)
             mc.drawScore(g2,645,4, numOfVaccines);
@@ -522,11 +523,4 @@ public class GameFrame extends JPanel implements Runnable{
             bgm.play();
         }
     }
-
-    public int[] getStartPoints(){
-      System.out.println(gameLevel);
-      startPoints = tileFrame.getStartPoints(gameLevel);
-      return startPoints;
-    }
-
 }

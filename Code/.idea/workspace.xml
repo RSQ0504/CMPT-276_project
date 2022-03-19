@@ -7,8 +7,15 @@
     <list default="true" id="d1523491-d180-4c57-990c-1160e4abce8b" name="Changes" comment="optimized a few things">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/GameFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GameFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/GameMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GameMap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/KindSurvivor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/KindSurvivor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MainCharacter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MainCharacter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/StaticCharacter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/StaticCharacter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TimerClock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TimerClock.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/GameFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/GameFrame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/KindSurvivor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/KindSurvivor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/MainCharacter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/MainCharacter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/inputKey.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/inputKey.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,7 +54,6 @@
       <MavenGeneralSettings>
         <option name="localRepository" value="$PROJECT_DIR$/../../../../Code environment/apache-maven-3.8.4/Repository" />
         <option name="mavenHome" value="$PROJECT_DIR$/../../../../Code environment/apache-maven-3.8.4" />
-        <option name="useMavenConfig" value="true" />
         <option name="userSettingsFile" value="$PROJECT_DIR$/../../../../Code environment/apache-maven-3.8.4/conf/settings.xml" />
       </MavenGeneralSettings>
     </option>
@@ -80,13 +86,6 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager">
-    <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Main" />
-      <module name="Code" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration default="true" type="DjangoTestsConfigurationType">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -106,17 +105,6 @@
       <option name="USE_OPTIONS" value="false" />
       <option name="OPTIONS" value="" />
       <method v="2" />
-    </configuration>
-    <configuration default="true" type="JetRunConfigurationType">
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <option name="filePath" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
     </configuration>
     <configuration default="true" type="PyBehaveRunConfigurationType" factoryName="Behave">
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -218,6 +206,24 @@
       <option name="PATTERN" value="" />
       <option name="USE_PATTERN" value="false" />
       <method v="2" />
+    </configuration>
+    <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="Code" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -351,6 +357,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="MC can be killed by zombies" />
