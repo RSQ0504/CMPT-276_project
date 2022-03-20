@@ -72,10 +72,20 @@ public class GameFrame extends JPanel implements Runnable{
     private Image bgTitleScreen;
     private Image bgChangeLevelScreen;
     private Image overlayImage;
+    private Image endScreenOverlay;
+//    private Image winEndScreenOverlay;
+//    private Image failEndScreenOverlay;
     private Image titleScreenOverlay;
     private Image gameWinBg;
     private Image gameFailBg;
     private Image cursor;
+
+    // buttons for end screen
+    private Image retryButtonRegular;
+    private Image retryButtonLight;
+    private Image returnButtonRegular;
+    private Image returnButtonLight;
+
 
     // tutorial images
     private Image tutorialPage;
@@ -96,8 +106,11 @@ public class GameFrame extends JPanel implements Runnable{
     private Image narrationPage10;
     private Image narrationPage11;
 
-    private BufferedImage gamewin = ImageIO.read(new File("src/main/java/picture/GUI_image/GameWin_interface.png"));
-    private BufferedImage gamefail = ImageIO.read(new File("src/main/java/picture/GUI_image/GameOver_interface.png"));
+//    private BufferedImage gamewin = ImageIO.read(new File("src/main/java/picture/GUI_image/GameWin_interface.png"));
+//    private BufferedImage gamefail = ImageIO.read(new File("src/main/java/picture/GUI_image/GameOver_interface.png"));
+
+    private BufferedImage gamewin = ImageIO.read(new File("src/main/java/picture/GUI_image/GameWin_interface_noButtons.png"));
+    private BufferedImage gamefail = ImageIO.read(new File("src/main/java/picture/GUI_image/GameOver_interface_noButtons.png"));
 
     //attributes of GameMap
     public GameObject[][] Map;
@@ -191,9 +204,18 @@ public class GameFrame extends JPanel implements Runnable{
         bgChangeLevelScreen = new ImageIcon("src/main/java/picture/GUI_image/change_level_screen_bg.png").getImage();
         overlayImage = new ImageIcon("src/main/java/picture/GUI_image/overlay_instructions.png").getImage();
         titleScreenOverlay = new ImageIcon("src/main/java/picture/GUI_image/title_screen_overlay.png").getImage();
+        endScreenOverlay = new ImageIcon("src/main/java/picture/GUI_image/end_screen_overlay.png").getImage();
+//        winEndScreenOverlay = new ImageIcon("src/main/java/picture/GUI_image/win_end_screen_overlay.png").getImage();
+//        failEndScreenOverlay = new ImageIcon("src/main/java/picture/GUI_image/fail_end_screen_overlay.png").getImage();
         gameWinBg = new ImageIcon("src/main/java/picture/GUI_image/escape_success_bg.jpg").getImage();
         gameFailBg = new ImageIcon("src/main/java/picture/GUI_image/escape_fail_bg.jpg").getImage();
         cursor = new ImageIcon("src/main/java/picture/GUI_image/redHand_icon.png").getImage();
+
+        // get images for buttons in end screen
+        retryButtonRegular = new ImageIcon("src/main/java/picture/GUI_image/RetryButton_noLight.png").getImage();
+        retryButtonLight = new ImageIcon("src/main/java/picture/GUI_image/RetryButton_light.png").getImage();
+        returnButtonRegular = new ImageIcon("src/main/java/picture/GUI_image/ReturnButton_noLight.png").getImage();
+        returnButtonLight = new ImageIcon("src/main/java/picture/GUI_image/ReturnButton_light.png").getImage();
 
 
         // get images for tutorial screen
@@ -462,6 +484,7 @@ public class GameFrame extends JPanel implements Runnable{
         }else if(gameState == pauseState) {
             g2.drawImage(bgImage, 0, 0, getWidth(), getHeight(), null);
             // screen display when game is paused
+            // not used
         }else if(gameState == endState) {
 
             if(gameResult == fail) {
@@ -473,6 +496,7 @@ public class GameFrame extends JPanel implements Runnable{
                 clock.draw(g2,260,280);
                 mc.drawScore(g2,360,280, numOfVaccines);
             }
+
             if(gameResult == win) {
                 // background image
                 g2.drawImage(gameWinBg, 0, 0, getWidth(), getHeight(), null);
@@ -481,8 +505,23 @@ public class GameFrame extends JPanel implements Runnable{
                 clock.stopTimer();
                 clock.draw(g2,260,280);
                 mc.drawScore(g2,360,280, numOfVaccines);
+
             }
-            // screen display when game ends
+
+            // add buttons (retry, return)
+            if(commandNum == 0) {
+                g2.drawImage(retryButtonLight, 240, 390, null);// selected option
+                g2.drawImage(returnButtonRegular, 370, 390, null);
+            }else if(commandNum == 1) {
+                g2.drawImage(retryButtonRegular, 240, 390, null);
+                g2.drawImage(returnButtonLight, 370, 390, null);// selected option
+            }
+
+
+            // draw overlay (key instruction/guide at the bottom)
+            g2.drawImage(endScreenOverlay, 0, getHeight() - 48, getWidth(), 48, null);
+
+
         }else if(gameState == tutorialState) {
             // tutorial screen
             if(tutorialState == tutorialIntro) {

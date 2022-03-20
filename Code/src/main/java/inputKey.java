@@ -223,6 +223,20 @@ public class inputKey implements KeyListener {
                 gf.gameState = gf.playState;
                 gf.stopBGM();
             }
+        }else if(gf.gameState == gf.endState) {
+            if(key == KeyEvent.VK_LEFT || key == KeyEvent.VK_RIGHT) {
+                // switch options
+                if(gf.commandNum == 0) {
+                    gf.commandNum = 1;
+                }else if(gf.commandNum == 1) {
+                    gf.commandNum = 0;
+                }else {
+                    // exception -> reset commandNum to 0
+                    gf.commandNum = 0;
+                }
+            }else if(key == KeyEvent.VK_ENTER) {
+                //
+            }
         }
 
     }
