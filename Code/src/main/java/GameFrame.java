@@ -72,10 +72,20 @@ public class GameFrame extends JPanel implements Runnable{
     private Image bgTitleScreen;
     private Image bgChangeLevelScreen;
     private Image overlayImage;
+    private Image endScreenOverlay;
+//    private Image winEndScreenOverlay;
+//    private Image failEndScreenOverlay;
     private Image titleScreenOverlay;
     private Image gameWinBg;
     private Image gameFailBg;
     private Image cursor;
+
+    // buttons for end screen
+    private Image retryButtonRegular;
+    private Image retryButtonLight;
+    private Image returnButtonRegular;
+    private Image returnButtonLight;
+
 
     // tutorial images
     private Image tutorialPage;
@@ -96,8 +106,11 @@ public class GameFrame extends JPanel implements Runnable{
     private Image narrationPage10;
     private Image narrationPage11;
 
-    private BufferedImage gamewin = ImageIO.read(new File("src/main/java/picture/GUI_image/GameWin_interface.png"));
-    private BufferedImage gamefail = ImageIO.read(new File("src/main/java/picture/GUI_image/GameOver_interface.png"));
+//    private BufferedImage gamewin = ImageIO.read(new File("src/main/java/picture/GUI_image/GameWin_interface.png"));
+//    private BufferedImage gamefail = ImageIO.read(new File("src/main/java/picture/GUI_image/GameOver_interface.png"));
+
+    private BufferedImage gamewin = ImageIO.read(new File("src/main/java/picture/GUI_image/GameWin_interface_noButtons.png"));
+    private BufferedImage gamefail = ImageIO.read(new File("src/main/java/picture/GUI_image/GameOver_interface_noButtons.png"));
 
     //attributes of GameMap
     public GameObject[][] Map;
@@ -191,9 +204,18 @@ public class GameFrame extends JPanel implements Runnable{
         bgChangeLevelScreen = new ImageIcon("src/main/java/picture/GUI_image/change_level_screen_bg.png").getImage();
         overlayImage = new ImageIcon("src/main/java/picture/GUI_image/overlay_instructions.png").getImage();
         titleScreenOverlay = new ImageIcon("src/main/java/picture/GUI_image/title_screen_overlay.png").getImage();
+        endScreenOverlay = new ImageIcon("src/main/java/picture/GUI_image/end_screen_overlay.png").getImage();
+//        winEndScreenOverlay = new ImageIcon("src/main/java/picture/GUI_image/win_end_screen_overlay.png").getImage();
+//        failEndScreenOverlay = new ImageIcon("src/main/java/picture/GUI_image/fail_end_screen_overlay.png").getImage();
         gameWinBg = new ImageIcon("src/main/java/picture/GUI_image/escape_success_bg.jpg").getImage();
         gameFailBg = new ImageIcon("src/main/java/picture/GUI_image/escape_fail_bg.jpg").getImage();
         cursor = new ImageIcon("src/main/java/picture/GUI_image/redHand_icon.png").getImage();
+
+        // get images for buttons in end screen
+        retryButtonRegular = new ImageIcon("src/main/java/picture/GUI_image/RetryButton_noLight.png").getImage();
+        retryButtonLight = new ImageIcon("src/main/java/picture/GUI_image/RetryButton_light.png").getImage();
+        returnButtonRegular = new ImageIcon("src/main/java/picture/GUI_image/ReturnButton_noLight.png").getImage();
+        returnButtonLight = new ImageIcon("src/main/java/picture/GUI_image/ReturnButton_light.png").getImage();
 
 
         // get images for tutorial screen
@@ -267,6 +289,25 @@ public class GameFrame extends JPanel implements Runnable{
         while(gameThread != null) {
             // 1.UPDATE
             updatePos();
+
+            // check whether main character is dead
+            Rectangle MC = new Rectangle(mc.x, mc.y,mc.width,mc.height);
+            Rectangle endpoint = new Rectangle(tileFrame.getEndPointX(), tileFrame.getEndPointY(), 10, 10);
+            if(zombie1.check(MC) || zombie2.check(MC) || zombie3.check(MC) || mc.getHP() == 0){
+                System.out.println("[run/GameFrame] check: main character dead!");
+                mc.setHP(0);
+                gameResult = fail;
+                gameState = endState;
+                timerState = timerTerminated;
+            }
+            // check whether main character is has won
+            if(mc.getVaccines() >= numOfVaccines && endpoint.intersects(MC)){
+                System.out.println("[run/GameFrame] check: main character survived!");
+                gameResult = win;
+                gameState = endState;
+                timerState = timerTerminated;
+            }
+
             // 2.DRAW
             repaint();
 
@@ -286,8 +327,19 @@ public class GameFrame extends JPanel implements Runnable{
             }else if(gameState == pauseState) {
                 System.out.println("[run/GameFrame] Game paused");
             }else if(gameState == endState) {
-                System.out.println("[run/GameFrame] Game ended");
+                if(timerState == timerTerminated) {
+//                    System.out.println("[run/GameFrame] game ended: timer terminated");
+                }else {
+                    timerState = timerTerminated;
+//                    System.out.println("[run/GameFrame] game ended: timer not terminated");
+                }
+            }else if(gameState == tutorialState) {
+                System.out.println("[run/GameFrame] tutorial state");
+            }else if(gameState == tutorialState) {
+                System.out.println("[run/GameFrame] title state");
             }
+
+
             try {
                 double sleepTime = (nextUpdate - System.nanoTime())/1000000;
                 if (sleepTime < 0) {
@@ -322,15 +374,17 @@ public class GameFrame extends JPanel implements Runnable{
         //check whether mc is killed by zombies
         Rectangle MC = new Rectangle(mc.x, mc.y,mc.width,mc.height);
         Rectangle endpoint = new Rectangle(tileFrame.getEndPointX(), tileFrame.getEndPointY(), 10, 10);
-        if(zombie1.check(MC)||zombie2.check(MC)||zombie3.check(MC)||mc.getHP()==0){
-          mc.setHP(0);
-          gameResult = fail;
-          gameState = endState;
-        }
-        if(mc.getVaccines()>=numOfVaccines && endpoint.intersects(MC)){
-          gameResult = win;
-          gameState = endState;
-        }
+//        if(zombie1.check(MC)||zombie2.check(MC)||zombie3.check(MC)||mc.getHP()==0){
+//          mc.setHP(0);
+//          gameResult = fail;
+//          gameState = endState;
+//          timerState = timerTerminated;
+//        }
+//        if(mc.getVaccines()>=numOfVaccines && endpoint.intersects(MC)){
+//          gameResult = win;
+//          gameState = endState;
+//          timerState = timerTerminated;
+//        }
 
 
         // control display depending on game state
@@ -462,6 +516,7 @@ public class GameFrame extends JPanel implements Runnable{
         }else if(gameState == pauseState) {
             g2.drawImage(bgImage, 0, 0, getWidth(), getHeight(), null);
             // screen display when game is paused
+            // not used
         }else if(gameState == endState) {
 
             if(gameResult == fail) {
@@ -473,6 +528,7 @@ public class GameFrame extends JPanel implements Runnable{
                 clock.draw(g2,260,280);
                 mc.drawScore(g2,360,280, numOfVaccines);
             }
+
             if(gameResult == win) {
                 // background image
                 g2.drawImage(gameWinBg, 0, 0, getWidth(), getHeight(), null);
@@ -481,8 +537,23 @@ public class GameFrame extends JPanel implements Runnable{
                 clock.stopTimer();
                 clock.draw(g2,260,280);
                 mc.drawScore(g2,360,280, numOfVaccines);
+
             }
-            // screen display when game ends
+
+            // add buttons (retry, return)
+            if(commandNum == 0) {
+                g2.drawImage(retryButtonLight, 240, 390, null);// selected option
+                g2.drawImage(returnButtonRegular, 370, 390, null);
+            }else if(commandNum == 1) {
+                g2.drawImage(retryButtonRegular, 240, 390, null);
+                g2.drawImage(returnButtonLight, 370, 390, null);// selected option
+            }
+
+
+            // draw overlay (key instruction/guide at the bottom)
+            g2.drawImage(endScreenOverlay, 0, getHeight() - 48, getWidth(), 48, null);
+
+
         }else if(gameState == tutorialState) {
             // tutorial screen
             if(tutorialState == tutorialIntro) {
@@ -580,4 +651,20 @@ public class GameFrame extends JPanel implements Runnable{
             bgm.play();
         }
     }
+
+    public void resetGame() {
+        mc.resetAttributesMC();
+        mc.setDefaultValue(tileFrame.getStartPoints(gameLevel));
+        // The characters
+        zombie1 = new Zombie(this,15,200,mc);
+        zombie2 = new Zombie(this,300,280,mc);
+        zombie3 = new Zombie(this,650,220,mc);
+
+        // The static characters
+        goodPerson1 = new KindSurvivor(this,key,mc,120,255,tileFrame.getOriginMap(gameLevel),23,1);
+        badPerson1 = new BadSurvivor(this,key,mc,262,115);
+        badPerson2 = new BadSurvivor(this,key,mc,300,280);
+        badPerson3 = new BadSurvivor(this,key,mc,650,220);
+    }
+
 }

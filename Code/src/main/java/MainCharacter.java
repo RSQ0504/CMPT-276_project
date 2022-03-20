@@ -229,7 +229,11 @@ public class MainCharacter extends DynamicCharacter{
       g2.drawString(""+getHP(), x+90,y+25);
     }
 
-    public void WinorLose(){
+    public void WinorLose(){}
 
+    public void resetAttributesMC() {
+        vaccines = 0;
+        HP = 1;
+        lvl = 0;
     }
 }
