@@ -72,6 +72,7 @@ public class GameFrame extends JPanel implements Runnable{
     private Image bgTitleScreen;
     private Image bgChangeLevelScreen;
     private Image overlayImage;
+    private Image titleScreenOverlay;
     private Image gameWinBg;
     private Image gameFailBg;
     private Image cursor;
@@ -189,6 +190,7 @@ public class GameFrame extends JPanel implements Runnable{
         bgTitleScreen = new ImageIcon("src/main/java/picture/GUI_image/title_screen_bg.png").getImage();
         bgChangeLevelScreen = new ImageIcon("src/main/java/picture/GUI_image/change_level_screen_bg.png").getImage();
         overlayImage = new ImageIcon("src/main/java/picture/GUI_image/overlay_instructions.png").getImage();
+        titleScreenOverlay = new ImageIcon("src/main/java/picture/GUI_image/title_screen_overlay.png").getImage();
         gameWinBg = new ImageIcon("src/main/java/picture/GUI_image/escape_success_bg.jpg").getImage();
         gameFailBg = new ImageIcon("src/main/java/picture/GUI_image/escape_fail_bg.jpg").getImage();
         cursor = new ImageIcon("src/main/java/picture/GUI_image/redHand_icon.png").getImage();
@@ -354,7 +356,7 @@ public class GameFrame extends JPanel implements Runnable{
             int cursorSize = 64;
             String[] buttons = {"START GAME", "CHANGE LEVEL", "EXIT"};
 
-            // display buttons
+            // display cursor
             for(int i = 0; i < numBtn; i++) {
                 btnLength = (int)g2.getFontMetrics().getStringBounds(buttons[i], g2).getWidth();
 
@@ -367,6 +369,9 @@ public class GameFrame extends JPanel implements Runnable{
                     g2.drawImage(cursor, x - (2*cursorSize + 25), y, cursorSize, cursorSize, null);
                 }
             }
+
+            // draw overlay (key instruction/guide at the bottom)
+            g2.drawImage(titleScreenOverlay, 0, getHeight() - 48, getWidth(), 48, null);
 
         }else if(gameState == playState) {
             // play bgm
