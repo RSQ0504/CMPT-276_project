@@ -72,6 +72,7 @@ public class GameFrame extends JPanel implements Runnable{
     private Image bgTitleScreen;
     private Image bgChangeLevelScreen;
     private Image overlayImage;
+    private Image titleScreenOverlay;
     private Image gameWinBg;
     private Image gameFailBg;
     private Image cursor;
@@ -137,7 +138,7 @@ public class GameFrame extends JPanel implements Runnable{
     private Zombie zombie3 = new Zombie(this,650,220,mc);
 
     // The static characters
-    private KindSurvivor goodPerson1 = new KindSurvivor(this,key,mc,120,255,tileFrame.getBoard(gameLevel),23,1);
+    private KindSurvivor goodPerson1 = new KindSurvivor(this,key,mc,120,255,tileFrame.getOriginMap(gameLevel),23,1);
     private BadSurvivor badPerson1 = new BadSurvivor(this,key,mc,262,115);
     private BadSurvivor badPerson2 = new BadSurvivor(this,key,mc,300,280);
     private BadSurvivor badPerson3 = new BadSurvivor(this,key,mc,650,220);
@@ -189,6 +190,7 @@ public class GameFrame extends JPanel implements Runnable{
         bgTitleScreen = new ImageIcon("src/main/java/picture/GUI_image/title_screen_bg.png").getImage();
         bgChangeLevelScreen = new ImageIcon("src/main/java/picture/GUI_image/change_level_screen_bg.png").getImage();
         overlayImage = new ImageIcon("src/main/java/picture/GUI_image/overlay_instructions.png").getImage();
+        titleScreenOverlay = new ImageIcon("src/main/java/picture/GUI_image/title_screen_overlay.png").getImage();
         gameWinBg = new ImageIcon("src/main/java/picture/GUI_image/escape_success_bg.jpg").getImage();
         gameFailBg = new ImageIcon("src/main/java/picture/GUI_image/escape_fail_bg.jpg").getImage();
         cursor = new ImageIcon("src/main/java/picture/GUI_image/redHand_icon.png").getImage();
@@ -354,7 +356,7 @@ public class GameFrame extends JPanel implements Runnable{
             int cursorSize = 64;
             String[] buttons = {"START GAME", "CHANGE LEVEL", "EXIT"};
 
-            // display buttons
+            // display cursor
             for(int i = 0; i < numBtn; i++) {
                 btnLength = (int)g2.getFontMetrics().getStringBounds(buttons[i], g2).getWidth();
 
@@ -367,6 +369,9 @@ public class GameFrame extends JPanel implements Runnable{
                     g2.drawImage(cursor, x - (2*cursorSize + 25), y, cursorSize, cursorSize, null);
                 }
             }
+
+            // draw overlay (key instruction/guide at the bottom)
+            g2.drawImage(titleScreenOverlay, 0, getHeight() - 48, getWidth(), 48, null);
 
         }else if(gameState == playState) {
             // play bgm
@@ -405,13 +410,13 @@ public class GameFrame extends JPanel implements Runnable{
                     break;
                 }
             }
-            goodPerson1.resetBoard(tileFrame.getBoard(gameLevel));
+            goodPerson1.resetBoard(tileFrame.getOriginMap(gameLevel));
             mc.drawMC(g2);
             zombie1.drawZombie(g2);
             zombie2.drawZombie(g2);
             zombie3.drawZombie(g2);
-            goodPerson1.drawKindCharacter(g2);
             if(goodPerson1.status) {
+                goodPerson1.drawKindCharacter(g2);
                 goodPerson1.drawKindCharcMsgBox(g2);
             }
             if(badPerson1.status) {
@@ -463,7 +468,7 @@ public class GameFrame extends JPanel implements Runnable{
                 // background image
                 g2.drawImage(gameFailBg, 0, 0, getWidth(), getHeight(), null);
 
-                g2.drawImage(gamefail, 150, 150, null);
+                g2.drawImage(gamefail, 165, 165, null);
                 clock.stopTimer();
                 clock.draw(g2,260,280);
                 mc.drawScore(g2,360,280, numOfVaccines);
@@ -472,7 +477,7 @@ public class GameFrame extends JPanel implements Runnable{
                 // background image
                 g2.drawImage(gameWinBg, 0, 0, getWidth(), getHeight(), null);
 
-                g2.drawImage(gamewin, 150, 150, null);
+                g2.drawImage(gamewin, 165, 165, null);
                 clock.stopTimer();
                 clock.draw(g2,260,280);
                 mc.drawScore(g2,360,280, numOfVaccines);

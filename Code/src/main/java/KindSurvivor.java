@@ -128,6 +128,7 @@ public class KindSurvivor extends StaticCharacter{
                     speakTimeCounter = 0;
                     if(mc.getVaccines() >= gf.numOfVaccines){
                         openDoor();
+                        status = false;
                     }
                 }
             }
@@ -144,7 +145,7 @@ public class KindSurvivor extends StaticCharacter{
     void drawKindCharcMsgBox(Graphics2D g2){
         speak();
         if(speakMessageShow){
-            if (mc.getVaccines() == gf.numOfVaccines){
+            if (mc.getVaccines() >= gf.numOfVaccines){
                 g2.drawImage(message_image,message_x,message_y,message_width,message_height,null);
             } else {
                 g2.drawImage(message_image_incomplete,message_x,message_y,message_width,message_height,null);
