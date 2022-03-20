@@ -128,6 +128,9 @@ public class BadSurvivor extends StaticCharacter{
         }
         g2.drawImage(character_image,x,y,character_image.getWidth(),character_image.getHeight(),null);
         if(speakMessageShow){
+            if (message_x+message_width >= 768){
+                message_x = 768 - (message_width+10);
+            }
             g2.drawImage(message_image,message_x,message_y,message_width,message_height,null);
         }
     }
