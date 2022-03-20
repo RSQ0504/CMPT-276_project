@@ -289,6 +289,25 @@ public class GameFrame extends JPanel implements Runnable{
         while(gameThread != null) {
             // 1.UPDATE
             updatePos();
+
+            // check whether main character is dead
+            Rectangle MC = new Rectangle(mc.x, mc.y,mc.width,mc.height);
+            Rectangle endpoint = new Rectangle(tileFrame.getEndPointX(), tileFrame.getEndPointY(), 10, 10);
+            if(zombie1.check(MC) || zombie2.check(MC) || zombie3.check(MC) || mc.getHP() == 0){
+                System.out.println("[run/GameFrame] check: main character dead!");
+                mc.setHP(0);
+                gameResult = fail;
+                gameState = endState;
+                timerState = timerTerminated;
+            }
+            // check whether main character is has won
+            if(mc.getVaccines() >= numOfVaccines && endpoint.intersects(MC)){
+                System.out.println("[run/GameFrame] check: main character survived!");
+                gameResult = win;
+                gameState = endState;
+                timerState = timerTerminated;
+            }
+
             // 2.DRAW
             repaint();
 
@@ -308,8 +327,19 @@ public class GameFrame extends JPanel implements Runnable{
             }else if(gameState == pauseState) {
                 System.out.println("[run/GameFrame] Game paused");
             }else if(gameState == endState) {
-                System.out.println("[run/GameFrame] Game ended");
+                if(timerState == timerTerminated) {
+//                    System.out.println("[run/GameFrame] game ended: timer terminated");
+                }else {
+                    timerState = timerTerminated;
+//                    System.out.println("[run/GameFrame] game ended: timer not terminated");
+                }
+            }else if(gameState == tutorialState) {
+                System.out.println("[run/GameFrame] tutorial state");
+            }else if(gameState == tutorialState) {
+                System.out.println("[run/GameFrame] title state");
             }
+
+
             try {
                 double sleepTime = (nextUpdate - System.nanoTime())/1000000;
                 if (sleepTime < 0) {
@@ -344,15 +374,17 @@ public class GameFrame extends JPanel implements Runnable{
         //check whether mc is killed by zombies
         Rectangle MC = new Rectangle(mc.x, mc.y,mc.width,mc.height);
         Rectangle endpoint = new Rectangle(tileFrame.getEndPointX(), tileFrame.getEndPointY(), 10, 10);
-        if(zombie1.check(MC)||zombie2.check(MC)||zombie3.check(MC)||mc.getHP()==0){
-          mc.setHP(0);
-          gameResult = fail;
-          gameState = endState;
-        }
-        if(mc.getVaccines()>=numOfVaccines && endpoint.intersects(MC)){
-          gameResult = win;
-          gameState = endState;
-        }
+//        if(zombie1.check(MC)||zombie2.check(MC)||zombie3.check(MC)||mc.getHP()==0){
+//          mc.setHP(0);
+//          gameResult = fail;
+//          gameState = endState;
+//          timerState = timerTerminated;
+//        }
+//        if(mc.getVaccines()>=numOfVaccines && endpoint.intersects(MC)){
+//          gameResult = win;
+//          gameState = endState;
+//          timerState = timerTerminated;
+//        }
 
 
         // control display depending on game state
@@ -619,4 +651,21 @@ public class GameFrame extends JPanel implements Runnable{
             bgm.play();
         }
     }
+
+    public void resetGame() {
+        mc.resetAttributesMC();
+
+        // The characters
+        mc = new MainCharacter(this,key);
+        zombie1 = new Zombie(this,15,200,mc);
+        zombie2 = new Zombie(this,300,280,mc);
+        zombie3 = new Zombie(this,650,220,mc);
+
+        // The static characters
+        goodPerson1 = new KindSurvivor(this,key,mc,120,255,tileFrame.getOriginMap(gameLevel),23,1);
+        badPerson1 = new BadSurvivor(this,key,mc,262,115);
+        badPerson2 = new BadSurvivor(this,key,mc,300,280);
+        badPerson3 = new BadSurvivor(this,key,mc,650,220);
+    }
+
 }

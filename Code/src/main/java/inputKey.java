@@ -72,10 +72,8 @@ public class inputKey implements KeyListener {
             }else if(key == KeyEvent.VK_ENTER) {
                 System.out.println("enter pressed in title screen");
                 if(gf.commandNum == gf.optionStart) {
-//                    gf.gameState = gf.playState;
                     gf.gameState = gf.tutorialState;
                     gf.commandNum = 0;
-//                    gf.stopBGM();
                 }else if(gf.commandNum == gf.optionChangeLevel) {
                     try {
                         gf.playSoundEffect(0);
@@ -224,7 +222,19 @@ public class inputKey implements KeyListener {
                 gf.stopBGM();
             }
         }else if(gf.gameState == gf.endState) {
+
             if(key == KeyEvent.VK_LEFT || key == KeyEvent.VK_RIGHT) {
+                // sound effect (track: 0)
+                try {
+                    gf.playSoundEffect(0);
+                } catch (UnsupportedAudioFileException ex) {
+                    ex.printStackTrace();
+                } catch (LineUnavailableException ex) {
+                    ex.printStackTrace();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+
                 // switch options
                 if(gf.commandNum == 0) {
                     gf.commandNum = 1;
@@ -235,7 +245,23 @@ public class inputKey implements KeyListener {
                     gf.commandNum = 0;
                 }
             }else if(key == KeyEvent.VK_ENTER) {
-                //
+                System.out.println("[inputKey] before enter key pressed, game state: " + gf.gameState);
+                gf.resetGame();
+
+                if(gf.commandNum == 0) {
+                    // restart game at same level
+                    System.out.println("[inputKey] enter key pressed, commandNum: 0");
+                    gf.gameState = gf.tutorialState;
+                }else if(gf.commandNum == 1) {
+                    // reset game attributes
+                    System.out.println("[inputKey] enter key pressed, commandNum: 1");
+                    gf.gameLevel = gf.levelEasy; // default level
+
+                    // return to title screen
+                    gf.gameState = gf.titleState;
+                }
+                System.out.println("[inputKey] after enter key pressed, game state: " + gf.gameState);
+                gf.commandNum = 0;
             }
         }
 
