@@ -12,7 +12,7 @@ public class MainCharacter extends DynamicCharacter{
      * The attributes of main character: the number of vaccines, the HP
      */
     private int vaccines;
-    private int HP;
+    private int HP = 1;
     private BufferedImage HP_image;
     private BufferedImage VaccineImage;
 

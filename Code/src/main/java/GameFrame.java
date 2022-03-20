@@ -123,7 +123,7 @@ public class GameFrame extends JPanel implements Runnable{
     public int[] startPoints = new int[2];
 
     //Timer
-    private TimerClock clock;
+    private TimerClock clock = new TimerClock();
     private int timerState = 0;
     private int timerInactive = 0;// 00:00, ready to start counting
     private int timerInProgress = 1;// counting
@@ -274,8 +274,8 @@ public class GameFrame extends JPanel implements Runnable{
 
                 if(timerState == timerInactive) {
                     System.out.println("[run/GameFrame] Start timer");
-                    clock = new TimerClock();
-//                    clock.startTimer();
+                   // clock = new TimerClock();
+                    clock.startTimer();
                     timerState = timerInProgress;
                 }else if(timerState == pauseState) {
                     System.out.println("[run/GameFrame] resume timer count");
@@ -320,7 +320,7 @@ public class GameFrame extends JPanel implements Runnable{
         //check whether mc is killed by zombies
         Rectangle MC = new Rectangle(mc.x, mc.y,mc.width,mc.height);
         Rectangle endpoint = new Rectangle(tileFrame.getEndPointX(), tileFrame.getEndPointY(), 10, 10);
-        if(zombie1.check(MC)||zombie2.check(MC)||zombie3.check(MC)||mc.getHP()<0){
+        if(zombie1.check(MC)||zombie2.check(MC)||zombie3.check(MC)||mc.getHP()==0){
           mc.setHP(0);
           gameResult = fail;
           gameState = endState;

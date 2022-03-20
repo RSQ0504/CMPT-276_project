@@ -22,8 +22,13 @@ public class TimerClock {
      * class constructor
      */
     TimerClock(){
-
         getTimerImg();
+    }
+
+    /**
+     * start Timer
+     */
+    public void startTimer(){
         second = 0;
         minute = 0;
         secondFormatted = "00";
@@ -41,7 +46,7 @@ public class TimerClock {
     /**
      * restart Timer
      */
-    public void startTimer(){
+    public void restartTimer(){
         timer.restart();
     }
 
@@ -49,7 +54,9 @@ public class TimerClock {
      * Stop timer
      */
     public void stopTimer(){
-        timer.stop();
+        if (timer != null){
+            timer.stop();
+        }
     }
 
     /**
