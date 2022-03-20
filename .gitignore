@@ -1,0 +1,8 @@
+.DS_Store
+/*.idea
+/Code/*.idea
+/*project
+/*target
+/*.bsp
+project.iml
+Code/Code.iml
