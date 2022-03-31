@@ -1,5 +1,6 @@
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
@@ -13,6 +14,12 @@ public class GameMap {
     public int startPointY;
     private int endPointX =30;
     private int endPointY = 540;
+
+    private BufferedImage[] fire;
+    private int fireCounter = 0;
+    private int fireNum = 0; // 0--image1, 1--image2, 2--image3, 3--image4
+
+    private BufferedImage[] decorations;
 
     //Map for each Game levels
     private int[][] maplvl1 = {
@@ -100,6 +107,8 @@ public class GameMap {
     GameMap(GameFrame frame){
         this.frame = frame;
         tile = new Tile[20];
+        fire = new BufferedImage[4];
+        decorations = new BufferedImage[5];
         getTileImg();
     }
 
@@ -263,7 +272,6 @@ public class GameMap {
         return board;
     }
 
-
     /**
      * Get player starting point depending on game level
      * @param lvl
@@ -300,6 +308,17 @@ public class GameMap {
      */
     public void getTileImg()  {
         try {
+            fire[0] = ImageIO.read(new File("src/main/java/picture/Tiles/fire (1).png"));
+            fire[1] = ImageIO.read(new File("src/main/java/picture/Tiles/fire (2).png"));
+            fire[2] = ImageIO.read(new File("src/main/java/picture/Tiles/fire (3).png"));
+            fire[3] = ImageIO.read(new File("src/main/java/picture/Tiles/fire (4).png"));
+
+            decorations[0] = ImageIO.read(new File("src/main/java/picture/Tiles/wall_decoration (1).png"));
+            decorations[1] = ImageIO.read(new File("src/main/java/picture/Tiles/wall_decoration (2).png"));
+            decorations[2] = ImageIO.read(new File("src/main/java/picture/Tiles/wall_decoration (3).png"));
+            decorations[3] = ImageIO.read(new File("src/main/java/picture/Tiles/earth_decoration (1).png"));
+            decorations[4] = ImageIO.read(new File("src/main/java/picture/Tiles/earth_decoration (2).png"));
+
             tile[0] = new Tile();
             tile[0].tileImg = ImageIO.read(new File("src/main/java/picture/Tiles/earth.png"));
             tile[0].setCollision(false);
@@ -363,6 +382,8 @@ public class GameMap {
             tile[15] = new Tile();
             tile[15].tileImg = ImageIO.read(new File("src/main/java/picture/Tiles/wall_leftRightEarth.png"));
             tile[15].setCollision(true);
+
+
         }catch (IOException e){
             e.printStackTrace();
         }
@@ -378,6 +399,33 @@ public class GameMap {
         for(int i = 0; i < 24; i++){
             for (int j = 0; j < 32; j++){
                 g2.drawImage(tile[map[i][j]].tileImg, j* frame.getCellSize()/2, i* frame.getCellSize()/2, 24, 24, null);
+                if(map[i][j] == 2){
+                    if((i+j)%7 == 0){
+                        fireCounter++;
+                        if(fireCounter>50){
+                            fireNum = (fireNum + 1) % 4;
+                            fireCounter = 0;
+                        }
+                        g2.drawImage(fire[fireNum], j* frame.getCellSize()/2, i* frame.getCellSize()/2, 24, 24, null);
+                    }
+                    else if((i+j)%13 == 0){
+                        g2.drawImage(decorations[0], j* frame.getCellSize()/2, i* frame.getCellSize()/2, 24, 24, null);
+                    }
+                    else if((i+j)%23 == 0){
+                        g2.drawImage(decorations[1], j* frame.getCellSize()/2, i* frame.getCellSize()/2, 24, 24, null);
+                    }
+                    else if((i+j)%19 == 0){
+                        g2.drawImage(decorations[2], j* frame.getCellSize()/2, i* frame.getCellSize()/2, 24, 24, null);
+                    }
+                }
+                else if(map[i][j] == 0){
+                    if((i+j)%11 == 0){
+                        g2.drawImage(decorations[3], j* frame.getCellSize()/2, i* frame.getCellSize()/2, 24, 24, null);
+                    }
+                    else if((i+j)%7 == 0){
+                        g2.drawImage(decorations[4], j* frame.getCellSize()/2, i* frame.getCellSize()/2, 24, 24, null);
+                    }
+                }
             }
         }
     }
