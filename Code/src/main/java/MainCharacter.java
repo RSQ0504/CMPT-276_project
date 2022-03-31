@@ -143,9 +143,15 @@ public class MainCharacter extends DynamicCharacter{
 
             spriteCounter++;
             if (spriteCounter > 10) {
-                spriteNum = (spriteNum + 1) % 4 + 1;
+                spriteNum = spriteNum + 1;
+                if(spriteNum > 4){
+                    spriteNum = 1;
+                }
                 spriteCounter = 0;
             }
+        }
+        else{
+            spriteNum = 1;
         }
     }
 
