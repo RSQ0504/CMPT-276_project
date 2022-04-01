@@ -44,11 +44,23 @@ public class TimerClock {
     public int getSecond(){return this.second;}
 
     /**
-     * restart Timer
+     * return minute
+     * @return
      */
-    public void restartTimer(){
-        timer.restart();
-    }
+    public int getMinute(){return this.minute;}
+
+    /**
+     * return second formatted
+     * @return
+     */
+    public String getFormattedSecond(){return this.secondFormatted;}
+
+    /**
+     * return second formatted
+     * @return
+     */
+    public String getFormattedMinute(){return this.minuteFormatted;}
+
 
     /**
      * Stop timer
