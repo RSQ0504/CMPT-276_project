@@ -226,12 +226,13 @@ public class GameMap {
                 startPointY = 0;
                 break;
             default:
+                startPointX = -1;
+                startPointY = -1;
                 System.out.println("map level does not exist.");
         }
 
         startPoints[0] = startPointX;
         startPoints[1] = startPointY;
-        System.out.println(startPoints);
 
         return startPoints;
     }
