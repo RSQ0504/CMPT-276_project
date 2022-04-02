@@ -29,7 +29,6 @@ public class checkCollisionTest {
         dcTest.collisionArea = false;
         ccTest.checkTile(dcTest);
         Assertions.assertTrue(dcTest.collisionArea);
-        System.out.println(dcTest.speed);
 
         //48,48
         dcTest.x = 768/2;
@@ -38,7 +37,7 @@ public class checkCollisionTest {
         dcTest.direction = "up";
         ccTest.checkTile(dcTest);
         Assertions.assertTrue(dcTest.collisionArea);
-        System.out.println(dcTest.x);
+        
 
         //0,48
         dcTest.x = 0;
@@ -47,7 +46,7 @@ public class checkCollisionTest {
         dcTest.direction = "down";
         ccTest.checkTile(dcTest);
         Assertions.assertTrue(dcTest.collisionArea);
-        System.out.println(dcTest.x);
+        
 
         //48,0
         dcTest.x = 768/2;
@@ -56,7 +55,7 @@ public class checkCollisionTest {
         dcTest.collisionArea = false;
         ccTest.checkTile(dcTest);
         Assertions.assertTrue(dcTest.collisionArea);
-        System.out.println(dcTest.x);
+        
 
         //Outside walls
         dcTest.x = 144;
@@ -65,7 +64,7 @@ public class checkCollisionTest {
         dcTest.direction = "right";
         ccTest.checkTile(dcTest);
         Assertions.assertFalse(dcTest.collisionArea);
-        System.out.println(dcTest.x);
+        
 
         //Top touching wall
         dcTest.x = 48;
@@ -74,7 +73,7 @@ public class checkCollisionTest {
         dcTest.direction = "up";
         ccTest.checkTile(dcTest);
         Assertions.assertFalse(dcTest.collisionArea);
-        System.out.println(dcTest.x);
+        
 
         //Bottom touching wall
         dcTest.x = 48;
@@ -83,7 +82,7 @@ public class checkCollisionTest {
         dcTest.direction = "down";
         ccTest.checkTile(dcTest);
         Assertions.assertFalse(dcTest.collisionArea);
-        System.out.println(dcTest.x);
+        
 
         //Right touching wall
         dcTest.x = 168;
@@ -92,7 +91,6 @@ public class checkCollisionTest {
         dcTest.direction = "right";
         ccTest.checkTile(dcTest);
         Assertions.assertFalse(dcTest.collisionArea);
-        System.out.println(dcTest.x);
 
         //left touching wall
         dcTest.x = 238;
@@ -101,7 +99,6 @@ public class checkCollisionTest {
         dcTest.direction = "left";
         ccTest.checkTile(dcTest);
         Assertions.assertFalse(dcTest.collisionArea);
-        System.out.println(dcTest.x);
     }
 
 }
