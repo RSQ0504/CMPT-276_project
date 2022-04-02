@@ -39,7 +39,7 @@ public class checkCollisionTest {
         //0,0
         ccTest.checkTile(dcTest);
         Assertions.assertTrue(dcTest.collisionArea);
-        System.out.print(dcTest.speed);
+        System.out.println(dcTest.speed);
 
         //48,48
         dcTest.x = 768/2;
@@ -47,21 +47,21 @@ public class checkCollisionTest {
         dcTest.direction = "up";
         ccTest.checkTile(dcTest);
         Assertions.assertTrue(dcTest.collisionArea);
-        System.out.print(dcTest.x);
+        System.out.println(dcTest.x);
 
         //0,48
         dcTest.x = 0;
         dcTest.y = 576;
         ccTest.checkTile(dcTest);
         Assertions.assertTrue(dcTest.collisionArea);
-        System.out.print(dcTest.x);
+        System.out.println(dcTest.x);
 
         //48,0
         dcTest.x = 768;
         dcTest.y = 0;
         ccTest.checkTile(dcTest);
         Assertions.assertTrue(dcTest.collisionArea);
-        System.out.print(dcTest.x);
+        System.out.println(dcTest.x);
 
 
 
