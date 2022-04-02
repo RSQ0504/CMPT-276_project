@@ -6,17 +6,6 @@ import java.io.IOException;
 
 
 public class checkCollisionTest {
-
-
-
-
-    //set objects position in
-        //corner
-        //in walls
-        //outside walls
-        //Each side touching wall
-    //Call checkTile Function and send Dynamic character in after setting character's position
-    //speed = 0
     @Test
     public void checkTileTest() throws IOException {
         int colm = 16;
@@ -37,6 +26,7 @@ public class checkCollisionTest {
 
         //Corner tests
         //0,0
+        dcTest.collisionArea = false;
         ccTest.checkTile(dcTest);
         Assertions.assertTrue(dcTest.collisionArea);
         System.out.println(dcTest.speed);
@@ -44,6 +34,7 @@ public class checkCollisionTest {
         //48,48
         dcTest.x = 768/2;
         dcTest.y = 576/2;
+        dcTest.collisionArea = false;
         dcTest.direction = "up";
         ccTest.checkTile(dcTest);
         Assertions.assertTrue(dcTest.collisionArea);
@@ -51,21 +42,66 @@ public class checkCollisionTest {
 
         //0,48
         dcTest.x = 0;
-        dcTest.y = 576;
+        dcTest.y = 576/2;
+        dcTest.collisionArea = false;
+        dcTest.direction = "down";
         ccTest.checkTile(dcTest);
         Assertions.assertTrue(dcTest.collisionArea);
         System.out.println(dcTest.x);
 
         //48,0
-        dcTest.x = 768;
+        dcTest.x = 768/2;
         dcTest.y = 0;
+        dcTest.direction = "left";
+        dcTest.collisionArea = false;
         ccTest.checkTile(dcTest);
         Assertions.assertTrue(dcTest.collisionArea);
         System.out.println(dcTest.x);
 
+        //Outside walls
+        dcTest.x = 144;
+        dcTest.y = 24;
+        dcTest.collisionArea = false;
+        dcTest.direction = "right";
+        ccTest.checkTile(dcTest);
+        Assertions.assertFalse(dcTest.collisionArea);
+        System.out.println(dcTest.x);
 
+        //Top touching wall
+        dcTest.x = 48;
+        dcTest.y = 24;
+        dcTest.collisionArea = false;
+        dcTest.direction = "up";
+        ccTest.checkTile(dcTest);
+        Assertions.assertFalse(dcTest.collisionArea);
+        System.out.println(dcTest.x);
 
+        //Bottom touching wall
+        dcTest.x = 48;
+        dcTest.y = 276;
+        dcTest.collisionArea = false;
+        dcTest.direction = "down";
+        ccTest.checkTile(dcTest);
+        Assertions.assertFalse(dcTest.collisionArea);
+        System.out.println(dcTest.x);
 
+        //Right touching wall
+        dcTest.x = 168;
+        dcTest.y = 518;
+        dcTest.collisionArea = false;
+        dcTest.direction = "right";
+        ccTest.checkTile(dcTest);
+        Assertions.assertFalse(dcTest.collisionArea);
+        System.out.println(dcTest.x);
+
+        //left touching wall
+        dcTest.x = 238;
+        dcTest.y = 518;
+        dcTest.collisionArea = false;
+        dcTest.direction = "left";
+        ccTest.checkTile(dcTest);
+        Assertions.assertFalse(dcTest.collisionArea);
+        System.out.println(dcTest.x);
     }
 
 }

@@ -33,6 +33,7 @@ public class checkCollision {
         switch(obj.direction){
             case "up":
                 charcTopRow = (charcTop - obj.speed)/scaledCellSize;
+
                 if (charcTopRow < 0 || charcTopRow > 23 || charcLeftCol < 0 || charcLeftCol > 31 || charcRightCol < 0 || charcRightCol > 31){
                     obj.collisionArea = true;
                 } else {
