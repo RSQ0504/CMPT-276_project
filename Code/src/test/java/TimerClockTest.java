@@ -29,9 +29,6 @@ public class TimerClockTest {
         Assertions.assertEquals(tcTest.getMinute(), 0);
         Assertions.assertEquals(tcTest.getFormattedMinute(), "00");
         Assertions.assertEquals(tcTest.getFormattedSecond(), "00");
-        System.out.println(tcTest.getSecond());
-
-
     }
 
     /**
@@ -43,21 +40,29 @@ public class TimerClockTest {
     }
 
     /**
-     * Test for timer stop
-     */
-    @Test
-    public void stopTimerTest(){
-
-    }
-
-    /**
      * Test for correct time increment
      */
     @Test
-    public void clockTimerTest(){
+    public void increaseTimeTest(){
+        tcTest.increaseTime();
+        Assertions.assertEquals(tcTest.getSecond(), 1);
+        Assertions.assertEquals(tcTest.getMinute(), 0);
+        Assertions.assertEquals(tcTest.getFormattedSecond(), "01");
+        Assertions.assertEquals(tcTest.getFormattedMinute(), null);
 
+        for (int i=0; i<59; i++){
+            tcTest.increaseTime();
+        }
+
+        Assertions.assertEquals(tcTest.getSecond(), 0);
+        Assertions.assertEquals(tcTest.getMinute(), 1);
+        Assertions.assertEquals(tcTest.getFormattedSecond(), "00");
+        Assertions.assertEquals(tcTest.getFormattedMinute(), "01");
+
+        tcTest.increaseTime();
+        Assertions.assertEquals(tcTest.getSecond(), 1);
+        Assertions.assertEquals(tcTest.getMinute(), 1);
+        Assertions.assertEquals(tcTest.getFormattedSecond(), "01");
+        Assertions.assertEquals(tcTest.getFormattedMinute(), "01");
     }
-
-
-
 }

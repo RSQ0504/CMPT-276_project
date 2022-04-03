@@ -89,15 +89,19 @@ public class TimerClock {
         timer = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                second++;
-                secondFormatted = timeFormatted.format(second);
-                if (second == 60) {
-                    second = 0;
-                    minute++;
-                    minuteFormatted = timeFormatted.format(minute);
-                }
+                increaseTime();
             }
         });
+    }
+
+    public void increaseTime(){
+        second++;
+        if (second == 60) {
+            second = 0;
+            minute++;
+            minuteFormatted = timeFormatted.format(minute);
+        }
+        secondFormatted = timeFormatted.format(second);
     }
 
     /**
