@@ -1,3 +1,4 @@
+import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 
@@ -25,24 +26,38 @@ public class inputKeyTest {
         System.out.println("[checkKeyInputsInTitleState/inputKeyTest]");
 
         GameFrame testGameFrame = new GameFrame(16, 12, 48);
-        inputKey key = new inputKey(testGameFrame);
-        testGameFrame.addKeyListener(key);
+        inputKey testKey = new inputKey(testGameFrame);
 
-        Robot keyboardUser = new Robot();
         int maxCommandNum = testGameFrame.numOfCommands - 1;
 
         // [key pressed] UP:
-        // commandNum decreases by 1
-        // if the current commandNum is less than zero, then commandNum is (numOfCommands - 1)
-        // if the current commandNum is greater than (numOfCommands - 1),
-        // then this is an exception. commandNum is (numOfCommands - 1)
+        KeyEvent upKey = new KeyEvent(testGameFrame, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0,  KeyEvent.VK_UP,'Z');
 
+        // when key input causes commandNum to be negative (less than zero)
         // commandNum: 0 -> 2
         testGameFrame.commandNum = 0;
-        keyboardUser.keyPress(KeyEvent.VK_UP);
-        keyboardUser.keyRelease(KeyEvent.VK_UP);
-        
+        testKey.keyPressed(upKey);
         Assertions.assertEquals(maxCommandNum, testGameFrame.commandNum);
+
+        // commandNum: 1 -> 0
+        testGameFrame.commandNum = 1;
+        testKey.keyPressed(upKey);
+        Assertions.assertEquals(0, testGameFrame.commandNum);
+
+        // commandNum: 2 -> 1
+        testGameFrame.commandNum = 2;
+        testKey.keyPressed(upKey);
+        Assertions.assertEquals(1, testGameFrame.commandNum);
+
+        // commandNum: -2 -> 2 (exception)
+        testGameFrame.commandNum = -2;
+        testKey.keyPressed(upKey);
+        Assertions.assertEquals(2, testGameFrame.commandNum);
+
+        // commandNum: 5 -> 0 (exception)
+        testGameFrame.commandNum = 5;
+        testKey.keyPressed(upKey);
+        Assertions.assertEquals(0, testGameFrame.commandNum);
 
 
         // [key pressed] DOWN:
