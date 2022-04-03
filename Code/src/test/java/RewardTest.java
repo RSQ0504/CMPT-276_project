@@ -13,7 +13,6 @@ class RewardTest {
   private MainCharacter a;
   private GameFrame gameFrame;
   private inputKey key;
-  private Random r = new Random();
 
   @BeforeEach
   void setUp() throws IOException {
@@ -26,14 +25,14 @@ class RewardTest {
 
   @Test
   void setAppearTest() {
-    boolean original = r.nextBoolean();
+    boolean original = true;
     reward.setAppear(original);
     assertEquals(original,reward.getAppear());
   }
 
   @Test
   void getAppearTest() {
-    boolean original = r.nextBoolean();
+    boolean original = true;
     reward.setAppear(original);
     assertEquals(original,reward.getAppear());
   }

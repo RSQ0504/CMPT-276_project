@@ -13,11 +13,10 @@ class GameObjectTest {
   private MainCharacter a;
   private GameFrame gameFrame;
   private inputKey key;
-  private Random r = new Random();
 
   @BeforeEach
   void setUp() throws IOException {
-    gameFrame = new GameFrame(r.nextInt(500),r.nextInt(500),r.nextInt(500));
+    gameFrame = new GameFrame(300,500,200);
     key = null;
     a = new MainCharacter(gameFrame,key);
     gameObject = new Food(gameFrame,0,0);
@@ -25,21 +24,21 @@ class GameObjectTest {
 
   @Test
   void getCollisionTest() {
-    boolean original = r.nextBoolean();
+    boolean original = true;
     gameObject.setCollision(original);
     assertEquals(original,gameObject.getCollision());
   }
 
   @Test
   void setCollisionTest() {
-    boolean original = r.nextBoolean();
+    boolean original = true;
     gameObject.setCollision(original);
     assertEquals(original,gameObject.getCollision());
   }
 
   @Test
   void getImage() {
-    gameObject.image = new BufferedImage(r.nextInt(10),r.nextInt(10),1);
+    gameObject.image = new BufferedImage(7,8,1);
     assertEquals(gameObject.image,gameObject.getImage());
   }
 

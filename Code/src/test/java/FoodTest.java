@@ -12,7 +12,6 @@ class FoodTest {
   private Food food;
   private GameFrame gameFrame;
   private inputKey key;
-  private Random r = new Random();
   @BeforeEach
   void setUp() throws IOException {
     gameFrame = new GameFrame(1,1,1);
@@ -23,7 +22,7 @@ class FoodTest {
 
   @Test
   void increaseHPTest() {
-    a.setHP(r.nextInt(10));
+    a.setHP(2);
     int original = a.getHP();
     food.increaseHP(a);
     int changed = a.getHP();

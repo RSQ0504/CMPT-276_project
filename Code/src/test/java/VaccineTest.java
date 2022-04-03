@@ -23,7 +23,7 @@ class VaccineTest {
 
   @Test
   void increaseVaccineTest() {
-    a.setVaccines(r.nextInt(10));
+    a.setVaccines(5);
     int original = a.getVaccines();
     va.increaseVaccine(a);
     int changed = a.getVaccines();
