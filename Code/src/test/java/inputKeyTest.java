@@ -61,8 +61,7 @@ public class inputKeyTest {
 
 
         // [key pressed] DOWN:
-        // commandNum increases by 1
-        // if the current commandNum is greater than (numOfCommands - 1), then commandNum is 0
+        KeyEvent downKey = new KeyEvent(testGameFrame, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0,  KeyEvent.VK_DOWN,'Z');
 
 
 
