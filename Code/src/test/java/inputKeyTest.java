@@ -2,10 +2,129 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 
+/*
+>> keyPressed
+1. titleState (UP, DOWN, ENTER)
+2. changeLevelState (UP, DOWN, ENTER)
+3. playState (UP, DOWN, LEFT, RIGHT, F, ESCAPE) *escape is not used in system (should not be used)
+4. tutorialState (LEFT, RIGHT, ENTER)
+5. narrationState (LEFT, RIGHT, ENTER)
+6. endState (LEFT, RIGHT, ENTER)
+
+>> keyReleased (mainly for playState)
+UP, DOWN, LEFT, RIGHT, F
+ */
 
 public class inputKeyTest {
+    // 1. titleState (UP, DOWN, ENTER)
+    @Test
+    public void checkKeyInputsInTitleState() throws IOException, AWTException {
+        System.out.println("[checkKeyInputsInTitleState/inputKeyTest]");
+
+        GameFrame testGameFrame = new GameFrame(16, 12, 48);
+        inputKey key = new inputKey(testGameFrame);
+        testGameFrame.addKeyListener(key);
+
+        Robot keyboardUser = new Robot();
+        int maxCommandNum = testGameFrame.numOfCommands - 1;
+
+        // [key pressed] UP:
+        // commandNum decreases by 1
+        // if the current commandNum is less than zero, then commandNum is (numOfCommands - 1)
+        // if the current commandNum is greater than (numOfCommands - 1),
+        // then this is an exception. commandNum is (numOfCommands - 1)
+
+        // commandNum: 0 -> 2
+        testGameFrame.commandNum = 0;
+        keyboardUser.keyPress(KeyEvent.VK_UP);
+        keyboardUser.keyRelease(KeyEvent.VK_UP);
+        
+        Assertions.assertEquals(maxCommandNum, testGameFrame.commandNum);
+
+
+        // [key pressed] DOWN:
+        // commandNum increases by 1
+        // if the current commandNum is greater than (numOfCommands - 1), then commandNum is 0
+
+
+
+
+
+        // [key pressed] ENTER
+    }
+
+    // 2. changeLevelState (UP, DOWN, ENTER)
+    @Test
+    public void checkKeyInputsInChangeLevelState() {
+        // [key pressed] UP
+        // [key pressed] DOWN
+        // [key pressed] ENTER
+    }
+
+    // 3. playState (UP, DOWN, LEFT, RIGHT, F, ESCAPE) *escape not used
+    @Test
+    public void checkKeyInputsInPlayState() {
+        // [key pressed] UP
+        // [key pressed] DOWN
+        // [key pressed] LEFT
+        // [key pressed] RIGHT
+        // [key pressed] F
+    }
+
+    // 4. tutorialState (LEFT, RIGHT, ENTER)
+    @Test
+    public void checkKeyInputsInTutorialState() {
+        // [key pressed] LEFT
+        // [key pressed] RIGHT
+        // [key pressed] ENTER
+    }
+
+    // 5. narrationState (LEFT, RIGHT, ENTER)
+    @Test
+    public void checkKeyInputsInNarrationState() {
+        // [key pressed] LEFT
+        // [key pressed] RIGHT
+        // [key pressed] ENTER
+    }
+
+    // 6. endState (LEFT, RIGHT, ENTER)
+    @Test
+    public void checkKeyInputsInEndState() {
+        // [key pressed] LEFT
+        // [key pressed] RIGHT
+        // [key pressed] ENTER
+    }
+
+
+    @Test
+    public void checkPressedUp() throws AWTException, IOException {
+        GameFrame testGameFrame = new GameFrame(16, 12, 48);
+        System.out.println("[checkPressedUp/inputKeyTest]");
+        Robot keyboardUser = new Robot();
+        keyboardUser.keyPress(KeyEvent.VK_UP);
+        keyboardUser.keyRelease(KeyEvent.VK_UP);
+
+        // [gamestate: ]
+//        System.out.println("[testGameFrame] var: ", testGameFrame.);
+
+        // assertion
+//        KeyEvent key = new KeyEvent(instance, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0,  KeyEvent.VK_UP,'Z');
+//        instance.getKeyListeners()[0].keyPressed(key);
+    }
+
+    @Test
+    public void checkPressedDown() {}
+
+    @Test
+    public void checkPressedLeft() {}
+
+    @Test
+    public void checkPressedRight() {}
+
+
     @Test
     public void checkInputKeyConstructor() throws IOException{
         int colm = 16;
