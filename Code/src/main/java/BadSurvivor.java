@@ -39,7 +39,7 @@ public class BadSurvivor extends StaticCharacter{
      * @param x
      * @param y
      */
-    private void setDefaultValue(int x, int y){
+    public void setDefaultValue(int x, int y){
         this.direction = "down";
         this.x = x;
         this.y = y;
@@ -70,7 +70,7 @@ public class BadSurvivor extends StaticCharacter{
      * check if player pressed F while in close proximity with static enemy
      * if close then display message box and lower player's HP
      */
-    void speak(){
+    public void speak(){
         if(status && (this.x < (mc.x + 40)) && (this.x > (mc.x - 40)) && (this.y < (mc.y + 40)) && (this.y > (mc.y - 40))){
             if(k.pressF){
                 int x_distance = this.x - mc.x;
@@ -115,7 +115,7 @@ public class BadSurvivor extends StaticCharacter{
      * draw static enemy character
      * @param g2
      */
-    void drawBadCharacter(Graphics2D g2){
+    public void drawBadCharacter(Graphics2D g2){
         BufferedImage character_image = null;
         speak();
         switch (direction){
@@ -140,4 +140,5 @@ public class BadSurvivor extends StaticCharacter{
             g2.drawImage(message_image,message_x,message_y,message_width,message_height,null);
         }
     }
+
 }
