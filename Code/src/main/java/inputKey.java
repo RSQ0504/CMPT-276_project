@@ -145,11 +145,7 @@ public class inputKey implements KeyListener {
                 else if(key == KeyEvent.VK_RIGHT){
                     pressedRight = true;
                 }
-                else if(key == KeyEvent.VK_ESCAPE) {
-                    gf.playSoundEffect(2);
 
-                    // pause game
-                }
             }else if(gf.gameState == gf.tutorialState) {
                 if(key== KeyEvent.VK_LEFT){
                     if(gf.tutorialState > gf.tutorialIntro && gf.tutorialState <= gf.tutorial3) {
