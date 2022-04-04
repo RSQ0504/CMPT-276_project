@@ -39,4 +39,12 @@ public class GameFrameTest {
     public void runGameTest(){
 
     }
+
+    /**
+     * Test for correct reset of character positioning
+     */
+    @Test
+    public void restGameTest(){
+
+    }
 }
