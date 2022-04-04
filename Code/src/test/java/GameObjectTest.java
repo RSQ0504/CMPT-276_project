@@ -27,11 +27,19 @@ class GameObjectTest {
     boolean original = true;
     gameObject.setCollision(original);
     assertEquals(original,gameObject.getCollision());
+
+    original = false;
+    gameObject.setCollision(original);
+    assertEquals(original,gameObject.getCollision());
   }
 
   @Test
   void setCollisionTest() {
     boolean original = true;
+    gameObject.setCollision(original);
+    assertEquals(original,gameObject.getCollision());
+
+    original = false;
     gameObject.setCollision(original);
     assertEquals(original,gameObject.getCollision());
   }

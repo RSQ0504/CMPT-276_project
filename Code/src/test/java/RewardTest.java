@@ -33,11 +33,19 @@ class RewardTest {
     boolean original = true;
     reward.setAppear(original);
     assertEquals(original,reward.getAppear());
+
+    original = false;
+    reward.setAppear(original);
+    assertEquals(original,reward.getAppear());
   }
 
   @Test
   void getAppearTest() {
     boolean original = true;
+    reward.setAppear(original);
+    assertEquals(original,reward.getAppear());
+
+    original = false;
     reward.setAppear(original);
     assertEquals(original,reward.getAppear());
   }
