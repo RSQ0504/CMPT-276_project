@@ -18,6 +18,13 @@ public class Zombie extends DynamicCharacter{
 
     /**
      * class constructor
+     */
+    public Zombie(){
+        // just use for test
+    }
+
+    /**
+     * class constructor
      * @param gameFrame
      * @param x
      * @param y
@@ -35,7 +42,7 @@ public class Zombie extends DynamicCharacter{
     /**
      * Read and import images for character
      */
-    private void getZombieImages() {
+    public void getZombieImages() {
         try{
             up1 = ImageIO.read(new File("src/main/java/picture/Character/Character_zombie/zombie_walkUp1.png"));
             up2 = ImageIO.read(new File("src/main/java/picture/Character/Character_zombie/zombie_walkUp2.png"));
@@ -77,7 +84,6 @@ public class Zombie extends DynamicCharacter{
      * update character positioning each update
      */
     void updateZombie(){
-
         collisionArea = false;
         gf.check_collision.checkTile(this);
 
@@ -95,6 +101,14 @@ public class Zombie extends DynamicCharacter{
                 case "right":
                     x += speed;
                     break;
+            }
+            spriteCounter++;
+            if (spriteCounter > 30) {
+                spriteNum = spriteNum + 1;
+                if(spriteNum > 4){
+                    spriteNum = 1;
+                }
+                spriteCounter = 0;
             }
         }
         if(!closedToAim()){
@@ -211,28 +225,6 @@ public class Zombie extends DynamicCharacter{
     }
 
     /**
-     * Return the damage
-     */
-    public int getDamage() {
-        return damage;
-    }
-
-    /**
-     * Set the damage
-     */
-    public void setDamage(int damage) {
-        this.damage = damage;
-    }
-
-    /**
-     * decrease player hp when in contact with enemy
-     * @param mc
-     */
-    public void Damage(MainCharacter mc){
-        mc.setHP(mc.getHP()-damage);
-    }
-
-    /**
      * check for hit intersection
      * @param mc
      * @return
@@ -240,5 +232,5 @@ public class Zombie extends DynamicCharacter{
     public boolean check(Rectangle mc){
       hitAreaStatic = new Rectangle(this.x,this.y,5,5);
       return hitAreaStatic.intersects(mc);
-  }
+    }
 }

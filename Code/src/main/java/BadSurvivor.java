@@ -7,6 +7,12 @@ import java.io.File;
  * Class for enemy static character which lowers Main Character's HP when in contact
  */
 public class BadSurvivor extends StaticCharacter{
+    /**
+     * Class Constructor without parameters
+     */
+    public BadSurvivor(){
+        // Just for test
+    }
 
     /**
      * Class Constructor

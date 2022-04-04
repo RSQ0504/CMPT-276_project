@@ -11,7 +11,6 @@ public class DynamicCharacter extends GameObject{
      * The width and height is the image's size
      */
     public int speed;
-    public int x,y,width,height;
     public Rectangle hitArea;
     public boolean collisionArea = false;
 

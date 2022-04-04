@@ -11,7 +11,7 @@ public class MainCharacter extends DynamicCharacter{
     /**
      * The attributes of main character: the number of vaccines, the HP
      */
-    private int vaccines;
+    private int vaccines = 0;
     private int HP = 1;
     private BufferedImage HP_image;
     private BufferedImage VaccineImage;
@@ -20,6 +20,13 @@ public class MainCharacter extends DynamicCharacter{
     private inputKey key;
     public BufferedImage MC_image;
     private int lvl = 0;
+
+    /**
+     * class constructor with no parameter
+     */
+    public MainCharacter(){
+        // Just use for test
+    }
 
     /**
      * class constructor
@@ -210,13 +217,13 @@ public class MainCharacter extends DynamicCharacter{
      * Read and import score images for player
      */
     private void getScoreImg() {
-    try{
-      VaccineImage = ImageIO.read(new File("src/main/java/picture/GUI_image/Vaccine_panel.png"));
-      HP_image = ImageIO.read(new File("src/main/java/picture/GUI_image/HP_panel.png"));
-    }catch(IOException e){
-      e.printStackTrace();
+        try{
+        VaccineImage = ImageIO.read(new File("src/main/java/picture/GUI_image/Vaccine_panel.png"));
+        HP_image = ImageIO.read(new File("src/main/java/picture/GUI_image/HP_panel.png"));
+        }catch(IOException e){
+            e.printStackTrace();
+        }
     }
-  }
 
     /**
      * Draw player score board
@@ -234,8 +241,6 @@ public class MainCharacter extends DynamicCharacter{
       g2.drawString(""+getVaccines()+"/" + maxVaccine, x+18,y+25);
       g2.drawString(""+getHP(), x+90,y+25);
     }
-
-    public void WinorLose(){}
 
     public void resetAttributesMC() {
         vaccines = 0;

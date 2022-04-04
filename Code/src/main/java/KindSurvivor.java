@@ -15,6 +15,13 @@ public class KindSurvivor extends StaticCharacter{
 
     /**
      * The constructor for KindSurvivor
+     */
+    public KindSurvivor(){
+        // Just for test
+    }
+
+    /**
+     * The constructor for KindSurvivor
      * The parameters are:
      *      gameFrame--The frame that show the game
      *      key -- The key input
