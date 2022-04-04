@@ -1,5 +1,6 @@
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
@@ -13,6 +14,12 @@ public class GameMap {
     public int startPointY;
     private int endPointX =30;
     private int endPointY = 540;
+
+    private BufferedImage[] fire;
+    private int fireCounter = 0;
+    private int fireNum = 0; // 0--image1, 1--image2, 2--image3, 3--image4
+
+    private BufferedImage[] decorations;
 
     //Map for each Game levels
     private int[][] maplvl1 = {
@@ -99,7 +106,9 @@ public class GameMap {
      */
     GameMap(GameFrame frame){
         this.frame = frame;
-        tile = new Tile[10];
+        tile = new Tile[20];
+        fire = new BufferedImage[4];
+        decorations = new BufferedImage[5];
         getTileImg();
     }
 
@@ -129,13 +138,13 @@ public class GameMap {
         int[][] board;
         switch(lvl){
             case 0:
-                board = setNewBoard(maplvl1);
+                board = setNewBoard(setWall(maplvl1));
                 break;
             case 1:
-                board =  setNewBoard(maplvl2);
+                board =  setNewBoard(setWall(maplvl2));
                 break;
             case 2:
-                board =  setNewBoard(maplvl3);
+                board =  setNewBoard(setWall(maplvl3));
                 break;
             default:
                 board = null;
@@ -149,6 +158,25 @@ public class GameMap {
      * @param map
      * @return
      */
+    private int[][] setWall(int[][] map){
+        int newMap[][] = map;
+        for(int i = 0; i < 24; i++){
+            for (int j = 0; j < 32; j++) {
+                if(map[i][j] == 0){
+                    newMap[i][j] = 0;
+                }
+                else{
+                    newMap[i][j] = 1;
+                    if((i!=23) && (map[i+1][j]==0)){
+                        // There are DownSide earth
+                        newMap[i][j] = 2;
+                    }
+                }
+            }
+        }
+        return newMap;
+    }
+
     public int[][] setNewBoard(int[][] map) {
         int newMap[][] = new int[24][32];
         for(int i = 0; i < 24; i++){
@@ -156,28 +184,68 @@ public class GameMap {
                 if(map[i][j] == 0){
                     // It is an earth
                     newMap[i][j] = 0;
-                    if((i!=0) && (map[i-1][j]==1)){
+                    if((i!=0) && ((map[i-1][j]==1)||(map[i-1][j]==2))){
                         // There are upside wall
                         newMap[i][j] = 3;
-                        if((j!=0) && (map[i][j-1]==1)){
+                        if((j!=0) && ((map[i][j-1]==1)||(map[i][j-1]==2))){
                             // There are upside wall and leftist wall
                             newMap[i][j] = 5;
                         }
                     }
-                    else if((j!=0) && (map[i][j-1]==1)){
+                    else if((j!=0) && ((map[i][j-1]==1)||(map[i][j-1]==2))){
                         // There are leftist wall
                         newMap[i][j] = 4;
                     }
-                    else if((i!=0) && (j!=0) && (map[i-1][j-1]==1)){
+                    else if((i!=0) && (j!=0) && ((map[i-1][j-1]==1)||(map[i-1][j-1]==2))){
                         // There are upLeftSide wall
                         newMap[i][j] = 6;
                     }
                 }
                 else {
                     // It is a wall
-                    newMap[i][j] = 1;
-                    if((i!=23) && (map[i+1][j]==0)){
+                    if(map[i][j] == 1)
+                        newMap[i][j] = 1;
+                    else if(map[i][j] == 2)
                         newMap[i][j] = 2;
+                    if((i!=23) && (map[i+1][j]==0)){
+                        // There are DownSide earth
+                        newMap[i][j] = 2;
+                    }
+                    else if((i!=0) && (map[i-1][j]==0)){
+                        // There are upSide earth
+                        newMap[i][j] = 7;
+                        if((j!=0) && ((map[i][j-1]==0) || (map[i][j-1]==2))){
+                            // There are upSide earth and leftSide earth
+                            newMap[i][j] = 10;
+                            if((j!=31) && ((map[i][j+1]==0)||(map[i][j+1]==2))){
+                                // There are upSide earth, leftSide earth and rightSide earth
+                                newMap[i][j] = 11;
+                            }
+                        }
+                        else if((j!=31) && ((map[i][j+1]==0)|| (map[i][j+1]==2))){
+                            // There are upSide earth and rightSide earth
+                            newMap[i][j] = 12;
+                        }
+                    }
+                    else if((j!=0) && ((map[i][j-1]==0)|| (map[i][j-1]==2))){
+                        // There are leftSide earth
+                        newMap[i][j] = 8;
+                        if((j!=31) && ((map[i][j+1]==0)|| (map[i][j+1]==2))){
+                            // There are leftSide earth and rightSide earth
+                            newMap[i][j] = 15;
+                        }
+                    }
+                    else if((j!=31) && ((map[i][j+1]==0)|| (map[i][j+1]==2))){
+                        // There are rightSide earth
+                        newMap[i][j] = 9;
+                    }
+                    else if((i!=0) && (j!=0) && (map[i-1][j-1]==0)){
+                        // There are upLeftSide earth
+                        newMap[i][j] = 13;
+                    }
+                    else if((i!=0) && (j!=31) && (map[i-1][j+1]==0)){
+                        // There are upRightSide earth
+                        newMap[i][j] = 14;
                     }
                 }
             }
@@ -208,7 +276,6 @@ public class GameMap {
         }
         return board;
     }
-
 
     /**
      * Get player starting point depending on game level
@@ -247,6 +314,17 @@ public class GameMap {
      */
     public void getTileImg()  {
         try {
+            fire[0] = ImageIO.read(new File("src/main/java/picture/Tiles/fire (1).png"));
+            fire[1] = ImageIO.read(new File("src/main/java/picture/Tiles/fire (2).png"));
+            fire[2] = ImageIO.read(new File("src/main/java/picture/Tiles/fire (3).png"));
+            fire[3] = ImageIO.read(new File("src/main/java/picture/Tiles/fire (4).png"));
+
+            decorations[0] = ImageIO.read(new File("src/main/java/picture/Tiles/wall_decoration (1).png"));
+            decorations[1] = ImageIO.read(new File("src/main/java/picture/Tiles/wall_decoration (2).png"));
+            decorations[2] = ImageIO.read(new File("src/main/java/picture/Tiles/wall_decoration (3).png"));
+            decorations[3] = ImageIO.read(new File("src/main/java/picture/Tiles/earth_decoration (1).png"));
+            decorations[4] = ImageIO.read(new File("src/main/java/picture/Tiles/earth_decoration (2).png"));
+
             tile[0] = new Tile();
             tile[0].tileImg = ImageIO.read(new File("src/main/java/picture/Tiles/earth.png"));
             tile[0].setCollision(false);
@@ -274,6 +352,44 @@ public class GameMap {
             tile[6] = new Tile();
             tile[6].tileImg = ImageIO.read(new File("src/main/java/picture/Tiles/earth_upLeftShadow2.png"));
             tile[6].setCollision(false);
+
+            tile[7] = new Tile();
+            tile[7].tileImg = ImageIO.read(new File("src/main/java/picture/Tiles/wall_UpEarth.png"));
+            tile[7].setCollision(true);
+
+            tile[8] = new Tile();
+            tile[8].tileImg = ImageIO.read(new File("src/main/java/picture/Tiles/wall_leftEarth.png"));
+            tile[8].setCollision(true);
+
+            tile[9] = new Tile();
+            tile[9].tileImg = ImageIO.read(new File("src/main/java/picture/Tiles/wall_rightEarth.png"));
+            tile[9].setCollision(true);
+
+            tile[10] = new Tile();
+            tile[10].tileImg = ImageIO.read(new File("src/main/java/picture/Tiles/wall_leftUpEarth.png"));
+            tile[10].setCollision(true);
+
+            tile[11] = new Tile();
+            tile[11].tileImg = ImageIO.read(new File("src/main/java/picture/Tiles/wall_leftUpRightEarth.png"));
+            tile[11].setCollision(true);
+
+            tile[12] = new Tile();
+            tile[12].tileImg = ImageIO.read(new File("src/main/java/picture/Tiles/wall_rightUpEarth.png"));
+            tile[12].setCollision(true);
+
+            tile[13] = new Tile();
+            tile[13].tileImg = ImageIO.read(new File("src/main/java/picture/Tiles/wall_1.png"));
+            tile[13].setCollision(true);
+
+            tile[14] = new Tile();
+            tile[14].tileImg = ImageIO.read(new File("src/main/java/picture/Tiles/wall_2.png"));
+            tile[14].setCollision(true);
+
+            tile[15] = new Tile();
+            tile[15].tileImg = ImageIO.read(new File("src/main/java/picture/Tiles/wall_leftRightEarth.png"));
+            tile[15].setCollision(true);
+
+
         }catch (IOException e){
             e.printStackTrace();
         }
@@ -289,6 +405,33 @@ public class GameMap {
         for(int i = 0; i < 24; i++){
             for (int j = 0; j < 32; j++){
                 g2.drawImage(tile[map[i][j]].tileImg, j* frame.getCellSize()/2, i* frame.getCellSize()/2, 24, 24, null);
+                if(map[i][j] == 2){
+                    if((i+j)%7 == 0){
+                        fireCounter++;
+                        if(fireCounter>50){
+                            fireNum = (fireNum + 1) % 4;
+                            fireCounter = 0;
+                        }
+                        g2.drawImage(fire[fireNum], j* frame.getCellSize()/2, i* frame.getCellSize()/2, 24, 24, null);
+                    }
+                    else if((i+j)%13 == 0){
+                        g2.drawImage(decorations[0], j* frame.getCellSize()/2, i* frame.getCellSize()/2, 24, 24, null);
+                    }
+                    else if((i+j)%23 == 0){
+                        g2.drawImage(decorations[1], j* frame.getCellSize()/2, i* frame.getCellSize()/2, 24, 24, null);
+                    }
+                    else if((i+j)%19 == 0){
+                        g2.drawImage(decorations[2], j* frame.getCellSize()/2, i* frame.getCellSize()/2, 24, 24, null);
+                    }
+                }
+                else if(map[i][j] == 0){
+                    if((i+j)%11 == 0){
+                        g2.drawImage(decorations[3], j* frame.getCellSize()/2, i* frame.getCellSize()/2, 24, 24, null);
+                    }
+                    else if((i+j)%7 == 0){
+                        g2.drawImage(decorations[4], j* frame.getCellSize()/2, i* frame.getCellSize()/2, 24, 24, null);
+                    }
+                }
             }
         }
     }
