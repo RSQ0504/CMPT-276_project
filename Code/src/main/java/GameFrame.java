@@ -21,6 +21,7 @@ public class GameFrame extends JPanel implements Runnable{
     public final int musicPlaying = 1;
 
 
+
     // GAME STATE
     public int gameState;
     public final int titleState = 0;
