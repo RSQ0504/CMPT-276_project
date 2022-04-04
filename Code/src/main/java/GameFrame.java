@@ -670,6 +670,35 @@ public class GameFrame extends JPanel implements Runnable{
         badPerson1 = new BadSurvivor(this,key,mc,262,115);
         badPerson2 = new BadSurvivor(this,key,mc,300,280);
         badPerson3 = new BadSurvivor(this,key,mc,650,220);
+
+        //reward
+        v.clear();
+        f.clear();
+        {
+          try {
+            v.add(new Vaccine(this,218,138));
+            v.add(new Vaccine(this,485,48));
+            v.add(new Vaccine(this,383,382));
+            v.add(new Vaccine(this,340,512));
+            v.add(new Vaccine(this,386,159));
+            v.add(new Vaccine(this,102,383));
+            v.add(new Vaccine(this,52,240));
+            v.add(new Vaccine(this,330,353));
+            v.add(new Vaccine(this,645,217));
+            v.add(new Vaccine(this,695,453));
+
+            f.add(new Food(this,575,230));
+            f.add(new Food(this,450,100));
+            f.add(new Food(this,350,20));
+            f.add(new Food(this,250,320));
+            f.add(new Food(this,120,300));
+            f.add(new Food(this,320,190));
+            f.add(new Food(this,695,220));
+          } catch (IOException e) {
+            e.printStackTrace();
+          }
+        }
+
     }
 
 }
