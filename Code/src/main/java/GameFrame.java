@@ -287,59 +287,7 @@ public class GameFrame extends JPanel implements Runnable{
         double interval = 1000000000/frame_speed;
         double nextUpdate = System.nanoTime() + interval;
         while(gameThread != null) {
-            // 1.UPDATE
-            updatePos();
-
-            // check whether main character is dead
-            Rectangle MC = new Rectangle(mc.x, mc.y,mc.width,mc.height);
-            Rectangle endpoint = new Rectangle(tileFrame.getEndPointX(), tileFrame.getEndPointY(), 10, 10);
-            if(zombie1.check(MC) || zombie2.check(MC) || zombie3.check(MC) || mc.getHP() == 0){
-                System.out.println("[run/GameFrame] check: main character dead!");
-                mc.setHP(0);
-                gameResult = fail;
-                gameState = endState;
-                timerState = timerTerminated;
-            }
-            // check whether main character is has won
-            if(mc.getVaccines() >= numOfVaccines && endpoint.intersects(MC)){
-                System.out.println("[run/GameFrame] check: main character survived!");
-                gameResult = win;
-                gameState = endState;
-                timerState = timerTerminated;
-            }
-
-            // 2.DRAW
-            repaint();
-
-            // TIMER
-            if(gameState == playState) {
-//                System.out.println("[run/GameFrame] Game playing");
-
-                if(timerState == timerInactive) {
-                    System.out.println("[run/GameFrame] Start timer");
-                   // clock = new TimerClock();
-                    clock.startTimer();
-                    timerState = timerInProgress;
-                }else if(timerState == pauseState) {
-                    System.out.println("[run/GameFrame] resume timer count");
-                }
-
-            }else if(gameState == pauseState) {
-                System.out.println("[run/GameFrame] Game paused");
-            }else if(gameState == endState) {
-                if(timerState == timerTerminated) {
-//                    System.out.println("[run/GameFrame] game ended: timer terminated");
-                }else {
-                    timerState = timerTerminated;
-//                    System.out.println("[run/GameFrame] game ended: timer not terminated");
-                }
-            }else if(gameState == tutorialState) {
-                System.out.println("[run/GameFrame] tutorial state");
-            }else if(gameState == tutorialState) {
-                System.out.println("[run/GameFrame] title state");
-            }
-
-
+            runGame();
             try {
                 double sleepTime = (nextUpdate - System.nanoTime())/1000000;
                 if (sleepTime < 0) {
@@ -350,6 +298,63 @@ public class GameFrame extends JPanel implements Runnable{
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    /**
+     * Function call while thread is running
+     */
+    public void runGame(){
+        // 1.UPDATE
+        updatePos();
+
+        // check whether main character is dead
+        Rectangle MC = new Rectangle(mc.x, mc.y,mc.width,mc.height);
+        Rectangle endpoint = new Rectangle(tileFrame.getEndPointX(), tileFrame.getEndPointY(), 10, 10);
+        if(zombie1.check(MC) || zombie2.check(MC) || zombie3.check(MC) || mc.getHP() == 0){
+            System.out.println("[run/GameFrame] check: main character dead!");
+            mc.setHP(0);
+            gameResult = fail;
+            gameState = endState;
+            timerState = timerTerminated;
+        }
+        // check whether main character is has won
+        if(mc.getVaccines() >= numOfVaccines && endpoint.intersects(MC)){
+            System.out.println("[run/GameFrame] check: main character survived!");
+            gameResult = win;
+            gameState = endState;
+            timerState = timerTerminated;
+        }
+
+        // 2.DRAW
+        repaint();
+
+        // TIMER
+        if(gameState == playState) {
+//                System.out.println("[run/GameFrame] Game playing");
+
+            if(timerState == timerInactive) {
+                System.out.println("[run/GameFrame] Start timer");
+                // clock = new TimerClock();
+                clock.startTimer();
+                timerState = timerInProgress;
+            }else if(timerState == pauseState) {
+                System.out.println("[run/GameFrame] resume timer count");
+            }
+
+        }else if(gameState == pauseState) {
+            System.out.println("[run/GameFrame] Game paused");
+        }else if(gameState == endState) {
+            if(timerState == timerTerminated) {
+//                    System.out.println("[run/GameFrame] game ended: timer terminated");
+            }else {
+                timerState = timerTerminated;
+//                    System.out.println("[run/GameFrame] game ended: timer not terminated");
+            }
+        }else if(gameState == tutorialState) {
+            System.out.println("[run/GameFrame] tutorial state");
+        }else if(gameState == tutorialState) {
+            System.out.println("[run/GameFrame] title state");
         }
     }
 
