@@ -74,6 +74,9 @@ public class inputKey implements KeyListener {
                     }else if(gf.commandNum == gf.optionExit) {
                         gf.playSoundEffect(2);
                         System.exit(0);
+                    }else {
+                        // exception: reset commandNum to 0
+                        gf.commandNum = 0;
                     }
                 }
             }else if(gf.gameState == gf.changeLevelState) { // key input in change level screen to move cursor
@@ -83,13 +86,17 @@ public class inputKey implements KeyListener {
                     gf.commandNum--;
                     if(gf.commandNum < 0) {
                         gf.commandNum = gf.numOfCommands - 1;
+                    }else if(gf.commandNum > gf.numOfCommands - 1) {
+                        gf.commandNum = 0;
                     }
                 }else if(key == KeyEvent.VK_DOWN) {
                     gf.playSoundEffect(0);
 
                     gf.commandNum++;
-                    if(gf.commandNum == 3) {
+                    if(gf.commandNum > gf.numOfCommands - 1) {
                         gf.commandNum = 0;
+                    }else if(gf.commandNum < 0) {
+                        gf.commandNum = gf.numOfCommands - 1;
                     }
                 }else if(key == KeyEvent.VK_ENTER) {
                     gf.playSoundEffect(0);
