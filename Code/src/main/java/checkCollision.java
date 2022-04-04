@@ -33,38 +33,55 @@ public class checkCollision {
         switch(obj.direction){
             case "up":
                 charcTopRow = (charcTop - obj.speed)/scaledCellSize;
-                tile1 = board[charcTopRow][charcLeftCol]; //left corner check
-                tile2 = board[charcTopRow][charcRightCol]; //right corner check
 
-                if(check_frame.tileFrame.tile[tile1].getCollision() || check_frame.tileFrame.tile[tile2].getCollision()) {
+                if (charcTopRow < 0 || charcTopRow > 23 || charcLeftCol < 0 || charcLeftCol > 31 || charcRightCol < 0 || charcRightCol > 31){
                     obj.collisionArea = true;
+                } else {
+                    tile1 = board[charcTopRow][charcLeftCol]; //left corner check
+                    tile2 = board[charcTopRow][charcRightCol]; //right corner check
+
+                    if(check_frame.tileFrame.tile[tile1].getCollision() || check_frame.tileFrame.tile[tile2].getCollision()) {
+                        obj.collisionArea = true;
+                    }
                 }
                 break;
             case "down":
                 charcBottomRow = (charcBottom + obj.speed)/scaledCellSize;
-                tile1 = board[charcBottomRow][charcLeftCol]; //left corner check
-                tile2 = board[charcBottomRow][charcRightCol]; //right corner check
-
-                if(check_frame.tileFrame.tile[tile1].getCollision() || check_frame.tileFrame.tile[tile2].getCollision()) {
+                if (charcBottomRow < 0 || charcBottomRow > 23 || charcLeftCol < 0 || charcLeftCol > 31 || charcRightCol < 0 || charcRightCol > 31){
                     obj.collisionArea = true;
+                } else {
+                    tile1 = board[charcBottomRow][charcLeftCol]; //left corner check
+                    tile2 = board[charcBottomRow][charcRightCol]; //right corner check
+
+                    if(check_frame.tileFrame.tile[tile1].getCollision() || check_frame.tileFrame.tile[tile2].getCollision()) {
+                        obj.collisionArea = true;
+                    }
                 }
                 break;
             case "right":
                 charcRightCol = (charcRight - obj.speed)/scaledCellSize;
-                tile1 = board[charcTopRow][charcRightCol+1]; //top corner check
-                tile2 = board[charcBottomRow][charcRightCol+1]; //bottom corner check
-
-                if(check_frame.tileFrame.tile[tile1].getCollision() || check_frame.tileFrame.tile[tile2].getCollision()) {
+                if (charcBottomRow < 0 || charcBottomRow > 23 || charcTopRow < 0 || charcTopRow > 23 || charcRightCol < 0 || charcRightCol > 31){
                     obj.collisionArea = true;
+                } else {
+                    tile1 = board[charcTopRow][charcRightCol+1]; //top corner check
+                    tile2 = board[charcBottomRow][charcRightCol+1]; //bottom corner check
+
+                    if(check_frame.tileFrame.tile[tile1].getCollision() || check_frame.tileFrame.tile[tile2].getCollision()) {
+                        obj.collisionArea = true;
+                    }
                 }
                 break;
             case "left":
                 charcLeftCol = (charcLeft + obj.speed)/scaledCellSize;
-                tile1 = board[charcTopRow][charcLeftCol]; //top corner check
-                tile2 = board[charcBottomRow][charcLeftCol]; //bottom corner check
-
-                if(check_frame.tileFrame.tile[tile1].getCollision() || check_frame.tileFrame.tile[tile2].getCollision()) {
+                if (charcBottomRow < 0 || charcBottomRow > 23 || charcTopRow < 0 || charcTopRow > 23 || charcLeftCol < 0 || charcLeftCol > 31) {
                     obj.collisionArea = true;
+                }else {
+                    tile1 = board[charcTopRow][charcLeftCol]; //top corner check
+                    tile2 = board[charcBottomRow][charcLeftCol]; //bottom corner check
+
+                    if(check_frame.tileFrame.tile[tile1].getCollision() || check_frame.tileFrame.tile[tile2].getCollision()) {
+                        obj.collisionArea = true;
+                    }
                 }
                 break;
             default:break;
