@@ -144,7 +144,12 @@ public class GameMap {
         return board;
     }
 
-    private int[][] setNewBoard(int[][] map) {
+    /**
+     * Set maze map depending on game level to fix different pictures
+     * @param map
+     * @return
+     */
+    public int[][] setNewBoard(int[][] map) {
         int newMap[][] = new int[24][32];
         for(int i = 0; i < 24; i++){
             for (int j = 0; j < 32; j++) {
@@ -226,12 +231,13 @@ public class GameMap {
                 startPointY = 0;
                 break;
             default:
+                startPointX = -1;
+                startPointY = -1;
                 System.out.println("map level does not exist.");
         }
 
         startPoints[0] = startPointX;
         startPoints[1] = startPointY;
-        System.out.println(startPoints);
 
         return startPoints;
     }

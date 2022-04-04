@@ -73,4 +73,5 @@ abstract class GameObject {
    * @param frame
    */
   public void setFrame(GameFrame frame){this.frame = frame;}
+  public GameFrame getFrame(){return frame;}
 }
