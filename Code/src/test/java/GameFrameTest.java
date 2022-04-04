@@ -1,4 +1,6 @@
+import jdk.jshell.Snippet;
 import org.junit.Assert;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 
@@ -7,11 +9,12 @@ import java.io.IOException;
 public class GameFrameTest {
 
     //Create GameFrame class to test
-    int colm = 16;
-    int rows = 12;
-    int pacSize = 48; //industry standard 48x48
+    private int colm = 16;
+    private int rows = 12;
+    private int pacSize = 48; //industry standard 48x48
 
     GameFrame gfTest = new GameFrame(colm, rows, pacSize);
+    inputKey key = new inputKey(gfTest);
 
     public GameFrameTest() throws IOException {
     }
@@ -45,6 +48,18 @@ public class GameFrameTest {
      */
     @Test
     public void restGameTest(){
+        gfTest.mc.setHP(2);
+        gfTest.mc.setVaccines(2);
+
+        //call method to test
+        gfTest.resetGame();
+
+        //main character test
+        Assert.assertEquals(gfTest.mc.getHP(), 1);
+        Assert.assertEquals(gfTest.mc.getVaccines(), 0);
+        Assert.assertEquals(gfTest.mc.x, 365);
+        Assert.assertEquals(gfTest.mc.y, 0);
+
 
     }
 }
