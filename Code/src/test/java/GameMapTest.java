@@ -412,11 +412,13 @@ public class GameMapTest {
      */
     @Test
     public void getTileImgTest() throws IOException {
+        String[] Img = null;
         gmTest.getTileImg();
         BufferedImage img = ImageIO.read(new File("src/main/java/picture/Tiles/earth.png"));
-        String testImg = img.toString();
+        Img = (gmTest.tile[0].tileImg).toString().split(" ");
         Assertions.assertTrue(gmTest.tile[1].getCollision());
         Assertions.assertFalse(gmTest.tile[0].getCollision());
-        Assertions.assertEquals((gmTest.tile[0].tileImg).toString().substring(22),testImg.substring(22));
+        for(int i= 1; i < Img.length; i++)
+            Assertions.assertEquals(Img[i],img.toString().split(" ")[i]);
     }
 }
