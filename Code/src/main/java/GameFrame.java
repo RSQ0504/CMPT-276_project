@@ -643,6 +643,7 @@ public class GameFrame extends JPanel implements Runnable{
 
     public void resetGame() {
         mc.resetAttributesMC();
+
         mc.setDefaultValue(tileFrame.getStartPoints(gameLevel));
         // The characters
         zombie1 = new Zombie(this,15,200,mc);

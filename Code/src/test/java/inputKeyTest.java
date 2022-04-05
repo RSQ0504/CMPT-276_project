@@ -800,10 +800,51 @@ public class inputKeyTest {
         GameFrame testGameFrame = new GameFrame(16, 12, 48);
         inputKey testKey = new inputKey(testGameFrame);
 
-        testGameFrame.gameState = testGameFrame.endState;
 
         // [key pressed] ENTER:
         KeyEvent enterKey = new KeyEvent(testGameFrame, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0,  KeyEvent.VK_ENTER,'Z');
+
+        // [retry: return to tutorial screen, restart game with same level]
+        // commandNum: 0
+        // gameLevel: intermediate
+        // numOfVaccines: 7
+        // gameResult: fail
+        testGameFrame.gameState = testGameFrame.endState;
+        testGameFrame.commandNum = 0;
+        testGameFrame.gameLevel = testGameFrame.levelIntermediate;
+        testGameFrame.numOfVaccines = 7;
+        testGameFrame.gameResult = testGameFrame.fail;
+        testKey.keyPressed(enterKey);
+        Assertions.assertEquals(testGameFrame.tutorialState, testGameFrame.gameState);
+        Assertions.assertEquals(0, testGameFrame.commandNum);
+        Assertions.assertEquals(7, testGameFrame.numOfVaccines);
+        Assertions.assertEquals(testGameFrame.levelIntermediate, testGameFrame.gameLevel);
+
+        // [return to title screen]
+        // commandNum: 1
+        // gameLevel: challenge
+        // numOfVaccines: 10
+        // gameResult: win
+        testGameFrame.gameState = testGameFrame.endState;
+        testGameFrame.commandNum = 1;
+        testGameFrame.gameLevel = testGameFrame.levelChallenge;
+        testGameFrame.numOfVaccines = 10;
+        testGameFrame.gameResult = testGameFrame.win;
+        testKey.keyPressed(enterKey);
+        Assertions.assertEquals(testGameFrame.titleState, testGameFrame.gameState);
+        Assertions.assertEquals(0, testGameFrame.commandNum);
+        Assertions.assertEquals(5, testGameFrame.numOfVaccines);
+        Assertions.assertEquals(testGameFrame.levelEasy, testGameFrame.gameLevel);
+
+        // enter pressed with commandNum: 5 (exception)
+        testGameFrame.gameState = testGameFrame.endState;
+        testGameFrame.commandNum = 5;
+        testGameFrame.gameLevel = 6;
+        testGameFrame.numOfVaccines = 34;
+        testGameFrame.gameResult = -1;
+        testKey.keyPressed(enterKey);
+        Assertions.assertEquals(testGameFrame.endState, testGameFrame.gameState);
+        Assertions.assertEquals(0, testGameFrame.commandNum);
     }
 
 
