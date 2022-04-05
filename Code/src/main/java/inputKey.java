@@ -234,18 +234,18 @@ public class inputKey implements KeyListener {
                         gf.commandNum = 0;
                     }
                 }else if(key == KeyEvent.VK_ENTER) {
-                    gf.stopBGM(3);
                     System.out.println("[inputKey] before enter key pressed, game state: " + gf.gameState);
-//                    gf.resetGame();
+
                     if(gf.commandNum == 0) {// restart game at same level: return to tutorial screen
                         gf.playSoundEffect(0);
+                        gf.stopBGM(3);
                         gf.resetGame(gf.commandNum);// partial reset(game level unchanged)
                         gf.gameState = gf.tutorialState;
                     }else if(gf.commandNum == 1) {// reset game attributes: return to title screen
                         gf.playSoundEffect(0);
+                        gf.stopBGM(3);
                         gf.resetGame(gf.commandNum);// full reset
-//                        gf.gameLevel = gf.levelEasy; // default level
-//                        gf.numOfVaccines = 5;// number of vaccines(for easy)
+
                         // return to title screen
                         gf.gameState = gf.titleState;
                     }

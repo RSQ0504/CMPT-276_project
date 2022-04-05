@@ -3,6 +3,8 @@ import org.junit.Rule;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -794,7 +796,7 @@ public class inputKeyTest {
         Assertions.assertEquals(0, testGameFrame.commandNum);
     }
     @Test
-    public void enterPressedInEndState() throws IOException {
+    public void enterPressedInEndState() throws IOException, UnsupportedAudioFileException, LineUnavailableException {
         System.out.println("[enterPressedInEndState/inputKeyTest]");
 
         GameFrame testGameFrame = new GameFrame(16, 12, 48);
@@ -814,11 +816,13 @@ public class inputKeyTest {
         testGameFrame.gameLevel = testGameFrame.levelIntermediate;
         testGameFrame.numOfVaccines = 7;
         testGameFrame.gameResult = testGameFrame.fail;
+        testGameFrame.playBGM(testGameFrame.track3_playState);
         testKey.keyPressed(enterKey);
         Assertions.assertEquals(testGameFrame.tutorialState, testGameFrame.gameState);
         Assertions.assertEquals(0, testGameFrame.commandNum);
         Assertions.assertEquals(7, testGameFrame.numOfVaccines);
         Assertions.assertEquals(testGameFrame.levelIntermediate, testGameFrame.gameLevel);
+        Assertions.assertEquals(-1, testGameFrame.musicTrack);
 
         // [return to title screen]
         // commandNum: 1
@@ -830,11 +834,13 @@ public class inputKeyTest {
         testGameFrame.gameLevel = testGameFrame.levelChallenge;
         testGameFrame.numOfVaccines = 10;
         testGameFrame.gameResult = testGameFrame.win;
+        testGameFrame.playBGM(testGameFrame.track3_playState);
         testKey.keyPressed(enterKey);
         Assertions.assertEquals(testGameFrame.titleState, testGameFrame.gameState);
         Assertions.assertEquals(0, testGameFrame.commandNum);
         Assertions.assertEquals(5, testGameFrame.numOfVaccines);
         Assertions.assertEquals(testGameFrame.levelEasy, testGameFrame.gameLevel);
+        Assertions.assertEquals(-1, testGameFrame.musicTrack);
 
         // enter pressed with commandNum: 5 (exception)
         testGameFrame.gameState = testGameFrame.endState;
@@ -842,9 +848,11 @@ public class inputKeyTest {
         testGameFrame.gameLevel = 6;
         testGameFrame.numOfVaccines = 34;
         testGameFrame.gameResult = -1;
+        testGameFrame.playBGM(testGameFrame.track3_playState);
         testKey.keyPressed(enterKey);
         Assertions.assertEquals(testGameFrame.endState, testGameFrame.gameState);
         Assertions.assertEquals(0, testGameFrame.commandNum);
+        Assertions.assertEquals(testGameFrame.track3_playState, testGameFrame.musicTrack);
     }
 
 
