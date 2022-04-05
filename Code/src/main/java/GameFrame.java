@@ -641,7 +641,30 @@ public class GameFrame extends JPanel implements Runnable{
         }
     }
 
-    public void resetGame() {
+    public void resetGame(int resetMode) {
+        // resetMode 0: partial reset - preserve game level of previous play
+        // resetMode 1: full reset - starting from title screen with default values set to levelEasy settings
+        if(resetMode == 0) {
+            // partial reset
+            if(gameLevel < 0 || gameLevel > 2) {
+                // exception
+                gameLevel = levelEasy;
+            }
+
+            // set number of vaccines
+            if(gameLevel == levelEasy) {
+                numOfVaccines = 5;
+            }else if(gameLevel == levelIntermediate) {
+                numOfVaccines = 7;
+            }else if(gameLevel == levelChallenge) {
+                numOfVaccines = 10;
+            }
+        }else if(resetMode == 1) {
+            // full reset
+            gameLevel = levelEasy;
+            numOfVaccines = 5;
+        }
+
         mc.resetAttributesMC();
 
         mc.setDefaultValue(tileFrame.getStartPoints(gameLevel));

@@ -240,13 +240,13 @@ public class inputKey implements KeyListener {
 
                     if(gf.commandNum == 0) {// restart game at same level: return to tutorial screen
                         gf.playSoundEffect(0);
-                        gf.resetGame();// partial reset(game level unchanged)
+                        gf.resetGame(gf.commandNum);// partial reset(game level unchanged)
                         gf.gameState = gf.tutorialState;
                     }else if(gf.commandNum == 1) {// reset game attributes: return to title screen
                         gf.playSoundEffect(0);
-                        gf.resetGame();// full reset
-                        gf.gameLevel = gf.levelEasy; // default level
-                        gf.numOfVaccines = 5;// number of vaccines(for easy)
+                        gf.resetGame(gf.commandNum);// full reset
+//                        gf.gameLevel = gf.levelEasy; // default level
+//                        gf.numOfVaccines = 5;// number of vaccines(for easy)
                         // return to title screen
                         gf.gameState = gf.titleState;
                     }
