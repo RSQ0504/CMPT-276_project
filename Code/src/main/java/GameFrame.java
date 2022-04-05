@@ -19,6 +19,10 @@ public class GameFrame extends JPanel implements Runnable{
     public int musicState = 0; // 0 or 1
     public final int musicPaused = 0;
     public final int musicPlaying = 1;
+    public int musicTrack = -1;
+    public final int track3_playState = 3;
+    public final int track4_titleState = 4;
+
 
 
 
@@ -148,7 +152,7 @@ public class GameFrame extends JPanel implements Runnable{
     public MainCharacter mc = new MainCharacter(this,key);
     private Zombie zombie1 = new Zombie(this,15,200,mc);
     private Zombie zombie2 = new Zombie(this,300,280,mc);
-    private Zombie zombie3 = new Zombie(this,650,220,mc);
+    private Zombie zombie3 = new Zombie(this,650,400,mc);
 
     // The static characters
     private KindSurvivor goodPerson1 = new KindSurvivor(this,key,mc,120,255,tileFrame.getOriginMap(gameLevel),23,1);
@@ -175,10 +179,10 @@ public class GameFrame extends JPanel implements Runnable{
       f.add(new Food(this,575,230));
       f.add(new Food(this,450,100));
       f.add(new Food(this,350,20));
-      f.add(new Food(this,250,320));
+      f.add(new Food(this,250,310));
       f.add(new Food(this,120,300));
       f.add(new Food(this,320,190));
-      f.add(new Food(this,695,220));
+      f.add(new Food(this,505,220));
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -380,17 +384,6 @@ public class GameFrame extends JPanel implements Runnable{
         //check whether mc is killed by zombies
         Rectangle MC = new Rectangle(mc.x, mc.y,mc.width,mc.height);
         Rectangle endpoint = new Rectangle(tileFrame.getEndPointX(), tileFrame.getEndPointY(), 10, 10);
-//        if(zombie1.check(MC)||zombie2.check(MC)||zombie3.check(MC)||mc.getHP()==0){
-//          mc.setHP(0);
-//          gameResult = fail;
-//          gameState = endState;
-//          timerState = timerTerminated;
-//        }
-//        if(mc.getVaccines()>=numOfVaccines && endpoint.intersects(MC)){
-//          gameResult = win;
-//          gameState = endState;
-//          timerState = timerTerminated;
-//        }
 
 
         // control display depending on game state
@@ -409,16 +402,14 @@ public class GameFrame extends JPanel implements Runnable{
             // display background image
             g2.drawImage(bgTitleScreen, 0, 0, getWidth(), getHeight(), null);
 
-            int x = 0;
-            int y = 0;
+            int x, y;
             int numBtn = 3; // number of buttons in menu
-            int btnLength = 0;
             int cursorSize = 64;
             String[] buttons = {"START GAME", "CHANGE LEVEL", "EXIT"};
 
             // display cursor
             for(int i = 0; i < numBtn; i++) {
-                btnLength = (int)g2.getFontMetrics().getStringBounds(buttons[i], g2).getWidth();
+                int btnLength = (int)g2.getFontMetrics().getStringBounds(buttons[i], g2).getWidth();
 
                 // set position of button
                 x = this.width/2 - btnLength/2;
@@ -500,15 +491,13 @@ public class GameFrame extends JPanel implements Runnable{
             // display background image
             g2.drawImage(bgChangeLevelScreen, 0, 0, getWidth(), getHeight(), null);
 
-            int x = 0;
-            int y = 0;
+            int x, y;
             int numBtn = 3; // number of options
-            int btnLength = 0;
             int cursorSize = 64;
             String[] levels = {"EASY", "INTERMEDIATE", "CHALLENGE"};
 
             for(int i = 0; i < numBtn; i++) {
-                btnLength = (int)g2.getFontMetrics().getStringBounds(levels[i], g2).getWidth();
+                int btnLength = (int)g2.getFontMetrics().getStringBounds(levels[i], g2).getWidth();
 
                 // set position of button
                 x = this.width/2 - btnLength/2;
@@ -519,6 +508,9 @@ public class GameFrame extends JPanel implements Runnable{
                     g2.drawImage(cursor, x-(2*cursorSize + 10), y, cursorSize, cursorSize, null);
                 }
             }
+
+            // draw overlay (key instruction/guide at the bottom)
+            g2.drawImage(titleScreenOverlay, 0, getHeight() - 48, getWidth(), 48, null);
         }else if(gameState == pauseState) {
             g2.drawImage(bgImage, 0, 0, getWidth(), getHeight(), null);
             // screen display when game is paused
@@ -561,6 +553,17 @@ public class GameFrame extends JPanel implements Runnable{
 
 
         }else if(gameState == tutorialState) {
+            // play bgm
+            try {
+                playBGM(4);
+            } catch (UnsupportedAudioFileException e) {
+                e.printStackTrace();
+            } catch (LineUnavailableException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
             // tutorial screen
             if(tutorialState == tutorialIntro) {
                 g2.drawImage(tutorialPage, 0, 0, getWidth(), getHeight(), null);
@@ -620,9 +623,11 @@ public class GameFrame extends JPanel implements Runnable{
         if(musicState == musicPaused) {
             System.out.println("[playBGM] playing bgm.");
             if(bgm.setFile(i)) {
-                bgm.play();
-                bgm.loop();
+                bgm.play(i);
+                bgm.loop(i);
                 musicState = musicPlaying;
+                musicTrack = i;// keeping track of which bgm is playing
+                System.out.println("[playBGM] musicTrack: " + musicTrack);
             }
         }
     }
@@ -630,11 +635,13 @@ public class GameFrame extends JPanel implements Runnable{
     /**
      * stop background music
      */
-    public void stopBGM() {
+    public void stopBGM(int i) {
         System.out.println("[stopBGM] stopping bgm.");
         if(musicState == musicPlaying) {
             System.out.println("[stopBGM] stop playing bgm.");
-            bgm.stop();
+            bgm.stop(i);
+            musicTrack = -1;
+            System.out.println("[stopBGM] musicTrack: " + musicTrack);
         }
         musicState = musicPaused;
     }
@@ -654,17 +661,41 @@ public class GameFrame extends JPanel implements Runnable{
         if(i >= 0 && i <= 2) {
             System.out.println("[playBGM] play sound effect.");
             bgm.setFile(i);
-            bgm.play();
+            bgm.play(i);
         }
     }
 
-    public void resetGame() {
+    public void resetGame(int resetMode) {
+        // resetMode 0: partial reset - preserve game level of previous play
+        // resetMode 1: full reset - starting from title screen with default values set to levelEasy settings
+        if(resetMode == 0) {
+            // partial reset
+            if(gameLevel < 0 || gameLevel > 2) {
+                // exception
+                gameLevel = levelEasy;
+            }
+
+            // set number of vaccines
+            if(gameLevel == levelEasy) {
+                numOfVaccines = 5;
+            }else if(gameLevel == levelIntermediate) {
+                numOfVaccines = 7;
+            }else if(gameLevel == levelChallenge) {
+                numOfVaccines = 10;
+            }
+        }else if(resetMode == 1) {
+            // full reset
+            gameLevel = levelEasy;
+            numOfVaccines = 5;
+        }
+
         mc.resetAttributesMC();
+
         mc.setDefaultValue(tileFrame.getStartPoints(gameLevel));
         // The characters
         zombie1 = new Zombie(this,15,200,mc);
         zombie2 = new Zombie(this,300,280,mc);
-        zombie3 = new Zombie(this,650,220,mc);
+        zombie3 = new Zombie(this,650,400,mc);
 
         // The static characters
         goodPerson1 = new KindSurvivor(this,key,mc,120,255,tileFrame.getOriginMap(gameLevel),23,1);

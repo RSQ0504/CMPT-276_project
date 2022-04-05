@@ -70,7 +70,7 @@ public class GameFrameTest {
         gfTest.mc.setVaccines(2);
 
         //call method to test
-        gfTest.resetGame();
+        gfTest.resetGame(0);
 
         //main character test
         Assert.assertEquals(gfTest.mc.getHP(), 1);
@@ -99,7 +99,7 @@ public class GameFrameTest {
     @Test
     public void stopBGMTest(){
         gfTest.musicState = 1;
-        gfTest.stopBGM();
+        gfTest.stopBGM(1);
         Assert.assertEquals(gfTest.musicState, 0);
     }
 }

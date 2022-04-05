@@ -331,8 +331,8 @@ public class GameMapTest {
                 {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}};
 
         int[][] maplvl2 = {
-                {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0},
-                {1,0,0,0,0,0,1,0,0,1,1,0,1,1,0,0,0,0,0,1,1,1,0,0,0,0,1,1,1,0,0,0} ,
+                {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1},
+                {1,0,0,0,0,0,1,0,0,1,1,0,1,1,0,0,0,0,0,1,1,1,0,0,0,0,1,1,1,0,0,1} ,
                 {1,0,1,1,1,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,1,1,0,1,0,1,0,0,1},
                 {1,0,0,0,0,1,1,0,0,0,1,0,0,1,1,1,1,1,0,1,1,1,1,1,1,0,1,0,1,0,0,1},
                 {1,0,1,1,1,0,0,1,0,0,1,0,1,0,0,1,1,1,0,0,0,0,0,0,0,1,1,0,1,1,0,1},
@@ -381,7 +381,6 @@ public class GameMapTest {
                 {1,1,0,1,1,1,1,1,1,0,1,1,0,0,0,1,0,0,0,0,1,0,1,0,1,0,1,1,1,1,0,1},
                 {1,1,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,1,1,0,1,0,0,0,0,0,1,0,0,0,0,1},
                 {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}};
-
         Assertions.assertEquals(Arrays.deepToString(gmTest.getOriginMap(0)),Arrays.deepToString(maplvl1));
         Assertions.assertEquals(Arrays.deepToString(gmTest.getOriginMap(1)),Arrays.deepToString(maplvl2));
         Assertions.assertEquals(Arrays.deepToString(gmTest.getOriginMap(2)),Arrays.deepToString(maplvl3));
@@ -398,9 +397,11 @@ public class GameMapTest {
         startPoints[1] = 0;
 
         Assertions.assertEquals(Arrays.toString(gmTest.getStartPoints(0)),Arrays.toString(startPoints));
-        startPoints[0] = 730;
+        startPoints[0] = 720;
+        startPoints[1] = 30;
         Assertions.assertEquals(Arrays.toString(gmTest.getStartPoints(1)),Arrays.toString(startPoints));
         startPoints[0] = 265;
+        startPoints[1] = 0;
         Assertions.assertEquals(Arrays.toString(gmTest.getStartPoints(2)),Arrays.toString(startPoints));
         startPoints[0] = -1;
         startPoints[1] = -1;
