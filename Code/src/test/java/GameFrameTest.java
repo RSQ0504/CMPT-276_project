@@ -4,6 +4,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
 
 public class GameFrameTest {
@@ -52,6 +54,28 @@ public class GameFrameTest {
         Assert.assertEquals(gfTest.mc.x, 365);
         Assert.assertEquals(gfTest.mc.y, 0);
 
+    }
 
+    /**
+     * Test for correct game status of music when it is paused
+     */
+    @Test
+    public void playBGMTest() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+        gfTest.musicState = 0;
+        gfTest.playBGM(-1);
+        Assert.assertEquals(gfTest.musicState, 0);
+        gfTest.musicState = 0;
+        gfTest.playBGM(4);
+        Assert.assertEquals(gfTest.musicState, 1);
+    }
+
+    /**
+     * Test for correct game status of music when it is playing
+     */
+    @Test
+    public void stopBGMTest(){
+        gfTest.musicState = 1;
+        gfTest.stopBGM();
+        Assert.assertEquals(gfTest.musicState, 0);
     }
 }
