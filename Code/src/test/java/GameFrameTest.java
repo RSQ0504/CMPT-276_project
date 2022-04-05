@@ -20,14 +20,6 @@ public class GameFrameTest {
     }
 
     /**
-     * Test correct variable set and image import once class constructor is called
-     */
-    @Test
-    public void GFConstructorTest(){
-
-    }
-
-    /**
      * Test correct return of cellSize variable
      */
     @Test
