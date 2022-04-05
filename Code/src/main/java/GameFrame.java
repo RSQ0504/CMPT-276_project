@@ -603,8 +603,8 @@ public class GameFrame extends JPanel implements Runnable{
         if(musicState == musicPaused) {
             System.out.println("[playBGM] playing bgm.");
             if(bgm.setFile(i)) {
-                bgm.play();
-                bgm.loop();
+                bgm.play(i);
+                bgm.loop(i);
                 musicState = musicPlaying;
             }
         }
@@ -613,11 +613,11 @@ public class GameFrame extends JPanel implements Runnable{
     /**
      * stop background music
      */
-    public void stopBGM() {
+    public void stopBGM(int i) {
         System.out.println("[stopBGM] stopping bgm.");
         if(musicState == musicPlaying) {
             System.out.println("[stopBGM] stop playing bgm.");
-            bgm.stop();
+            bgm.stop(i);
         }
         musicState = musicPaused;
     }
@@ -637,7 +637,7 @@ public class GameFrame extends JPanel implements Runnable{
         if(i >= 0 && i <= 2) {
             System.out.println("[playBGM] play sound effect.");
             bgm.setFile(i);
-            bgm.play();
+            bgm.play(i);
         }
     }
 

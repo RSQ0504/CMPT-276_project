@@ -212,7 +212,7 @@ public class inputKey implements KeyListener {
                     if(gf.narrationState >= gf.narration1 && gf.narrationState <= gf.narration11) {
                         gf.narrationState = gf.narration1;
                         gf.gameState = gf.playState;
-                        gf.stopBGM();
+                        gf.stopBGM(4);
                     }else {
                         // exception
                         gf.narrationState = gf.narration1;
@@ -221,7 +221,6 @@ public class inputKey implements KeyListener {
 
                 }
             }else if(gf.gameState == gf.endState) {
-
                 if(key == KeyEvent.VK_LEFT || key == KeyEvent.VK_RIGHT) {
                     gf.playSoundEffect(0);
 
@@ -235,9 +234,9 @@ public class inputKey implements KeyListener {
                         gf.commandNum = 0;
                     }
                 }else if(key == KeyEvent.VK_ENTER) {
+                    gf.stopBGM(3);
                     System.out.println("[inputKey] before enter key pressed, game state: " + gf.gameState);
 //                    gf.resetGame();
-
                     if(gf.commandNum == 0) {// restart game at same level: return to tutorial screen
                         gf.playSoundEffect(0);
                         gf.resetGame(gf.commandNum);// partial reset(game level unchanged)
