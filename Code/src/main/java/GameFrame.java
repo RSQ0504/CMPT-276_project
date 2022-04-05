@@ -287,59 +287,7 @@ public class GameFrame extends JPanel implements Runnable{
         double interval = 1000000000/frame_speed;
         double nextUpdate = System.nanoTime() + interval;
         while(gameThread != null) {
-            // 1.UPDATE
-            updatePos();
-
-            // check whether main character is dead
-            Rectangle MC = new Rectangle(mc.x, mc.y,mc.width,mc.height);
-            Rectangle endpoint = new Rectangle(tileFrame.getEndPointX(), tileFrame.getEndPointY(), 10, 10);
-            if(zombie1.check(MC) || zombie2.check(MC) || zombie3.check(MC) || mc.getHP() == 0){
-//                System.out.println("[run/GameFrame] check: main character dead!");
-                mc.setHP(0);
-                gameResult = fail;
-                gameState = endState;
-                timerState = timerTerminated;
-            }
-            // check whether main character is has won
-            if(mc.getVaccines() >= numOfVaccines && endpoint.intersects(MC)){
-//                System.out.println("[run/GameFrame] check: main character survived!");
-                gameResult = win;
-                gameState = endState;
-                timerState = timerTerminated;
-            }
-
-            // 2.DRAW
-            repaint();
-
-            // TIMER
-            if(gameState == playState) {
-//                System.out.println("[run/GameFrame] Game playing");
-
-                if(timerState == timerInactive) {
-//                    System.out.println("[run/GameFrame] Start timer");
-                   // clock = new TimerClock();
-                    clock.startTimer();
-                    timerState = timerInProgress;
-                }else if(timerState == pauseState) {
-//                    System.out.println("[run/GameFrame] resume timer count");
-                }
-
-            }else if(gameState == pauseState) {
-//                System.out.println("[run/GameFrame] Game paused");
-            }else if(gameState == endState) {
-                if(timerState == timerTerminated) {
-//                    System.out.println("[run/GameFrame] game ended: timer terminated");
-                }else {
-                    timerState = timerTerminated;
-//                    System.out.println("[run/GameFrame] game ended: timer not terminated");
-                }
-            }else if(gameState == tutorialState) {
-//                System.out.println("[run/GameFrame] tutorial state");
-            }else if(gameState == tutorialState) {
-//                System.out.println("[run/GameFrame] title state");
-            }
-
-
+            runGame();
             try {
                 double sleepTime = (nextUpdate - System.nanoTime())/1000000;
                 if (sleepTime < 0) {
@@ -351,6 +299,64 @@ public class GameFrame extends JPanel implements Runnable{
                 e.printStackTrace();
             }
         }
+    }
+
+    /**
+     * Function call while thread is running
+     */
+    public void runGame(){
+        // 1.UPDATE
+        updatePos();
+
+        // check whether main character is dead
+        Rectangle MC = new Rectangle(mc.x, mc.y,mc.width,mc.height);
+        Rectangle endpoint = new Rectangle(tileFrame.getEndPointX(), tileFrame.getEndPointY(), 10, 10);
+        if(zombie1.check(MC) || zombie2.check(MC) || zombie3.check(MC) || mc.getHP() == 0){
+//                System.out.println("[run/GameFrame] check: main character dead!");
+            mc.setHP(0);
+            gameResult = fail;
+            gameState = endState;
+            timerState = timerTerminated;
+        }
+        // check whether main character is has won
+        if(mc.getVaccines() >= numOfVaccines && endpoint.intersects(MC)){
+//                System.out.println("[run/GameFrame] check: main character survived!");
+            gameResult = win;
+            gameState = endState;
+            timerState = timerTerminated;
+        }
+
+        // 2.DRAW
+        repaint();
+
+        // TIMER
+        if(gameState == playState) {
+//                System.out.println("[run/GameFrame] Game playing");
+
+            if(timerState == timerInactive) {
+//                    System.out.println("[run/GameFrame] Start timer");
+                // clock = new TimerClock();
+                clock.startTimer();
+                timerState = timerInProgress;
+            }else if(timerState == pauseState) {
+//                    System.out.println("[run/GameFrame] resume timer count");
+            }
+
+        }else if(gameState == pauseState) {
+//                System.out.println("[run/GameFrame] Game paused");
+        }else if(gameState == endState) {
+            if(timerState == timerTerminated) {
+//                    System.out.println("[run/GameFrame] game ended: timer terminated");
+            }else {
+                timerState = timerTerminated;
+//                    System.out.println("[run/GameFrame] game ended: timer not terminated");
+            }
+        }else if(gameState == tutorialState) {
+//                System.out.println("[run/GameFrame] tutorial state");
+        }else if(gameState == tutorialState) {
+//                System.out.println("[run/GameFrame] title state");
+        }
+
     }
 
     /**
@@ -665,6 +671,35 @@ public class GameFrame extends JPanel implements Runnable{
         badPerson1 = new BadSurvivor(this,key,mc,262,115);
         badPerson2 = new BadSurvivor(this,key,mc,300,280);
         badPerson3 = new BadSurvivor(this,key,mc,650,220);
+
+        //reward
+        v.clear();
+        f.clear();
+        {
+          try {
+            v.add(new Vaccine(this,218,138));
+            v.add(new Vaccine(this,485,48));
+            v.add(new Vaccine(this,383,382));
+            v.add(new Vaccine(this,340,512));
+            v.add(new Vaccine(this,386,159));
+            v.add(new Vaccine(this,102,383));
+            v.add(new Vaccine(this,52,240));
+            v.add(new Vaccine(this,330,353));
+            v.add(new Vaccine(this,645,217));
+            v.add(new Vaccine(this,695,453));
+
+            f.add(new Food(this,575,230));
+            f.add(new Food(this,450,100));
+            f.add(new Food(this,350,20));
+            f.add(new Food(this,250,320));
+            f.add(new Food(this,120,300));
+            f.add(new Food(this,320,190));
+            f.add(new Food(this,695,220));
+          } catch (IOException e) {
+            e.printStackTrace();
+          }
+        }
+
     }
 
 }

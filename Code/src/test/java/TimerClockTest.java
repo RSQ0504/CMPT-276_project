@@ -16,7 +16,8 @@ public class TimerClockTest {
     @Test
     public void getTimerImgTest() throws IOException {
         BufferedImage testImg = ImageIO.read(new File("src/main/java/picture/GUI_image/Time_panel.png"));
-        Assertions.assertEquals((tcTest.timerImg).toString().substring(22), testImg.toString().substring(22));
+        String actImg = (tcTest.timerImg).toString();
+        Assertions.assertEquals(actImg.substring(actImg.indexOf("type")), testImg.toString().substring((testImg.toString()).indexOf("type")));
     }
 
     /**

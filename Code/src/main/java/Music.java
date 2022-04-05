@@ -60,6 +60,8 @@ public class Music {
      * Stop music
      */
     public void stop() {
-        clip.stop();
+        if(clip != null){
+            clip.stop();
+        }
     }
 }

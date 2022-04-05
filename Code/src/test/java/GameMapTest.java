@@ -418,6 +418,9 @@ public class GameMapTest {
         String testImg = img.toString();
         Assertions.assertTrue(gmTest.tile[1].getCollision());
         Assertions.assertFalse(gmTest.tile[0].getCollision());
-        Assertions.assertEquals((gmTest.tile[0].tileImg).toString().substring(22),testImg.substring(22));
+
+        String actImg = (gmTest.tile[0].tileImg).toString();
+
+        Assertions.assertEquals((actImg.substring(actImg.indexOf("type"))),testImg.substring(testImg.indexOf("type")));
     }
 }
