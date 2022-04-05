@@ -15,6 +15,13 @@ public class KindSurvivor extends StaticCharacter{
 
     /**
      * The constructor for KindSurvivor
+     */
+    public KindSurvivor(){
+        // Just for test
+    }
+
+    /**
+     * The constructor for KindSurvivor
      * The parameters are:
      *      gameFrame--The frame that show the game
      *      key -- The key input
@@ -52,7 +59,7 @@ public class KindSurvivor extends StaticCharacter{
      * @param door_x
      * @param door_y
      */
-    private void setDefaultValue(int x, int y,int door_x, int door_y){
+    public void setDefaultValue(int x, int y,int door_x, int door_y){
         this.direction = "down";
         this.x = x;
         this.y = y;
@@ -70,6 +77,10 @@ public class KindSurvivor extends StaticCharacter{
      */
     public void openDoor() {
         this.map[door_x][door_y] = 0;
+    }
+
+    public int[][] getMap(){
+        return this.map;
     }
 
     /**
@@ -93,7 +104,7 @@ public class KindSurvivor extends StaticCharacter{
      * check if player pressed F while in close proximity with static enemy
      * if close then display message box and open door if all required vaccines are collected by player
      */
-    void speak(){
+    public void speak(){
         if(status && (this.x < (mc.x + 40)) && (this.x > (mc.x - 40)) && (this.y < (mc.y + 40)) && (this.y > (mc.y - 40))){
             if(k.pressF == true) {
                 int x_distance = this.x - mc.x;
@@ -142,7 +153,7 @@ public class KindSurvivor extends StaticCharacter{
      * draw character dialog box
      * @param g2
      */
-    void drawKindCharcMsgBox(Graphics2D g2){
+    public void drawKindCharcMsgBox(Graphics2D g2){
         speak();
         if(speakMessageShow){
             if (message_x+message_width >= 768){
@@ -160,7 +171,7 @@ public class KindSurvivor extends StaticCharacter{
      * draw character
      * @param g2
      */
-    void drawKindCharacter(Graphics2D g2){
+    public void drawKindCharacter(Graphics2D g2){
         BufferedImage character_image = null;
         speak();
         switch (direction){
@@ -178,6 +189,5 @@ public class KindSurvivor extends StaticCharacter{
                 break;
         }
         g2.drawImage(character_image,x,y,character_image.getWidth(),character_image.getHeight(),null);
-
     }
 }

@@ -6,7 +6,7 @@ import java.io.IOException;
  * class to implement and manage Background music and sound effects
  */
 public class Music {
-    Clip clip;
+    Clip[] clip = new Clip[5];
     private String[] musicFilePaths = {
             "src/main/java/music/Click_music_1.wav",// 0
             "src/main/java/music/Click_music_2.wav",// 1
@@ -29,37 +29,76 @@ public class Music {
         if(i >= 0 && i < musicFilePaths.length) {
             File file = new File(musicFilePaths[i]);
             AudioInputStream bgm = AudioSystem.getAudioInputStream(file);
-            clip = AudioSystem.getClip();
-            clip.open(bgm);
+            clip[i] = AudioSystem.getClip();
+            clip[i].open(bgm);
         }else {
             return false;
         }
-
+//        System.out.println("SET_FILE");
+//        System.out.println("isOpen(): " + clip[i].isOpen());
+//        System.out.println("isRunning(): " + clip[i].isRunning());
+//        System.out.println("isActive(): " + clip[i].isActive());
         return true;
     }
 
     /**
      * play music
      */
-    public void play() {
-        if(clip == null) {
+    public boolean play(int i) {
+        if(i >= 0 && i < musicFilePaths.length) {
+            if(clip == null || clip[i] == null) {
 //            System.out.println("[play] Clip is null.");
+                return false;
+            }else {
+                clip[i].start();
+            }
         }else {
-            clip.start();
+            return false;
         }
+//        System.out.println("PLAY");
+//        System.out.println("isOpen(): " + clip[i].isOpen());
+//        System.out.println("isRunning(): " + clip[i].isRunning());
+//        System.out.println("isActive(): " + clip[i].isActive());
+        return true;
     }
 
     /**
      * Loop music
      */
-    public void loop() {
-        clip.loop(Clip.LOOP_CONTINUOUSLY);
+    public boolean loop(int i) {
+        if(i >= 0 && i < musicFilePaths.length) {
+            if(clip == null || clip[i] == null) {
+                return false;
+            }else {
+                clip[i].loop(Clip.LOOP_CONTINUOUSLY);
+            }
+        }else {
+            return false;
+        }
+//        System.out.println("LOOP");
+//        System.out.println("isOpen(): " + clip[i].isOpen());
+//        System.out.println("isRunning(): " + clip[i].isRunning());
+//        System.out.println("isActive(): " + clip[i].isActive());
+        return true;
     }
 
     /**
      * Stop music
      */
-    public void stop() {
-        clip.stop();
+    public boolean stop(int i) {
+        if(i >= 0 && i < musicFilePaths.length) {
+            if(clip == null || clip[i] == null) {
+                return false;
+            }else {
+                clip[i].stop();
+            }
+        }else {
+            return false;
+        }
+//        System.out.println("STOP");
+//        System.out.println("isOpen(): " + clip[i].isOpen());
+//        System.out.println("isRunning(): " + clip[i].isRunning());
+//        System.out.println("isActive(): " + clip[i].isActive());
+        return true;
     }
 }

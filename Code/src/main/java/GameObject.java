@@ -5,9 +5,8 @@ import java.awt.image.BufferedImage;
  * Class for managing Static and Dynamic game objects
  */
 abstract class GameObject {
-  public int x,y;
-  public int width;
-  int height;
+  public int x = 0,y = 0;
+  public int width, height;
   private boolean collision;
   private GameFrame frame;
   public Rectangle hitAreaStatic;
@@ -73,4 +72,5 @@ abstract class GameObject {
    * @param frame
    */
   public void setFrame(GameFrame frame){this.frame = frame;}
+  public GameFrame getFrame(){return frame;}
 }
