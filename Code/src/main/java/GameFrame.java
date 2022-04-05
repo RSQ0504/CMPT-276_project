@@ -19,6 +19,10 @@ public class GameFrame extends JPanel implements Runnable{
     public int musicState = 0; // 0 or 1
     public final int musicPaused = 0;
     public final int musicPlaying = 1;
+    public int musicTrack = -1;
+    public final int track3_playState = 3;
+    public final int track4_titleState = 4;
+
 
 
 
@@ -543,6 +547,17 @@ public class GameFrame extends JPanel implements Runnable{
 
 
         }else if(gameState == tutorialState) {
+            // play bgm
+            try {
+                playBGM(4);
+            } catch (UnsupportedAudioFileException e) {
+                e.printStackTrace();
+            } catch (LineUnavailableException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
             // tutorial screen
             if(tutorialState == tutorialIntro) {
                 g2.drawImage(tutorialPage, 0, 0, getWidth(), getHeight(), null);
@@ -605,6 +620,8 @@ public class GameFrame extends JPanel implements Runnable{
                 bgm.play(i);
                 bgm.loop(i);
                 musicState = musicPlaying;
+                musicTrack = i;// keeping track of which bgm is playing
+                System.out.println("[playBGM] musicTrack: " + musicTrack);
             }
         }
     }
@@ -617,6 +634,8 @@ public class GameFrame extends JPanel implements Runnable{
         if(musicState == musicPlaying) {
             System.out.println("[stopBGM] stop playing bgm.");
             bgm.stop(i);
+            musicTrack = -1;
+            System.out.println("[stopBGM] musicTrack: " + musicTrack);
         }
         musicState = musicPaused;
     }
