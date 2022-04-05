@@ -152,7 +152,7 @@ public class GameFrame extends JPanel implements Runnable{
     public MainCharacter mc = new MainCharacter(this,key);
     private Zombie zombie1 = new Zombie(this,15,200,mc);
     private Zombie zombie2 = new Zombie(this,300,280,mc);
-    private Zombie zombie3 = new Zombie(this,650,220,mc);
+    private Zombie zombie3 = new Zombie(this,650,400,mc);
 
     // The static characters
     private KindSurvivor goodPerson1 = new KindSurvivor(this,key,mc,120,255,tileFrame.getOriginMap(gameLevel),23,1);
@@ -179,10 +179,10 @@ public class GameFrame extends JPanel implements Runnable{
       f.add(new Food(this,575,230));
       f.add(new Food(this,450,100));
       f.add(new Food(this,350,20));
-      f.add(new Food(this,250,320));
+      f.add(new Food(this,250,310));
       f.add(new Food(this,120,300));
       f.add(new Food(this,320,190));
-      f.add(new Food(this,695,220));
+      f.add(new Food(this,505,220));
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -689,7 +689,7 @@ public class GameFrame extends JPanel implements Runnable{
         // The characters
         zombie1 = new Zombie(this,15,200,mc);
         zombie2 = new Zombie(this,300,280,mc);
-        zombie3 = new Zombie(this,650,220,mc);
+        zombie3 = new Zombie(this,650,400,mc);
 
         // The static characters
         goodPerson1 = new KindSurvivor(this,key,mc,120,255,tileFrame.getOriginMap(gameLevel),23,1);
@@ -716,10 +716,10 @@ public class GameFrame extends JPanel implements Runnable{
           f.add(new Food(this,575,230));
           f.add(new Food(this,450,100));
           f.add(new Food(this,350,20));
-          f.add(new Food(this,250,320));
+          f.add(new Food(this,250,310));
           f.add(new Food(this,120,300));
           f.add(new Food(this,320,190));
-          f.add(new Food(this,695,220));
+          f.add(new Food(this,505,220));
         } catch (IOException e) {
           e.printStackTrace();
         }
