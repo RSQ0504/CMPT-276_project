@@ -392,16 +392,14 @@ public class GameFrame extends JPanel implements Runnable{
             // display background image
             g2.drawImage(bgTitleScreen, 0, 0, getWidth(), getHeight(), null);
 
-            int x = 0;
-            int y = 0;
+            int x, y;
             int numBtn = 3; // number of buttons in menu
-            int btnLength = 0;
             int cursorSize = 64;
             String[] buttons = {"START GAME", "CHANGE LEVEL", "EXIT"};
 
             // display cursor
             for(int i = 0; i < numBtn; i++) {
-                btnLength = (int)g2.getFontMetrics().getStringBounds(buttons[i], g2).getWidth();
+                int btnLength = (int)g2.getFontMetrics().getStringBounds(buttons[i], g2).getWidth();
 
                 // set position of button
                 x = this.width/2 - btnLength/2;
@@ -483,15 +481,13 @@ public class GameFrame extends JPanel implements Runnable{
             // display background image
             g2.drawImage(bgChangeLevelScreen, 0, 0, getWidth(), getHeight(), null);
 
-            int x = 0;
-            int y = 0;
+            int x, y;
             int numBtn = 3; // number of options
-            int btnLength = 0;
             int cursorSize = 64;
             String[] levels = {"EASY", "INTERMEDIATE", "CHALLENGE"};
 
             for(int i = 0; i < numBtn; i++) {
-                btnLength = (int)g2.getFontMetrics().getStringBounds(levels[i], g2).getWidth();
+                int btnLength = (int)g2.getFontMetrics().getStringBounds(levels[i], g2).getWidth();
 
                 // set position of button
                 x = this.width/2 - btnLength/2;
@@ -502,6 +498,9 @@ public class GameFrame extends JPanel implements Runnable{
                     g2.drawImage(cursor, x-(2*cursorSize + 10), y, cursorSize, cursorSize, null);
                 }
             }
+
+            // draw overlay (key instruction/guide at the bottom)
+            g2.drawImage(titleScreenOverlay, 0, getHeight() - 48, getWidth(), 48, null);
         }else if(gameState == pauseState) {
             g2.drawImage(bgImage, 0, 0, getWidth(), getHeight(), null);
             // screen display when game is paused
