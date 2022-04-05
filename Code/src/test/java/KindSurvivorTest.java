@@ -3,6 +3,10 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -192,5 +196,50 @@ public class KindSurvivorTest {
         Assert.assertEquals(1, kindSurvivor.getMap()[3][3]);
         kindSurvivor.openDoor();
         Assert.assertEquals(0, kindSurvivor.getMap()[3][3]);
+    }
+
+    @Test
+    void drawTest() throws InterruptedException, IOException {
+        int colm = 16;
+        int rows = 12;
+        int pacSize = 48;
+        GameFrame gf = new GameFrame(colm, rows, pacSize);
+        inputKey key = new inputKey(gf);
+        MainCharacter mc = new MainCharacter(gf, key);
+        int[] startPoint = {50,250};
+        mc.setDefaultValue(startPoint);
+        int[][] board = {
+                {1,1,1,1},
+                {1,0,0,1},
+                {1,0,0,1},
+                {1,1,1,1},
+        };
+        int doorX = 3, doorY = 3;
+        KindSurvivor kindSurvivor = new KindSurvivor(gf, key, mc, 1, 1, board, doorX, doorY);
+        class drawTest extends JPanel {
+            private Frame frame = new Frame("BadSurvivorTest");
+            public void paint(Graphics g) {
+                Graphics2D g2 = (Graphics2D)g;
+                kindSurvivor.drawKindCharacter(g2);
+            }
+
+            public void init() {
+                drawTest Draw = new drawTest();
+                Draw.repaint();
+                Draw.setPreferredSize(new Dimension(20,70));
+                frame.add(Draw);
+                frame.addWindowListener(new WindowAdapter() {
+                    @Override
+                    public void windowClosing(WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                frame.pack();
+                frame.setVisible(true);
+            }
+        }
+        drawTest test = new drawTest();
+        test.init();
+        Thread.sleep(1000);
     }
 }

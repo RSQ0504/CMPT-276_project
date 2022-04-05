@@ -2,6 +2,10 @@ import junit.framework.Assert;
 import org.junit.jupiter.api.*;
 
 import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -191,5 +195,44 @@ public class MainCharacterTest {
         mc.resetAttributesMC();
         Assert.assertEquals(1,mc.getHP());
         Assert.assertEquals(0,mc.getVaccines());
+    }
+
+    @Test
+    void drawTest() throws InterruptedException, IOException {
+        int colm = 16;
+        int rows = 12;
+        int pacSize = 48;
+        GameFrame gf = new GameFrame(colm, rows, pacSize);
+        inputKey key = new inputKey(gf);
+        MainCharacter mc = new MainCharacter(gf, key);
+        int[] startPoint = {0,0};
+        mc.setDefaultValue(startPoint);
+
+        class drawTest extends JPanel {
+            private Frame frame = new Frame("BadSurvivorTest");
+            public void paint(Graphics g) {
+                Graphics2D g2 = (Graphics2D)g;
+                mc.drawMC(g2);
+                mc.drawScore(g2,50,10,5);
+            }
+
+            public void init() {
+                drawTest Draw = new drawTest();
+                Draw.repaint();
+                Draw.setPreferredSize(new Dimension(100,70));
+                frame.add(Draw);
+                frame.addWindowListener(new WindowAdapter() {
+                    @Override
+                    public void windowClosing(WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                frame.pack();
+                frame.setVisible(true);
+            }
+        }
+        drawTest test = new drawTest();
+        test.init();
+        Thread.sleep(1000);
     }
 }
