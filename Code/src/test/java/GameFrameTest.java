@@ -1,8 +1,6 @@
 import jdk.jshell.Snippet;
 import org.junit.Assert;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Assertions;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
@@ -34,6 +32,32 @@ public class GameFrameTest {
      */
     @Test
     public void runGameTest(){
+        gfTest.mc.setVaccines(20);
+
+        gfTest.runGame();
+
+        Assert.assertEquals(gfTest.gameResult,0 );
+        Assert.assertEquals(gfTest.gameState, 0);
+
+        gfTest.mc.x = 30;
+        gfTest.mc.y = 540;
+
+        gfTest.runGame();
+
+        Assert.assertEquals(gfTest.gameResult,1 );
+        Assert.assertEquals(gfTest.gameState, 3);
+
+        gfTest.gameState = 0;
+        gfTest.gameResult = 0;
+        gfTest.mc.setVaccines(5);
+        Assert.assertEquals(gfTest.gameResult,0 );
+        Assert.assertEquals(gfTest.gameState, 0);
+
+        gfTest.gameState = 0;
+        gfTest.gameResult = 0;
+        gfTest.mc.setVaccines(1);
+        Assert.assertEquals(gfTest.gameResult,0 );
+        Assert.assertEquals(gfTest.gameState, 0);
 
     }
 
