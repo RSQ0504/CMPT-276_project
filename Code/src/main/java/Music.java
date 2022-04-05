@@ -34,32 +34,72 @@ public class Music {
         }else {
             return false;
         }
-
+//        System.out.println("SET_FILE");
+//        System.out.println("isOpen(): " + clip[i].isOpen());
+//        System.out.println("isRunning(): " + clip[i].isRunning());
+//        System.out.println("isActive(): " + clip[i].isActive());
         return true;
     }
 
     /**
      * play music
      */
-    public void play(int i) {
-        if(clip == null) {
+    public boolean play(int i) {
+        if(i >= 0 && i < musicFilePaths.length) {
+            if(clip == null || clip[i] == null) {
 //            System.out.println("[play] Clip is null.");
+                return false;
+            }else {
+                clip[i].start();
+            }
         }else {
-            clip[i].start();
+            return false;
         }
+//        System.out.println("PLAY");
+//        System.out.println("isOpen(): " + clip[i].isOpen());
+//        System.out.println("isRunning(): " + clip[i].isRunning());
+//        System.out.println("isActive(): " + clip[i].isActive());
+        return true;
     }
 
     /**
      * Loop music
      */
-    public void loop(int i) {
-        clip[i].loop(Clip.LOOP_CONTINUOUSLY);
+    public boolean loop(int i) {
+        if(i >= 0 && i < musicFilePaths.length) {
+            if(clip == null || clip[i] == null) {
+                return false;
+            }else {
+                clip[i].loop(Clip.LOOP_CONTINUOUSLY);
+            }
+        }else {
+            return false;
+        }
+//        System.out.println("LOOP");
+//        System.out.println("isOpen(): " + clip[i].isOpen());
+//        System.out.println("isRunning(): " + clip[i].isRunning());
+//        System.out.println("isActive(): " + clip[i].isActive());
+        return true;
     }
 
     /**
      * Stop music
      */
-    public void stop(int i) {
-        clip[i].stop();
+    public boolean stop(int i) {
+        if(i >= 0 && i < musicFilePaths.length) {
+            if(clip == null || clip[i] == null) {
+                return false;
+            }else {
+                clip[i].stop();
+            }
+        }else {
+            return false;
+        }
+//        System.out.println("STOP");
+//        System.out.println("isOpen(): " + clip[i].isOpen());
+//        System.out.println("isRunning(): " + clip[i].isRunning());
+//        System.out.println("isActive(): " + clip[i].isActive());
+        return true;
+
     }
 }

@@ -1,11 +1,8 @@
-import org.junit.Assert;
-import org.junit.Rule;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
@@ -24,8 +21,6 @@ UP, DOWN, LEFT, RIGHT, F
  */
 
 public class inputKeyTest {
-//    @Rule
-//    public final ExpectedSystemExit exit = ExpectedSystemExit.none();
 
     // 1. titleState (UP, DOWN, ENTER)
     @Test
