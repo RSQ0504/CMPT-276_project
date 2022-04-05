@@ -9,7 +9,7 @@ import java.io.IOException;
  */
 public class inputKey implements KeyListener {
     GameFrame gf;
-    public boolean pressedUp, pressedDown,pressedLeft,pressedRight;
+    public boolean pressedUp, pressedDown, pressedLeft, pressedRight;
     public boolean pressF;
 
     /**
@@ -133,7 +133,7 @@ public class inputKey implements KeyListener {
                 if(key== KeyEvent.VK_F){
                     pressF = true;
                 }
-                if(key == KeyEvent.VK_UP){
+                else if(key == KeyEvent.VK_UP){
                     pressedUp = true;
                 }
                 else if(key == KeyEvent.VK_DOWN){
@@ -223,9 +223,7 @@ public class inputKey implements KeyListener {
             }else if(gf.gameState == gf.endState) {
 
                 if(key == KeyEvent.VK_LEFT || key == KeyEvent.VK_RIGHT) {
-                    // sound effect (track: 0)
                     gf.playSoundEffect(0);
-
 
                     // switch options
                     if(gf.commandNum == 0) {
@@ -233,7 +231,7 @@ public class inputKey implements KeyListener {
                     }else if(gf.commandNum == 1) {
                         gf.commandNum = 0;
                     }else {
-                        // exception -> reset commandNum to 0
+                        // exception: reset commandNum to 0
                         gf.commandNum = 0;
                     }
                 }else if(key == KeyEvent.VK_ENTER) {
@@ -242,11 +240,11 @@ public class inputKey implements KeyListener {
 
                     if(gf.commandNum == 0) {
                         // restart game at same level
-                        System.out.println("[inputKey] enter key pressed, commandNum: 0");
+                        gf.playSoundEffect(0);
                         gf.gameState = gf.tutorialState;
                     }else if(gf.commandNum == 1) {
                         // reset game attributes
-                        System.out.println("[inputKey] enter key pressed, commandNum: 1");
+                        gf.playSoundEffect(0);
                         gf.gameLevel = gf.levelEasy; // default level
 
                         // return to title screen

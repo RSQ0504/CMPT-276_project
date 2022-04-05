@@ -3,6 +3,7 @@ import org.junit.Rule;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
@@ -226,8 +227,6 @@ public class inputKeyTest {
         GameFrame testGameFrame = new GameFrame(16, 12, 48);
         inputKey testKey = new inputKey(testGameFrame);
 
-        int maxCommandNum = testGameFrame.numOfCommands - 1;
-
         // [key pressed] ENTER:
         KeyEvent enterKey = new KeyEvent(testGameFrame, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0,  KeyEvent.VK_ENTER,'Z');
 
@@ -291,15 +290,165 @@ public class inputKeyTest {
 
     // 3. playState (UP, DOWN, LEFT, RIGHT, F, ESCAPE) *escape not used
     @Test
-    public void upPressedInPlayState() {}
+    public void upPressedInPlayState() throws IOException {
+        System.out.println("[upPressedInPlayState/inputKeyTest]");
+
+        GameFrame testGameFrame = new GameFrame(16, 12, 48);
+        inputKey testKey = new inputKey(testGameFrame);
+
+        testGameFrame.gameState = testGameFrame.playState;
+
+        // [key pressed] UP:
+        KeyEvent upKey = new KeyEvent(testGameFrame, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0,  KeyEvent.VK_UP,'Z');
+
+        // [keyPressed()] pressedUp: false -> true
+        testKey.pressedUp = false;
+        testKey.keyPressed(upKey);
+        Assertions.assertEquals(true, testKey.pressedUp);
+
+        // [keyPressed()] pressedUp: true -> true (exception)
+        testKey.pressedUp = true;
+        testKey.keyPressed(upKey);
+        Assertions.assertEquals(true, testKey.pressedUp);
+
+        // [keyReleased()] pressedUp: true -> false
+        testKey.pressedUp = true;
+        testKey.keyReleased(upKey);
+        Assertions.assertEquals(false, testKey.pressedUp);
+
+        // [keyReleased()] pressedUp: false -> false (exception)
+        testKey.pressedUp = false;
+        testKey.keyReleased(upKey);
+        Assertions.assertEquals(false, testKey.pressedUp);
+    }
     @Test
-    public void downPressedInPlayState() {}
+    public void downPressedInPlayState() throws IOException {
+        System.out.println("[downPressedInPlayState/inputKeyTest]");
+
+        GameFrame testGameFrame = new GameFrame(16, 12, 48);
+        inputKey testKey = new inputKey(testGameFrame);
+
+        testGameFrame.gameState = testGameFrame.playState;
+
+        // [key pressed] DOWN:
+        KeyEvent downKey = new KeyEvent(testGameFrame, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0,  KeyEvent.VK_DOWN,'Z');
+
+        // [keyPressed()] pressedDown: false -> true
+        testKey.pressedDown = false;
+        testKey.keyPressed(downKey);
+        Assertions.assertEquals(true, testKey.pressedDown);
+
+        // [keyPressed()] pressedDown: true -> true (exception)
+        testKey.pressedDown = true;
+        testKey.keyPressed(downKey);
+        Assertions.assertEquals(true, testKey.pressedDown);
+
+        // [keyReleased()] pressedDown: true -> false
+        testKey.pressedDown = true;
+        testKey.keyReleased(downKey);
+        Assertions.assertEquals(false, testKey.pressedDown);
+
+        // [keyReleased()] pressedDown: false -> false (exception)
+        testKey.pressedDown = false;
+        testKey.keyReleased(downKey);
+        Assertions.assertEquals(false, testKey.pressedDown);
+    }
     @Test
-    public void leftPressedInPlayState() {}
+    public void leftPressedInPlayState() throws IOException {
+        System.out.println("[leftPressedInPlayState/inputKeyTest]");
+
+        GameFrame testGameFrame = new GameFrame(16, 12, 48);
+        inputKey testKey = new inputKey(testGameFrame);
+
+        testGameFrame.gameState = testGameFrame.playState;
+
+        // [key pressed] LEFT:
+        KeyEvent leftKey = new KeyEvent(testGameFrame, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0,  KeyEvent.VK_LEFT,'Z');
+
+        // [keyPressed()] pressedLeft: false -> true
+        testKey.pressedDown = false;
+        testKey.keyPressed(leftKey);
+        Assertions.assertEquals(true, testKey.pressedLeft);
+
+        // [keyPressed()] pressedLeft: true -> true (exception)
+        testKey.pressedDown = true;
+        testKey.keyPressed(leftKey);
+        Assertions.assertEquals(true, testKey.pressedLeft);
+
+        // [keyReleased()] pressedLeft: true -> false
+        testKey.pressedDown = true;
+        testKey.keyReleased(leftKey);
+        Assertions.assertEquals(false, testKey.pressedLeft);
+
+        // [keyReleased()] pressedLeft: false -> false (exception)
+        testKey.pressedDown = false;
+        testKey.keyReleased(leftKey);
+        Assertions.assertEquals(false, testKey.pressedLeft);
+    }
     @Test
-    public void rightPressedInPlayState() {}
+    public void rightPressedInPlayState() throws IOException {
+        System.out.println("[rightPressedInPlayState/inputKeyTest]");
+
+        GameFrame testGameFrame = new GameFrame(16, 12, 48);
+        inputKey testKey = new inputKey(testGameFrame);
+
+        testGameFrame.gameState = testGameFrame.playState;
+
+        // [key pressed] RIGHT:
+        KeyEvent rightKey = new KeyEvent(testGameFrame, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0,  KeyEvent.VK_RIGHT,'Z');
+
+        // [keyPressed()] pressedRight: false -> true
+        testKey.pressedRight = false;
+        testKey.keyPressed(rightKey);
+        Assertions.assertEquals(true, testKey.pressedRight);
+
+        // [keyPressed()] pressedRight: true -> true (exception)
+        testKey.pressedRight = true;
+        testKey.keyPressed(rightKey);
+        Assertions.assertEquals(true, testKey.pressedRight);
+
+        // [keyReleased()] pressedRight: true -> false
+        testKey.pressedRight= true;
+        testKey.keyReleased(rightKey);
+        Assertions.assertEquals(false, testKey.pressedRight);
+
+        // [keyReleased()] pressedRight: false -> false (exception)
+        testKey.pressedRight= false;
+        testKey.keyReleased(rightKey);
+        Assertions.assertEquals(false, testKey.pressedRight);
+    }
     @Test
-    public void fPressedInPlayState() {}
+    public void fPressedInPlayState() throws IOException {
+        System.out.println("[fPressedInPlayState/inputKeyTest]");
+
+        GameFrame testGameFrame = new GameFrame(16, 12, 48);
+        inputKey testKey = new inputKey(testGameFrame);
+
+        testGameFrame.gameState = testGameFrame.playState;
+
+        // [key pressed] F:
+        KeyEvent fKey = new KeyEvent(testGameFrame, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0,  KeyEvent.VK_F,'Z');
+
+        // [keyPressed()] pressF: false -> true
+        testKey.pressF = false;
+        testKey.keyPressed(fKey);
+        Assertions.assertEquals(true, testKey.pressF);
+
+        // [keyPressed()] pressF: true -> true (exception)
+        testKey.pressF = true;
+        testKey.keyPressed(fKey);
+        Assertions.assertEquals(true, testKey.pressF);
+
+        // [keyReleased()] pressF: true -> false
+        testKey.pressF = true;
+        testKey.keyReleased(fKey);
+        Assertions.assertEquals(false, testKey.pressF);
+
+        // [keyReleased()] pressF: false -> false (exception)
+        testKey.pressF = false;
+        testKey.keyReleased(fKey);
+        Assertions.assertEquals(false, testKey.pressF);
+    }
 
     // 4. tutorialState (LEFT, RIGHT, ENTER)
     @Test
@@ -591,11 +740,71 @@ public class inputKeyTest {
 
     // 6. endState (LEFT, RIGHT, ENTER)
     @Test
-    public void leftPressedInEndState() {}
+    public void leftPressedInEndState() throws IOException {
+        System.out.println("[leftPressedInEndState/inputKeyTest]");
+
+        GameFrame testGameFrame = new GameFrame(16, 12, 48);
+        inputKey testKey = new inputKey(testGameFrame);
+
+        testGameFrame.gameState = testGameFrame.endState;
+
+        // [key pressed] LEFT:
+        KeyEvent leftKey = new KeyEvent(testGameFrame, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0,  KeyEvent.VK_LEFT,'Z');
+
+        // commandNum: 0 -> 1
+        testGameFrame.commandNum = 0;
+        testKey.keyPressed(leftKey);
+        Assertions.assertEquals(1, testGameFrame.commandNum);
+
+        // commandNum: 1 -> 0
+        testGameFrame.commandNum = 1;
+        testKey.keyPressed(leftKey);
+        Assertions.assertEquals(0, testGameFrame.commandNum);
+
+        // commandNum: 7 -> 0 (exception)
+        testGameFrame.commandNum = 7;
+        testKey.keyPressed(leftKey);
+        Assertions.assertEquals(0, testGameFrame.commandNum);
+    }
     @Test
-    public void rightPressedInEndState() {}
+    public void rightPressedInEndState() throws IOException {
+        System.out.println("[rightPressedInEndState/inputKeyTest]");
+
+        GameFrame testGameFrame = new GameFrame(16, 12, 48);
+        inputKey testKey = new inputKey(testGameFrame);
+
+        testGameFrame.gameState = testGameFrame.endState;
+
+        // [key pressed] RIGHT:
+        KeyEvent rightKey = new KeyEvent(testGameFrame, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0,  KeyEvent.VK_RIGHT,'Z');
+
+        // commandNum: 0 -> 1
+        testGameFrame.commandNum = 0;
+        testKey.keyPressed(rightKey);
+        Assertions.assertEquals(1, testGameFrame.commandNum);
+
+        // commandNum: 1 -> 0
+        testGameFrame.commandNum = 1;
+        testKey.keyPressed(rightKey);
+        Assertions.assertEquals(0, testGameFrame.commandNum);
+
+        // commandNum: 7 -> 0 (exception)
+        testGameFrame.commandNum = 7;
+        testKey.keyPressed(rightKey);
+        Assertions.assertEquals(0, testGameFrame.commandNum);
+    }
     @Test
-    public void enterPressedInEndState() {}
+    public void enterPressedInEndState() throws IOException {
+        System.out.println("[enterPressedInEndState/inputKeyTest]");
+
+        GameFrame testGameFrame = new GameFrame(16, 12, 48);
+        inputKey testKey = new inputKey(testGameFrame);
+
+        testGameFrame.gameState = testGameFrame.endState;
+
+        // [key pressed] ENTER:
+        KeyEvent enterKey = new KeyEvent(testGameFrame, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0,  KeyEvent.VK_ENTER,'Z');
+    }
 
 
 
