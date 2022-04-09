@@ -163,7 +163,7 @@ public class BadSurvivorTest {
             private Frame frame = new Frame("BadSurvivorTest");
             public void paint(Graphics g) {
                 Graphics2D g2 = (Graphics2D)g;
-                badSurvivor.drawBadCharacter(g2);
+                badSurvivor.draw(g2);
             }
 
             public void init() {

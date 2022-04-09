@@ -212,7 +212,7 @@ public class MainCharacterTest {
             private Frame frame = new Frame("BadSurvivorTest");
             public void paint(Graphics g) {
                 Graphics2D g2 = (Graphics2D)g;
-                mc.drawMC(g2);
+                mc.draw(g2);
                 mc.drawScore(g2,50,10,5);
             }
 

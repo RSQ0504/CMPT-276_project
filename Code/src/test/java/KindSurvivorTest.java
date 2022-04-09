@@ -220,7 +220,7 @@ public class KindSurvivorTest {
             private Frame frame = new Frame("BadSurvivorTest");
             public void paint(Graphics g) {
                 Graphics2D g2 = (Graphics2D)g;
-                kindSurvivor.drawKindCharacter(g2);
+                kindSurvivor.draw(g2);
             }
 
             public void init() {

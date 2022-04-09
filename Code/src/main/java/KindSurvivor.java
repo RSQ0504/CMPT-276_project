@@ -171,23 +171,23 @@ public class KindSurvivor extends StaticCharacter{
      * draw character
      * @param g2
      */
-    public void drawKindCharacter(Graphics2D g2){
-        BufferedImage character_image = null;
+    public void draw(Graphics2D g2){
+        image = null;
         speak();
         switch (direction){
             case "up":
-                character_image = up;
+                image = up;
                 break;
             case "down":
-                character_image = down;
+                image = down;
                 break;
             case "left":
-                character_image = left;
+                image = left;
                 break;
             case "right":
-                character_image = right;
+                image = right;
                 break;
         }
-        g2.drawImage(character_image,x,y,character_image.getWidth(),character_image.getHeight(),null);
+        g2.drawImage(image,x,y,image.getWidth(),image.getHeight(),null);
     }
 }

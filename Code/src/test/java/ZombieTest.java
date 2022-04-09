@@ -174,7 +174,7 @@ public class ZombieTest {
             private Frame frame = new Frame("BadSurvivorTest");
             public void paint(Graphics g) {
                 Graphics2D g2 = (Graphics2D)g;
-                zombie.drawZombie(g2);
+                zombie.draw(g2);
             }
 
             public void init() {

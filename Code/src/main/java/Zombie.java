@@ -157,6 +157,7 @@ public class Zombie extends DynamicCharacter{
                 }
             }
         }
+      hitArea = new Rectangle(this.x,this.y,5,5);
     }
 
     /**
@@ -175,60 +176,50 @@ public class Zombie extends DynamicCharacter{
      * draw character
      * @param g2
      */
-    void drawZombie(Graphics2D g2){
-        BufferedImage zombie_image = null;
+    public void draw(Graphics2D g2){
+        image = null;
         switch (direction){
             case "up":
                 if(spriteNum == 1)
-                    zombie_image = up1;
+                    image = up1;
                 else if(spriteNum == 2)
-                    zombie_image = up2;
+                    image = up2;
                 else if(spriteNum == 3)
-                    zombie_image = up3;
+                    image = up3;
                 else
-                    zombie_image = up4;
+                    image = up4;
                 break;
             case "down":
                 if(spriteNum == 1)
-                    zombie_image = down1;
+                    image = down1;
                 else if(spriteNum == 2)
-                    zombie_image = down2;
+                    image = down2;
                 else if(spriteNum == 3)
-                    zombie_image = down3;
+                    image = down3;
                 else
-                    zombie_image = down4;
+                    image = down4;
                 break;
             case "left":
                 if(spriteNum == 1)
-                    zombie_image = left1;
+                    image = left1;
                 else if(spriteNum == 2)
-                    zombie_image = left2;
+                    image = left2;
                 else if(spriteNum == 3)
-                    zombie_image = left3;
+                    image = left3;
                 else
-                    zombie_image = left4;
+                    image = left4;
                 break;
             case "right":
                 if(spriteNum == 1)
-                    zombie_image = right1;
+                    image = right1;
                 else if(spriteNum == 2)
-                    zombie_image = right2;
+                    image = right2;
                 else if(spriteNum == 3)
-                    zombie_image = right3;
+                    image = right3;
                 else
-                    zombie_image = right4;
+                    image = right4;
                 break;
         }
-        g2.drawImage(zombie_image,x,y,zombie_image.getWidth(),zombie_image.getHeight(),null);
-    }
-
-    /**
-     * check for hit intersection
-     * @param mc
-     * @return
-     */
-    public boolean check(Rectangle mc){
-      hitAreaStatic = new Rectangle(this.x,this.y,5,5);
-      return hitAreaStatic.intersects(mc);
+        g2.drawImage(image,x,y,image.getWidth(),image.getHeight(),null);
     }
 }

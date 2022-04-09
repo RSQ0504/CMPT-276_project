@@ -10,8 +10,8 @@ abstract class GameObject {
   protected boolean collision = false;
   protected GameFrame frame;
   public Rectangle hitAreaStatic;
+  public Rectangle hitArea;
   protected int lvl;
-  protected GameMap gm;
 
   BufferedImage image;
   protected inputKey key;
@@ -76,4 +76,22 @@ abstract class GameObject {
    */
   public void setFrame(GameFrame frame){this.frame = frame;}
   public GameFrame getFrame(){return frame;}
+
+  /**
+   * Draw rewards
+   * @param g
+   */
+  public void draw(Graphics2D g){
+    if(appearStatus)
+      g.drawImage(image,x,y,image.getWidth(), image.getHeight(), null);
+  }
+
+  /**
+   * check if player intersects
+   * @param mc
+   * @return
+   */
+  public boolean check(Rectangle mc){
+    return hitArea.intersects(mc);
+  }
 }

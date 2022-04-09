@@ -23,21 +23,4 @@ abstract class Reward extends GameObject{
     return appearStatus;
   }
 
-  /**
-   * Draw rewards
-   * @param g
-   */
-  public void draw(Graphics2D g){
-    if(getAppear())
-      g.drawImage(image,x,y,image.getWidth(), image.getHeight(), null);
-  }
-
-  /**
-   * check if player intersects with reward
-   * @param mc
-   * @return
-   */
-  public boolean check(Rectangle mc){
-    return hitAreaStatic.intersects(mc);
-  }
 }

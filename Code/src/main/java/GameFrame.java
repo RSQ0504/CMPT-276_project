@@ -462,22 +462,22 @@ public class GameFrame extends JPanel implements Runnable{
                 }
             }
             goodPerson1.resetBoard(tileFrame.getOriginMap(gameLevel));
-            mc.drawMC(g2);
-            zombie1.drawZombie(g2);
-            zombie2.drawZombie(g2);
-            zombie3.drawZombie(g2);
+            mc.draw(g2);
+            zombie1.draw(g2);
+            zombie2.draw(g2);
+            zombie3.draw(g2);
             if(goodPerson1.appearStatus) {
-                goodPerson1.drawKindCharacter(g2);
+                goodPerson1.draw(g2);
                 goodPerson1.drawKindCharcMsgBox(g2);
             }
             if(badPerson1.appearStatus) {
-                badPerson1.drawBadCharacter(g2);
+                badPerson1.draw(g2);
             }
             if(badPerson2.appearStatus) {
-                badPerson2.drawBadCharacter(g2);
+                badPerson2.draw(g2);
             }
             if(badPerson3.appearStatus) {
-                badPerson3.drawBadCharacter(g2);
+                badPerson3.draw(g2);
             }
 
 

@@ -16,8 +16,6 @@ public class MainCharacter extends DynamicCharacter{
     private BufferedImage HP_image;
     private BufferedImage VaccineImage;
 
-    public BufferedImage MC_image;
-
     /**
      * class constructor with no parameter
      */
@@ -164,51 +162,51 @@ public class MainCharacter extends DynamicCharacter{
      * Draw player character
      * @param g2
      */
-    void drawMC(Graphics2D g2){
-        MC_image = null;
+    public void draw(Graphics2D g2){
+        image = null;
         switch (direction){
             case "up":
                 if(spriteNum == 1)
-                    MC_image = up1;
+                    image = up1;
                 else if(spriteNum == 2)
-                    MC_image = up2;
+                    image = up2;
                 else if(spriteNum == 3)
-                    MC_image = up3;
+                    image = up3;
                 else
-                    MC_image = up4;
+                    image = up4;
                 break;
             case "down":
                 if(spriteNum == 1)
-                    MC_image = down1;
+                    image = down1;
                 else if(spriteNum == 2)
-                    MC_image = down2;
+                    image = down2;
                 else if(spriteNum == 3)
-                    MC_image = down3;
+                    image = down3;
                 else
-                    MC_image = down4;
+                    image = down4;
                 break;
             case "left":
                 if(spriteNum == 1)
-                    MC_image = left1;
+                    image = left1;
                 else if(spriteNum == 2)
-                    MC_image = left2;
+                    image = left2;
                 else if(spriteNum == 3)
-                    MC_image = left3;
+                    image = left3;
                 else
-                    MC_image = left4;
+                    image = left4;
                 break;
             case "right":
                 if(spriteNum == 1)
-                    MC_image = right1;
+                    image = right1;
                 else if(spriteNum == 2)
-                    MC_image = right2;
+                    image = right2;
                 else if(spriteNum == 3)
-                    MC_image = right3;
+                    image = right3;
                 else
-                    MC_image = right4;
+                    image = right4;
                 break;
         }
-        g2.drawImage(MC_image,x,y, (frame.getCellSize()/2), frame.getCellSize(), null);
+        g2.drawImage(image,x,y, (frame.getCellSize()/2), frame.getCellSize(), null);
     }
 
     /**
