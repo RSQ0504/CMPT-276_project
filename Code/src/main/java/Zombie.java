@@ -11,9 +11,7 @@ public class Zombie extends DynamicCharacter{
     /**
      * The attributes of zombie: the number of HP decrease from MainCharacter (damage)
      */
-    private int damage;
 
-    private GameFrame gf;
     private MainCharacter aim;
 
     /**
@@ -31,12 +29,12 @@ public class Zombie extends DynamicCharacter{
      * @param mc
      */
     public Zombie(GameFrame gameFrame, int x, int y, MainCharacter mc){
-        this.gf = gameFrame;
+        this.frame = gameFrame;
         this.aim = mc;
 
         setDefaultValue(x,y);
         getZombieImages();
-        hitArea = new Rectangle((int) 1,45,gf.getCellSize()/2, (int) (gf.getCellSize()));
+        hitAreaStatic = new Rectangle((int) 1,45,frame.getCellSize()/2, (int) (frame.getCellSize()));
     }
 
     /**
@@ -84,10 +82,10 @@ public class Zombie extends DynamicCharacter{
      * update character positioning each update
      */
     void updateZombie(){
-        collisionArea = false;
-        gf.check_collision.checkTile(this);
+        collision = false;
+        frame.check_collision.checkTile(this);
 
-        if (collisionArea == false) {
+        if (collision == false) {
             switch (direction){
                 case "up":
                     y -= speed;

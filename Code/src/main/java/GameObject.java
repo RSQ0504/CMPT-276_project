@@ -5,15 +5,18 @@ import java.awt.image.BufferedImage;
  * Class for managing Static and Dynamic game objects
  */
 abstract class GameObject {
-  public int x = 0,y = 0;
-  public int width, height;
-  private boolean collision;
-  private GameFrame frame;
+  protected int x = 0,y = 0;
+  protected int width, height;
+  protected boolean collision = false;
+  protected GameFrame frame;
   public Rectangle hitAreaStatic;
   protected int lvl;
   protected GameMap gm;
 
   BufferedImage image;
+  protected inputKey key;
+  protected String direction = "down";
+  protected boolean appearStatus=true;
 
   /**
    * get collision boolean

@@ -23,8 +23,8 @@ public class BadSurvivor extends StaticCharacter{
      * @param y
      */
     public BadSurvivor(GameFrame gameFrame, inputKey key, MainCharacter mc, int x, int y){
-        this.gf = gameFrame;
-        this.k = key;
+        this.frame = gameFrame;
+        this.key = key;
         this.mc = mc;
         this.width = 30;
         this.height = 30;
@@ -71,8 +71,8 @@ public class BadSurvivor extends StaticCharacter{
      * if close then display message box and lower player's HP
      */
     public void speak(){
-        if(status && (this.x < (mc.x + 40)) && (this.x > (mc.x - 40)) && (this.y < (mc.y + 40)) && (this.y > (mc.y - 40))){
-            if(k.pressF){
+        if(appearStatus && (this.x < (mc.x + 40)) && (this.x > (mc.x - 40)) && (this.y < (mc.y + 40)) && (this.y > (mc.y - 40))){
+            if(key.pressF){
                 int x_distance = this.x - mc.x;
                 int y_distance = this.y - mc.y;
                 if(x_distance>0){
@@ -105,7 +105,7 @@ public class BadSurvivor extends StaticCharacter{
                 if(speakTimeCounter >100){
                     // damage
                     mc.setHP(mc.getHP()-1);
-                    status = false;
+                    appearStatus = false;
                 }
             }
         }

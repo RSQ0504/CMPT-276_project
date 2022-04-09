@@ -6,7 +6,6 @@ import java.awt.image.BufferedImage;
  * class to implement and manage reward objects
  */
 abstract class Reward extends GameObject{
-  public boolean appearStatus=true;
 
   /**
    * set appear status

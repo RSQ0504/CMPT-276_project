@@ -33,8 +33,8 @@ public class KindSurvivor extends StaticCharacter{
      *      door_y -- the y position of the door that kind survivor can open
      */
     public KindSurvivor(GameFrame gameFrame, inputKey key, MainCharacter mc, int x, int y, int[][] Board,int door_x, int door_y){
-        this.gf = gameFrame;
-        this.k = key;
+        this.frame = gameFrame;
+        this.key = key;
         this.mc = mc;
         this.map = Board;
         this.width = 30;
@@ -105,8 +105,8 @@ public class KindSurvivor extends StaticCharacter{
      * if close then display message box and open door if all required vaccines are collected by player
      */
     public void speak(){
-        if(status && (this.x < (mc.x + 40)) && (this.x > (mc.x - 40)) && (this.y < (mc.y + 40)) && (this.y > (mc.y - 40))){
-            if(k.pressF == true) {
+        if(appearStatus && (this.x < (mc.x + 40)) && (this.x > (mc.x - 40)) && (this.y < (mc.y + 40)) && (this.y > (mc.y - 40))){
+            if(key.pressF == true) {
                 int x_distance = this.x - mc.x;
                 int y_distance = this.y - mc.y;
                 if (x_distance > 0) {
@@ -137,9 +137,9 @@ public class KindSurvivor extends StaticCharacter{
                 if(speakTimeCounter >200){
                     speakMessageShow = false;
                     speakTimeCounter = 0;
-                    if(mc.getVaccines() >= gf.numOfVaccines){
+                    if(mc.getVaccines() >= frame.numOfVaccines){
                         openDoor();
-                        status = false;
+                        appearStatus = false;
                     }
                 }
             }
@@ -159,7 +159,7 @@ public class KindSurvivor extends StaticCharacter{
             if (message_x+message_width >= 768){
                 message_x = 768 - (message_width+10);
             }
-            if (mc.getVaccines() >= gf.numOfVaccines){
+            if (mc.getVaccines() >= frame.numOfVaccines){
                 g2.drawImage(message_image,message_x,message_y,message_width,message_height,null);
             } else {
                 g2.drawImage(message_image_incomplete,message_x,message_y,message_width,message_height,null);

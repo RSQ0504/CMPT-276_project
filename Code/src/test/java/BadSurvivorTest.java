@@ -24,7 +24,7 @@ public class BadSurvivorTest {
         img[2] = ImageIO.read(new File("src/main/java/picture/Character/Character_goodOrBadPerson/staticCharacter_faceToDown.png"));
         img[3] = ImageIO.read(new File("src/main/java/picture/Character/Character_goodOrBadPerson/staticCharacter_faceToRight.png"));
         img[4] = ImageIO.read(new File("src/main/java/picture/Character/Character_goodOrBadPerson/staticCharacter_faceToLeft.png"));
-        
+
         for(int i = 0; i < 5; i++) {
             String[] badSurvivorImg = null;
             switch (i) {
@@ -51,7 +51,7 @@ public class BadSurvivorTest {
                 Assertions.assertEquals(img[i].toString().split(" ")[j], badSurvivorImg[j]);
         }
     }
-    
+
     @Test
     public void testSetDefaultValue(){
         BadSurvivor badSurvivor = new BadSurvivor();
@@ -81,7 +81,7 @@ public class BadSurvivorTest {
         mc.setDefaultValue(startPoint);
         BadSurvivor badSurvivor = new BadSurvivor(gf, key, mc, 10, 10);
 
-        Assert.assertTrue(badSurvivor.status);
+        Assert.assertTrue(badSurvivor.appearStatus);
         Assert.assertEquals("down", badSurvivor.direction);
 
         // if MainCharacter is closed to bad survivor at right and press F
@@ -90,13 +90,13 @@ public class BadSurvivorTest {
         key.pressF = true;
         badSurvivor.speak();
         Assert.assertEquals("right", badSurvivor.direction);
-        Assert.assertTrue(badSurvivor.status); // It is still true because it should wait for the speakTimeCounter >100
+        Assert.assertTrue(badSurvivor.appearStatus); // It is still true because it should wait for the speakTimeCounter >100
 
         key.pressF = false;
         badSurvivor.speakMessageShow = true;
         badSurvivor.speakTimeCounter = 100;
         badSurvivor.speak();
-        Assert.assertFalse(badSurvivor.status); // It should be false right now
+        Assert.assertFalse(badSurvivor.appearStatus); // It should be false right now
     }
 
     @Test
@@ -111,7 +111,7 @@ public class BadSurvivorTest {
         mc.setDefaultValue(startPoint);
         BadSurvivor badSurvivor = new BadSurvivor(gf, key, mc, 10, 10);
 
-        Assert.assertTrue(badSurvivor.status);
+        Assert.assertTrue(badSurvivor.appearStatus);
         Assert.assertEquals("down", badSurvivor.direction);
 
         // if MainCharacter is not closed to bad survivor at right and press F
@@ -120,7 +120,7 @@ public class BadSurvivorTest {
         key.pressF = true;
         badSurvivor.speak();
         Assert.assertEquals("down", badSurvivor.direction);
-        Assert.assertTrue(badSurvivor.status);
+        Assert.assertTrue(badSurvivor.appearStatus);
     }
 
     @Test
@@ -135,7 +135,7 @@ public class BadSurvivorTest {
         mc.setDefaultValue(startPoint);
         BadSurvivor badSurvivor = new BadSurvivor(gf, key, mc, 10, 10);
 
-        Assert.assertTrue(badSurvivor.status);
+        Assert.assertTrue(badSurvivor.appearStatus);
         Assert.assertEquals("down", badSurvivor.direction);
 
         // if MainCharacter is closed to bad survivor at left but not press F
@@ -144,7 +144,7 @@ public class BadSurvivorTest {
         key.pressF = false;
         badSurvivor.speak();
         Assert.assertEquals("down", badSurvivor.direction);
-        Assert.assertTrue(badSurvivor.status);
+        Assert.assertTrue(badSurvivor.appearStatus);
     }
 
     @Test

@@ -92,7 +92,7 @@ public class KindSurvivorTest {
         int doorX = 3, doorY = 3;
         KindSurvivor kindSurvivor = new KindSurvivor(gf, key, mc, 1, 1, board, doorX, doorY);
 
-        Assert.assertTrue(kindSurvivor.status);
+        Assert.assertTrue(kindSurvivor.appearStatus);
         Assert.assertEquals("down", kindSurvivor.direction);
 
         // if MainCharacter who did not collect all vaccines is closed to bad survivor at right and press F
@@ -101,7 +101,7 @@ public class KindSurvivorTest {
         key.pressF = true;
         kindSurvivor.speak();
         Assert.assertEquals("right", kindSurvivor.direction);
-        Assert.assertTrue(kindSurvivor.status);
+        Assert.assertTrue(kindSurvivor.appearStatus);
 
         // if MainCharacter who collect all vaccines is closed to bad survivor at right and press F
         key.pressF = false;
@@ -110,7 +110,7 @@ public class KindSurvivorTest {
         mc.setVaccines(5);
         gf.numOfVaccines = 5;
         kindSurvivor.speak();
-        Assert.assertFalse(kindSurvivor.status); // It should be false right now
+        Assert.assertFalse(kindSurvivor.appearStatus); // It should be false right now
     }
 
     @Test
@@ -132,7 +132,7 @@ public class KindSurvivorTest {
         int doorX = 3, doorY = 3;
         KindSurvivor kindSurvivor = new KindSurvivor(gf, key, mc, 1, 1, board, doorX, doorY);
 
-        Assert.assertTrue(kindSurvivor.status);
+        Assert.assertTrue(kindSurvivor.appearStatus);
         Assert.assertEquals("down", kindSurvivor.direction);
 
         // if MainCharacter is not closed to bad survivor at right and press F
@@ -141,7 +141,7 @@ public class KindSurvivorTest {
         key.pressF = true;
         kindSurvivor.speak();
         Assert.assertEquals("down", kindSurvivor.direction);
-        Assert.assertTrue(kindSurvivor.status);
+        Assert.assertTrue(kindSurvivor.appearStatus);
     }
 
     @Test
@@ -163,7 +163,7 @@ public class KindSurvivorTest {
         int doorX = 3, doorY = 3;
         KindSurvivor kindSurvivor = new KindSurvivor(gf, key, mc, 1, 1, board, doorX, doorY);
 
-        Assert.assertTrue(kindSurvivor.status);
+        Assert.assertTrue(kindSurvivor.appearStatus);
         Assert.assertEquals("down", kindSurvivor.direction);
 
         // if MainCharacter is closed to bad survivor at left but not press F
@@ -172,7 +172,7 @@ public class KindSurvivorTest {
         key.pressF = false;
         kindSurvivor.speak();
         Assert.assertEquals("down", kindSurvivor.direction);
-        Assert.assertTrue(kindSurvivor.status);
+        Assert.assertTrue(kindSurvivor.appearStatus);
     }
 
     @Test

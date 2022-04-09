@@ -16,10 +16,7 @@ public class MainCharacter extends DynamicCharacter{
     private BufferedImage HP_image;
     private BufferedImage VaccineImage;
 
-    private GameFrame gf;
-    private inputKey key;
     public BufferedImage MC_image;
-    private int lvl = 0;
 
     /**
      * class constructor with no parameter
@@ -34,14 +31,15 @@ public class MainCharacter extends DynamicCharacter{
      * @param key
      */
     public MainCharacter(GameFrame gameFrame, inputKey key){
-        this.gf = gameFrame;
+        this.frame = gameFrame;
         this.key = key;
         this.width = 20;
         this.height = 20;
+        this.lvl =0;
 
-        setDefaultValue(gf.tileFrame.getStartPoints(lvl));
+        setDefaultValue(frame.tileFrame.getStartPoints(lvl));
         getMCImages();
-        hitArea = new Rectangle( 1,45,gf.getCellSize()/2,  gf.getCellSize());
+        hitAreaStatic = new Rectangle( 1,45,frame.getCellSize()/2,  frame.getCellSize());
     }
 
     /**
@@ -128,10 +126,10 @@ public class MainCharacter extends DynamicCharacter{
                 direction = "right";
             }
 
-            collisionArea = false;
-            gf.check_collision.checkTile(this);
+            collision = false;
+            frame.check_collision.checkTile(this);
 
-            if (collisionArea == false) {
+            if (collision == false) {
                 switch (direction) {
                     case "up":
                         y -= speed;
@@ -210,7 +208,7 @@ public class MainCharacter extends DynamicCharacter{
                     MC_image = right4;
                 break;
         }
-        g2.drawImage(MC_image,x,y, (gf.getCellSize()/2), gf.getCellSize(), null);
+        g2.drawImage(MC_image,x,y, (frame.getCellSize()/2), frame.getCellSize(), null);
     }
 
     /**

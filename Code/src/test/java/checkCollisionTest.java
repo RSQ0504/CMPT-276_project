@@ -22,83 +22,83 @@ public class checkCollisionTest {
         checkCollision ccTest = new checkCollision(testGF);
 
         //hit area
-        dcTest.hitArea = new Rectangle( 0,0,24,  24);
+        dcTest.hitAreaStatic = new Rectangle( 0,0,24,  24);
 
         //Corner tests
         //0,0
-        dcTest.collisionArea = false;
+        dcTest.collision = false;
         ccTest.checkTile(dcTest);
-        Assertions.assertTrue(dcTest.collisionArea);
+        Assertions.assertTrue(dcTest.collision);
 
         //48,48
         dcTest.x = 768/2;
         dcTest.y = 576/2;
-        dcTest.collisionArea = false;
+        dcTest.collision = false;
         dcTest.direction = "up";
         ccTest.checkTile(dcTest);
-        Assertions.assertTrue(dcTest.collisionArea);
-        
+        Assertions.assertTrue(dcTest.collision);
+
 
         //0,48
         dcTest.x = 0;
         dcTest.y = 576/2;
-        dcTest.collisionArea = false;
+        dcTest.collision = false;
         dcTest.direction = "down";
         ccTest.checkTile(dcTest);
-        Assertions.assertTrue(dcTest.collisionArea);
-        
+        Assertions.assertTrue(dcTest.collision);
+
 
         //48,0
         dcTest.x = 768/2;
         dcTest.y = 0;
         dcTest.direction = "left";
-        dcTest.collisionArea = false;
+        dcTest.collision = false;
         ccTest.checkTile(dcTest);
-        Assertions.assertTrue(dcTest.collisionArea);
-        
+        Assertions.assertTrue(dcTest.collision);
+
 
         //Outside walls
         dcTest.x = 144;
         dcTest.y = 24;
-        dcTest.collisionArea = false;
+        dcTest.collision = false;
         dcTest.direction = "right";
         ccTest.checkTile(dcTest);
-        Assertions.assertFalse(dcTest.collisionArea);
-        
+        Assertions.assertFalse(dcTest.collision);
+
 
         //Top touching wall
         dcTest.x = 48;
         dcTest.y = 24;
-        dcTest.collisionArea = false;
+        dcTest.collision = false;
         dcTest.direction = "up";
         ccTest.checkTile(dcTest);
-        Assertions.assertFalse(dcTest.collisionArea);
-        
+        Assertions.assertFalse(dcTest.collision);
+
 
         //Bottom touching wall
         dcTest.x = 48;
         dcTest.y = 276;
-        dcTest.collisionArea = false;
+        dcTest.collision = false;
         dcTest.direction = "down";
         ccTest.checkTile(dcTest);
-        Assertions.assertFalse(dcTest.collisionArea);
-        
+        Assertions.assertFalse(dcTest.collision);
+
 
         //Right touching wall
         dcTest.x = 168;
         dcTest.y = 518;
-        dcTest.collisionArea = false;
+        dcTest.collision = false;
         dcTest.direction = "right";
         ccTest.checkTile(dcTest);
-        Assertions.assertFalse(dcTest.collisionArea);
+        Assertions.assertFalse(dcTest.collision);
 
         //left touching wall
         dcTest.x = 238;
         dcTest.y = 518;
-        dcTest.collisionArea = false;
+        dcTest.collision = false;
         dcTest.direction = "left";
         ccTest.checkTile(dcTest);
-        Assertions.assertFalse(dcTest.collisionArea);
+        Assertions.assertFalse(dcTest.collision);
     }
 
 }
