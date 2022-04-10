@@ -34,6 +34,7 @@ public class Zombie extends DynamicCharacter{
 
         setDefaultValue(x,y);
         getZombieImages();
+        hitArea = new Rectangle(this.x,this.y,5,5);
         hitAreaStatic = new Rectangle((int) 1,45,frame.getCellSize()/2, (int) (frame.getCellSize()));
     }
 
