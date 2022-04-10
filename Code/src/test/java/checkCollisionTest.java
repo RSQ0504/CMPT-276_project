@@ -16,7 +16,7 @@ public class checkCollisionTest {
         GameFrame testGF = new GameFrame(colm, rows, pacSize);
 
         //Make Dynamic Character
-        DynamicCharacter dcTest = new DynamicCharacter();
+        DynamicCharacter dcTest = new MainCharacter();
 
         //Make checkCollision class and send GameFrame class in
         checkCollision ccTest = new checkCollision(testGF);

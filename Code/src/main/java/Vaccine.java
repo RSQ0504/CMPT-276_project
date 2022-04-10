@@ -30,10 +30,25 @@ public class Vaccine extends Reward {
     setFrame(frame);
     this.x = x;
     this.y = y;
-    image = ImageIO.read(new File("src/main/java/picture/Rewards/Vaccine.png"));
+    images[0] = ImageIO.read(new File("src/main/java/picture/Rewards/Vaccine.png"));
     this.width = 25;
     this.height = 25;
     hitArea = new Rectangle(this.x,this.y-10,this.width,this.height);
+  }
+
+  /**
+   * Draw Food
+   * @param g
+   */
+  @Override
+  public void draw(Graphics2D g){
+    if(appearStatus)
+      g.drawImage(images[0],x,y,images[0].getWidth(), images[0].getHeight(), null);
+  }
+
+  @Override
+  public void update() {
+
   }
 
 }

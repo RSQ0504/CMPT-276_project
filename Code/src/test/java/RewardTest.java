@@ -82,7 +82,7 @@ class RewardTest {
   @Test
   void check() {
     Rectangle mc = new Rectangle(a.x,a.y,a.width,a.height);
-    boolean original = reward.hitAreaStatic.intersects(mc);
+    boolean original = reward.hitArea.intersects(mc);
     assertEquals(original,reward.check(mc));
   }
 }

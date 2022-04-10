@@ -19,34 +19,15 @@ public class BadSurvivorTest {
 
         BufferedImage[] img = new BufferedImage[5];
 
-        img[0] = ImageIO.read(new File("src/main/java/picture/Character/Character_goodOrBadPerson/Message_badPerson.png"));
-        img[1] = ImageIO.read(new File("src/main/java/picture/Character/Character_goodOrBadPerson/staticCharacter_faceToUp.png"));
-        img[2] = ImageIO.read(new File("src/main/java/picture/Character/Character_goodOrBadPerson/staticCharacter_faceToDown.png"));
-        img[3] = ImageIO.read(new File("src/main/java/picture/Character/Character_goodOrBadPerson/staticCharacter_faceToRight.png"));
-        img[4] = ImageIO.read(new File("src/main/java/picture/Character/Character_goodOrBadPerson/staticCharacter_faceToLeft.png"));
+        img[0] = ImageIO.read(new File("src/main/java/picture/Character/Character_goodOrBadPerson/staticCharacter_faceToUp.png"));
+        img[1] = ImageIO.read(new File("src/main/java/picture/Character/Character_goodOrBadPerson/staticCharacter_faceToDown.png"));
+        img[2] = ImageIO.read(new File("src/main/java/picture/Character/Character_goodOrBadPerson/staticCharacter_faceToRight.png"));
+        img[3] = ImageIO.read(new File("src/main/java/picture/Character/Character_goodOrBadPerson/staticCharacter_faceToLeft.png"));
+        img[4] = ImageIO.read(new File("src/main/java/picture/Character/Character_goodOrBadPerson/Message_badPerson.png"));
 
         for(int i = 0; i < 5; i++) {
             String[] badSurvivorImg = null;
-            switch (i) {
-                case 0:
-                    badSurvivorImg = badSurvivor.message_image.toString().split(" ");
-                    break;
-                case 1:
-                    badSurvivorImg = badSurvivor.up.toString().split(" ");
-                    break;
-                case 2:
-                    badSurvivorImg = badSurvivor.down.toString().split(" ");
-                    break;
-                case 3:
-                    badSurvivorImg = badSurvivor.right.toString().split(" ");
-                    break;
-                case 4:
-                    badSurvivorImg = badSurvivor.left.toString().split(" ");
-                    break;
-                default:
-                    break;
-            }
-
+            badSurvivorImg = badSurvivor.images[i].toString().split(" ");
             for (int j = 1; j < badSurvivorImg.length; j++)
                 Assertions.assertEquals(img[i].toString().split(" ")[j], badSurvivorImg[j]);
         }
@@ -63,7 +44,7 @@ public class BadSurvivorTest {
         Assert.assertEquals(20,badSurvivor.y);
         Assert.assertFalse(badSurvivor.speakMessageShow);
         Assert.assertEquals(10, badSurvivor.message_x);
-        int width = badSurvivor.message_image.getWidth(), height = badSurvivor.message_image.getHeight();
+        int width = badSurvivor.images[4].getWidth(), height = badSurvivor.images[4].getHeight();
         Assert.assertEquals(20 - height, badSurvivor.message_y);
         Assert.assertEquals(width, badSurvivor.message_width);
         Assert.assertEquals(height,badSurvivor.message_height);
@@ -88,14 +69,14 @@ public class BadSurvivorTest {
         int[] startPoint1 = {15, 10};
         mc.setDefaultValue(startPoint1);
         key.pressF = true;
-        badSurvivor.speak();
+        badSurvivor.update();
         Assert.assertEquals("right", badSurvivor.direction);
         Assert.assertTrue(badSurvivor.appearStatus); // It is still true because it should wait for the speakTimeCounter >100
 
         key.pressF = false;
         badSurvivor.speakMessageShow = true;
         badSurvivor.speakTimeCounter = 100;
-        badSurvivor.speak();
+        badSurvivor.update();
         Assert.assertFalse(badSurvivor.appearStatus); // It should be false right now
     }
 
@@ -118,7 +99,7 @@ public class BadSurvivorTest {
         int[] startPoint2 = {150, 10};
         mc.setDefaultValue(startPoint2);
         key.pressF = true;
-        badSurvivor.speak();
+        badSurvivor.update();
         Assert.assertEquals("down", badSurvivor.direction);
         Assert.assertTrue(badSurvivor.appearStatus);
     }
@@ -142,7 +123,7 @@ public class BadSurvivorTest {
         int[] startPoint3 = {0, 10};
         mc.setDefaultValue(startPoint3);
         key.pressF = false;
-        badSurvivor.speak();
+        badSurvivor.update();
         Assert.assertEquals("down", badSurvivor.direction);
         Assert.assertTrue(badSurvivor.appearStatus);
     }

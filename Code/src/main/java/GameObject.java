@@ -13,10 +13,10 @@ abstract class GameObject {
   public Rectangle hitArea;
   protected int lvl;
 
-  BufferedImage image;
+  BufferedImage[] images = new BufferedImage[16];
   protected inputKey key;
   protected String direction = "down";
-  protected boolean appearStatus=true;
+  protected boolean appearStatus = true;
 
   /**
    * get collision boolean
@@ -34,8 +34,8 @@ abstract class GameObject {
    * get image for game objects
    * @return
    */
-  public BufferedImage getImage(){
-    return image;
+  public BufferedImage[] getImage(){
+    return images;
   }
 
   /**
@@ -75,23 +75,29 @@ abstract class GameObject {
    * @param frame
    */
   public void setFrame(GameFrame frame){this.frame = frame;}
+
+  /**
+   * get private variable frame
+   */
   public GameFrame getFrame(){return frame;}
 
   /**
-   * Draw rewards
-   * @param g
+   * check if player intersects
+   * @param mcHitArea
+   * @return
    */
-  public void draw(Graphics2D g){
-    if(appearStatus)
-      g.drawImage(image,x,y,image.getWidth(), image.getHeight(), null);
+  public boolean check(Rectangle mcHitArea){
+     return hitArea.intersects(mcHitArea);
   }
 
   /**
-   * check if player intersects
-   * @param mc
-   * @return
+   * Draw the GameObject in Graphics2D
+   * @param g
    */
-  public boolean check(Rectangle mc){
-    return hitArea.intersects(mc);
-  }
+  public abstract void draw(Graphics2D g);
+
+  /**
+   * Update the GameObject
+   */
+  public abstract void update();
 }

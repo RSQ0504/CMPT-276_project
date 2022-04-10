@@ -46,8 +46,10 @@ class GameObjectTest {
 
   @Test
   void getImage() {
-    gameObject.image = new BufferedImage(7,8,1);
-    assertEquals(gameObject.image,gameObject.getImage());
+    BufferedImage[] images = new BufferedImage[1];
+    images[0] = new BufferedImage(7,8,1);
+    gameObject.images = images;
+    assertEquals(gameObject.images,gameObject.getImage());
   }
 
   @Test

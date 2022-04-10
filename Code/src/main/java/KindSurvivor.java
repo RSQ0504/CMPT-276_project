@@ -67,9 +67,9 @@ public class KindSurvivor extends StaticCharacter{
         this.door_y = door_y;
         this.speakMessageShow = false;
         this.message_x = x;
-        this.message_y = y - message_image.getHeight();
-        this.message_width = message_image.getWidth();
-        this.message_height = message_image.getHeight();
+        this.message_y = y - images[4].getHeight();
+        this.message_width = images[4].getWidth();
+        this.message_height = images[4].getHeight();
     }
 
     /**
@@ -86,14 +86,12 @@ public class KindSurvivor extends StaticCharacter{
     /**
      * read and import character image
      */
+    @Override
     public void getSurvivorImages(){
+        super.getSurvivorImages();
         try{
-            message_image= ImageIO.read(new File("src/main/java/picture/Character/Character_goodOrBadPerson/Message_goodPerson.png"));
-            message_image_incomplete= ImageIO.read(new File("src/main/java/picture/Character/Character_goodOrBadPerson/Message_goodPerson2.png"));
-            up = ImageIO.read(new File("src/main/java/picture/Character/Character_goodOrBadPerson/staticCharacter_faceToUp.png"));
-            down = ImageIO.read(new File("src/main/java/picture/Character/Character_goodOrBadPerson/staticCharacter_faceToDown.png"));
-            right = ImageIO.read(new File("src/main/java/picture/Character/Character_goodOrBadPerson/staticCharacter_faceToRight.png"));
-            left = ImageIO.read(new File("src/main/java/picture/Character/Character_goodOrBadPerson/staticCharacter_faceToLeft.png"));
+            images[4] = ImageIO.read(new File("src/main/java/picture/Character/Character_goodOrBadPerson/Message_goodPerson.png"));
+            images[5] = ImageIO.read(new File("src/main/java/picture/Character/Character_goodOrBadPerson/Message_goodPerson2.png"));
         }
         catch (Exception e){
             e.printStackTrace();
@@ -104,7 +102,8 @@ public class KindSurvivor extends StaticCharacter{
      * check if player pressed F while in close proximity with static enemy
      * if close then display message box and open door if all required vaccines are collected by player
      */
-    public void speak(){
+    @Override
+    public void update(){
         if(appearStatus && (this.x < (mc.x + 40)) && (this.x > (mc.x - 40)) && (this.y < (mc.y + 40)) && (this.y > (mc.y - 40))){
             if(key.pressF == true) {
                 int x_distance = this.x - mc.x;
@@ -150,44 +149,21 @@ public class KindSurvivor extends StaticCharacter{
     }
 
     /**
-     * draw character dialog box
+     * draw character
      * @param g2
      */
-    public void drawKindCharcMsgBox(Graphics2D g2){
-        speak();
+    @Override
+    public void draw(Graphics2D g2){
+        super.draw(g2);
         if(speakMessageShow){
             if (message_x+message_width >= 768){
                 message_x = 768 - (message_width+10);
             }
             if (mc.getVaccines() >= frame.numOfVaccines){
-                g2.drawImage(message_image,message_x,message_y,message_width,message_height,null);
+                g2.drawImage(images[4],message_x,message_y,message_width,message_height,null);
             } else {
-                g2.drawImage(message_image_incomplete,message_x,message_y,message_width,message_height,null);
+                g2.drawImage(images[5],message_x,message_y,message_width,message_height,null);
             }
         }
-    }
-
-    /**
-     * draw character
-     * @param g2
-     */
-    public void draw(Graphics2D g2){
-        image = null;
-        speak();
-        switch (direction){
-            case "up":
-                image = up;
-                break;
-            case "down":
-                image = down;
-                break;
-            case "left":
-                image = left;
-                break;
-            case "right":
-                image = right;
-                break;
-        }
-        g2.drawImage(image,x,y,image.getWidth(),image.getHeight(),null);
     }
 }

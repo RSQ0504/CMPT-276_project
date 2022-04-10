@@ -40,59 +40,7 @@ public class ZombieTest {
         img[15] = ImageIO.read(new File("src/main/java/picture/Character/Character_zombie/zombie_walkLeft4.png"));
         for(int i = 0; i < 16; i++){
             String[] zombieImg = null;
-            switch (i){
-                case 0:
-                    zombieImg = zombie.up1.toString().split(" ");
-                    break;
-                case 1:
-                    zombieImg = zombie.up2.toString().split(" ");
-                    break;
-                case 2:
-                    zombieImg = zombie.up3.toString().split(" ");
-                    break;
-                case 3:
-                    zombieImg = zombie.up4.toString().split(" ");
-                    break;
-                case 4:
-                    zombieImg = zombie.down1.toString().split(" ");
-                    break;
-                case 5:
-                    zombieImg = zombie.down2.toString().split(" ");
-                    break;
-                case 6:
-                    zombieImg = zombie.down3.toString().split(" ");
-                    break;
-                case 7:
-                    zombieImg = zombie.down4.toString().split(" ");
-                    break;
-                case 8:
-                    zombieImg = zombie.right1.toString().split(" ");
-                    break;
-                case 9:
-                    zombieImg = zombie.right2.toString().split(" ");
-                    break;
-                case 10:
-                    zombieImg = zombie.right3.toString().split(" ");
-                    break;
-                case 11:
-                    zombieImg = zombie.right4.toString().split(" ");
-                    break;
-                case 12:
-                    zombieImg = zombie.left1.toString().split(" ");
-                    break;
-                case 13:
-                    zombieImg = zombie.left2.toString().split(" ");
-                    break;
-                case 14:
-                    zombieImg = zombie.left3.toString().split(" ");
-                    break;
-                case 15:
-                    zombieImg = zombie.left4.toString().split(" ");
-                    break;
-                default:
-                    break;
-            }
-
+            zombieImg = zombie.images[i].toString().split(" ");
             for(int j = 1; j < zombieImg.length; j++)
                 Assertions.assertEquals(img[i].toString().split(" ")[j], zombieImg[j]);
         }
@@ -109,7 +57,7 @@ public class ZombieTest {
 
         Zombie zombie = new Zombie(gf, 15, 200, mc);
 
-        zombie.updateZombie();
+        zombie.update();
         Assert.assertEquals(15, zombie.x);
         Assert.assertEquals(200, zombie.y);
     }
@@ -145,14 +93,17 @@ public class ZombieTest {
         zombie.y = 10;
         zombie.height = 10;
         zombie.width = 10;
+        zombie.hitArea = new Rectangle(5,10,5,5);
 
         Zombie zombie2 = new Zombie();
         zombie2.x = 100;
         zombie2.y = 100;
         zombie2.height = 10;
         zombie2.width = 10;
+        zombie2.hitArea = new Rectangle(100,100,5,5);
 
-        Rectangle rec = new Rectangle(5,5,10,10);
+        Rectangle rec = new Rectangle(5,5,50,50);
+
         Assert.assertTrue(zombie.check(rec));
         Assert.assertFalse(zombie2.check(rec));
     }

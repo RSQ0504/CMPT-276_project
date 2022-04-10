@@ -367,10 +367,10 @@ public class GameFrame extends JPanel implements Runnable{
      * update dynamic character positioning
      */
     private void updatePos(){
-        mc.updateMC();
-        zombie1.updateZombie();
-        zombie2.updateZombie();
-        zombie3.updateZombie();
+        mc.update();
+        zombie1.update();
+        zombie2.update();
+        zombie3.update();
     }
 
     /**
@@ -468,7 +468,6 @@ public class GameFrame extends JPanel implements Runnable{
             zombie3.draw(g2);
             if(goodPerson1.appearStatus) {
                 goodPerson1.draw(g2);
-                goodPerson1.drawKindCharcMsgBox(g2);
             }
             if(badPerson1.appearStatus) {
                 badPerson1.draw(g2);

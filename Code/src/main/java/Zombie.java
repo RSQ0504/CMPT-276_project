@@ -34,6 +34,7 @@ public class Zombie extends DynamicCharacter{
 
         setDefaultValue(x,y);
         getZombieImages();
+        hitArea = new Rectangle(this.x,this.y,5,5);
         hitAreaStatic = new Rectangle((int) 1,45,frame.getCellSize()/2, (int) (frame.getCellSize()));
     }
 
@@ -42,25 +43,25 @@ public class Zombie extends DynamicCharacter{
      */
     public void getZombieImages() {
         try{
-            up1 = ImageIO.read(new File("src/main/java/picture/Character/Character_zombie/zombie_walkUp1.png"));
-            up2 = ImageIO.read(new File("src/main/java/picture/Character/Character_zombie/zombie_walkUp2.png"));
-            up3 = ImageIO.read(new File("src/main/java/picture/Character/Character_zombie/zombie_walkUp3.png"));
-            up4 = ImageIO.read(new File("src/main/java/picture/Character/Character_zombie/zombie_walkUp4.png"));
+            images[0] = ImageIO.read(new File("src/main/java/picture/Character/Character_zombie/zombie_walkUp1.png"));
+            images[1] = ImageIO.read(new File("src/main/java/picture/Character/Character_zombie/zombie_walkUp2.png"));
+            images[2] = ImageIO.read(new File("src/main/java/picture/Character/Character_zombie/zombie_walkUp3.png"));
+            images[3] = ImageIO.read(new File("src/main/java/picture/Character/Character_zombie/zombie_walkUp4.png"));
 
-            down1 = ImageIO.read(new File("src/main/java/picture/Character/Character_zombie/zombie_walkDown1.png"));
-            down2 = ImageIO.read(new File("src/main/java/picture/Character/Character_zombie/zombie_walkDown2.png"));
-            down3 = ImageIO.read(new File("src/main/java/picture/Character/Character_zombie/zombie_walkDown3.png"));
-            down4 = ImageIO.read(new File("src/main/java/picture/Character/Character_zombie/zombie_walkDown4.png"));
+            images[4] = ImageIO.read(new File("src/main/java/picture/Character/Character_zombie/zombie_walkDown1.png"));
+            images[5] = ImageIO.read(new File("src/main/java/picture/Character/Character_zombie/zombie_walkDown2.png"));
+            images[6] = ImageIO.read(new File("src/main/java/picture/Character/Character_zombie/zombie_walkDown3.png"));
+            images[7] = ImageIO.read(new File("src/main/java/picture/Character/Character_zombie/zombie_walkDown4.png"));
 
-            right1 = ImageIO.read(new File("src/main/java/picture/Character/Character_zombie/zombie_walkRight1.png"));
-            right2 = ImageIO.read(new File("src/main/java/picture/Character/Character_zombie/zombie_walkRight2.png"));
-            right3 = ImageIO.read(new File("src/main/java/picture/Character/Character_zombie/zombie_walkRight3.png"));
-            right4 = ImageIO.read(new File("src/main/java/picture/Character/Character_zombie/zombie_walkRight4.png"));
+            images[8] = ImageIO.read(new File("src/main/java/picture/Character/Character_zombie/zombie_walkRight1.png"));
+            images[9] = ImageIO.read(new File("src/main/java/picture/Character/Character_zombie/zombie_walkRight2.png"));
+            images[10] = ImageIO.read(new File("src/main/java/picture/Character/Character_zombie/zombie_walkRight3.png"));
+            images[11] = ImageIO.read(new File("src/main/java/picture/Character/Character_zombie/zombie_walkRight4.png"));
 
-            left1 = ImageIO.read(new File("src/main/java/picture/Character/Character_zombie/zombie_walkLeft1.png"));
-            left2 = ImageIO.read(new File("src/main/java/picture/Character/Character_zombie/zombie_walkLeft2.png"));
-            left3 = ImageIO.read(new File("src/main/java/picture/Character/Character_zombie/zombie_walkLeft3.png"));
-            left4 = ImageIO.read(new File("src/main/java/picture/Character/Character_zombie/zombie_walkLeft4.png"));
+            images[12] = ImageIO.read(new File("src/main/java/picture/Character/Character_zombie/zombie_walkLeft1.png"));
+            images[13] = ImageIO.read(new File("src/main/java/picture/Character/Character_zombie/zombie_walkLeft2.png"));
+            images[14] = ImageIO.read(new File("src/main/java/picture/Character/Character_zombie/zombie_walkLeft3.png"));
+            images[15] = ImageIO.read(new File("src/main/java/picture/Character/Character_zombie/zombie_walkLeft4.png"));
         }
         catch (Exception e){
             e.printStackTrace();
@@ -81,7 +82,7 @@ public class Zombie extends DynamicCharacter{
     /**
      * update character positioning each update
      */
-    void updateZombie(){
+    public void update(){
         collision = false;
         frame.check_collision.checkTile(this);
 
@@ -157,7 +158,6 @@ public class Zombie extends DynamicCharacter{
                 }
             }
         }
-      hitArea = new Rectangle(this.x,this.y,5,5);
     }
 
     /**
@@ -176,49 +176,51 @@ public class Zombie extends DynamicCharacter{
      * draw character
      * @param g2
      */
+    @Override
     public void draw(Graphics2D g2){
-        image = null;
+        BufferedImage image = null;
         switch (direction){
             case "up":
                 if(spriteNum == 1)
-                    image = up1;
+                    image = images[0];
                 else if(spriteNum == 2)
-                    image = up2;
+                    image = images[1];
                 else if(spriteNum == 3)
-                    image = up3;
+                    image = images[2];
                 else
-                    image = up4;
+                    image = images[3];
                 break;
             case "down":
                 if(spriteNum == 1)
-                    image = down1;
+                    image = images[4];
                 else if(spriteNum == 2)
-                    image = down2;
+                    image = images[5];
                 else if(spriteNum == 3)
-                    image = down3;
+                    image = images[6];
                 else
-                    image = down4;
-                break;
-            case "left":
-                if(spriteNum == 1)
-                    image = left1;
-                else if(spriteNum == 2)
-                    image = left2;
-                else if(spriteNum == 3)
-                    image = left3;
-                else
-                    image = left4;
+                    image = images[7];
                 break;
             case "right":
                 if(spriteNum == 1)
-                    image = right1;
+                    image = images[8];
                 else if(spriteNum == 2)
-                    image = right2;
+                    image = images[9];
                 else if(spriteNum == 3)
-                    image = right3;
+                    image = images[10];
                 else
-                    image = right4;
+                    image = images[11];
                 break;
+            case "left":
+                if(spriteNum == 1)
+                    image = images[12];
+                else if(spriteNum == 2)
+                    image = images[13];
+                else if(spriteNum == 3)
+                    image = images[14];
+                else
+                    image = images[15];
+                break;
+
         }
         g2.drawImage(image,x,y,image.getWidth(),image.getHeight(),null);
     }
