@@ -178,7 +178,7 @@ public class GameFrame extends JPanel implements Runnable{
 
       f.add(new Food(this,575,230));
       f.add(new Food(this,450,100));
-      f.add(new Food(this,350,20));
+      f.add(new Food(this,100,20));
       f.add(new Food(this,250,310));
       f.add(new Food(this,120,300));
       f.add(new Food(this,320,190));
@@ -720,7 +720,7 @@ public class GameFrame extends JPanel implements Runnable{
 
             f.add(new Food(this,575,230));
             f.add(new Food(this,450,100));
-            f.add(new Food(this,350,20));
+            f.add(new Food(this,100,20));
             f.add(new Food(this,250,320));
             f.add(new Food(this,120,300));
             f.add(new Food(this,320,190));
