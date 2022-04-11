@@ -23,8 +23,8 @@ public class BadSurvivor extends StaticCharacter{
      * @param y
      */
     public BadSurvivor(GameFrame gameFrame, inputKey key, MainCharacter mc, int x, int y){
-        this.gf = gameFrame;
-        this.k = key;
+        this.frame = gameFrame;
+        this.key = key;
         this.mc = mc;
         this.width = 30;
         this.height = 30;
@@ -45,34 +45,34 @@ public class BadSurvivor extends StaticCharacter{
         this.y = y;
         this.speakMessageShow = false;
         this.message_x = x;
-        this.message_y = y - message_image.getHeight();
-        this.message_width = message_image.getWidth();
-        this.message_height = message_image.getHeight();
+        this.message_y = y - images[4].getHeight();
+        this.message_width = images[4].getWidth();
+        this.message_height = images[4].getHeight();
     }
 
     /**
-     * Read and import images for static enemies and dialog message boxes
+     * read and import character image
      */
+    @Override
     public void getSurvivorImages(){
+        super.getSurvivorImages();
         try{
-            message_image= ImageIO.read(new File("src/main/java/picture/Character/Character_goodOrBadPerson/Message_badPerson.png"));
-            up = ImageIO.read(new File("src/main/java/picture/Character/Character_goodOrBadPerson/staticCharacter_faceToUp.png"));
-            down = ImageIO.read(new File("src/main/java/picture/Character/Character_goodOrBadPerson/staticCharacter_faceToDown.png"));
-            right = ImageIO.read(new File("src/main/java/picture/Character/Character_goodOrBadPerson/staticCharacter_faceToRight.png"));
-            left = ImageIO.read(new File("src/main/java/picture/Character/Character_goodOrBadPerson/staticCharacter_faceToLeft.png"));
+            images[4] = ImageIO.read(new File("src/main/java/picture/Character/Character_goodOrBadPerson/Message_badPerson.png"));
         }
         catch (Exception e){
             e.printStackTrace();
         }
     }
 
+
     /**
      * check if player pressed F while in close proximity with static enemy
      * if close then display message box and lower player's HP
      */
-    public void speak(){
-        if(status && (this.x < (mc.x + 40)) && (this.x > (mc.x - 40)) && (this.y < (mc.y + 40)) && (this.y > (mc.y - 40))){
-            if(k.pressF){
+    @Override
+    public void update(){
+        if(appearStatus && (this.x < (mc.x + 40)) && (this.x > (mc.x - 40)) && (this.y < (mc.y + 40)) && (this.y > (mc.y - 40))){
+            if(key.pressF){
                 int x_distance = this.x - mc.x;
                 int y_distance = this.y - mc.y;
                 if(x_distance>0){
@@ -105,7 +105,7 @@ public class BadSurvivor extends StaticCharacter{
                 if(speakTimeCounter >100){
                     // damage
                     mc.setHP(mc.getHP()-1);
-                    status = false;
+                    appearStatus = false;
                 }
             }
         }
@@ -115,30 +115,14 @@ public class BadSurvivor extends StaticCharacter{
      * draw static enemy character
      * @param g2
      */
-    public void drawBadCharacter(Graphics2D g2){
-        BufferedImage character_image = null;
-        speak();
-        switch (direction){
-            case "up":
-                character_image = up;
-                break;
-            case "down":
-                character_image = down;
-                break;
-            case "left":
-                character_image = left;
-                break;
-            case "right":
-                character_image = right;
-                break;
-        }
-        g2.drawImage(character_image,x,y,character_image.getWidth(),character_image.getHeight(),null);
+    @Override
+    public void draw(Graphics2D g2){
+        super.draw(g2);
         if(speakMessageShow){
             if (message_x+message_width >= 768){
                 message_x = 768 - (message_width+10);
             }
-            g2.drawImage(message_image,message_x,message_y,message_width,message_height,null);
+            g2.drawImage(images[4],message_x,message_y,message_width,message_height,null);
         }
     }
-
 }

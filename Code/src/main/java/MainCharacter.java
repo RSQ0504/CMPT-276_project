@@ -16,11 +16,6 @@ public class MainCharacter extends DynamicCharacter{
     private BufferedImage HP_image;
     private BufferedImage VaccineImage;
 
-    private GameFrame gf;
-    private inputKey key;
-    public BufferedImage MC_image;
-    private int lvl = 0;
-
     /**
      * class constructor with no parameter
      */
@@ -34,14 +29,15 @@ public class MainCharacter extends DynamicCharacter{
      * @param key
      */
     public MainCharacter(GameFrame gameFrame, inputKey key){
-        this.gf = gameFrame;
+        this.frame = gameFrame;
         this.key = key;
         this.width = 20;
         this.height = 20;
+        this.lvl =0;
 
-        setDefaultValue(gf.tileFrame.getStartPoints(lvl));
+        setDefaultValue(frame.tileFrame.getStartPoints(lvl));
         getMCImages();
-        hitArea = new Rectangle( 1,45,gf.getCellSize()/2,  gf.getCellSize());
+        hitAreaStatic = new Rectangle( 1,45,frame.getCellSize()/2,  frame.getCellSize());
     }
 
     /**
@@ -88,25 +84,26 @@ public class MainCharacter extends DynamicCharacter{
      */
     public void getMCImages(){
         try{
-            up1 = ImageIO.read(new File("src/main/java/picture/Character/Character_boy/boy_walkUp1.png"));
-            up2 = ImageIO.read(new File("src/main/java/picture/Character/Character_boy/boy_walkUp2.png"));
-            up3 = ImageIO.read(new File("src/main/java/picture/Character/Character_boy/boy_walkUp3.png"));
-            up4 = ImageIO.read(new File("src/main/java/picture/Character/Character_boy/boy_walkUp4.png"));
+            int i = 0;
+            images[i++] = ImageIO.read(new File("src/main/java/picture/Character/Character_boy/boy_walkUp1.png"));
+            images[i++] = ImageIO.read(new File("src/main/java/picture/Character/Character_boy/boy_walkUp2.png"));
+            images[i++] = ImageIO.read(new File("src/main/java/picture/Character/Character_boy/boy_walkUp3.png"));
+            images[i++] = ImageIO.read(new File("src/main/java/picture/Character/Character_boy/boy_walkUp4.png"));
 
-            down1 = ImageIO.read(new File("src/main/java/picture/Character/Character_boy/boy_walkDown1.png"));
-            down2 = ImageIO.read(new File("src/main/java/picture/Character/Character_boy/boy_walkDown2.png"));
-            down3 = ImageIO.read(new File("src/main/java/picture/Character/Character_boy/boy_walkDown3.png"));
-            down4 = ImageIO.read(new File("src/main/java/picture/Character/Character_boy/boy_walkDown4.png"));
+            images[i++] = ImageIO.read(new File("src/main/java/picture/Character/Character_boy/boy_walkDown1.png"));
+            images[i++] = ImageIO.read(new File("src/main/java/picture/Character/Character_boy/boy_walkDown2.png"));
+            images[i++] = ImageIO.read(new File("src/main/java/picture/Character/Character_boy/boy_walkDown3.png"));
+            images[i++] = ImageIO.read(new File("src/main/java/picture/Character/Character_boy/boy_walkDown4.png"));
 
-            right1 = ImageIO.read(new File("src/main/java/picture/Character/Character_boy/boy_walkRight1.png"));
-            right2 = ImageIO.read(new File("src/main/java/picture/Character/Character_boy/boy_walkRight2.png"));
-            right3 = ImageIO.read(new File("src/main/java/picture/Character/Character_boy/boy_walkRight3.png"));
-            right4 = ImageIO.read(new File("src/main/java/picture/Character/Character_boy/boy_walkRight4.png"));
+            images[i++] = ImageIO.read(new File("src/main/java/picture/Character/Character_boy/boy_walkRight1.png"));
+            images[i++] = ImageIO.read(new File("src/main/java/picture/Character/Character_boy/boy_walkRight2.png"));
+            images[i++] = ImageIO.read(new File("src/main/java/picture/Character/Character_boy/boy_walkRight3.png"));
+            images[i++] = ImageIO.read(new File("src/main/java/picture/Character/Character_boy/boy_walkRight4.png"));
 
-            left1 = ImageIO.read(new File("src/main/java/picture/Character/Character_boy/boy_walkLeft1.png"));
-            left2 = ImageIO.read(new File("src/main/java/picture/Character/Character_boy/boy_walkLeft2.png"));
-            left3 = ImageIO.read(new File("src/main/java/picture/Character/Character_boy/boy_walkLeft3.png"));
-            left4 = ImageIO.read(new File("src/main/java/picture/Character/Character_boy/boy_walkLeft4.png"));
+            images[i++] = ImageIO.read(new File("src/main/java/picture/Character/Character_boy/boy_walkLeft1.png"));
+            images[i++] = ImageIO.read(new File("src/main/java/picture/Character/Character_boy/boy_walkLeft2.png"));
+            images[i++] = ImageIO.read(new File("src/main/java/picture/Character/Character_boy/boy_walkLeft3.png"));
+            images[i++] = ImageIO.read(new File("src/main/java/picture/Character/Character_boy/boy_walkLeft4.png"));
         }
         catch (Exception e){
             e.printStackTrace();
@@ -116,7 +113,8 @@ public class MainCharacter extends DynamicCharacter{
     /**
      * Update player position based on user keyboard inputs
      */
-    void updateMC(){
+    @Override
+    public void update(){
         if(key.pressedUp == true || key.pressedDown == true || key.pressedLeft == true || key.pressedRight == true) {
             if (key.pressedUp == true) {
                 direction = "up";
@@ -128,10 +126,10 @@ public class MainCharacter extends DynamicCharacter{
                 direction = "right";
             }
 
-            collisionArea = false;
-            gf.check_collision.checkTile(this);
+            collision = false;
+            frame.check_collision.checkTile(this);
 
-            if (collisionArea == false) {
+            if (collision == false) {
                 switch (direction) {
                     case "up":
                         y -= speed;
@@ -166,51 +164,52 @@ public class MainCharacter extends DynamicCharacter{
      * Draw player character
      * @param g2
      */
-    void drawMC(Graphics2D g2){
-        MC_image = null;
+    @Override
+    public void draw(Graphics2D g2){
+        BufferedImage image = null;
         switch (direction){
             case "up":
                 if(spriteNum == 1)
-                    MC_image = up1;
+                    image = images[0];
                 else if(spriteNum == 2)
-                    MC_image = up2;
+                    image = images[1];
                 else if(spriteNum == 3)
-                    MC_image = up3;
+                    image = images[2];
                 else
-                    MC_image = up4;
+                    image = images[3];
                 break;
             case "down":
                 if(spriteNum == 1)
-                    MC_image = down1;
+                    image = images[4];
                 else if(spriteNum == 2)
-                    MC_image = down2;
+                    image = images[5];
                 else if(spriteNum == 3)
-                    MC_image = down3;
+                    image = images[6];
                 else
-                    MC_image = down4;
-                break;
-            case "left":
-                if(spriteNum == 1)
-                    MC_image = left1;
-                else if(spriteNum == 2)
-                    MC_image = left2;
-                else if(spriteNum == 3)
-                    MC_image = left3;
-                else
-                    MC_image = left4;
+                    image = images[7];
                 break;
             case "right":
                 if(spriteNum == 1)
-                    MC_image = right1;
+                    image = images[8];
                 else if(spriteNum == 2)
-                    MC_image = right2;
+                    image = images[9];
                 else if(spriteNum == 3)
-                    MC_image = right3;
+                    image = images[10];
                 else
-                    MC_image = right4;
+                    image = images[11];
+                break;
+            case "left":
+                if(spriteNum == 1)
+                    image = images[12];
+                else if(spriteNum == 2)
+                    image = images[13];
+                else if(spriteNum == 3)
+                    image = images[14];
+                else
+                    image = images[15];
                 break;
         }
-        g2.drawImage(MC_image,x,y, (gf.getCellSize()/2), gf.getCellSize(), null);
+        g2.drawImage(image,x,y, (frame.getCellSize()/2), frame.getCellSize(), null);
     }
 
     /**

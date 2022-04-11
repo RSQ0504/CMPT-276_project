@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 /**
@@ -6,4 +7,14 @@ import java.awt.image.BufferedImage;
 public class Tile extends GameObject{
 
     public BufferedImage tileImg;
+
+    @Override
+    public void draw(Graphics2D g) {
+
+    }
+
+    @Override
+    public void update() {
+
+    }
 }

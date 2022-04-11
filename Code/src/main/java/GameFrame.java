@@ -178,7 +178,7 @@ public class GameFrame extends JPanel implements Runnable{
 
       f.add(new Food(this,575,230));
       f.add(new Food(this,450,100));
-      f.add(new Food(this,350,20));
+      f.add(new Food(this,100,20));
       f.add(new Food(this,250,310));
       f.add(new Food(this,120,300));
       f.add(new Food(this,320,190));
@@ -367,10 +367,10 @@ public class GameFrame extends JPanel implements Runnable{
      * update dynamic character positioning
      */
     private void updatePos(){
-        mc.updateMC();
-        zombie1.updateZombie();
-        zombie2.updateZombie();
-        zombie3.updateZombie();
+        mc.update();
+        zombie1.update();
+        zombie2.update();
+        zombie3.update();
     }
 
     /**
@@ -462,22 +462,21 @@ public class GameFrame extends JPanel implements Runnable{
                 }
             }
             goodPerson1.resetBoard(tileFrame.getOriginMap(gameLevel));
-            mc.drawMC(g2);
-            zombie1.drawZombie(g2);
-            zombie2.drawZombie(g2);
-            zombie3.drawZombie(g2);
-            if(goodPerson1.status) {
-                goodPerson1.drawKindCharacter(g2);
-                goodPerson1.drawKindCharcMsgBox(g2);
+            mc.draw(g2);
+            zombie1.draw(g2);
+            zombie2.draw(g2);
+            zombie3.draw(g2);
+            if(goodPerson1.appearStatus) {
+                goodPerson1.draw(g2);
             }
-            if(badPerson1.status) {
-                badPerson1.drawBadCharacter(g2);
+            if(badPerson1.appearStatus) {
+                badPerson1.draw(g2);
             }
-            if(badPerson2.status) {
-                badPerson2.drawBadCharacter(g2);
+            if(badPerson2.appearStatus) {
+                badPerson2.draw(g2);
             }
-            if(badPerson3.status) {
-                badPerson3.drawBadCharacter(g2);
+            if(badPerson3.appearStatus) {
+                badPerson3.draw(g2);
             }
 
 
@@ -721,7 +720,7 @@ public class GameFrame extends JPanel implements Runnable{
 
             f.add(new Food(this,575,230));
             f.add(new Food(this,450,100));
-            f.add(new Food(this,350,20));
+            f.add(new Food(this,100,20));
             f.add(new Food(this,250,320));
             f.add(new Food(this,120,300));
             f.add(new Food(this,320,190));

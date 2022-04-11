@@ -5,15 +5,18 @@ import java.awt.image.BufferedImage;
  * Class for managing Static and Dynamic game objects
  */
 abstract class GameObject {
-  public int x = 0,y = 0;
-  public int width, height;
-  private boolean collision;
-  private GameFrame frame;
+  protected int x = 0,y = 0;
+  protected int width, height;
+  protected boolean collision = false;
+  protected GameFrame frame;
   public Rectangle hitAreaStatic;
+  public Rectangle hitArea;
   protected int lvl;
-  protected GameMap gm;
 
-  BufferedImage image;
+  BufferedImage[] images = new BufferedImage[16];
+  protected inputKey key;
+  protected String direction = "down";
+  protected boolean appearStatus = true;
 
   /**
    * get collision boolean
@@ -31,8 +34,8 @@ abstract class GameObject {
    * get image for game objects
    * @return
    */
-  public BufferedImage getImage(){
-    return image;
+  public BufferedImage[] getImage(){
+    return images;
   }
 
   /**
@@ -72,5 +75,29 @@ abstract class GameObject {
    * @param frame
    */
   public void setFrame(GameFrame frame){this.frame = frame;}
+
+  /**
+   * get private variable frame
+   */
   public GameFrame getFrame(){return frame;}
+
+  /**
+   * check if player intersects
+   * @param mcHitArea
+   * @return
+   */
+  public boolean check(Rectangle mcHitArea){
+     return hitArea.intersects(mcHitArea);
+  }
+
+  /**
+   * Draw the GameObject in Graphics2D
+   * @param g
+   */
+  public abstract void draw(Graphics2D g);
+
+  /**
+   * Update the GameObject
+   */
+  public abstract void update();
 }

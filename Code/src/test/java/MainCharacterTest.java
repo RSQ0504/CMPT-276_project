@@ -77,60 +77,7 @@ public class MainCharacterTest {
         img[14] = ImageIO.read(new File("src/main/java/picture/Character/Character_boy/boy_walkLeft3.png"));
         img[15] = ImageIO.read(new File("src/main/java/picture/Character/Character_boy/boy_walkLeft4.png"));
         for(int i = 0; i < 16; i++){
-            String[] MCImg = null;
-            switch (i){
-                case 0:
-                    MCImg = mc.up1.toString().split(" ");
-                    break;
-                case 1:
-                    MCImg = mc.up2.toString().split(" ");
-                    break;
-                case 2:
-                    MCImg = mc.up3.toString().split(" ");
-                    break;
-                case 3:
-                    MCImg = mc.up4.toString().split(" ");
-                    break;
-                case 4:
-                    MCImg = mc.down1.toString().split(" ");
-                    break;
-                case 5:
-                    MCImg = mc.down2.toString().split(" ");
-                    break;
-                case 6:
-                    MCImg = mc.down3.toString().split(" ");
-                    break;
-                case 7:
-                    MCImg = mc.down4.toString().split(" ");
-                    break;
-                case 8:
-                    MCImg = mc.right1.toString().split(" ");
-                    break;
-                case 9:
-                    MCImg = mc.right2.toString().split(" ");
-                    break;
-                case 10:
-                    MCImg = mc.right3.toString().split(" ");
-                    break;
-                case 11:
-                    MCImg = mc.right4.toString().split(" ");
-                    break;
-                case 12:
-                    MCImg = mc.left1.toString().split(" ");
-                    break;
-                case 13:
-                    MCImg = mc.left2.toString().split(" ");
-                    break;
-                case 14:
-                    MCImg = mc.left3.toString().split(" ");
-                    break;
-                case 15:
-                    MCImg = mc.left4.toString().split(" ");
-                    break;
-                default:
-                    break;
-            }
-
+            String[] MCImg = mc.images[i].toString().split(" ");
             for(int j = 1; j < MCImg.length; j++)
                 Assertions.assertEquals(img[i].toString().split(" ")[j], MCImg[j]);
         }
@@ -153,7 +100,7 @@ public class MainCharacterTest {
         // Walk up 1 step
         key.pressedUp = true;
         mc.setCollision(false);
-        mc.updateMC();
+        mc.update();
         startPoint = new int[]{0, 0};
         Assert.assertEquals(startPoint[0],mc.x);
         Assert.assertEquals(startPoint[1],mc.y);
@@ -161,7 +108,7 @@ public class MainCharacterTest {
         // Walk Left 1 step
         key.pressedLeft = true;
         mc.setCollision(false);
-        mc.updateMC();
+        mc.update();
         startPoint = new int[]{0, 0};
         Assert.assertEquals(startPoint[0],mc.x);
         Assert.assertEquals(startPoint[1],mc.y);
@@ -169,7 +116,7 @@ public class MainCharacterTest {
         // Can not walk right 1 step because collision
         key.pressedRight = true;
         mc.setCollision(true);
-        mc.updateMC();
+        mc.update();
         startPoint = new int[]{0, 0};
         Assert.assertEquals(startPoint[0],mc.x);
         Assert.assertEquals(startPoint[1],mc.y);
@@ -177,7 +124,7 @@ public class MainCharacterTest {
         // Can not walk down 1 step because collision
         key.pressedDown = true;
         mc.setCollision(true);
-        mc.updateMC();
+        mc.update();
         startPoint = new int[]{0, 0};
         Assert.assertEquals(startPoint[0],mc.x);
         Assert.assertEquals(startPoint[1],mc.y);
@@ -212,7 +159,7 @@ public class MainCharacterTest {
             private Frame frame = new Frame("BadSurvivorTest");
             public void paint(Graphics g) {
                 Graphics2D g2 = (Graphics2D)g;
-                mc.drawMC(g2);
+                mc.draw(g2);
                 mc.drawScore(g2,50,10,5);
             }
 

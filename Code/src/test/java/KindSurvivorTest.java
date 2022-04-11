@@ -19,37 +19,15 @@ public class KindSurvivorTest {
 
         BufferedImage[] img = new BufferedImage[6];
 
-        img[0] = ImageIO.read(new File("src/main/java/picture/Character/Character_goodOrBadPerson/Message_goodPerson.png"));
-        img[1] = ImageIO.read(new File("src/main/java/picture/Character/Character_goodOrBadPerson/Message_goodPerson2.png"));
-        img[2] = ImageIO.read(new File("src/main/java/picture/Character/Character_goodOrBadPerson/staticCharacter_faceToUp.png"));
-        img[3] = ImageIO.read(new File("src/main/java/picture/Character/Character_goodOrBadPerson/staticCharacter_faceToDown.png"));
-        img[4] = ImageIO.read(new File("src/main/java/picture/Character/Character_goodOrBadPerson/staticCharacter_faceToRight.png"));
-        img[5] = ImageIO.read(new File("src/main/java/picture/Character/Character_goodOrBadPerson/staticCharacter_faceToLeft.png"));
-
+        img[0] = ImageIO.read(new File("src/main/java/picture/Character/Character_goodOrBadPerson/staticCharacter_faceToUp.png"));
+        img[1] = ImageIO.read(new File("src/main/java/picture/Character/Character_goodOrBadPerson/staticCharacter_faceToDown.png"));
+        img[2] = ImageIO.read(new File("src/main/java/picture/Character/Character_goodOrBadPerson/staticCharacter_faceToRight.png"));
+        img[3] = ImageIO.read(new File("src/main/java/picture/Character/Character_goodOrBadPerson/staticCharacter_faceToLeft.png"));
+        img[4] = ImageIO.read(new File("src/main/java/picture/Character/Character_goodOrBadPerson/Message_goodPerson.png"));
+        img[5] = ImageIO.read(new File("src/main/java/picture/Character/Character_goodOrBadPerson/Message_goodPerson2.png"));
         for(int i = 0; i < 6; i++) {
             String[] kindSurvivorImg = null;
-            switch (i) {
-                case 0:
-                    kindSurvivorImg = kindSurvivor.message_image.toString().split(" ");
-                    break;
-                case 1:
-                    kindSurvivorImg = kindSurvivor.message_image_incomplete.toString().split(" ");
-                    break;
-                case 2:
-                    kindSurvivorImg = kindSurvivor.up.toString().split(" ");
-                    break;
-                case 3:
-                    kindSurvivorImg = kindSurvivor.down.toString().split(" ");
-                    break;
-                case 4:
-                    kindSurvivorImg = kindSurvivor.right.toString().split(" ");
-                    break;
-                case 5:
-                    kindSurvivorImg = kindSurvivor.left.toString().split(" ");
-                    break;
-                default:
-                    break;
-            }
+            kindSurvivorImg = kindSurvivor.images[i].toString().split(" ");
 
             for (int j = 1; j < kindSurvivorImg.length; j++)
                 Assertions.assertEquals(img[i].toString().split(" ")[j], kindSurvivorImg[j]);
@@ -67,7 +45,7 @@ public class KindSurvivorTest {
         Assert.assertEquals(30,kindSurvivor.y);
         Assert.assertFalse(kindSurvivor.speakMessageShow);
         Assert.assertEquals(10, kindSurvivor.message_x);
-        int width = kindSurvivor.message_image.getWidth(), height = kindSurvivor.message_image.getHeight();
+        int width = kindSurvivor.images[4].getWidth(), height = kindSurvivor.images[4].getHeight();
         Assert.assertEquals(30 - height, kindSurvivor.message_y);
         Assert.assertEquals(width, kindSurvivor.message_width);
         Assert.assertEquals(height,kindSurvivor.message_height);
@@ -92,16 +70,16 @@ public class KindSurvivorTest {
         int doorX = 3, doorY = 3;
         KindSurvivor kindSurvivor = new KindSurvivor(gf, key, mc, 1, 1, board, doorX, doorY);
 
-        Assert.assertTrue(kindSurvivor.status);
+        Assert.assertTrue(kindSurvivor.appearStatus);
         Assert.assertEquals("down", kindSurvivor.direction);
 
         // if MainCharacter who did not collect all vaccines is closed to bad survivor at right and press F
         int[] startPoint1 = {20, 0};
         mc.setDefaultValue(startPoint1);
         key.pressF = true;
-        kindSurvivor.speak();
+        kindSurvivor.update();
         Assert.assertEquals("right", kindSurvivor.direction);
-        Assert.assertTrue(kindSurvivor.status);
+        Assert.assertTrue(kindSurvivor.appearStatus);
 
         // if MainCharacter who collect all vaccines is closed to bad survivor at right and press F
         key.pressF = false;
@@ -109,8 +87,8 @@ public class KindSurvivorTest {
         kindSurvivor.speakTimeCounter = 200;
         mc.setVaccines(5);
         gf.numOfVaccines = 5;
-        kindSurvivor.speak();
-        Assert.assertFalse(kindSurvivor.status); // It should be false right now
+        kindSurvivor.update();
+        Assert.assertFalse(kindSurvivor.appearStatus); // It should be false right now
     }
 
     @Test
@@ -132,16 +110,16 @@ public class KindSurvivorTest {
         int doorX = 3, doorY = 3;
         KindSurvivor kindSurvivor = new KindSurvivor(gf, key, mc, 1, 1, board, doorX, doorY);
 
-        Assert.assertTrue(kindSurvivor.status);
+        Assert.assertTrue(kindSurvivor.appearStatus);
         Assert.assertEquals("down", kindSurvivor.direction);
 
         // if MainCharacter is not closed to bad survivor at right and press F
         int[] startPoint2 = {150, 10};
         mc.setDefaultValue(startPoint2);
         key.pressF = true;
-        kindSurvivor.speak();
+        kindSurvivor.update();
         Assert.assertEquals("down", kindSurvivor.direction);
-        Assert.assertTrue(kindSurvivor.status);
+        Assert.assertTrue(kindSurvivor.appearStatus);
     }
 
     @Test
@@ -163,16 +141,16 @@ public class KindSurvivorTest {
         int doorX = 3, doorY = 3;
         KindSurvivor kindSurvivor = new KindSurvivor(gf, key, mc, 1, 1, board, doorX, doorY);
 
-        Assert.assertTrue(kindSurvivor.status);
+        Assert.assertTrue(kindSurvivor.appearStatus);
         Assert.assertEquals("down", kindSurvivor.direction);
 
         // if MainCharacter is closed to bad survivor at left but not press F
         int[] startPoint3 = {0, 10};
         mc.setDefaultValue(startPoint3);
         key.pressF = false;
-        kindSurvivor.speak();
+        kindSurvivor.update();
         Assert.assertEquals("down", kindSurvivor.direction);
-        Assert.assertTrue(kindSurvivor.status);
+        Assert.assertTrue(kindSurvivor.appearStatus);
     }
 
     @Test
@@ -220,7 +198,7 @@ public class KindSurvivorTest {
             private Frame frame = new Frame("BadSurvivorTest");
             public void paint(Graphics g) {
                 Graphics2D g2 = (Graphics2D)g;
-                kindSurvivor.drawKindCharacter(g2);
+                kindSurvivor.draw(g2);
             }
 
             public void init() {
