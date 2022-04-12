@@ -67,13 +67,7 @@ public class GameFrame extends JPanel implements Runnable{
     public ChangeLevelCommand cmdChangeLevel = new ChangeLevelCommand();
     public EndScreenCommand cmdEnd = new EndScreenCommand();
 
-    /*
-    public int numOfCommands = 3; // number of commands
-    public int commandNum = 0; // start: 0, change level: 1, exit: 2
-    public final int optionStart = 0;
-    public final int optionChangeLevel = 1;
-    public final int optionExit = 2;
-     */
+
 
     private GameImage gameImage = new GameImage();
 
@@ -92,11 +86,12 @@ public class GameFrame extends JPanel implements Runnable{
     private inputKey key = new inputKey(this);
     private int speed = 4;
     private int frame_speed = 60;
-    public int gameLevel = 0;
-    public final int levelEasy = 0;
-    public final int levelIntermediate = 1;
-    public final int levelChallenge = 2;
-    public int numOfVaccines = 5;// easy: 5 intermediate: 7 challenge: 10
+    public GameAttribute settings = new GameAttribute(0);
+//    public int gameLevel = 0;
+//    public final int levelEasy = 0;
+//    public final int levelIntermediate = 1;
+//    public final int levelChallenge = 2;
+//    public int numOfVaccines = 5;// easy: 5 intermediate: 7 challenge: 10
     GameMap tileFrame = new GameMap(this);
     public checkCollision check_collision = new checkCollision(this);
     public int[] startPoints = new int[2];
@@ -116,7 +111,7 @@ public class GameFrame extends JPanel implements Runnable{
     private Zombie zombie3 = new Zombie(this,650,400,mc);
 
     // The static characters
-    private KindSurvivor goodPerson1 = new KindSurvivor(this,key,mc,120,255,tileFrame.getOriginMap(gameLevel),23,1);
+    private KindSurvivor goodPerson1 = new KindSurvivor(this,key,mc,120,255,tileFrame.getOriginMap(settings.getGameLevel()),23,1);
     private BadSurvivor badPerson1 = new BadSurvivor(this,key,mc,262,115);
     private BadSurvivor badPerson2 = new BadSurvivor(this,key,mc,300,280);
     private BadSurvivor badPerson3 = new BadSurvivor(this,key,mc,650,220);
@@ -246,7 +241,7 @@ public class GameFrame extends JPanel implements Runnable{
             timerState = timerTerminated;
         }
         // check whether main character is has won
-        if(mc.getVaccines() >= numOfVaccines && endpoint.intersects(MC)){
+        if(mc.getVaccines() >= settings.getNumOfVaccines() && endpoint.intersects(MC)){
 //                System.out.println("[run/GameFrame] check: main character survived!");
             gameResult = win;
             gameState = endState;
@@ -360,7 +355,7 @@ public class GameFrame extends JPanel implements Runnable{
             }
 
             // setup game
-            tileFrame.draw(g2, tileFrame.getBoard(gameLevel));
+            tileFrame.draw(g2, tileFrame.getBoard(settings.getGameLevel()));
 
 
             //reward
@@ -384,7 +379,7 @@ public class GameFrame extends JPanel implements Runnable{
                     break;
                 }
             }
-            goodPerson1.resetBoard(tileFrame.getOriginMap(gameLevel));
+            goodPerson1.resetBoard(tileFrame.getOriginMap(settings.getGameLevel()));
             mc.draw(g2);
             zombie1.draw(g2);
             zombie2.draw(g2);
@@ -404,7 +399,7 @@ public class GameFrame extends JPanel implements Runnable{
 
 
             // draw frame (score, time, overlay)
-            mc.drawScore(g2,645,4, numOfVaccines);
+            mc.drawScore(g2,645,4, settings.getNumOfVaccines());
             clock.draw(g2,555,4);
             g2.drawImage(gameImage.overlayImage, 0, 0, 340, 28, null);
 
@@ -445,7 +440,7 @@ public class GameFrame extends JPanel implements Runnable{
                 g2.drawImage(gameImage.gamefail, 165, 165, null);
                 clock.stopTimer();
                 clock.draw(g2,260,280);
-                mc.drawScore(g2,360,280, numOfVaccines);
+                mc.drawScore(g2,360,280, settings.getNumOfVaccines());
             }
 
             if(gameResult == win) {
@@ -454,7 +449,7 @@ public class GameFrame extends JPanel implements Runnable{
                 g2.drawImage(gameImage.gamewin, 165, 165, null);
                 clock.stopTimer();
                 clock.draw(g2,260,280);
-                mc.drawScore(g2,360,280, numOfVaccines);
+                mc.drawScore(g2,360,280, settings.getNumOfVaccines());
 
             }
 
@@ -590,35 +585,24 @@ public class GameFrame extends JPanel implements Runnable{
         // resetMode 1: full reset - starting from title screen with default values set to levelEasy settings
         if(resetMode == 0) {
             // partial reset
-            if(gameLevel < 0 || gameLevel > 2) {
-                // exception
-                gameLevel = levelEasy;
-            }
-
-            // set number of vaccines
-            if(gameLevel == levelEasy) {
-                numOfVaccines = 5;
-            }else if(gameLevel == levelIntermediate) {
-                numOfVaccines = 7;
-            }else if(gameLevel == levelChallenge) {
-                numOfVaccines = 10;
+            if(settings.getGameLevel() < 0 || settings.getGameLevel() > 2) {// exception
+                settings.setGameLevel(settings.levelEasy);
             }
         }else if(resetMode == 1) {
             // full reset
-            gameLevel = levelEasy;
-            numOfVaccines = 5;
+            settings.setGameLevel(settings.levelEasy);
         }
 
         mc.resetAttributesMC();
 
-        mc.setDefaultValue(tileFrame.getStartPoints(gameLevel));
+        mc.setDefaultValue(tileFrame.getStartPoints(settings.getGameLevel()));
         // The characters
         zombie1 = new Zombie(this,15,200,mc);
         zombie2 = new Zombie(this,300,280,mc);
         zombie3 = new Zombie(this,650,400,mc);
 
         // The static characters
-        goodPerson1 = new KindSurvivor(this,key,mc,120,255,tileFrame.getOriginMap(gameLevel),23,1);
+        goodPerson1 = new KindSurvivor(this,key,mc,120,255,tileFrame.getOriginMap(settings.getGameLevel()),23,1);
         badPerson1 = new BadSurvivor(this,key,mc,262,115);
         badPerson2 = new BadSurvivor(this,key,mc,300,280);
         badPerson3 = new BadSurvivor(this,key,mc,650,220);

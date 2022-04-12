@@ -136,7 +136,7 @@ public class KindSurvivor extends StaticCharacter{
                 if(speakTimeCounter >200){
                     speakMessageShow = false;
                     speakTimeCounter = 0;
-                    if(mc.getVaccines() >= frame.numOfVaccines){
+                    if(mc.getVaccines() >= frame.settings.getNumOfVaccines()){
                         openDoor();
                         appearStatus = false;
                     }
@@ -159,7 +159,7 @@ public class KindSurvivor extends StaticCharacter{
             if (message_x+message_width >= 768){
                 message_x = 768 - (message_width+10);
             }
-            if (mc.getVaccines() >= frame.numOfVaccines){
+            if (mc.getVaccines() >= frame.settings.getNumOfVaccines()){
                 g2.drawImage(images[4],message_x,message_y,message_width,message_height,null);
             } else {
                 g2.drawImage(images[5],message_x,message_y,message_width,message_height,null);

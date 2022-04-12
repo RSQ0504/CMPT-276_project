@@ -214,29 +214,28 @@ public class inputKey implements KeyListener {
         cmd.setCommandNum(0);
     }
     private void performActionWithEnter(ChangeLevelCommand cmd) {
-        System.out.println("enter pressed in change level screen");
         if(cmd.getCommandNum() == cmd.cmdEasy) {
-            System.out.println("change to easy");
-            gf.numOfVaccines = 5;
-            gf.gameLevel = gf.levelEasy;
-            gf.mc.setDefaultValue(gf.tileFrame.getStartPoints(gf.levelEasy));
+            gf.settings.setGameLevel(gf.settings.levelEasy);
+//            gf.numOfVaccines = 5;
+//            gf.gameLevel = gf.levelEasy;
+            gf.mc.setDefaultValue(gf.tileFrame.getStartPoints(gf.settings.levelEasy));
             gf.gameState = gf.titleState;
         }else if(cmd.getCommandNum() == cmd.cmdIntermediate) {
-            System.out.println("change to intermediate");
-            gf.numOfVaccines = 7;
-            gf.gameLevel = gf.levelIntermediate;
-            gf.mc.setDefaultValue(gf.tileFrame.getStartPoints(gf.levelIntermediate));
+            gf.settings.setGameLevel(gf.settings.levelIntermediate);
+//            gf.numOfVaccines = 7;
+//            gf.gameLevel = gf.levelIntermediate;
+            gf.mc.setDefaultValue(gf.tileFrame.getStartPoints(gf.settings.levelIntermediate));
             gf.gameState = gf.titleState;
         }else if(cmd.getCommandNum() == cmd.cmdChallenge) {
-            System.out.println("change to challenge");
-            gf.numOfVaccines = 10;
-            gf.gameLevel = gf.levelChallenge;
-            gf.mc.setDefaultValue(gf.tileFrame.getStartPoints(gf.levelChallenge));
+            gf.settings.setGameLevel(gf.settings.levelChallenge);
+//            gf.numOfVaccines = 10;
+//            gf.gameLevel = gf.levelChallenge;
+            gf.mc.setDefaultValue(gf.tileFrame.getStartPoints(gf.settings.levelChallenge));
             gf.gameState = gf.titleState;
         }else {
-            System.out.println("invalid commandNum");
-            gf.gameLevel = gf.levelEasy;
-            gf.numOfVaccines = 5;
+            gf.settings.setGameLevel(gf.settings.levelEasy);
+//            gf.gameLevel = gf.levelEasy;
+//            gf.numOfVaccines = 5;
             gf.gameState = gf.changeLevelState;
         }
     }

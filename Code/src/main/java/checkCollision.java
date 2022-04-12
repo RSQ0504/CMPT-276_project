@@ -28,7 +28,7 @@ public class checkCollision {
         int charcRightCol = charcRight/scaledCellSize;
 
         int tile1,tile2;
-        int[][] board = check_frame.tileFrame.getBoard(check_frame.gameLevel);
+        int[][] board = check_frame.tileFrame.getBoard(check_frame.settings.getGameLevel());
 
         switch(obj.direction){
             case "up":
@@ -77,7 +77,7 @@ public class checkCollision {
      */
     private void setTileCollisions(int tile1x, int tile1y, int tile2x, int tile2y, DynamicCharacter obj){
         int tile1,tile2;
-        int[][] board = check_frame.tileFrame.getBoard(check_frame.gameLevel);
+        int[][] board = check_frame.tileFrame.getBoard(check_frame.settings.getGameLevel());
         tile1 = board[tile1x][tile1y];
         tile2 = board[tile2x][tile2y];
 

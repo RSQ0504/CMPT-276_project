@@ -81,12 +81,12 @@ public class KindSurvivorTest {
         Assert.assertEquals("right", kindSurvivor.direction);
         Assert.assertTrue(kindSurvivor.appearStatus);
 
-        // if MainCharacter who collect all vaccines is closed to bad survivor at right and press F
+        // if MainCharacter collected all vaccines and is closed to bad survivor at right and press F
         key.pressF = false;
         kindSurvivor.speakMessageShow = true;
         kindSurvivor.speakTimeCounter = 200;
         mc.setVaccines(5);
-        gf.numOfVaccines = 5;
+//        gf.numOfVaccines = 5;
         kindSurvivor.update();
         Assert.assertFalse(kindSurvivor.appearStatus); // It should be false right now
     }
