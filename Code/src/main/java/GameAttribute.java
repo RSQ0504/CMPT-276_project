@@ -3,6 +3,7 @@ public class GameAttribute {
     private int numOfVaccines;
     // easy: 5 intermediate: 7 challenge: 10
 
+
     public final int levelEasy = 0;
     public final int levelIntermediate = 1;
     public final int levelChallenge = 2;

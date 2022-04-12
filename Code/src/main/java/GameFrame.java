@@ -24,36 +24,7 @@ public class GameFrame extends JPanel implements Runnable{
     public final int track4_titleState = 4;
 
     // GAME STATE
-    public int gameState;
-    public final int titleState = 0;
-    public final int playState = 1; // game play screen
-    public final int pauseState = 2; // game pause screen
-    public final int endState = 3; // game end screen
-    public final int changeLevelState = 4; // change game level screen
-
-    // TUTORIAL STATE
-    public int tutorialState = 5;
-    public final int tutorialIntro = 5; // navigation guide for tutorial and background-story screen
-    public final int tutorial1 = 6;
-    public final int tutorial2 = 7;
-    public final int tutorial3 = 8;
-
-
-    // NARRATION STATE
-    public int narrationState = 9; // background story
-    public final int narration1 = 9;
-    public final int narration2 = 10;
-    public final int narration3 = 11;
-    public final int narration4 = 12;
-    public final int narration5 = 13;
-    public final int narration6 = 14;
-    public final int narration7 = 15;
-    public final int narration8 = 16;
-    public final int narration9 = 17;
-    public final int narration10 = 18;
-    public final int narration11 = 19;
-
-
+    public GameState state = new GameState();
 
   //Game Result
     public int gameResult;
@@ -67,8 +38,7 @@ public class GameFrame extends JPanel implements Runnable{
     public ChangeLevelCommand cmdChangeLevel = new ChangeLevelCommand();
     public EndScreenCommand cmdEnd = new EndScreenCommand();
 
-
-
+    
     private GameImage gameImage = new GameImage();
 
     //attributes of GameMap
@@ -87,11 +57,6 @@ public class GameFrame extends JPanel implements Runnable{
     private int speed = 4;
     private int frame_speed = 60;
     public GameAttribute settings = new GameAttribute(0);
-//    public int gameLevel = 0;
-//    public final int levelEasy = 0;
-//    public final int levelIntermediate = 1;
-//    public final int levelChallenge = 2;
-//    public int numOfVaccines = 5;// easy: 5 intermediate: 7 challenge: 10
     GameMap tileFrame = new GameMap(this);
     public checkCollision check_collision = new checkCollision(this);
     public int[] startPoints = new int[2];
@@ -155,7 +120,8 @@ public class GameFrame extends JPanel implements Runnable{
         this.colm =colm;
         this.rows = rows;
         this.cellSize = cellSize;
-        this.gameState = titleState;
+        state.toTitleState();
+//        this.gameState = titleState;
         setUpScreen();
         setStartPoint(100,100);
     }
@@ -237,14 +203,16 @@ public class GameFrame extends JPanel implements Runnable{
 //                System.out.println("[run/GameFrame] check: main character dead!");
             mc.setHP(0);
             gameResult = fail;
-            gameState = endState;
+//            gameState = endState;
+            state.toEndState();
             timerState = timerTerminated;
         }
         // check whether main character is has won
         if(mc.getVaccines() >= settings.getNumOfVaccines() && endpoint.intersects(MC)){
 //                System.out.println("[run/GameFrame] check: main character survived!");
             gameResult = win;
-            gameState = endState;
+//            gameState = endState;
+            state.toEndState();
             timerState = timerTerminated;
         }
 
@@ -252,31 +220,22 @@ public class GameFrame extends JPanel implements Runnable{
         repaint();
 
         // TIMER
-        if(gameState == playState) {
+        if(state.getGameState() == state.playState) {
 //                System.out.println("[run/GameFrame] Game playing");
 
             if(timerState == timerInactive) {
 //                    System.out.println("[run/GameFrame] Start timer");
-                // clock = new TimerClock();
                 clock.startTimer();
                 timerState = timerInProgress;
-            }else if(timerState == pauseState) {
-//                    System.out.println("[run/GameFrame] resume timer count");
             }
 
-        }else if(gameState == pauseState) {
-//                System.out.println("[run/GameFrame] Game paused");
-        }else if(gameState == endState) {
+        }else if(state.getGameState() == state.endState) {
             if(timerState == timerTerminated) {
 //                    System.out.println("[run/GameFrame] game ended: timer terminated");
             }else {
                 timerState = timerTerminated;
 //                    System.out.println("[run/GameFrame] game ended: timer not terminated");
             }
-        }else if(gameState == tutorialState) {
-//                System.out.println("[run/GameFrame] tutorial state");
-        }else if(gameState == tutorialState) {
-//                System.out.println("[run/GameFrame] title state");
         }
 
     }
@@ -305,7 +264,7 @@ public class GameFrame extends JPanel implements Runnable{
 
 
         // control display depending on game state
-        if(gameState == titleState) {
+        if(state.getGameState() == state.titleState) {
             // play bgm
             try {
                 playBGM(4);
@@ -342,7 +301,7 @@ public class GameFrame extends JPanel implements Runnable{
             // draw overlay (key instruction/guide at the bottom)
             g2.drawImage(gameImage.titleScreenOverlay, 0, getHeight() - 48, getWidth(), 48, null);
 
-        }else if(gameState == playState) {
+        }else if(state.getGameState() == state.playState) {
             // play bgm
             try {
                 playBGM(3);
@@ -404,7 +363,7 @@ public class GameFrame extends JPanel implements Runnable{
             g2.drawImage(gameImage.overlayImage, 0, 0, 340, 28, null);
 
 
-        }else if(gameState == changeLevelState) { // screen display for change-level-screen
+        }else if(state.getGameState() == state.changeLevelState) { // screen display for change-level-screen
             // display background image
             g2.drawImage(gameImage.bgChangeLevelScreen, 0, 0, getWidth(), getHeight(), null);
 
@@ -428,11 +387,7 @@ public class GameFrame extends JPanel implements Runnable{
 
             // draw overlay (key instruction/guide at the bottom)
             g2.drawImage(gameImage.titleScreenOverlay, 0, getHeight() - 48, getWidth(), 48, null);
-        }else if(gameState == pauseState) {
-            g2.drawImage(gameImage.bgImage, 0, 0, getWidth(), getHeight(), null);
-            // screen display when game is paused
-            // not used
-        }else if(gameState == endState) {
+        }else if(state.getGameState() == state.endState) {
 
             if(gameResult == fail) {
                 // background image
@@ -467,7 +422,7 @@ public class GameFrame extends JPanel implements Runnable{
             g2.drawImage(gameImage.endScreenOverlay, 0, getHeight() - 48, getWidth(), 48, null);
 
 
-        }else if(gameState == tutorialState) {
+        }else if(state.getGameState() == state.tutorialState) {
             // play bgm
             try {
                 playBGM(4);
@@ -479,49 +434,13 @@ public class GameFrame extends JPanel implements Runnable{
                 e.printStackTrace();
             }
 
-            // tutorial screen
-            if(tutorialState == tutorialIntro) {
-                g2.drawImage(gameImage.getTutorialImage(0), 0, 0, getWidth(), getHeight(), null);
-            }else if(tutorialState == tutorial1) {
-                g2.drawImage(gameImage.getTutorialImage(1), 0, 0, getWidth(), getHeight(), null);
-            }else if(tutorialState == tutorial2) {
-                g2.drawImage(gameImage.getTutorialImage(2), 0, 0, getWidth(), getHeight(), null);
-            }else if(tutorialState == tutorial3) {
-                g2.drawImage(gameImage.getTutorialImage(3), 0, 0, getWidth(), getHeight(), null);
-            }else {
-                // exception -> display first page
-                tutorialState = tutorialIntro;
-            }
+            g2.drawImage(gameImage.getTutorialImage(state.getPage()), 0, 0, getWidth(), getHeight(), null);
 
-
-        }else if(gameState == narrationState) {
-            // narration screen
-            if(narrationState == narration1) {
-                g2.drawImage(gameImage.getNarrationImage(0), 0, 0, getWidth(), getHeight(), null);
-            }else if(narrationState == narration2) {
-                g2.drawImage(gameImage.getNarrationImage(1), 0, 0, getWidth(), getHeight(), null);
-            }else if(narrationState == narration3) {
-                g2.drawImage(gameImage.getNarrationImage(2), 0, 0, getWidth(), getHeight(), null);
-            }else if(narrationState == narration4) {
-                g2.drawImage(gameImage.getNarrationImage(3), 0, 0, getWidth(), getHeight(), null);
-            }else if(narrationState == narration5) {
-                g2.drawImage(gameImage.getNarrationImage(4), 0, 0, getWidth(), getHeight(), null);
-            }else if(narrationState == narration6) {
-                g2.drawImage(gameImage.getNarrationImage(5), 0, 0, getWidth(), getHeight(), null);
-            }else if(narrationState == narration7) {
-                g2.drawImage(gameImage.getNarrationImage(6), 0, 0, getWidth(), getHeight(), null);
-            }else if(narrationState == narration8) {
-                g2.drawImage(gameImage.getNarrationImage(7), 0, 0, getWidth(), getHeight(), null);
-            }else if(narrationState == narration9) {
-                g2.drawImage(gameImage.getNarrationImage(8), 0, 0, getWidth(), getHeight(), null);
-            }else if(narrationState == narration10) {
-                g2.drawImage(gameImage.getNarrationImage(9), 0, 0, getWidth(), getHeight(), null);
-            }else if(narrationState == narration11) {
-                g2.drawImage(gameImage.getNarrationImage(10), 0, 0, getWidth(), getHeight(), null);
-            }
+        }else if(state.getGameState() == state.narrationState) {
+            g2.drawImage(gameImage.getNarrationImage(state.getPage()), 0, 0, getWidth(), getHeight(), null);
         }else {
             // exception -> go back to title screen
-            gameState = titleState;
+            state.toTitleState();
         }
 
         g2.dispose();

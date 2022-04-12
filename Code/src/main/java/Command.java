@@ -5,9 +5,6 @@ public class Command {
     protected Map<String, Integer> commandOption = new HashMap<String, Integer>();
     protected int commandNum;
     Command() {
-//        commandOption.put("start", 0);
-//        commandOption.put("changeLevel", 1);
-//        commandOption.put("exit", 2);
         commandNum = 0;
     }
     protected void addCommand(String newCmd) {

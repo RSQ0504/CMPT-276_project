@@ -34,7 +34,7 @@ public class inputKey implements KeyListener {
         int key = e.getKeyCode();
 
         try {
-            if(gf.gameState == gf.titleState) { // key input in title screen to move cursor
+            if(gf.state.getGameState() == gf.state.titleState) { // key input in title screen to move cursor
 
                 if(key == KeyEvent.VK_UP) {
                     gf.playSoundEffect(0);
@@ -47,7 +47,7 @@ public class inputKey implements KeyListener {
                     System.out.println("enter pressed in title screen");
                     performActionWithEnter(gf.cmdTitle);
                 }
-            }else if(gf.gameState == gf.changeLevelState) { // key input in change level screen to move cursor
+            }else if(gf.state.getGameState() == gf.state.changeLevelState) { // key input in change level screen to move cursor
                 System.out.println("key pressed in change level screen");
                 if(key == KeyEvent.VK_UP) {
                     gf.playSoundEffect(0);
@@ -60,7 +60,7 @@ public class inputKey implements KeyListener {
                     performActionWithEnter(gf.cmdChangeLevel);
 //                    System.out.println("enter pressed in change level screen");
                 }
-            } else if(gf.gameState == gf.playState) { // key input during play state
+            } else if(gf.state.getGameState() == gf.state.playState) { // key input during play state
                 if(key== KeyEvent.VK_F){
                     pressF = true;
                 }
@@ -77,87 +77,36 @@ public class inputKey implements KeyListener {
                     pressedRight = true;
                 }
 
-            }else if(gf.gameState == gf.tutorialState) {
+            }else if(gf.state.getGameState() == gf.state.tutorialState) {
                 if(key== KeyEvent.VK_LEFT){
-                    if(gf.tutorialState > gf.tutorialIntro && gf.tutorialState <= gf.tutorial3) {
-                        gf.tutorialState--;
-                        gf.playSoundEffect(0);
-                    }else {
-                        // exception
-                        gf.tutorialState = gf.tutorialIntro;
-                    }
-
-                    // update gameState to reflect tutorial state
-                    gf.gameState = gf.tutorialState;
-                }else if(key == KeyEvent.VK_RIGHT){
-                    if(gf.tutorialState >= gf.tutorialIntro && gf.tutorialState <= gf.tutorial3) {
-                        gf.tutorialState++;
-                        gf.playSoundEffect(0);
-                    }else {
-                        // exception
-                        gf.tutorialState = gf.tutorial3;
-                    }
-
-                    // check if gameState has transferred to narration state
-                    if(gf.tutorialState == gf.narrationState) {
-                        gf.tutorialState = gf.tutorialIntro;// reset
-                        gf.gameState = gf.narrationState;
-                    }else {
-                        gf.gameState = gf.tutorialState;
-                    }
-                }else if(key == KeyEvent.VK_ENTER){
-                    if(gf.tutorialState >= gf.tutorialIntro && gf.tutorialState <= gf.tutorial3) {
-                        gf.playSoundEffect(0);
-                        gf.tutorialState = gf.tutorialIntro;// reset
-                        gf.gameState = gf.narrationState;
-                    }else {
-                        // exception
-                        gf.tutorialState = gf.tutorialIntro;
-                        gf.gameState = gf.tutorialState;
-                    }
-
-                }
-            }else if(gf.gameState == gf.narrationState) {
-                System.out.println("gameState: " + gf.gameState + " narrationState: " + gf.narrationState);
-                if(key== KeyEvent.VK_LEFT){
-                    if(gf.narrationState > gf.narration1 && gf.narrationState <= gf.narration11) {
-                        gf.playSoundEffect(0);
-                        gf.narrationState--;
-                    }else {
-                        // exception
-                        gf.narrationState = gf.narration1;
-                    }
-
-                    gf.gameState = gf.narrationState;
-                }else if(key == KeyEvent.VK_RIGHT){
-                    if(gf.narrationState >= gf.narration1 && gf.narrationState < gf.narration11) {
-                        gf.playSoundEffect(0);
-                        gf.narrationState++;
-                    }else {
-                        // exception
-                        gf.narrationState = gf.narration11;
-                    }
-
-                    gf.gameState = gf.narrationState;
-                }else if(key == KeyEvent.VK_ENTER){
-                    if(gf.narrationState >= gf.narration1 && gf.narrationState <= gf.narration11) {
-                        gf.narrationState = gf.narration1;
-                        gf.gameState = gf.playState;
-                        gf.stopBGM(4);
-                    }else {
-                        // exception
-                        gf.narrationState = gf.narration1;
-                        gf.gameState = gf.narrationState;
-                    }
-
-                }
-            }else if(gf.gameState == gf.endState) {
-                if(key == KeyEvent.VK_LEFT || key == KeyEvent.VK_RIGHT) {
+                    gf.state.prevPage();
                     gf.playSoundEffect(0);
-                    // switch options
+                }else if(key == KeyEvent.VK_RIGHT){
+                    gf.state.nextPage();
+                    gf.playSoundEffect(0);
+                }else if(key == KeyEvent.VK_ENTER){
+                    gf.state.skipTutorial();
+                    gf.playSoundEffect(0);
+                }
+            }else if(gf.state.getGameState() == gf.state.narrationState) {
+                if(key== KeyEvent.VK_LEFT){
+                    gf.state.prevPage();
+                    gf.playSoundEffect(0);
+                }else if(key == KeyEvent.VK_RIGHT){
+                    gf.state.nextPage();
+                    gf.playSoundEffect(0);
+                }else if(key == KeyEvent.VK_ENTER){
+                    gf.state.skipNarration();
+                    gf.stopBGM(4);
+                }
+            }else if(gf.state.getGameState() == gf.state.endState) {
+                if(key == KeyEvent.VK_LEFT) {
+                    gf.playSoundEffect(0);
+                    gf.cmdEnd.decCommand();
+                }else if(key == KeyEvent.VK_RIGHT) {
+                    gf.playSoundEffect(0);
                     gf.cmdEnd.incCommand();
                 }else if(key == KeyEvent.VK_ENTER) {
-                    System.out.println("[inputKey] before enter key pressed, game state: " + gf.gameState);
                     performActionWithEnter(gf.cmdEnd);
                 }
             }
@@ -197,18 +146,15 @@ public class inputKey implements KeyListener {
 
     private void performActionWithEnter(TitleScreenCommand cmd) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         if(cmd.getCommandNum() == cmd.cmdStart) {
-            gf.gameState = gf.tutorialState;
+            gf.state.toTutorialState();
             cmd.setCommandNum(0);
         }else if(cmd.getCommandNum() == cmd.cmdChangeLevel) {
             gf.playSoundEffect(0);
-
-            gf.gameState = gf.changeLevelState;
-//            cmd.setCommandNum(gf.gameLevel);
+            gf.state.toChangeLevelState();
         }else if(cmd.getCommandNum() == cmd.cmdExit) {
             gf.playSoundEffect(2);
             System.exit(0);
-        }else {
-            // exception: reset commandNum to 0
+        }else {// exception: reset commandNum to 0
             cmd.setCommandNum(0);
         }
         cmd.setCommandNum(0);
@@ -216,46 +162,35 @@ public class inputKey implements KeyListener {
     private void performActionWithEnter(ChangeLevelCommand cmd) {
         if(cmd.getCommandNum() == cmd.cmdEasy) {
             gf.settings.setGameLevel(gf.settings.levelEasy);
-//            gf.numOfVaccines = 5;
-//            gf.gameLevel = gf.levelEasy;
             gf.mc.setDefaultValue(gf.tileFrame.getStartPoints(gf.settings.levelEasy));
-            gf.gameState = gf.titleState;
+            gf.state.toTitleState();
         }else if(cmd.getCommandNum() == cmd.cmdIntermediate) {
             gf.settings.setGameLevel(gf.settings.levelIntermediate);
-//            gf.numOfVaccines = 7;
-//            gf.gameLevel = gf.levelIntermediate;
             gf.mc.setDefaultValue(gf.tileFrame.getStartPoints(gf.settings.levelIntermediate));
-            gf.gameState = gf.titleState;
+            gf.state.toTitleState();
         }else if(cmd.getCommandNum() == cmd.cmdChallenge) {
             gf.settings.setGameLevel(gf.settings.levelChallenge);
-//            gf.numOfVaccines = 10;
-//            gf.gameLevel = gf.levelChallenge;
             gf.mc.setDefaultValue(gf.tileFrame.getStartPoints(gf.settings.levelChallenge));
-            gf.gameState = gf.titleState;
+            gf.state.toTitleState();
         }else {
             gf.settings.setGameLevel(gf.settings.levelEasy);
-//            gf.gameLevel = gf.levelEasy;
-//            gf.numOfVaccines = 5;
-            gf.gameState = gf.changeLevelState;
+            gf.state.toChangeLevelState();
         }
     }
     private void performActionWithEnter(EndScreenCommand cmd) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
-        System.out.println("[inputKey] before enter key pressed, game state: " + gf.gameState);
-
+//        System.out.println("[inputKey] before enter key pressed, game state: " + gf.gameState);
         if(cmd.getCommandNum() == cmd.cmdRetry) {// restart game at same level: return to tutorial screen
             gf.playSoundEffect(0);
             gf.stopBGM(3);
             gf.resetGame(cmd.getCommandNum());// partial reset(game level unchanged)
-            gf.gameState = gf.tutorialState;
+            gf.state.toTutorialState();
         }else if(cmd.getCommandNum() == cmd.cmdReturn) {// reset game attributes: return to title screen
             gf.playSoundEffect(0);
             gf.stopBGM(3);
             gf.resetGame(cmd.getCommandNum());// full reset
-
-            // return to title screen
-            gf.gameState = gf.titleState;
+            gf.state.toTitleState();
         }
-        System.out.println("[inputKey] after enter key pressed, game state: " + gf.gameState);
+//        System.out.println("[inputKey] after enter key pressed, game state: " + gf.gameState);
         cmd.setCommandNum(0);
     }
 }

@@ -37,7 +37,7 @@ public class GameFrameTest {
         gfTest.runGame();
 
         Assert.assertEquals(gfTest.gameResult,0 );
-        Assert.assertEquals(gfTest.gameState, 0);
+        Assert.assertEquals(gfTest.state.getGameState(), 0);
 
         gfTest.mc.x = 30;
         gfTest.mc.y = 540;
@@ -45,19 +45,21 @@ public class GameFrameTest {
         gfTest.runGame();
 
         Assert.assertEquals(gfTest.gameResult,1 );
-        Assert.assertEquals(gfTest.gameState, 3);
+        Assert.assertEquals(gfTest.state.getGameState(), 3);
 
-        gfTest.gameState = 0;
+//        gfTest.gameState = 0;
+        gfTest.state.toTitleState();
         gfTest.gameResult = 0;
         gfTest.mc.setVaccines(5);
         Assert.assertEquals(gfTest.gameResult,0 );
-        Assert.assertEquals(gfTest.gameState, 0);
+        Assert.assertEquals(gfTest.state.getGameState(), 0);
 
-        gfTest.gameState = 0;
+//        gfTest.gameState = 0;
+        gfTest.state.toTitleState();
         gfTest.gameResult = 0;
         gfTest.mc.setVaccines(1);
         Assert.assertEquals(gfTest.gameResult,0 );
-        Assert.assertEquals(gfTest.gameState, 0);
+        Assert.assertEquals(gfTest.state.getGameState(), 0);
 
     }
 
