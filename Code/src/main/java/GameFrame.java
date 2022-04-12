@@ -63,11 +63,6 @@ public class GameFrame extends JPanel implements Runnable{
 
     //Timer
     private TimerClock clock = new TimerClock();
-    private int timerState = 0;
-    private int timerInactive = 0;// 00:00, ready to start counting
-    private int timerInProgress = 1;// counting
-    private int timerPaused = 2;// paused
-    private int timerTerminated = 3;// completed counting, with final count of time
 
     // The characters
     public MainCharacter mc = new MainCharacter(this,key);
@@ -204,14 +199,13 @@ public class GameFrame extends JPanel implements Runnable{
             mc.setHP(0);
             gameResult = fail;
             state.toEndState();
-            timerState = timerTerminated;
         }
-        // check whether main character is has won
+
+        // check whether main character has won
         if(mc.getVaccines() >= settings.getNumOfVaccines() && endpoint.intersects(MC)){
 //                System.out.println("[run/GameFrame] check: main character survived!");
             gameResult = win;
             state.toEndState();
-            timerState = timerTerminated;
         }
 
         // 2.DRAW
@@ -219,20 +213,8 @@ public class GameFrame extends JPanel implements Runnable{
 
         // TIMER
         if(state.getGameState() == state.playState) {
-//                System.out.println("[run/GameFrame] Game playing");
-
-            if(timerState == timerInactive) {
-//                    System.out.println("[run/GameFrame] Start timer");
+            if(clock.getTimerState() == clock.stopped) {
                 clock.startTimer();
-                timerState = timerInProgress;
-            }
-
-        }else if(state.getGameState() == state.endState) {
-            if(timerState == timerTerminated) {
-//                    System.out.println("[run/GameFrame] game ended: timer terminated");
-            }else {
-                timerState = timerTerminated;
-//                    System.out.println("[run/GameFrame] game ended: timer not terminated");
             }
         }
 

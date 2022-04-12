@@ -17,12 +17,16 @@ public class TimerClock {
     private int second, minute;
     private String secondFormatted, minuteFormatted;
     private DecimalFormat timeFormatted = new DecimalFormat("00");
+    private int state;
+    public final int running = 0;
+    public final int stopped = 1;
 
     /**
      * class constructor
      */
     TimerClock(){
         getTimerImg();
+        state = stopped;
     }
 
     /**
@@ -35,6 +39,13 @@ public class TimerClock {
         minuteFormatted = "00";
         clockTimer();
         timer.start();
+        state = running;
+    }
+    /**
+     * get timer state
+     */
+    public int getTimerState() {
+        return state;
     }
 
     /**
@@ -68,6 +79,7 @@ public class TimerClock {
     public void stopTimer(){
         if (timer != null){
             timer.stop();
+            state = stopped;
         }
     }
 
