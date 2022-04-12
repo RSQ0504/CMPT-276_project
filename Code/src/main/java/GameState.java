@@ -25,12 +25,19 @@ public class GameState {
         page = 0;
     }
 
+    /**
+     * change game states
+     */
     public void toTitleState() {gameState = State.TITLE;}
     public void toPlayState() {gameState = State.PLAY;}
     public void toChangeLevelState() {gameState = State.CHANGE_LEVEL;}
     public void toTutorialState() {gameState = State.TUTORIAL;}
     public void toNarrationState() {gameState = State.NARRATION;}
     public void toEndState() {gameState = State.END;}
+
+    /**
+     * get current game states
+     */
     public int getGameState() {
         switch (gameState) {
             case TITLE: return 0;
@@ -46,6 +53,9 @@ public class GameState {
         checkPageValid();
         return page;
     }
+    /**
+     * switch to previous screen in tutorial state or narration state
+     */
     public void prevPage() {
         if(gameState == State.TUTORIAL) {
             if(page > 0 && page <= maxPageTutorial) {
@@ -58,6 +68,10 @@ public class GameState {
         }
         checkPageValid();
     }
+    /**
+     * switch to next screen in tutorial state or narration state
+     * last page of tutorial state will switch to first page of narration state
+     */
     public void nextPage() {
         if(gameState == State.TUTORIAL) {
             if(page >= 0 && page < maxPageTutorial) {
@@ -91,7 +105,11 @@ public class GameState {
             toPlayState();
         }
     }
-
+    /**
+     * check if page is within the maximum number of pages for that screen(tutorial/narration)
+     * tutorial: 0-3
+     * narration: 0-10
+     */
     private void checkPageValid() {
         if(page < 0) {
             page = 0;

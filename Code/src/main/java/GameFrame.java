@@ -38,7 +38,7 @@ public class GameFrame extends JPanel implements Runnable{
     public ChangeLevelCommand cmdChangeLevel = new ChangeLevelCommand();
     public EndScreenCommand cmdEnd = new EndScreenCommand();
 
-    
+
     private GameImage gameImage = new GameImage();
 
     //attributes of GameMap
@@ -203,7 +203,6 @@ public class GameFrame extends JPanel implements Runnable{
 //                System.out.println("[run/GameFrame] check: main character dead!");
             mc.setHP(0);
             gameResult = fail;
-//            gameState = endState;
             state.toEndState();
             timerState = timerTerminated;
         }
@@ -211,7 +210,6 @@ public class GameFrame extends JPanel implements Runnable{
         if(mc.getVaccines() >= settings.getNumOfVaccines() && endpoint.intersects(MC)){
 //                System.out.println("[run/GameFrame] check: main character survived!");
             gameResult = win;
-//            gameState = endState;
             state.toEndState();
             timerState = timerTerminated;
         }

@@ -63,17 +63,13 @@ public class inputKey implements KeyListener {
             } else if(gf.state.getGameState() == gf.state.playState) { // key input during play state
                 if(key== KeyEvent.VK_F){
                     pressF = true;
-                }
-                else if(key == KeyEvent.VK_UP){
+                }else if(key == KeyEvent.VK_UP){
                     pressedUp = true;
-                }
-                else if(key == KeyEvent.VK_DOWN){
+                }else if(key == KeyEvent.VK_DOWN){
                     pressedDown = true;
-                }
-                else if(key == KeyEvent.VK_LEFT){
+                }else if(key == KeyEvent.VK_LEFT){
                     pressedLeft = true;
-                }
-                else if(key == KeyEvent.VK_RIGHT){
+                }else if(key == KeyEvent.VK_RIGHT){
                     pressedRight = true;
                 }
 
@@ -129,17 +125,13 @@ public class inputKey implements KeyListener {
         int key = e.getKeyCode();
         if(key== KeyEvent.VK_F){
             pressF = false;
-        }
-        if(key == KeyEvent.VK_UP){
+        }if(key == KeyEvent.VK_UP){
             pressedUp = false;
-        }
-        else if(key == KeyEvent.VK_DOWN){
+        }else if(key == KeyEvent.VK_DOWN){
             pressedDown = false;
-        }
-        else if(key == KeyEvent.VK_LEFT){
+        }else if(key == KeyEvent.VK_LEFT){
             pressedLeft = false;
-        }
-        else if(key == KeyEvent.VK_RIGHT){
+        }else if(key == KeyEvent.VK_RIGHT){
             pressedRight = false;
         }
     }

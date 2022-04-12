@@ -8,7 +8,10 @@ public class GameAttribute {
     public final int levelIntermediate = 1;
     public final int levelChallenge = 2;
 
-
+    /**
+     * initialize game attribute with default level
+     * @param defaultLvl
+     */
     GameAttribute(int defaultLvl) {
         setGameLevel(defaultLvl);
     }
@@ -21,6 +24,9 @@ public class GameAttribute {
         }
         setGameAttributes();
     }
+    /**
+     * sets attributes of game(game level, number of vaccines required for the level)
+     */
     private void setGameAttributes() {
         switch (gameLevel) {
             case levelEasy:
