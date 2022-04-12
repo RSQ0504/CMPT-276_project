@@ -23,9 +23,6 @@ public class GameFrame extends JPanel implements Runnable{
     public final int track3_playState = 3;
     public final int track4_titleState = 4;
 
-
-
-
     // GAME STATE
     public int gameState;
     public final int titleState = 0;
@@ -65,56 +62,20 @@ public class GameFrame extends JPanel implements Runnable{
 
 
     // menu
+//    public Command cmd = new Command();
+    public TitleScreenCommand cmdTitle = new TitleScreenCommand();
+    public ChangeLevelCommand cmdChangeLevel = new ChangeLevelCommand();
+    public EndScreenCommand cmdEnd = new EndScreenCommand();
+
+    /*
     public int numOfCommands = 3; // number of commands
     public int commandNum = 0; // start: 0, change level: 1, exit: 2
     public final int optionStart = 0;
     public final int optionChangeLevel = 1;
     public final int optionExit = 2;
+     */
 
-    // background images, initialized in GameFrame constructor
-    private Image bgImage;
-    private Image bgTitleScreen;
-    private Image bgChangeLevelScreen;
-    private Image overlayImage;
-    private Image endScreenOverlay;
-//    private Image winEndScreenOverlay;
-//    private Image failEndScreenOverlay;
-    private Image titleScreenOverlay;
-    private Image gameWinBg;
-    private Image gameFailBg;
-    private Image cursor;
-
-    // buttons for end screen
-    private Image retryButtonRegular;
-    private Image retryButtonLight;
-    private Image returnButtonRegular;
-    private Image returnButtonLight;
-
-
-    // tutorial images
-    private Image tutorialPage;
-    private Image tutorialPage1;
-    private Image tutorialPage2;
-    private Image tutorialPage3;
-
-    // narration images
-    private Image narrationPage1;
-    private Image narrationPage2;
-    private Image narrationPage3;
-    private Image narrationPage4;
-    private Image narrationPage5;
-    private Image narrationPage6;
-    private Image narrationPage7;
-    private Image narrationPage8;
-    private Image narrationPage9;
-    private Image narrationPage10;
-    private Image narrationPage11;
-
-//    private BufferedImage gamewin = ImageIO.read(new File("src/main/java/picture/GUI_image/GameWin_interface.png"));
-//    private BufferedImage gamefail = ImageIO.read(new File("src/main/java/picture/GUI_image/GameOver_interface.png"));
-
-    private BufferedImage gamewin = ImageIO.read(new File("src/main/java/picture/GUI_image/GameWin_interface_noButtons.png"));
-    private BufferedImage gamefail = ImageIO.read(new File("src/main/java/picture/GUI_image/GameOver_interface_noButtons.png"));
+    private GameImage gameImage = new GameImage();
 
     //attributes of GameMap
     public GameObject[][] Map;
@@ -202,44 +163,6 @@ public class GameFrame extends JPanel implements Runnable{
         this.gameState = titleState;
         setUpScreen();
         setStartPoint(100,100);
-
-        bgImage = new ImageIcon("src/main/java/picture/GUI_image/titleScreenBg.jpg").getImage();
-        bgTitleScreen = new ImageIcon("src/main/java/picture/GUI_image/title_screen_bg.png").getImage();
-        bgChangeLevelScreen = new ImageIcon("src/main/java/picture/GUI_image/change_level_screen_bg.png").getImage();
-        overlayImage = new ImageIcon("src/main/java/picture/GUI_image/overlay_instructions.png").getImage();
-        titleScreenOverlay = new ImageIcon("src/main/java/picture/GUI_image/title_screen_overlay.png").getImage();
-        endScreenOverlay = new ImageIcon("src/main/java/picture/GUI_image/end_screen_overlay.png").getImage();
-//        winEndScreenOverlay = new ImageIcon("src/main/java/picture/GUI_image/win_end_screen_overlay.png").getImage();
-//        failEndScreenOverlay = new ImageIcon("src/main/java/picture/GUI_image/fail_end_screen_overlay.png").getImage();
-        gameWinBg = new ImageIcon("src/main/java/picture/GUI_image/escape_success_bg.jpg").getImage();
-        gameFailBg = new ImageIcon("src/main/java/picture/GUI_image/escape_fail_bg.jpg").getImage();
-        cursor = new ImageIcon("src/main/java/picture/GUI_image/redHand_icon.png").getImage();
-
-        // get images for buttons in end screen
-        retryButtonRegular = new ImageIcon("src/main/java/picture/GUI_image/RetryButton_noLight.png").getImage();
-        retryButtonLight = new ImageIcon("src/main/java/picture/GUI_image/RetryButton_light.png").getImage();
-        returnButtonRegular = new ImageIcon("src/main/java/picture/GUI_image/ReturnButton_noLight.png").getImage();
-        returnButtonLight = new ImageIcon("src/main/java/picture/GUI_image/ReturnButton_light.png").getImage();
-
-
-        // get images for tutorial screen
-        tutorialPage = new ImageIcon("src/main/java/picture/GUI_image/tutorial/tutorial_sample.png").getImage();
-        tutorialPage1 = new ImageIcon("src/main/java/picture/GUI_image/tutorial/tutorial1_sample.png").getImage();
-        tutorialPage2 = new ImageIcon("src/main/java/picture/GUI_image/tutorial/tutorial2_sample.png").getImage();
-        tutorialPage3 = new ImageIcon("src/main/java/picture/GUI_image/tutorial/tutorial3_sample.png").getImage();
-
-        // get images for narration screen
-        narrationPage1 = new ImageIcon("src/main/java/picture/GUI_image/background_story/background_story1.png").getImage();
-        narrationPage2 = new ImageIcon("src/main/java/picture/GUI_image/background_story/background_story2.png").getImage();
-        narrationPage3 = new ImageIcon("src/main/java/picture/GUI_image/background_story/background_story3.png").getImage();
-        narrationPage4 = new ImageIcon("src/main/java/picture/GUI_image/background_story/background_story4.png").getImage();
-        narrationPage5 = new ImageIcon("src/main/java/picture/GUI_image/background_story/background_story5.png").getImage();
-        narrationPage6 = new ImageIcon("src/main/java/picture/GUI_image/background_story/background_story6.png").getImage();
-        narrationPage7 = new ImageIcon("src/main/java/picture/GUI_image/background_story/background_story7.png").getImage();
-        narrationPage8 = new ImageIcon("src/main/java/picture/GUI_image/background_story/background_story8.png").getImage();
-        narrationPage9 = new ImageIcon("src/main/java/picture/GUI_image/background_story/background_story9.png").getImage();
-        narrationPage10 = new ImageIcon("src/main/java/picture/GUI_image/background_story/background_story10.png").getImage();
-        narrationPage11 = new ImageIcon("src/main/java/picture/GUI_image/background_story/background_story11.png").getImage();
     }
 
     /**
@@ -400,7 +323,7 @@ public class GameFrame extends JPanel implements Runnable{
             }
 
             // display background image
-            g2.drawImage(bgTitleScreen, 0, 0, getWidth(), getHeight(), null);
+            g2.drawImage(gameImage.bgTitleScreen, 0, 0, getWidth(), getHeight(), null);
 
             int x, y;
             int numBtn = 3; // number of buttons in menu
@@ -416,13 +339,13 @@ public class GameFrame extends JPanel implements Runnable{
                 y = 280 + (cursorSize*i) - 10;
 
                 // draw cursor
-                if(commandNum == i) {
-                    g2.drawImage(cursor, x - (2*cursorSize + 25), y, cursorSize, cursorSize, null);
+                if(cmdTitle.getCommandNum() == i) {
+                    g2.drawImage(gameImage.cursor, x - (2*cursorSize + 25), y, cursorSize, cursorSize, null);
                 }
             }
 
             // draw overlay (key instruction/guide at the bottom)
-            g2.drawImage(titleScreenOverlay, 0, getHeight() - 48, getWidth(), 48, null);
+            g2.drawImage(gameImage.titleScreenOverlay, 0, getHeight() - 48, getWidth(), 48, null);
 
         }else if(gameState == playState) {
             // play bgm
@@ -483,12 +406,12 @@ public class GameFrame extends JPanel implements Runnable{
             // draw frame (score, time, overlay)
             mc.drawScore(g2,645,4, numOfVaccines);
             clock.draw(g2,555,4);
-            g2.drawImage(overlayImage, 0, 0, 340, 28, null);
+            g2.drawImage(gameImage.overlayImage, 0, 0, 340, 28, null);
 
 
         }else if(gameState == changeLevelState) { // screen display for change-level-screen
             // display background image
-            g2.drawImage(bgChangeLevelScreen, 0, 0, getWidth(), getHeight(), null);
+            g2.drawImage(gameImage.bgChangeLevelScreen, 0, 0, getWidth(), getHeight(), null);
 
             int x, y;
             int numBtn = 3; // number of options
@@ -503,24 +426,23 @@ public class GameFrame extends JPanel implements Runnable{
                 y = 280 + (cursorSize*i) - 10;
 
                 // draw cursor
-                if(commandNum == i) {
-                    g2.drawImage(cursor, x-(2*cursorSize + 10), y, cursorSize, cursorSize, null);
+                if(cmdChangeLevel.getCommandNum() == i) {
+                    g2.drawImage(gameImage.cursor, x-(2*cursorSize + 10), y, cursorSize, cursorSize, null);
                 }
             }
 
             // draw overlay (key instruction/guide at the bottom)
-            g2.drawImage(titleScreenOverlay, 0, getHeight() - 48, getWidth(), 48, null);
+            g2.drawImage(gameImage.titleScreenOverlay, 0, getHeight() - 48, getWidth(), 48, null);
         }else if(gameState == pauseState) {
-            g2.drawImage(bgImage, 0, 0, getWidth(), getHeight(), null);
+            g2.drawImage(gameImage.bgImage, 0, 0, getWidth(), getHeight(), null);
             // screen display when game is paused
             // not used
         }else if(gameState == endState) {
 
             if(gameResult == fail) {
                 // background image
-                g2.drawImage(gameFailBg, 0, 0, getWidth(), getHeight(), null);
-
-                g2.drawImage(gamefail, 165, 165, null);
+                g2.drawImage(gameImage.gameFailBg, 0, 0, getWidth(), getHeight(), null);
+                g2.drawImage(gameImage.gamefail, 165, 165, null);
                 clock.stopTimer();
                 clock.draw(g2,260,280);
                 mc.drawScore(g2,360,280, numOfVaccines);
@@ -528,9 +450,8 @@ public class GameFrame extends JPanel implements Runnable{
 
             if(gameResult == win) {
                 // background image
-                g2.drawImage(gameWinBg, 0, 0, getWidth(), getHeight(), null);
-
-                g2.drawImage(gamewin, 165, 165, null);
+                g2.drawImage(gameImage.gameWinBg, 0, 0, getWidth(), getHeight(), null);
+                g2.drawImage(gameImage.gamewin, 165, 165, null);
                 clock.stopTimer();
                 clock.draw(g2,260,280);
                 mc.drawScore(g2,360,280, numOfVaccines);
@@ -538,17 +459,17 @@ public class GameFrame extends JPanel implements Runnable{
             }
 
             // add buttons (retry, return)
-            if(commandNum == 0) {
-                g2.drawImage(retryButtonLight, 240, 390, null);// selected option
-                g2.drawImage(returnButtonRegular, 370, 390, null);
-            }else if(commandNum == 1) {
-                g2.drawImage(retryButtonRegular, 240, 390, null);
-                g2.drawImage(returnButtonLight, 370, 390, null);// selected option
+            if(cmdEnd.getCommandNum() == 0) {
+                g2.drawImage(gameImage.retryButtonLight, 240, 390, null);// selected option
+                g2.drawImage(gameImage.returnButtonRegular, 370, 390, null);
+            }else if(cmdEnd.getCommandNum() == 1) {
+                g2.drawImage(gameImage.retryButtonRegular, 240, 390, null);
+                g2.drawImage(gameImage.returnButtonLight, 370, 390, null);// selected option
             }
 
 
             // draw overlay (key instruction/guide at the bottom)
-            g2.drawImage(endScreenOverlay, 0, getHeight() - 48, getWidth(), 48, null);
+            g2.drawImage(gameImage.endScreenOverlay, 0, getHeight() - 48, getWidth(), 48, null);
 
 
         }else if(gameState == tutorialState) {
@@ -565,13 +486,13 @@ public class GameFrame extends JPanel implements Runnable{
 
             // tutorial screen
             if(tutorialState == tutorialIntro) {
-                g2.drawImage(tutorialPage, 0, 0, getWidth(), getHeight(), null);
+                g2.drawImage(gameImage.getTutorialImage(0), 0, 0, getWidth(), getHeight(), null);
             }else if(tutorialState == tutorial1) {
-                g2.drawImage(tutorialPage1, 0, 0, getWidth(), getHeight(), null);
+                g2.drawImage(gameImage.getTutorialImage(1), 0, 0, getWidth(), getHeight(), null);
             }else if(tutorialState == tutorial2) {
-                g2.drawImage(tutorialPage2, 0, 0, getWidth(), getHeight(), null);
+                g2.drawImage(gameImage.getTutorialImage(2), 0, 0, getWidth(), getHeight(), null);
             }else if(tutorialState == tutorial3) {
-                g2.drawImage(tutorialPage3, 0, 0, getWidth(), getHeight(), null);
+                g2.drawImage(gameImage.getTutorialImage(3), 0, 0, getWidth(), getHeight(), null);
             }else {
                 // exception -> display first page
                 tutorialState = tutorialIntro;
@@ -581,27 +502,27 @@ public class GameFrame extends JPanel implements Runnable{
         }else if(gameState == narrationState) {
             // narration screen
             if(narrationState == narration1) {
-                g2.drawImage(narrationPage1, 0, 0, getWidth(), getHeight(), null);
+                g2.drawImage(gameImage.getNarrationImage(0), 0, 0, getWidth(), getHeight(), null);
             }else if(narrationState == narration2) {
-                g2.drawImage(narrationPage2, 0, 0, getWidth(), getHeight(), null);
+                g2.drawImage(gameImage.getNarrationImage(1), 0, 0, getWidth(), getHeight(), null);
             }else if(narrationState == narration3) {
-                g2.drawImage(narrationPage3, 0, 0, getWidth(), getHeight(), null);
+                g2.drawImage(gameImage.getNarrationImage(2), 0, 0, getWidth(), getHeight(), null);
             }else if(narrationState == narration4) {
-                g2.drawImage(narrationPage4, 0, 0, getWidth(), getHeight(), null);
+                g2.drawImage(gameImage.getNarrationImage(3), 0, 0, getWidth(), getHeight(), null);
             }else if(narrationState == narration5) {
-                g2.drawImage(narrationPage5, 0, 0, getWidth(), getHeight(), null);
+                g2.drawImage(gameImage.getNarrationImage(4), 0, 0, getWidth(), getHeight(), null);
             }else if(narrationState == narration6) {
-                g2.drawImage(narrationPage6, 0, 0, getWidth(), getHeight(), null);
+                g2.drawImage(gameImage.getNarrationImage(5), 0, 0, getWidth(), getHeight(), null);
             }else if(narrationState == narration7) {
-                g2.drawImage(narrationPage7, 0, 0, getWidth(), getHeight(), null);
+                g2.drawImage(gameImage.getNarrationImage(6), 0, 0, getWidth(), getHeight(), null);
             }else if(narrationState == narration8) {
-                g2.drawImage(narrationPage8, 0, 0, getWidth(), getHeight(), null);
+                g2.drawImage(gameImage.getNarrationImage(7), 0, 0, getWidth(), getHeight(), null);
             }else if(narrationState == narration9) {
-                g2.drawImage(narrationPage9, 0, 0, getWidth(), getHeight(), null);
+                g2.drawImage(gameImage.getNarrationImage(8), 0, 0, getWidth(), getHeight(), null);
             }else if(narrationState == narration10) {
-                g2.drawImage(narrationPage10, 0, 0, getWidth(), getHeight(), null);
+                g2.drawImage(gameImage.getNarrationImage(9), 0, 0, getWidth(), getHeight(), null);
             }else if(narrationState == narration11) {
-                g2.drawImage(narrationPage11, 0, 0, getWidth(), getHeight(), null);
+                g2.drawImage(gameImage.getNarrationImage(10), 0, 0, getWidth(), getHeight(), null);
             }
         }else {
             // exception -> go back to title screen
