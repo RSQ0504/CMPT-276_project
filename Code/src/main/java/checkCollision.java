@@ -33,16 +33,10 @@ public class checkCollision {
         switch(obj.direction){
             case "up":
                 charcTopRow = (charcTop - obj.speed)/scaledCellSize;
-
                 if (charcTopRow < 0 || charcTopRow > 23 || charcLeftCol < 0 || charcLeftCol > 31 || charcRightCol < 0 || charcRightCol > 31){
                     obj.collision = true;
                 } else {
-                    tile1 = board[charcTopRow][charcLeftCol]; //left corner check
-                    tile2 = board[charcTopRow][charcRightCol]; //right corner check
-
-                    if(check_frame.tileFrame.tile[tile1].getCollision() || check_frame.tileFrame.tile[tile2].getCollision()) {
-                        obj.collision = true;
-                    }
+                    setTileCollisions(charcTopRow,charcLeftCol,charcTopRow,charcRightCol,obj);
                 }
                 break;
             case "down":
@@ -50,12 +44,7 @@ public class checkCollision {
                 if (charcBottomRow < 0 || charcBottomRow > 23 || charcLeftCol < 0 || charcLeftCol > 31 || charcRightCol < 0 || charcRightCol > 31){
                     obj.collision = true;
                 } else {
-                    tile1 = board[charcBottomRow][charcLeftCol]; //left corner check
-                    tile2 = board[charcBottomRow][charcRightCol]; //right corner check
-
-                    if(check_frame.tileFrame.tile[tile1].getCollision() || check_frame.tileFrame.tile[tile2].getCollision()) {
-                        obj.collision = true;
-                    }
+                    setTileCollisions(charcBottomRow,charcLeftCol,charcBottomRow,charcRightCol,obj);
                 }
                 break;
             case "right":
@@ -63,12 +52,7 @@ public class checkCollision {
                 if (charcBottomRow < 0 || charcBottomRow > 23 || charcTopRow < 0 || charcTopRow > 23 || charcRightCol < 0 || charcRightCol > 31){
                     obj.collision = true;
                 } else {
-                    tile1 = board[charcTopRow][charcRightCol+1]; //top corner check
-                    tile2 = board[charcBottomRow][charcRightCol+1]; //bottom corner check
-
-                    if(check_frame.tileFrame.tile[tile1].getCollision() || check_frame.tileFrame.tile[tile2].getCollision()) {
-                        obj.collision = true;
-                    }
+                    setTileCollisions(charcTopRow,charcRightCol+1,charcBottomRow,charcRightCol+1,obj);
                 }
                 break;
             case "left":
@@ -76,15 +60,29 @@ public class checkCollision {
                 if (charcBottomRow < 0 || charcBottomRow > 23 || charcTopRow < 0 || charcTopRow > 23 || charcLeftCol < 0 || charcLeftCol > 31) {
                     obj.collision = true;
                 }else {
-                    tile1 = board[charcTopRow][charcLeftCol]; //top corner check
-                    tile2 = board[charcBottomRow][charcLeftCol]; //bottom corner check
-
-                    if(check_frame.tileFrame.tile[tile1].getCollision() || check_frame.tileFrame.tile[tile2].getCollision()) {
-                        obj.collision = true;
-                    }
+                    setTileCollisions(charcTopRow,charcLeftCol,charcBottomRow,charcLeftCol,obj);
                 }
                 break;
             default:break;
+        }
+    }
+
+    /**
+     * check calculated index for collisions and set collision value accordingly
+     * @param tile1x
+     * @param tile1y
+     * @param tile2x
+     * @param tile2y
+     * @param obj
+     */
+    private void setTileCollisions(int tile1x, int tile1y, int tile2x, int tile2y, DynamicCharacter obj){
+        int tile1,tile2;
+        int[][] board = check_frame.tileFrame.getBoard(check_frame.gameLevel);
+        tile1 = board[tile1x][tile1y];
+        tile2 = board[tile2x][tile2y];
+
+        if(check_frame.tileFrame.tile[tile1].getCollision() || check_frame.tileFrame.tile[tile2].getCollision()) {
+            obj.collision = true;
         }
     }
 }
