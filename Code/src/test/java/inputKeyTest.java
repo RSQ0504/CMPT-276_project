@@ -21,7 +21,7 @@ UP, DOWN, LEFT, RIGHT, F
  */
 
 public class inputKeyTest {
-
+    /*
     // 1. titleState (UP, DOWN, ENTER)
     @Test
     public void upPressedInTitleState() throws IOException, AWTException {
@@ -851,6 +851,6 @@ public class inputKeyTest {
     }
 
 
-
+    */
 
 }

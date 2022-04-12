@@ -37,97 +37,28 @@ public class inputKey implements KeyListener {
             if(gf.gameState == gf.titleState) { // key input in title screen to move cursor
 
                 if(key == KeyEvent.VK_UP) {
-//                System.out.println("UP pressed in title screen");
                     gf.playSoundEffect(0);
-
-                    gf.commandNum--;
-//                    System.out.println("commandNum = " + gf.commandNum);
-                    if(gf.commandNum < 0) {
-                        gf.commandNum = gf.numOfCommands - 1;
-//                    System.out.println("[change] commandNum = " + gf.commandNum);
-                    }else if(gf.commandNum > gf.numOfCommands - 1) {
-                        gf.commandNum = 0;
-                    }
+                    gf.cmdTitle.decCommand();
                 }else if(key == KeyEvent.VK_DOWN) {
                     System.out.println("DOWN pressed in title screen");
                     gf.playSoundEffect(0);
-
-//                    System.out.println("commandNum = " + gf.commandNum);
-                    gf.commandNum++;
-                    if(gf.commandNum > gf.numOfCommands - 1) {
-                        gf.commandNum = 0;
-//                        System.out.println("[change] commandNum = " + gf.commandNum);
-                    }else if(gf.commandNum < 0) {
-                        // exception
-                        gf.commandNum = gf.numOfCommands - 1;
-                    }
+                    gf.cmdTitle.incCommand();
                 }else if(key == KeyEvent.VK_ENTER) {
                     System.out.println("enter pressed in title screen");
-                    if(gf.commandNum == gf.optionStart) {
-                        gf.gameState = gf.tutorialState;
-                        gf.commandNum = 0;
-                    }else if(gf.commandNum == gf.optionChangeLevel) {
-                        gf.playSoundEffect(0);
-
-                        gf.gameState = gf.changeLevelState;
-                        gf.commandNum = gf.gameLevel;
-                    }else if(gf.commandNum == gf.optionExit) {
-                        gf.playSoundEffect(2);
-                        System.exit(0);
-                    }else {
-                        // exception: reset commandNum to 0
-                        gf.commandNum = 0;
-                    }
+                    performActionWithEnter(gf.cmdTitle);
                 }
             }else if(gf.gameState == gf.changeLevelState) { // key input in change level screen to move cursor
                 System.out.println("key pressed in change level screen");
                 if(key == KeyEvent.VK_UP) {
                     gf.playSoundEffect(0);
-                    gf.commandNum--;
-                    if(gf.commandNum < 0) {
-                        gf.commandNum = gf.numOfCommands - 1;
-                    }else if(gf.commandNum > gf.numOfCommands - 1) {
-                        gf.commandNum = 0;
-                    }
+                    gf.cmdChangeLevel.decCommand();
                 }else if(key == KeyEvent.VK_DOWN) {
                     gf.playSoundEffect(0);
-
-                    gf.commandNum++;
-                    if(gf.commandNum > gf.numOfCommands - 1) {
-                        gf.commandNum = 0;
-                    }else if(gf.commandNum < 0) {
-                        gf.commandNum = gf.numOfCommands - 1;
-                    }
+                    gf.cmdChangeLevel.incCommand();
                 }else if(key == KeyEvent.VK_ENTER) {
                     gf.playSoundEffect(0);
-
-                    System.out.println("enter pressed in change level screen");
-                    if(gf.commandNum == gf.levelEasy) {
-                        System.out.println("change to easy");
-                        gf.numOfVaccines = 5;
-                        gf.gameLevel = gf.levelEasy;
-                        gf.mc.setDefaultValue(gf.tileFrame.getStartPoints(gf.levelEasy));
-                        gf.gameState = gf.titleState;
-                    }else if(gf.commandNum == gf.levelIntermediate) {
-                        System.out.println("change to intermediate");
-                        gf.numOfVaccines = 7;
-                        gf.gameLevel = gf.levelIntermediate;
-                        gf.mc.setDefaultValue(gf.tileFrame.getStartPoints(gf.levelIntermediate));
-                        gf.gameState = gf.titleState;
-                    }else if(gf.commandNum == gf.levelChallenge) {
-                        System.out.println("change to challenge");
-                        gf.numOfVaccines = 10;
-                        gf.gameLevel = gf.levelChallenge;
-                        gf.mc.setDefaultValue(gf.tileFrame.getStartPoints(gf.levelChallenge));
-                        gf.gameState = gf.titleState;
-                    }else {
-                        System.out.println("invalid commandNum");
-                        gf.gameLevel = gf.levelEasy;
-                        gf.numOfVaccines = 5;
-                        gf.gameState = gf.changeLevelState;
-                    }
-                    gf.commandNum = 0;
-//                    gf.gameState = gf.titleState;
+                    performActionWithEnter(gf.cmdChangeLevel);
+//                    System.out.println("enter pressed in change level screen");
                 }
             } else if(gf.gameState == gf.playState) { // key input during play state
                 if(key== KeyEvent.VK_F){
@@ -223,34 +154,11 @@ public class inputKey implements KeyListener {
             }else if(gf.gameState == gf.endState) {
                 if(key == KeyEvent.VK_LEFT || key == KeyEvent.VK_RIGHT) {
                     gf.playSoundEffect(0);
-
                     // switch options
-                    if(gf.commandNum == 0) {
-                        gf.commandNum = 1;
-                    }else if(gf.commandNum == 1) {
-                        gf.commandNum = 0;
-                    }else {
-                        // exception: reset commandNum to 0
-                        gf.commandNum = 0;
-                    }
+                    gf.cmdEnd.incCommand();
                 }else if(key == KeyEvent.VK_ENTER) {
                     System.out.println("[inputKey] before enter key pressed, game state: " + gf.gameState);
-
-                    if(gf.commandNum == 0) {// restart game at same level: return to tutorial screen
-                        gf.playSoundEffect(0);
-                        gf.stopBGM(3);
-                        gf.resetGame(gf.commandNum);// partial reset(game level unchanged)
-                        gf.gameState = gf.tutorialState;
-                    }else if(gf.commandNum == 1) {// reset game attributes: return to title screen
-                        gf.playSoundEffect(0);
-                        gf.stopBGM(3);
-                        gf.resetGame(gf.commandNum);// full reset
-
-                        // return to title screen
-                        gf.gameState = gf.titleState;
-                    }
-                    System.out.println("[inputKey] after enter key pressed, game state: " + gf.gameState);
-                    gf.commandNum = 0;
+                    performActionWithEnter(gf.cmdEnd);
                 }
             }
         } catch (UnsupportedAudioFileException ex) {
@@ -260,8 +168,6 @@ public class inputKey implements KeyListener {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-
-
 
     }
 
@@ -287,5 +193,70 @@ public class inputKey implements KeyListener {
         else if(key == KeyEvent.VK_RIGHT){
             pressedRight = false;
         }
+    }
+
+    private void performActionWithEnter(TitleScreenCommand cmd) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+        if(cmd.getCommandNum() == cmd.cmdStart) {
+            gf.gameState = gf.tutorialState;
+            cmd.setCommandNum(0);
+        }else if(cmd.getCommandNum() == cmd.cmdChangeLevel) {
+            gf.playSoundEffect(0);
+
+            gf.gameState = gf.changeLevelState;
+//            cmd.setCommandNum(gf.gameLevel);
+        }else if(cmd.getCommandNum() == cmd.cmdExit) {
+            gf.playSoundEffect(2);
+            System.exit(0);
+        }else {
+            // exception: reset commandNum to 0
+            cmd.setCommandNum(0);
+        }
+        cmd.setCommandNum(0);
+    }
+    private void performActionWithEnter(ChangeLevelCommand cmd) {
+        System.out.println("enter pressed in change level screen");
+        if(cmd.getCommandNum() == cmd.cmdEasy) {
+            System.out.println("change to easy");
+            gf.numOfVaccines = 5;
+            gf.gameLevel = gf.levelEasy;
+            gf.mc.setDefaultValue(gf.tileFrame.getStartPoints(gf.levelEasy));
+            gf.gameState = gf.titleState;
+        }else if(cmd.getCommandNum() == cmd.cmdIntermediate) {
+            System.out.println("change to intermediate");
+            gf.numOfVaccines = 7;
+            gf.gameLevel = gf.levelIntermediate;
+            gf.mc.setDefaultValue(gf.tileFrame.getStartPoints(gf.levelIntermediate));
+            gf.gameState = gf.titleState;
+        }else if(cmd.getCommandNum() == cmd.cmdChallenge) {
+            System.out.println("change to challenge");
+            gf.numOfVaccines = 10;
+            gf.gameLevel = gf.levelChallenge;
+            gf.mc.setDefaultValue(gf.tileFrame.getStartPoints(gf.levelChallenge));
+            gf.gameState = gf.titleState;
+        }else {
+            System.out.println("invalid commandNum");
+            gf.gameLevel = gf.levelEasy;
+            gf.numOfVaccines = 5;
+            gf.gameState = gf.changeLevelState;
+        }
+    }
+    private void performActionWithEnter(EndScreenCommand cmd) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+        System.out.println("[inputKey] before enter key pressed, game state: " + gf.gameState);
+
+        if(cmd.getCommandNum() == cmd.cmdRetry) {// restart game at same level: return to tutorial screen
+            gf.playSoundEffect(0);
+            gf.stopBGM(3);
+            gf.resetGame(cmd.getCommandNum());// partial reset(game level unchanged)
+            gf.gameState = gf.tutorialState;
+        }else if(cmd.getCommandNum() == cmd.cmdReturn) {// reset game attributes: return to title screen
+            gf.playSoundEffect(0);
+            gf.stopBGM(3);
+            gf.resetGame(cmd.getCommandNum());// full reset
+
+            // return to title screen
+            gf.gameState = gf.titleState;
+        }
+        System.out.println("[inputKey] after enter key pressed, game state: " + gf.gameState);
+        cmd.setCommandNum(0);
     }
 }

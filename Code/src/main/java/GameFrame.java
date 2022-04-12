@@ -62,13 +62,20 @@ public class GameFrame extends JPanel implements Runnable{
 
 
     // menu
+//    public Command cmd = new Command();
+    public TitleScreenCommand cmdTitle = new TitleScreenCommand();
+    public ChangeLevelCommand cmdChangeLevel = new ChangeLevelCommand();
+    public EndScreenCommand cmdEnd = new EndScreenCommand();
+
+    /*
     public int numOfCommands = 3; // number of commands
     public int commandNum = 0; // start: 0, change level: 1, exit: 2
     public final int optionStart = 0;
     public final int optionChangeLevel = 1;
     public final int optionExit = 2;
+     */
 
-    GameImage gameImage = new GameImage();
+    private GameImage gameImage = new GameImage();
 
     //attributes of GameMap
     public GameObject[][] Map;
@@ -332,7 +339,7 @@ public class GameFrame extends JPanel implements Runnable{
                 y = 280 + (cursorSize*i) - 10;
 
                 // draw cursor
-                if(commandNum == i) {
+                if(cmdTitle.getCommandNum() == i) {
                     g2.drawImage(gameImage.cursor, x - (2*cursorSize + 25), y, cursorSize, cursorSize, null);
                 }
             }
@@ -419,7 +426,7 @@ public class GameFrame extends JPanel implements Runnable{
                 y = 280 + (cursorSize*i) - 10;
 
                 // draw cursor
-                if(commandNum == i) {
+                if(cmdChangeLevel.getCommandNum() == i) {
                     g2.drawImage(gameImage.cursor, x-(2*cursorSize + 10), y, cursorSize, cursorSize, null);
                 }
             }
@@ -452,10 +459,10 @@ public class GameFrame extends JPanel implements Runnable{
             }
 
             // add buttons (retry, return)
-            if(commandNum == 0) {
+            if(cmdEnd.getCommandNum() == 0) {
                 g2.drawImage(gameImage.retryButtonLight, 240, 390, null);// selected option
                 g2.drawImage(gameImage.returnButtonRegular, 370, 390, null);
-            }else if(commandNum == 1) {
+            }else if(cmdEnd.getCommandNum() == 1) {
                 g2.drawImage(gameImage.retryButtonRegular, 240, 390, null);
                 g2.drawImage(gameImage.returnButtonLight, 370, 390, null);// selected option
             }
