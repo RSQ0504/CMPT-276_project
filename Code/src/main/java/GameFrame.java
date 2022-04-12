@@ -23,9 +23,6 @@ public class GameFrame extends JPanel implements Runnable{
     public final int track3_playState = 3;
     public final int track4_titleState = 4;
 
-
-
-
     // GAME STATE
     public int gameState;
     public final int titleState = 0;

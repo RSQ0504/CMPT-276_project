@@ -1,30 +1,30 @@
+import java.util.HashMap;
+import java.util.Map;
+
 public class Command {
-    private int numOfCommands;
+    private Map<String, Integer> commandOption = new HashMap<String, Integer>();
     private int commandNum;
-    public final int optionStart = 0;
-    public final int optionChangeLevel = 1;
-    public final int optionExit = 2;
 
-    Command(int sz, int n) {
-        numOfCommands = sz;
-        commandNum = n;
+    Command() {
+        commandOption.put("start", 0);
+        commandOption.put("changeLevel", 1);
+        commandOption.put("exit", 2);
+        commandNum = 0;
     }
 
-    // returns the number of commands
-    public int size() {
-        return numOfCommands;
+    public int getNumOfCommands() {
+        return commandOption.size();
     }
 
-    // sets the command number and returns true, if fails returns false
-    public boolean setCommandNum(int n) {
-        if(n >= 0 && n < numOfCommands) {
+    public void setCommandNum(int n) {
+        if(commandOption.containsValue(n)) {
             commandNum = n;
-            return true;
+        }else {
+            // exception: set the default value 0
+            commandNum = 0;
         }
-        return false;
     }
 
-    // gets the current command number
     public int getCommandNum() {
         return commandNum;
     }
