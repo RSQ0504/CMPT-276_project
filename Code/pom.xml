@@ -11,15 +11,12 @@
   <build>
     <defaultGoal>Compile</defaultGoal>
     <plugins>
-      <!--
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-assembly-plugin</artifactId>
         <version>2.2-beta-5</version>
         <configuration>
-          <descriptors>
-            <descriptor>assembly.xml</descriptor>
-          </descriptors>
           <descriptorRefs>
             <descriptorRef>jar-with-dependencies</descriptorRef>
           </descriptorRefs>
@@ -39,7 +36,7 @@
           </execution>
         </executions>
       </plugin>
-      -->
+
       <plugin>
         <inherited>true</inherited>
         <artifactId>maven-javadoc-plugin</artifactId>
