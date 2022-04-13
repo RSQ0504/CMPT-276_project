@@ -435,13 +435,13 @@ public class GameFrame extends JPanel implements Runnable{
      */
     public void playBGM(int i) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         if(musicState == musicPaused) {
-            System.out.println("[playBGM] playing bgm.");
+//            System.out.println("[playBGM] playing bgm.");
             if(bgm.setFile(i)) {
                 bgm.play(i);
                 bgm.loop(i);
                 musicState = musicPlaying;
                 musicTrack = i;// keeping track of which bgm is playing
-                System.out.println("[playBGM] musicTrack: " + musicTrack);
+//                System.out.println("[playBGM] musicTrack: " + musicTrack);
             }
         }
     }
@@ -450,12 +450,12 @@ public class GameFrame extends JPanel implements Runnable{
      * stop background music
      */
     public void stopBGM(int i) {
-        System.out.println("[stopBGM] stopping bgm.");
+//        System.out.println("[stopBGM] stopping bgm.");
         if(musicState == musicPlaying) {
-            System.out.println("[stopBGM] stop playing bgm.");
+//            System.out.println("[stopBGM] stop playing bgm.");
             bgm.stop(i);
             musicTrack = -1;
-            System.out.println("[stopBGM] musicTrack: " + musicTrack);
+//            System.out.println("[stopBGM] musicTrack: " + musicTrack);
         }
         musicState = musicPaused;
     }
@@ -473,7 +473,7 @@ public class GameFrame extends JPanel implements Runnable{
         // 1: Click_music_2
         // 2: Click_music_3
         if(i >= 0 && i <= 2) {
-            System.out.println("[playBGM] play sound effect.");
+//            System.out.println("[playBGM] play sound effect.");
             bgm.setFile(i);
             bgm.play(i);
         }
@@ -511,6 +511,7 @@ public class GameFrame extends JPanel implements Runnable{
         f.clear();
         {
           try {
+              for(int i = 0; i < v.size(); )
             v.add(new Vaccine(this,218,138));
             v.add(new Vaccine(this,485,48));
             v.add(new Vaccine(this,383,382));

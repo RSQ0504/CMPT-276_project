@@ -9,6 +9,17 @@ import java.io.IOException;
  * class to implement and manage vaccine rewards
  */
 public class Vaccine extends Reward {
+  public int coordinates[][] = new int[10][2];
+  private int size = 0;
+  private void addCoordinates(int x, int y) {
+    if(size < 10) {
+      coordinates[size][0] = x;
+      coordinates[size][1] = y;
+    }
+  }
+  public int getNumOfVaccines() {
+    return size;
+  }
 
   /**
    * increase vaccine count that player has collected
@@ -34,6 +45,18 @@ public class Vaccine extends Reward {
     this.width = 25;
     this.height = 25;
     hitArea = new Rectangle(this.x,this.y-10,this.width,this.height);
+
+    // set vaccine coordinates
+    addCoordinates(218,138);
+    addCoordinates(485,48);
+    addCoordinates(383,382);
+    addCoordinates(340,512);
+    addCoordinates(386,159);
+    addCoordinates(102,383);
+    addCoordinates(52,240);
+    addCoordinates(330,353);
+    addCoordinates(645,217);
+    addCoordinates(695,453);
   }
 
   /**
