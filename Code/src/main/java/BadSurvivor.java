@@ -1,7 +1,10 @@
 import javax.imageio.ImageIO;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 
 /**
  * Class for enemy static character which lowers Main Character's HP when in contact
@@ -70,7 +73,7 @@ public class BadSurvivor extends StaticCharacter{
      * if close then display message box and lower player's HP
      */
     @Override
-    public void update(){
+    public void update() {
         if(appearStatus && (this.x < (mc.x + 40)) && (this.x > (mc.x - 40)) && (this.y < (mc.y + 40)) && (this.y > (mc.y - 40))){
             if(key.pressF){
                 int x_distance = this.x - mc.x;

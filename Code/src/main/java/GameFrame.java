@@ -15,7 +15,6 @@ import java.util.LinkedList;
 public class GameFrame extends JPanel implements Runnable{
     // BGM
     public Music bgm = new Music();
-    //public Music soundEffect = new Music();
     public int musicState = 0; // 0 or 1
     public final int musicPaused = 0;
     public final int musicPlaying = 1;
@@ -33,7 +32,6 @@ public class GameFrame extends JPanel implements Runnable{
 
 
     // menu
-//    public Command cmd = new Command();
     public TitleScreenCommand cmdTitle = new TitleScreenCommand();
     public ChangeLevelCommand cmdChangeLevel = new ChangeLevelCommand();
     public EndScreenCommand cmdEnd = new EndScreenCommand();
@@ -306,6 +304,15 @@ public class GameFrame extends JPanel implements Runnable{
                 if(f.get(i).check(MC)){
                     f.get(i).setAppear(false);
                     f.get(i).increaseHP(mc);
+                    try {
+                        playSoundEffect(1);
+                    } catch (UnsupportedAudioFileException e) {
+                        e.printStackTrace();
+                    } catch (LineUnavailableException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     f.remove(i);
                     break;
                 }
@@ -314,6 +321,15 @@ public class GameFrame extends JPanel implements Runnable{
                 if(v.get(i).check(MC)){
                     v.get(i).setAppear(false);
                     v.get(i).increaseVaccine(mc);
+                    try {
+                        playSoundEffect(1);
+                    } catch (UnsupportedAudioFileException e) {
+                        e.printStackTrace();
+                    } catch (LineUnavailableException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     v.remove(i);
                     break;
                 }
@@ -508,6 +524,7 @@ public class GameFrame extends JPanel implements Runnable{
         badPerson1 = new BadSurvivor(this,key,mc,262,115);
         badPerson2 = new BadSurvivor(this,key,mc,300,280);
         badPerson3 = new BadSurvivor(this,key,mc,650,220);
+        goodPerson1.closeDoor();
 
         //reward
         v.clear();

@@ -125,7 +125,8 @@ public class inputKey implements KeyListener {
         int key = e.getKeyCode();
         if(key== KeyEvent.VK_F){
             pressF = false;
-        }if(key == KeyEvent.VK_UP){
+        }
+        if(key == KeyEvent.VK_UP){
             pressedUp = false;
         }else if(key == KeyEvent.VK_DOWN){
             pressedDown = false;

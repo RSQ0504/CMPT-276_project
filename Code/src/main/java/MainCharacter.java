@@ -33,7 +33,7 @@ public class MainCharacter extends DynamicCharacter{
         this.key = key;
         this.width = 20;
         this.height = 20;
-        this.lvl =0;
+        this.lvl = 0;
 
         setDefaultValue(frame.tileFrame.getStartPoints(lvl));
         getMCImages();
@@ -115,19 +115,20 @@ public class MainCharacter extends DynamicCharacter{
      */
     @Override
     public void update(){
-        if(key.pressedUp == true || key.pressedDown == true || key.pressedLeft == true || key.pressedRight == true) {
-            if (key.pressedUp == true) {
+        if(key.pressedUp || key.pressedDown || key.pressedLeft || key.pressedRight) {
+            if (key.pressedUp) {
                 direction = "up";
-            } else if (key.pressedDown == true) {
+            } else if (key.pressedDown) {
                 direction = "down";
-            } else if (key.pressedLeft == true) {
+            } else if (key.pressedLeft) {
                 direction = "left";
-            } else if (key.pressedRight == true) {
+            } else if (key.pressedRight) {
                 direction = "right";
             }
 
             collision = false;
             frame.check_collision.checkTile(this);
+            System.out.println(collision);
 
             if (collision == false) {
                 switch (direction) {
@@ -245,5 +246,7 @@ public class MainCharacter extends DynamicCharacter{
         vaccines = 0;
         HP = 1;
         lvl = 0;
+        direction = "down";
+        collision = false;
     }
 }

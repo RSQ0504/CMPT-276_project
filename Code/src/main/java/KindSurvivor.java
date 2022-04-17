@@ -79,6 +79,11 @@ public class KindSurvivor extends StaticCharacter{
         this.map[door_x][door_y] = 0;
     }
 
+    /**
+     * Hide exit when resetting game (game finish)
+     */
+    public void closeDoor() { this.map[door_x][door_y] = 1; }
+
     public int[][] getMap(){
         return this.map;
     }
