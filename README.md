@@ -19,14 +19,14 @@ Group16
 
 
 ## Build
-To build all the class located in the directory ~/Code/src/main/java/, run:
+Run the following commands to build all the class located in the directory ~/Code/src/main/java/.
 ```
 $ mvn clean
 $ mvn install
 $ mvn build
 ```
 
-## JAR files and executables
+### JAR files and executables
 After the maven commands are run, the following jar files will be created in the directory: ~/Code/target/.
 * Survive_in_the_end-1.0 -> Jar files with game classes
 * Survive_in_the_end-1.0-jar-with-dependency -> Jar files with classes and their dependency
