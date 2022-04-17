@@ -22,7 +22,7 @@
           </descriptorRefs>
           <archive>
             <manifest>
-              <mainClass>/src/main/java/Main.java</mainClass>
+              <mainClass>Main</mainClass>
             </manifest>
           </archive>
         </configuration>
