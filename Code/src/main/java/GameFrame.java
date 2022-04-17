@@ -340,7 +340,7 @@ public class GameFrame extends JPanel implements Runnable{
             // draw frame (score, time, overlay)
             mc.drawScore(g2,645,4, settings.getNumOfVaccines());
             clock.draw(g2,555,4);
-            g2.drawImage(gameImage.overlayImage, 0, 0, 340, 28, null);
+            g2.drawImage(gameImage.overlayImage, getWidth()-340, getHeight()-28, 340, 28, null);
 
 
         }else if(state.getGameState() == state.changeLevelState) { // screen display for change-level-screen
