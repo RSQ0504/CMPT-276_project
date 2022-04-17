@@ -103,13 +103,15 @@ public class BadSurvivor extends StaticCharacter{
                     }
                 }
                 speakMessageShow = true;
-            }else if(speakMessageShow){
-                speakTimeCounter++;
-                if(speakTimeCounter >100){
-                    // damage
-                    mc.setHP(mc.getHP()-1);
-                    appearStatus = false;
-                }
+            }
+        }
+
+        if(speakMessageShow){
+            speakTimeCounter++;
+            if(speakTimeCounter > 100){
+                // damage
+                mc.setHP(mc.getHP()-1);
+                appearStatus = false;
             }
         }
     }

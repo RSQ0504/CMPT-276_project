@@ -110,6 +110,7 @@ public class KindSurvivor extends StaticCharacter{
     @Override
     public void update(){
         if(appearStatus && (this.x < (mc.x + 40)) && (this.x > (mc.x - 40)) && (this.y < (mc.y + 40)) && (this.y > (mc.y - 40))){
+//            System.out.println("near the mystery character");
             if(key.pressF == true) {
                 int x_distance = this.x - mc.x;
                 int y_distance = this.y - mc.y;
@@ -136,20 +137,19 @@ public class KindSurvivor extends StaticCharacter{
                 }
 
                 speakMessageShow = true;
-            } else if (speakMessageShow == true){
-                speakTimeCounter++;
-                if(speakTimeCounter >200){
-                    speakMessageShow = false;
-                    speakTimeCounter = 0;
-                    if(mc.getVaccines() >= frame.settings.getNumOfVaccines()){
-                        openDoor();
-                        appearStatus = false;
-                    }
+            }
+        }
+
+        if (speakMessageShow == true){
+            speakTimeCounter++;
+            if(speakTimeCounter >200){
+                speakMessageShow = false;
+                speakTimeCounter = 0;
+                if(mc.getVaccines() >= frame.settings.getNumOfVaccines()){
+                    openDoor();
+                    appearStatus = false;
                 }
             }
-
-
-
         }
     }
 
