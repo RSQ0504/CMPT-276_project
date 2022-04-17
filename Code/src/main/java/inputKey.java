@@ -40,15 +40,15 @@ public class inputKey implements KeyListener {
                     gf.playSoundEffect(0);
                     gf.cmdTitle.decCommand();
                 }else if(key == KeyEvent.VK_DOWN) {
-                    System.out.println("DOWN pressed in title screen");
+//                    System.out.println("DOWN pressed in title screen");
                     gf.playSoundEffect(0);
                     gf.cmdTitle.incCommand();
                 }else if(key == KeyEvent.VK_ENTER) {
-                    System.out.println("enter pressed in title screen");
+//                    System.out.println("enter pressed in title screen");
                     performActionWithEnter(gf.cmdTitle);
                 }
             }else if(gf.state.getGameState() == gf.state.changeLevelState) { // key input in change level screen to move cursor
-                System.out.println("key pressed in change level screen");
+//                System.out.println("key pressed in change level screen");
                 if(key == KeyEvent.VK_UP) {
                     gf.playSoundEffect(0);
                     gf.cmdChangeLevel.decCommand();

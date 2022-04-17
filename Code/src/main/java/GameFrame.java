@@ -166,7 +166,7 @@ public class GameFrame extends JPanel implements Runnable{
      */
     @Override
     public void run() {
-        System.out.println("[run/GameFrame.java] running GameFrame");
+//        System.out.println("[run/GameFrame.java] running GameFrame");
         double interval = 1000000000/frame_speed;
         double nextUpdate = System.nanoTime() + interval;
         while(gameThread != null) {
@@ -491,6 +491,9 @@ public class GameFrame extends JPanel implements Runnable{
             // full reset
             settings.setGameLevel(settings.levelEasy);
         }
+
+        // update command number in change level screen
+        cmdChangeLevel.setCommandNum(settings.getGameLevel());
 
         mc.resetAttributesMC();
 
