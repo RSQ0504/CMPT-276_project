@@ -2,7 +2,7 @@
 Our game, Survive in the End, is an arcade style pseudo 3D game. The game is based on a zombie apocalypse horror story where the survivors include good survivors, bad survivors. and the main player. While the good and bad survivors have the same visuals, the main player will lose HP when coming in contact with the bad survivors. On the contrary, the good survivor will increase the main player’s HP when in contact. Throughout the maze, there are numerous vaccines scattered for the player to collect. The player’s objective is to collect the required number of vaccines and find the good survivor who will open the exit door for the player to exit the maze. The required number of vaccines depends on the difficulty level chosen by the player.
 
 ### Tutorial/Demo Video
-Link to the video : https://youtu.be/hg11bC-Xeew
+Link to the video : https://youtu.be/Kj0EhzXitaM
 
 ### Development team
 Group16
