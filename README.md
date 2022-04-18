@@ -26,6 +26,10 @@ $ mvn install
 $ mvn build
 ```
 
+Run the following command to start the game in the directory ~/Code/target
+```
+$ java -cp Survive_in_the_end-1.0-jar-with-dependencies.jar Main
+```
 ### JAR files and executables
 After the maven commands are run, the following jar files will be created in the directory: ~/Code/target/.
 * Survive_in_the_end-1.0 -> Jar files with game classes
