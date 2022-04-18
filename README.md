@@ -39,10 +39,10 @@ After the maven commands are run, the following jar files will be created in the
 * Survive_in_the_end-1.0-javadoc -> Jar files with javadoc comments in html
 
 ## Run
-Run the Java class file "Main.class" located in the directory: ~/Code/src/main/java/.
+Method 1: Run the Java class file "Main.class" located in the directory: ~/Code/src/main/java/.
 
 
-Run the following command to start the game in the directory ~/Code/target
+Method 2: Run the following command to start the game in the directory ~/Code/target
 ```
 $ java -cp Survive_in_the_end-1.0-jar-with-dependencies.jar Main
 ```
