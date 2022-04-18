@@ -546,7 +546,7 @@ public class inputKeyTest {
         testKey.keyPressed(enterKey);
         Assertions.assertEquals(0, testGameFrame.state.getPage());
         Assertions.assertEquals(testGameFrame.state.playState, testGameFrame.state.getGameState());
-        
+
     }
 
 
