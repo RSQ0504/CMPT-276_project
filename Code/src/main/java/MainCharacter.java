@@ -128,7 +128,7 @@ public class MainCharacter extends DynamicCharacter{
 
             collision = false;
             frame.check_collision.checkTile(this);
-            System.out.println(collision);
+//            System.out.println(collision);
 
             if (collision == false) {
                 switch (direction) {
