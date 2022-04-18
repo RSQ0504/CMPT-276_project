@@ -21,7 +21,7 @@ UP, DOWN, LEFT, RIGHT, F
  */
 
 public class inputKeyTest {
-    /*
+
     // 1. titleState (UP, DOWN, ENTER)
     @Test
     public void upPressedInTitleState() throws IOException, AWTException {
@@ -30,35 +30,35 @@ public class inputKeyTest {
         GameFrame testGameFrame = new GameFrame(16, 12, 48);
         inputKey testKey = new inputKey(testGameFrame);
 
-        int maxCommandNum = testGameFrame.numOfCommands - 1;
+        int maxCommandNum = testGameFrame.cmdTitle.getNumOfCommands() - 1;
 
         // [key pressed] UP:
         KeyEvent upKey = new KeyEvent(testGameFrame, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0,  KeyEvent.VK_UP,'Z');
 
         // commandNum: 0 -> 2
-        testGameFrame.commandNum = 0;
+        testGameFrame.cmdTitle.setCommandNum(0);
         testKey.keyPressed(upKey);
-        Assertions.assertEquals(maxCommandNum, testGameFrame.commandNum);
+        Assertions.assertEquals(maxCommandNum, testGameFrame.cmdTitle.getCommandNum());
 
         // commandNum: 1 -> 0
-        testGameFrame.commandNum = 1;
+        testGameFrame.cmdTitle.setCommandNum(1);
         testKey.keyPressed(upKey);
-        Assertions.assertEquals(0, testGameFrame.commandNum);
+        Assertions.assertEquals(0, testGameFrame.cmdTitle.getCommandNum());
 
         // commandNum: 2 -> 1
-        testGameFrame.commandNum = 2;
+        testGameFrame.cmdTitle.setCommandNum(2);
         testKey.keyPressed(upKey);
-        Assertions.assertEquals(1, testGameFrame.commandNum);
+        Assertions.assertEquals(1, testGameFrame.cmdTitle.getCommandNum());
 
-        // commandNum: -2 -> 2 (exception)
-        testGameFrame.commandNum = -2;
+        // commandNum: -2 -> 0 (exception)
+        testGameFrame.cmdTitle.setCommandNum(-2);
         testKey.keyPressed(upKey);
-        Assertions.assertEquals(2, testGameFrame.commandNum);
+        Assertions.assertEquals(0, testGameFrame.cmdTitle.getCommandNum());
 
         // commandNum: 5 -> 0 (exception)
-        testGameFrame.commandNum = 5;
+        testGameFrame.cmdTitle.setCommandNum(5);
         testKey.keyPressed(upKey);
-        Assertions.assertEquals(0, testGameFrame.commandNum);
+        Assertions.assertEquals(0, testGameFrame.cmdTitle.getCommandNum());
     }
 
     @Test
@@ -68,35 +68,35 @@ public class inputKeyTest {
         GameFrame testGameFrame = new GameFrame(16, 12, 48);
         inputKey testKey = new inputKey(testGameFrame);
 
-        int maxCommandNum = testGameFrame.numOfCommands - 1;
+        int maxCommandNum = testGameFrame.cmdTitle.getNumOfCommands() - 1;
 
         // [key pressed] DOWN:
         KeyEvent downKey = new KeyEvent(testGameFrame, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0,  KeyEvent.VK_DOWN,'Z');
 
         // commandNum: 0 -> 1
-        testGameFrame.commandNum = 0;
+        testGameFrame.cmdTitle.setCommandNum(0);
         testKey.keyPressed(downKey);
-        Assertions.assertEquals(1, testGameFrame.commandNum);
+        Assertions.assertEquals(1, testGameFrame.cmdTitle.getCommandNum());
 
         // commandNum: 1 -> 2
-        testGameFrame.commandNum = 1;
+        testGameFrame.cmdTitle.setCommandNum(1);
         testKey.keyPressed(downKey);
-        Assertions.assertEquals(maxCommandNum, testGameFrame.commandNum);
+        Assertions.assertEquals(maxCommandNum, testGameFrame.cmdTitle.getCommandNum());
 
         // commandNum: 2 -> 0
-        testGameFrame.commandNum = 2;
+        testGameFrame.cmdTitle.setCommandNum(2);
         testKey.keyPressed(downKey);
-        Assertions.assertEquals(0, testGameFrame.commandNum);
+        Assertions.assertEquals(0, testGameFrame.cmdTitle.getCommandNum());
 
-        // commandNum: -2 -> 2 (exception)
-        testGameFrame.commandNum = -2;
+        // commandNum: -2 -> 0 (exception)
+        testGameFrame.cmdTitle.setCommandNum(-2);
         testKey.keyPressed(downKey);
-        Assertions.assertEquals(2, testGameFrame.commandNum);
+        Assertions.assertEquals(2, testGameFrame.cmdTitle.getCommandNum());
 
         // commandNum: 5 -> 0 (exception)
-        testGameFrame.commandNum = 5;
+        testGameFrame.cmdTitle.setCommandNum(5);
         testKey.keyPressed(downKey);
-        Assertions.assertEquals(0, testGameFrame.commandNum);
+        Assertions.assertEquals(0, testGameFrame.cmdTitle.getCommandNum());
     }
 
     @Test
@@ -106,43 +106,39 @@ public class inputKeyTest {
         GameFrame testGameFrame = new GameFrame(16, 12, 48);
         inputKey testKey = new inputKey(testGameFrame);
 
-        int maxCommandNum = testGameFrame.numOfCommands - 1;
+//        int maxCommandNum = testGameFrame.numOfCommands - 1;
 
         // [key pressed] ENTER
         KeyEvent enterKey = new KeyEvent(testGameFrame, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0,  KeyEvent.VK_ENTER,'Z');
 
         // enter key pressed with commandNum: 0 (title -> tutorial)
-        testGameFrame.gameState = testGameFrame.titleState;
-        testGameFrame.commandNum = 0;
+//        testGameFrame.gameState = testGameFrame.titleState;
+        testGameFrame.state.toTitleState();
+        testGameFrame.cmdTitle.setCommandNum(0);
         testKey.keyPressed(enterKey);
-        Assertions.assertEquals(0, testGameFrame.commandNum);
-        Assertions.assertEquals(testGameFrame.tutorialState, testGameFrame.gameState);
+        Assertions.assertEquals(0, testGameFrame.cmdTitle.getCommandNum());
+        Assertions.assertEquals(testGameFrame.state.tutorialState, testGameFrame.state.getGameState());
 
         // enter key pressed with commandNum: 1 (title -> change level)
-        testGameFrame.gameState = testGameFrame.titleState;
-        testGameFrame.commandNum = 1;
+        testGameFrame.state.toTitleState();
+        testGameFrame.cmdTitle.setCommandNum(1);
         testKey.keyPressed(enterKey);
-        Assertions.assertEquals(testGameFrame.gameLevel, testGameFrame.commandNum);
-        Assertions.assertEquals(testGameFrame.changeLevelState, testGameFrame.gameState);
-
-        // enter key pressed with commandNum: 2 (title -> exit)
-//        testGameFrame.gameState = testGameFrame.titleState;
-//        testGameFrame.commandNum = 2;
-//        testKey.keyPressed(enterKey);
+        Assertions.assertEquals(testGameFrame.state.getGameState(), testGameFrame.cmdTitle.getCommandNum());
+        Assertions.assertEquals(testGameFrame.state.changeLevelState, testGameFrame.state.getGameState());
 
         // enter key pressed with commandNum: -3 (exception)
-        testGameFrame.gameState = testGameFrame.titleState;
-        testGameFrame.commandNum = -3;
+        testGameFrame.state.toTitleState();
+        testGameFrame.cmdTitle.setCommandNum(-3);
         testKey.keyPressed(enterKey);
-        Assertions.assertEquals(0, testGameFrame.commandNum);
-        Assertions.assertEquals(testGameFrame.titleState, testGameFrame.gameState);
+        Assertions.assertEquals(0, testGameFrame.cmdTitle.getCommandNum());
+        Assertions.assertEquals(testGameFrame.state.titleState, testGameFrame.state.getGameState());
 
         // enter key pressed with commandNum: 5 (exception)
-        testGameFrame.gameState = testGameFrame.titleState;
-        testGameFrame.commandNum = 5;
+        testGameFrame.state.toTitleState();
+        testGameFrame.cmdTitle.setCommandNum(5);
         testKey.keyPressed(enterKey);
-        Assertions.assertEquals(0, testGameFrame.commandNum);
-        Assertions.assertEquals(testGameFrame.titleState, testGameFrame.gameState);
+        Assertions.assertEquals(0, testGameFrame.cmdTitle.getCommandNum());
+        Assertions.assertEquals(testGameFrame.state.titleState, testGameFrame.state.getGameState());
     }
 
 
@@ -155,32 +151,32 @@ public class inputKeyTest {
         GameFrame testGameFrame = new GameFrame(16, 12, 48);
         inputKey testKey = new inputKey(testGameFrame);
 
-        int maxCommandNum = testGameFrame.numOfCommands - 1;
-        testGameFrame.gameState = testGameFrame.changeLevelState;
+        int maxCommandNum = testGameFrame.cmdChangeLevel.getNumOfCommands() - 1;
+        testGameFrame.state.toChangeLevelState();
 
         // [key pressed] UP:
         KeyEvent upKey = new KeyEvent(testGameFrame, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0,  KeyEvent.VK_UP,'Z');
 
         // commandNum: 0 -> 2
-        testGameFrame.commandNum = 0;
+        testGameFrame.cmdChangeLevel.setCommandNum(0);
         testKey.keyPressed(upKey);
-        Assertions.assertEquals(maxCommandNum, testGameFrame.commandNum);
+        Assertions.assertEquals(maxCommandNum, testGameFrame.cmdChangeLevel.getCommandNum());
 
 
         // commandNum: 1 -> 0
-        testGameFrame.commandNum = 1;
+        testGameFrame.cmdChangeLevel.setCommandNum(1);
         testKey.keyPressed(upKey);
-        Assertions.assertEquals(0, testGameFrame.commandNum);
+        Assertions.assertEquals(0, testGameFrame.cmdChangeLevel.getCommandNum());
 
         // commandNum: -2 -> 2
-        testGameFrame.commandNum = -2;
+        testGameFrame.cmdChangeLevel.setCommandNum(-2);
         testKey.keyPressed(upKey);
-        Assertions.assertEquals(maxCommandNum, testGameFrame.commandNum);
+        Assertions.assertEquals(maxCommandNum, testGameFrame.cmdChangeLevel.getCommandNum());
 
         // commandNum: 5 -> 0
-        testGameFrame.commandNum = 5;
+        testGameFrame.cmdChangeLevel.setCommandNum(5);
         testKey.keyPressed(upKey);
-        Assertions.assertEquals(0, testGameFrame.commandNum);
+        Assertions.assertEquals(0, testGameFrame.cmdChangeLevel.getCommandNum());
 
     }
     @Test
@@ -190,32 +186,32 @@ public class inputKeyTest {
         GameFrame testGameFrame = new GameFrame(16, 12, 48);
         inputKey testKey = new inputKey(testGameFrame);
 
-        int maxCommandNum = testGameFrame.numOfCommands - 1;
-        testGameFrame.gameState = testGameFrame.changeLevelState;
+        int maxCommandNum = testGameFrame.cmdChangeLevel.getNumOfCommands() - 1;
+        testGameFrame.state.toChangeLevelState();
 
         // [key pressed] DOWN:
         KeyEvent downKey = new KeyEvent(testGameFrame, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0,  KeyEvent.VK_DOWN,'Z');
 
         // commandNum: 0 -> 1
-        testGameFrame.commandNum = 0;
+        testGameFrame.cmdChangeLevel.setCommandNum(0);
         testKey.keyPressed(downKey);
-        Assertions.assertEquals(1, testGameFrame.commandNum);
+        Assertions.assertEquals(1, testGameFrame.cmdChangeLevel.getCommandNum());
 
 
         // commandNum: 2 -> 0
-        testGameFrame.commandNum = 2;
+        testGameFrame.cmdChangeLevel.setCommandNum(2);
         testKey.keyPressed(downKey);
-        Assertions.assertEquals(0, testGameFrame.commandNum);
+        Assertions.assertEquals(0, testGameFrame.cmdChangeLevel.getCommandNum());
 
         // commandNum: -2 -> 2
-        testGameFrame.commandNum = -2;
+        testGameFrame.cmdChangeLevel.setCommandNum(-2);
         testKey.keyPressed(downKey);
-        Assertions.assertEquals(maxCommandNum, testGameFrame.commandNum);
+        Assertions.assertEquals(maxCommandNum, testGameFrame.cmdChangeLevel.getCommandNum());
 
         // commandNum: 5 -> 0
-        testGameFrame.commandNum = 5;
+        testGameFrame.cmdChangeLevel.setCommandNum(5);
         testKey.keyPressed(downKey);
-        Assertions.assertEquals(0, testGameFrame.commandNum);
+        Assertions.assertEquals(0, testGameFrame.cmdChangeLevel.getCommandNum());
     }
     @Test
     public void enterPressedInChangeLevelState() throws IOException {
@@ -228,60 +224,46 @@ public class inputKeyTest {
         KeyEvent enterKey = new KeyEvent(testGameFrame, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0,  KeyEvent.VK_ENTER,'Z');
 
         // ENTER pressed with commandNum: 0 gameLevel: 0 -> 0
-        testGameFrame.commandNum = 0;
-        testGameFrame.gameState = testGameFrame.changeLevelState;
-        testGameFrame.gameLevel = testGameFrame.levelEasy;
-        testGameFrame.numOfVaccines = 5;
+        testGameFrame.cmdChangeLevel.setCommandNum(0);
+        testGameFrame.state.toChangeLevelState();
+        testGameFrame.settings.setGameLevel(testGameFrame.settings.levelEasy);
         testKey.keyPressed(enterKey);
-        Assertions.assertEquals(0, testGameFrame.commandNum);
-        Assertions.assertEquals(testGameFrame.titleState, testGameFrame.gameState);
-        Assertions.assertEquals(testGameFrame.levelEasy, testGameFrame.gameLevel);
-        Assertions.assertEquals(5, testGameFrame.numOfVaccines);
+        Assertions.assertEquals(0, testGameFrame.cmdChangeLevel.getCommandNum());
+        Assertions.assertEquals(testGameFrame.state.titleState, testGameFrame.state.getGameState());
+        Assertions.assertEquals(testGameFrame.settings.levelEasy, testGameFrame.settings.getGameLevel());
+        Assertions.assertEquals(5, testGameFrame.settings.getNumOfVaccines());
 
         // ENTER pressed with commandNum: 0 gameLevel: 1 -> 0
-        testGameFrame.commandNum = 0;
-        testGameFrame.gameState = testGameFrame.changeLevelState;
-        testGameFrame.gameLevel = testGameFrame.levelIntermediate;
-        testGameFrame.numOfVaccines = 7;
+        testGameFrame.cmdChangeLevel.setCommandNum(0);
+        testGameFrame.state.toChangeLevelState();
+        testGameFrame.settings.setGameLevel(testGameFrame.settings.levelIntermediate);
         testKey.keyPressed(enterKey);
-        Assertions.assertEquals(0, testGameFrame.commandNum);
-        Assertions.assertEquals(testGameFrame.titleState, testGameFrame.gameState);
-        Assertions.assertEquals(testGameFrame.levelEasy, testGameFrame.gameLevel);
-        Assertions.assertEquals(5, testGameFrame.numOfVaccines);
+        Assertions.assertEquals(0, testGameFrame.cmdChangeLevel.getCommandNum());
+        Assertions.assertEquals(testGameFrame.state.titleState, testGameFrame.state.getGameState());
+        Assertions.assertEquals(testGameFrame.settings.levelEasy, testGameFrame.settings.getGameLevel());
+        Assertions.assertEquals(5, testGameFrame.settings.getNumOfVaccines());
 
 
         // ENTER pressed with commandNum: 1 gameLevel: 2 -> 1
-        testGameFrame.commandNum = 1;
-        testGameFrame.gameState = testGameFrame.changeLevelState;
-        testGameFrame.gameLevel = testGameFrame.levelChallenge;
-        testGameFrame.numOfVaccines = 10;
+        testGameFrame.cmdChangeLevel.setCommandNum(1);
+        testGameFrame.state.toChangeLevelState();
+        testGameFrame.settings.setGameLevel(testGameFrame.settings.levelChallenge);
         testKey.keyPressed(enterKey);
-        Assertions.assertEquals(0, testGameFrame.commandNum);
-        Assertions.assertEquals(testGameFrame.titleState, testGameFrame.gameState);
-        Assertions.assertEquals(testGameFrame.levelIntermediate, testGameFrame.gameLevel);
-        Assertions.assertEquals(7, testGameFrame.numOfVaccines);
+        Assertions.assertEquals(0, testGameFrame.cmdChangeLevel.getCommandNum());
+        Assertions.assertEquals(testGameFrame.state.titleState, testGameFrame.state.getGameState());
+        Assertions.assertEquals(testGameFrame.settings.levelIntermediate, testGameFrame.settings.getGameLevel());
+        Assertions.assertEquals(7, testGameFrame.settings.getNumOfVaccines());
 
         // ENTER pressed with commandNum: 2 gameLevel: 0 -> 2
-        testGameFrame.commandNum = 2;
-        testGameFrame.gameState = testGameFrame.changeLevelState;
-        testGameFrame.gameLevel = testGameFrame.levelEasy;
-        testGameFrame.numOfVaccines = 5;
+        testGameFrame.cmdChangeLevel.setCommandNum(2);
+        testGameFrame.state.toChangeLevelState();
+        testGameFrame.settings.setGameLevel(testGameFrame.settings.levelEasy);
         testKey.keyPressed(enterKey);
-        Assertions.assertEquals(0, testGameFrame.commandNum);
-        Assertions.assertEquals(testGameFrame.titleState, testGameFrame.gameState);
-        Assertions.assertEquals(testGameFrame.levelChallenge, testGameFrame.gameLevel);
-        Assertions.assertEquals(10, testGameFrame.numOfVaccines);
+        Assertions.assertEquals(0, testGameFrame.cmdChangeLevel.getCommandNum());
+        Assertions.assertEquals(testGameFrame.state.titleState, testGameFrame.state.getGameState());
+        Assertions.assertEquals(testGameFrame.settings.levelChallenge, testGameFrame.settings.getGameLevel());
+        Assertions.assertEquals(10, testGameFrame.settings.getNumOfVaccines());
 
-        // ENTER pressed with invalid commandNum: other than 0, 1, or 2 and invalid game configuration
-        testGameFrame.commandNum = 5;
-        testGameFrame.gameState = testGameFrame.changeLevelState;
-        testGameFrame.gameLevel = -1;
-        testGameFrame.numOfVaccines = -1;
-        testKey.keyPressed(enterKey);
-        Assertions.assertEquals(0, testGameFrame.commandNum);
-        Assertions.assertEquals(testGameFrame.changeLevelState, testGameFrame.gameState);
-        Assertions.assertEquals(testGameFrame.levelEasy, testGameFrame.gameLevel);
-        Assertions.assertEquals(5, testGameFrame.numOfVaccines);
     }
 
 
@@ -293,7 +275,7 @@ public class inputKeyTest {
         GameFrame testGameFrame = new GameFrame(16, 12, 48);
         inputKey testKey = new inputKey(testGameFrame);
 
-        testGameFrame.gameState = testGameFrame.playState;
+        testGameFrame.state.toPlayState();
 
         // [key pressed] UP:
         KeyEvent upKey = new KeyEvent(testGameFrame, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0,  KeyEvent.VK_UP,'Z');
@@ -325,7 +307,7 @@ public class inputKeyTest {
         GameFrame testGameFrame = new GameFrame(16, 12, 48);
         inputKey testKey = new inputKey(testGameFrame);
 
-        testGameFrame.gameState = testGameFrame.playState;
+        testGameFrame.state.toPlayState();
 
         // [key pressed] DOWN:
         KeyEvent downKey = new KeyEvent(testGameFrame, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0,  KeyEvent.VK_DOWN,'Z');
@@ -357,7 +339,8 @@ public class inputKeyTest {
         GameFrame testGameFrame = new GameFrame(16, 12, 48);
         inputKey testKey = new inputKey(testGameFrame);
 
-        testGameFrame.gameState = testGameFrame.playState;
+        testGameFrame.state.toPlayState();
+
 
         // [key pressed] LEFT:
         KeyEvent leftKey = new KeyEvent(testGameFrame, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0,  KeyEvent.VK_LEFT,'Z');
@@ -389,7 +372,8 @@ public class inputKeyTest {
         GameFrame testGameFrame = new GameFrame(16, 12, 48);
         inputKey testKey = new inputKey(testGameFrame);
 
-        testGameFrame.gameState = testGameFrame.playState;
+        testGameFrame.state.toPlayState();
+
 
         // [key pressed] RIGHT:
         KeyEvent rightKey = new KeyEvent(testGameFrame, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0,  KeyEvent.VK_RIGHT,'Z');
@@ -421,7 +405,7 @@ public class inputKeyTest {
         GameFrame testGameFrame = new GameFrame(16, 12, 48);
         inputKey testKey = new inputKey(testGameFrame);
 
-        testGameFrame.gameState = testGameFrame.playState;
+        testGameFrame.state.toPlayState();
 
         // [key pressed] F:
         KeyEvent fKey = new KeyEvent(testGameFrame, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0,  KeyEvent.VK_F,'Z');
@@ -459,47 +443,16 @@ public class inputKeyTest {
         // [key pressed] LEFT:
         KeyEvent leftKey = new KeyEvent(testGameFrame, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0,  KeyEvent.VK_LEFT,'Z');
 
-        // tutorialState: 5 -> 5 (no change)
-        testGameFrame.tutorialState = testGameFrame.tutorialIntro;
-        testGameFrame.gameState = testGameFrame.tutorialState;
+        // tutorialState page: 0 -> 0 (no change)
+        testGameFrame.state.toTutorialState();
         testKey.keyPressed(leftKey);
-        Assertions.assertEquals(testGameFrame.tutorialIntro, testGameFrame.tutorialState);
-        Assertions.assertEquals(testGameFrame.tutorialIntro, testGameFrame.gameState);
+        Assertions.assertEquals(0, testGameFrame.state.getPage());
+        Assertions.assertEquals(testGameFrame.state.tutorialState, testGameFrame.state.getGameState());
 
-        // tutorialState: 6 -> 5
-        testGameFrame.tutorialState = testGameFrame.tutorial1;
-        testGameFrame.gameState = testGameFrame.tutorialState;
+        // tutorialState page: 1 -> 0
         testKey.keyPressed(leftKey);
-        Assertions.assertEquals(testGameFrame.tutorialIntro, testGameFrame.tutorialState);
-        Assertions.assertEquals(testGameFrame.tutorialIntro, testGameFrame.gameState);
-
-        // tutorialState: 10 -> 5 (exception, reset tutorialState to 5)
-        testGameFrame.tutorialState = 10;
-        testGameFrame.gameState = testGameFrame.tutorialState;
-        testKey.keyPressed(leftKey);
-        Assertions.assertEquals(testGameFrame.tutorialIntro, testGameFrame.tutorialState);
-        Assertions.assertEquals(testGameFrame.tutorialIntro, testGameFrame.gameState);
-
-        // tutorialState: 3 -> 5 (exception, reset tutorialState to 5)
-        testGameFrame.tutorialState = 3;
-        testGameFrame.gameState = testGameFrame.tutorialState;
-        testKey.keyPressed(leftKey);
-        Assertions.assertEquals(testGameFrame.tutorialIntro, testGameFrame.tutorialState);
-        Assertions.assertEquals(testGameFrame.tutorialIntro, testGameFrame.gameState);
-
-        // tutorialState: 23 -> 5 (exception)
-        testGameFrame.tutorialState = 23;
-        testGameFrame.gameState = testGameFrame.tutorialState;
-        testKey.keyPressed(leftKey);
-        Assertions.assertEquals(testGameFrame.tutorialIntro, testGameFrame.tutorialState);
-        Assertions.assertEquals(testGameFrame.tutorialIntro, testGameFrame.gameState);
-
-        // tutorialState: -1 -> 5 (exception)
-        testGameFrame.tutorialState = -1;
-        testGameFrame.gameState = testGameFrame.tutorialState;
-        testKey.keyPressed(leftKey);
-        Assertions.assertEquals(testGameFrame.tutorialIntro, testGameFrame.tutorialState);
-        Assertions.assertEquals(testGameFrame.tutorialIntro, testGameFrame.gameState);
+        Assertions.assertEquals(1, testGameFrame.state.getPage());
+        Assertions.assertEquals(testGameFrame.state.tutorialState, testGameFrame.state.getGameState());
     }
     @Test
     public void rightPressedInTutorialState() throws IOException {
@@ -508,54 +461,16 @@ public class inputKeyTest {
         GameFrame testGameFrame = new GameFrame(16, 12, 48);
         inputKey testKey = new inputKey(testGameFrame);
 
-        int maxCommandNum = testGameFrame.numOfCommands - 1;
-        testGameFrame.gameState = testGameFrame.tutorialState;
+        testGameFrame.state.toTutorialState();
 
         // [key pressed] RIGHT:
         KeyEvent rightKey = new KeyEvent(testGameFrame, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0,  KeyEvent.VK_RIGHT,'Z');
 
-        // tutorialState: 5 -> 6
-        testGameFrame.tutorialState = testGameFrame.tutorialIntro;
-        testGameFrame.gameState = testGameFrame.tutorialState;
+        // tutorialState: 0 -> 1
         testKey.keyPressed(rightKey);
-        Assertions.assertEquals(testGameFrame.tutorial1, testGameFrame.tutorialState);
-        Assertions.assertEquals(testGameFrame.tutorial1, testGameFrame.gameState);
+        Assertions.assertEquals(1, testGameFrame.state.getPage());
+        Assertions.assertEquals(testGameFrame.state.tutorialState, testGameFrame.state.getGameState());
 
-        // tutorialState: 8 -> 9 (gameState transfers to narration state)
-        testGameFrame.tutorialState = testGameFrame.tutorial3;
-        testGameFrame.gameState = testGameFrame.tutorialState;
-        testKey.keyPressed(rightKey);
-        Assertions.assertEquals(testGameFrame.tutorialIntro, testGameFrame.tutorialState);
-        Assertions.assertEquals(testGameFrame.narration1, testGameFrame.narrationState);
-        Assertions.assertEquals(testGameFrame.narration1, testGameFrame.gameState);
-
-        // tutorialState: 10 -> 8 (exception)
-        testGameFrame.tutorialState = 10;
-        testGameFrame.gameState = testGameFrame.tutorialState;
-        testKey.keyPressed(rightKey);
-        Assertions.assertEquals(testGameFrame.tutorial3, testGameFrame.tutorialState);
-        Assertions.assertEquals(testGameFrame.tutorial3, testGameFrame.gameState);
-
-        // tutorialState: 3 -> 8 (exception)
-        testGameFrame.tutorialState = 3;
-        testGameFrame.gameState = testGameFrame.tutorialState;
-        testKey.keyPressed(rightKey);
-        Assertions.assertEquals(testGameFrame.tutorial3, testGameFrame.tutorialState);
-        Assertions.assertEquals(testGameFrame.tutorial3, testGameFrame.gameState);
-
-        // tutorialState: 23 -> 8 (exception)
-        testGameFrame.tutorialState = 23;
-        testGameFrame.gameState = testGameFrame.tutorialState;
-        testKey.keyPressed(rightKey);
-        Assertions.assertEquals(testGameFrame.tutorial3, testGameFrame.tutorialState);
-        Assertions.assertEquals(testGameFrame.tutorial3, testGameFrame.gameState);
-
-        // tutorialState: -1 -> 8 (exception)
-        testGameFrame.tutorialState = -1;
-        testGameFrame.gameState = testGameFrame.tutorialState;
-        testKey.keyPressed(rightKey);
-        Assertions.assertEquals(testGameFrame.tutorial3, testGameFrame.tutorialState);
-        Assertions.assertEquals(testGameFrame.tutorial3, testGameFrame.gameState);
     }
     @Test
     public void enterPressedInTutorialState() throws IOException {
@@ -564,41 +479,16 @@ public class inputKeyTest {
         GameFrame testGameFrame = new GameFrame(16, 12, 48);
         inputKey testKey = new inputKey(testGameFrame);
 
-        int maxCommandNum = testGameFrame.numOfCommands - 1;
-        testGameFrame.gameState = testGameFrame.tutorialState;
+        testGameFrame.state.toTutorialState();
 
         // [key pressed] ENTER:
         KeyEvent enterKey = new KeyEvent(testGameFrame, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0,  KeyEvent.VK_ENTER,'Z');
 
-        // tutorialState: 5 -> 9
-        testGameFrame.tutorialState = testGameFrame.tutorialIntro;
-        testGameFrame.gameState = testGameFrame.tutorialState;
+        // tutorialState: 0 -> 0
         testKey.keyPressed(enterKey);
-        Assertions.assertEquals(testGameFrame.tutorialIntro, testGameFrame.tutorialState);
-        Assertions.assertEquals(testGameFrame.narration1, testGameFrame.narrationState);
-        Assertions.assertEquals(testGameFrame.narration1, testGameFrame.gameState);
+        Assertions.assertEquals(0, testGameFrame.state.getPage());
+        Assertions.assertEquals(testGameFrame.state.narrationState, testGameFrame.state.getGameState());
 
-        // tutorialState: 8 -> 9
-        testGameFrame.tutorialState = testGameFrame.tutorial3;
-        testGameFrame.gameState = testGameFrame.tutorialState;
-        testKey.keyPressed(enterKey);
-        Assertions.assertEquals(testGameFrame.tutorialIntro, testGameFrame.tutorialState);
-        Assertions.assertEquals(testGameFrame.narration1, testGameFrame.narrationState);
-        Assertions.assertEquals(testGameFrame.narration1, testGameFrame.gameState);
-
-        // tutorialState: 23 -> 5 (exception)
-        testGameFrame.tutorialState = 23;
-        testGameFrame.gameState = testGameFrame.tutorialState;
-        testKey.keyPressed(enterKey);
-        Assertions.assertEquals(testGameFrame.tutorialIntro, testGameFrame.tutorialState);
-        Assertions.assertEquals(testGameFrame.tutorialIntro, testGameFrame.gameState);
-
-        // tutorialState: -1 -> 5 (exception)
-        testGameFrame.tutorialState = -1;
-        testGameFrame.gameState = testGameFrame.tutorialState;
-        testKey.keyPressed(enterKey);
-        Assertions.assertEquals(testGameFrame.tutorialIntro, testGameFrame.tutorialState);
-        Assertions.assertEquals(testGameFrame.tutorialIntro, testGameFrame.gameState);
     }
 
 
@@ -610,39 +500,16 @@ public class inputKeyTest {
         GameFrame testGameFrame = new GameFrame(16, 12, 48);
         inputKey testKey = new inputKey(testGameFrame);
 
-        int maxCommandNum = testGameFrame.numOfCommands - 1;
-        testGameFrame.gameState = testGameFrame.narrationState;
+        testGameFrame.state.toNarrationState();
 
         // [key pressed] LEFT:
         KeyEvent leftKey = new KeyEvent(testGameFrame, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0,  KeyEvent.VK_LEFT,'Z');
 
-        // narrationState: 9 -> 9
-        testGameFrame.narrationState = testGameFrame.narration1;
-        testGameFrame.gameState = testGameFrame.narrationState;
+        // narrationState: 0 -> 0
         testKey.keyPressed(leftKey);
-        Assertions.assertEquals(testGameFrame.narration1, testGameFrame.narrationState);
-        Assertions.assertEquals(testGameFrame.narration1, testGameFrame.gameState);
+        Assertions.assertEquals(0, testGameFrame.state.getPage());
+        Assertions.assertEquals(testGameFrame.state.narrationState, testGameFrame.state.getGameState());
 
-        // narrationState: 10 -> 9
-        testGameFrame.narrationState = testGameFrame.narration2;
-        testGameFrame.gameState = testGameFrame.narrationState;
-        testKey.keyPressed(leftKey);
-        Assertions.assertEquals(testGameFrame.narration1, testGameFrame.narrationState);
-        Assertions.assertEquals(testGameFrame.narration1, testGameFrame.gameState);
-
-        // narrationState: 23 -> 9 (exception)
-        testGameFrame.narrationState = 23;
-        testGameFrame.gameState = testGameFrame.narrationState;
-        testKey.keyPressed(leftKey);
-        Assertions.assertEquals(testGameFrame.narration1, testGameFrame.narrationState);
-        Assertions.assertEquals(testGameFrame.narration1, testGameFrame.gameState);
-
-        // narrationState: -1 -> 9 (exception)
-        testGameFrame.narrationState = -1;
-        testGameFrame.gameState = testGameFrame.narrationState;
-        testKey.keyPressed(leftKey);
-        Assertions.assertEquals(testGameFrame.narration1, testGameFrame.narrationState);
-        Assertions.assertEquals(testGameFrame.narration1, testGameFrame.gameState);
     }
     @Test
     public void rightPressedInNarrationState() throws IOException {
@@ -651,39 +518,17 @@ public class inputKeyTest {
         GameFrame testGameFrame = new GameFrame(16, 12, 48);
         inputKey testKey = new inputKey(testGameFrame);
 
-        int maxCommandNum = testGameFrame.numOfCommands - 1;
-        testGameFrame.gameState = testGameFrame.narrationState;
+        testGameFrame.state.toNarrationState();
 
         // [key pressed] RIGHT:
         KeyEvent rightKey = new KeyEvent(testGameFrame, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0,  KeyEvent.VK_RIGHT,'Z');
 
-        // narrationState: 9 -> 10
-        testGameFrame.narrationState = testGameFrame.narration1;
-        testGameFrame.gameState = testGameFrame.narrationState;
+        // narrationState: 0 -> 1
         testKey.keyPressed(rightKey);
-        Assertions.assertEquals(testGameFrame.narration2, testGameFrame.narrationState);
-        Assertions.assertEquals(testGameFrame.narration2, testGameFrame.gameState);
+        Assertions.assertEquals(1, testGameFrame.state.getPage());
+        Assertions.assertEquals(testGameFrame.state.narrationState, testGameFrame.state.getGameState());
 
-        // narrationState: 19 -> 19
-        testGameFrame.narrationState = testGameFrame.narration11;
-        testGameFrame.gameState = testGameFrame.narrationState;
-        testKey.keyPressed(rightKey);
-        Assertions.assertEquals(testGameFrame.narration11, testGameFrame.narrationState);
-        Assertions.assertEquals(testGameFrame.narration11, testGameFrame.gameState);
 
-        // narrationState: 23 -> 19 (exception)
-        testGameFrame.narrationState = 23;
-        testGameFrame.gameState = testGameFrame.narrationState;
-        testKey.keyPressed(rightKey);
-        Assertions.assertEquals(testGameFrame.narration11, testGameFrame.narrationState);
-        Assertions.assertEquals(testGameFrame.narration11, testGameFrame.gameState);
-
-        // narrationState: -1 -> 19 (exception)
-        testGameFrame.narrationState = -1;
-        testGameFrame.gameState = testGameFrame.narrationState;
-        testKey.keyPressed(rightKey);
-        Assertions.assertEquals(testGameFrame.narration11, testGameFrame.narrationState);
-        Assertions.assertEquals(testGameFrame.narration11, testGameFrame.gameState);
     }
     @Test
     public void enterPressedInNarrationState() throws IOException {
@@ -692,46 +537,16 @@ public class inputKeyTest {
         GameFrame testGameFrame = new GameFrame(16, 12, 48);
         inputKey testKey = new inputKey(testGameFrame);
 
-        int maxCommandNum = testGameFrame.numOfCommands - 1;
-        testGameFrame.gameState = testGameFrame.narrationState;
+        testGameFrame.state.toNarrationState();
 
         // [key pressed] ENTER:
         KeyEvent enterKey = new KeyEvent(testGameFrame, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0,  KeyEvent.VK_ENTER,'Z');
 
-        // narrationState: 9 -> play
-        testGameFrame.narrationState = testGameFrame.narration1;
-        testGameFrame.gameState = testGameFrame.narrationState;
+        // narrationState: 0 -> play
         testKey.keyPressed(enterKey);
-        Assertions.assertEquals(testGameFrame.narration1, testGameFrame.narrationState);
-        Assertions.assertEquals(testGameFrame.playState, testGameFrame.gameState);
+        Assertions.assertEquals(0, testGameFrame.state.getPage());
+        Assertions.assertEquals(testGameFrame.state.playState, testGameFrame.state.getGameState());
 
-        // narrationState: 19 -> play
-        testGameFrame.narrationState = testGameFrame.narration11;
-        testGameFrame.gameState = testGameFrame.narrationState;
-        testKey.keyPressed(enterKey);
-        Assertions.assertEquals(testGameFrame.narration1, testGameFrame.narrationState);
-        Assertions.assertEquals(testGameFrame.playState, testGameFrame.gameState);
-
-        // narrationState: 15 -> play
-        testGameFrame.narrationState = testGameFrame.narration7;
-        testGameFrame.gameState = testGameFrame.narrationState;
-        testKey.keyPressed(enterKey);
-        Assertions.assertEquals(testGameFrame.narration1, testGameFrame.narrationState);
-        Assertions.assertEquals(testGameFrame.playState, testGameFrame.gameState);
-
-        // narrationState: 23 -> 9 (exception)
-        testGameFrame.narrationState = 23;
-        testGameFrame.gameState = testGameFrame.narrationState;
-        testKey.keyPressed(enterKey);
-        Assertions.assertEquals(testGameFrame.narration1, testGameFrame.narrationState);
-        Assertions.assertEquals(testGameFrame.narration1, testGameFrame.gameState);
-
-        // narrationState: -1 -> 9 (exception)
-        testGameFrame.narrationState = -1;
-        testGameFrame.gameState = testGameFrame.narrationState;
-        testKey.keyPressed(enterKey);
-        Assertions.assertEquals(testGameFrame.narration1, testGameFrame.narrationState);
-        Assertions.assertEquals(testGameFrame.narration1, testGameFrame.gameState);
     }
 
 
@@ -743,25 +558,25 @@ public class inputKeyTest {
         GameFrame testGameFrame = new GameFrame(16, 12, 48);
         inputKey testKey = new inputKey(testGameFrame);
 
-        testGameFrame.gameState = testGameFrame.endState;
+        testGameFrame.state.toEndState();
 
         // [key pressed] LEFT:
         KeyEvent leftKey = new KeyEvent(testGameFrame, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0,  KeyEvent.VK_LEFT,'Z');
 
         // commandNum: 0 -> 1
-        testGameFrame.commandNum = 0;
+        testGameFrame.cmdEnd.setCommandNum(0);
         testKey.keyPressed(leftKey);
-        Assertions.assertEquals(1, testGameFrame.commandNum);
+        Assertions.assertEquals(1, testGameFrame.cmdEnd.getCommandNum());
 
         // commandNum: 1 -> 0
-        testGameFrame.commandNum = 1;
+        testGameFrame.cmdEnd.setCommandNum(1);
         testKey.keyPressed(leftKey);
-        Assertions.assertEquals(0, testGameFrame.commandNum);
+        Assertions.assertEquals(0, testGameFrame.cmdEnd.getCommandNum());
 
         // commandNum: 7 -> 0 (exception)
-        testGameFrame.commandNum = 7;
+        testGameFrame.cmdEnd.setCommandNum(7);
         testKey.keyPressed(leftKey);
-        Assertions.assertEquals(0, testGameFrame.commandNum);
+        Assertions.assertEquals(0, testGameFrame.cmdEnd.getCommandNum());
     }
     @Test
     public void rightPressedInEndState() throws IOException {
@@ -770,25 +585,25 @@ public class inputKeyTest {
         GameFrame testGameFrame = new GameFrame(16, 12, 48);
         inputKey testKey = new inputKey(testGameFrame);
 
-        testGameFrame.gameState = testGameFrame.endState;
+        testGameFrame.state.toEndState();
 
         // [key pressed] RIGHT:
         KeyEvent rightKey = new KeyEvent(testGameFrame, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0,  KeyEvent.VK_RIGHT,'Z');
 
         // commandNum: 0 -> 1
-        testGameFrame.commandNum = 0;
+        testGameFrame.cmdEnd.setCommandNum(0);
         testKey.keyPressed(rightKey);
-        Assertions.assertEquals(1, testGameFrame.commandNum);
+        Assertions.assertEquals(1, testGameFrame.cmdEnd.getCommandNum());
 
         // commandNum: 1 -> 0
-        testGameFrame.commandNum = 1;
+        testGameFrame.cmdEnd.setCommandNum(1);
         testKey.keyPressed(rightKey);
-        Assertions.assertEquals(0, testGameFrame.commandNum);
+        Assertions.assertEquals(0, testGameFrame.cmdEnd.getCommandNum());
 
         // commandNum: 7 -> 0 (exception)
-        testGameFrame.commandNum = 7;
+        testGameFrame.cmdEnd.setCommandNum(7);
         testKey.keyPressed(rightKey);
-        Assertions.assertEquals(0, testGameFrame.commandNum);
+        Assertions.assertEquals(0, testGameFrame.cmdEnd.getCommandNum());
     }
     @Test
     public void enterPressedInEndState() throws IOException, UnsupportedAudioFileException, LineUnavailableException {
@@ -806,17 +621,16 @@ public class inputKeyTest {
         // gameLevel: intermediate
         // numOfVaccines: 7
         // gameResult: fail
-        testGameFrame.gameState = testGameFrame.endState;
-        testGameFrame.commandNum = 0;
-        testGameFrame.gameLevel = testGameFrame.levelIntermediate;
-        testGameFrame.numOfVaccines = 7;
+        testGameFrame.state.toEndState();
+        testGameFrame.cmdEnd.setCommandNum(0);
+        testGameFrame.settings.setGameLevel(testGameFrame.settings.levelIntermediate);
         testGameFrame.gameResult = testGameFrame.fail;
         testGameFrame.playBGM(testGameFrame.track3_playState);
         testKey.keyPressed(enterKey);
-        Assertions.assertEquals(testGameFrame.tutorialState, testGameFrame.gameState);
-        Assertions.assertEquals(0, testGameFrame.commandNum);
-        Assertions.assertEquals(7, testGameFrame.numOfVaccines);
-        Assertions.assertEquals(testGameFrame.levelIntermediate, testGameFrame.gameLevel);
+        Assertions.assertEquals(testGameFrame.state.tutorialState, testGameFrame.state.getGameState());
+        Assertions.assertEquals(0, testGameFrame.cmdTitle.getCommandNum());
+        Assertions.assertEquals(7, testGameFrame.settings.getNumOfVaccines());
+        Assertions.assertEquals(testGameFrame.settings.levelIntermediate, testGameFrame.settings.getGameLevel());
         Assertions.assertEquals(-1, testGameFrame.musicTrack);
 
         // [return to title screen]
@@ -824,33 +638,21 @@ public class inputKeyTest {
         // gameLevel: challenge
         // numOfVaccines: 10
         // gameResult: win
-        testGameFrame.gameState = testGameFrame.endState;
-        testGameFrame.commandNum = 1;
-        testGameFrame.gameLevel = testGameFrame.levelChallenge;
-        testGameFrame.numOfVaccines = 10;
+        testGameFrame.state.toEndState();
+        testGameFrame.cmdEnd.setCommandNum(1);
+        testGameFrame.settings.setGameLevel(testGameFrame.settings.levelChallenge);
         testGameFrame.gameResult = testGameFrame.win;
         testGameFrame.playBGM(testGameFrame.track3_playState);
         testKey.keyPressed(enterKey);
-        Assertions.assertEquals(testGameFrame.titleState, testGameFrame.gameState);
-        Assertions.assertEquals(0, testGameFrame.commandNum);
-        Assertions.assertEquals(5, testGameFrame.numOfVaccines);
-        Assertions.assertEquals(testGameFrame.levelEasy, testGameFrame.gameLevel);
+        Assertions.assertEquals(testGameFrame.state.titleState, testGameFrame.state.getGameState());
+        Assertions.assertEquals(0, testGameFrame.cmdTitle.getCommandNum());
+        Assertions.assertEquals(5, testGameFrame.settings.getNumOfVaccines());
+        Assertions.assertEquals(testGameFrame.settings.levelEasy, testGameFrame.settings.getGameLevel());
         Assertions.assertEquals(-1, testGameFrame.musicTrack);
 
-        // enter pressed with commandNum: 5 (exception)
-        testGameFrame.gameState = testGameFrame.endState;
-        testGameFrame.commandNum = 5;
-        testGameFrame.gameLevel = 6;
-        testGameFrame.numOfVaccines = 34;
-        testGameFrame.gameResult = -1;
-        testGameFrame.playBGM(testGameFrame.track3_playState);
-        testKey.keyPressed(enterKey);
-        Assertions.assertEquals(testGameFrame.endState, testGameFrame.gameState);
-        Assertions.assertEquals(0, testGameFrame.commandNum);
-        Assertions.assertEquals(testGameFrame.track3_playState, testGameFrame.musicTrack);
     }
 
 
-    */
+
 
 }
